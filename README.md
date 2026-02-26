@@ -127,7 +127,21 @@ Discipline. Pain. Brotherhood. Redemption.
 Athletes who believe in discipline and brotherhood —
 send your story.
 </p>
-
+<script src="https://giscus.app/client.js"
+        data-repo="joel-site/joel-site"
+        data-repo-id="[ENTER REPO ID HERE]"
+        data-category="[ENTER CATEGORY NAME HERE]"
+        data-category-id="[ENTER CATEGORY ID HERE]"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+</script>
 <p style="color:lightgray;">
 Email: wromasjoel@yahoo.com
 </p>
