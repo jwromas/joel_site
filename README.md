@@ -5,7 +5,56 @@
 <meta charset="UTF-8">
 <title>Joel | Still In The Fight</title>
 </head>
+<!-- Global Search -->
+<section style="text-align:center; margin:60px 0;">
 
+  <h2 style="
+    font-family: Arial, sans-serif;
+    letter-spacing:2px;
+    font-weight:700;
+    margin-bottom:20px;">
+    SEARCH WITHOUT LIMITS
+  </h2>
+
+  <form action="https://www.google.com/search" method="get" target="_blank" style="display:inline-block;">
+
+    <input 
+      type="text" 
+      name="q" 
+      placeholder="Search the world..."
+      required
+      style="
+        padding:12px 16px;
+        width:260px;
+        background:#111;
+        color:#fff;
+        border:2px solid #444;
+        outline:none;
+        font-size:14px;
+        letter-spacing:1px;
+      "
+    >
+
+    <button type="submit"
+      style="
+        padding:12px 18px;
+        background:#000;
+        color:#fff;
+        border:2px solid #fff;
+        font-weight:bold;
+        letter-spacing:1px;
+        cursor:pointer;
+        margin-left:6px;
+      "
+      onmouseover="this.style.background='#fff'; this.style.color='#000';"
+      onmouseout="this.style.background='#000'; this.style.color='#fff';"
+    >
+      SEARCH
+    </button>
+
+  </form>
+
+</section>
 <body style="margin:0; font-family:Arial, sans-serif; background:black; color:white;">
 
 <!-- HERO SECTION -->
