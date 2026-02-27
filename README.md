@@ -169,6 +169,16 @@ privacy terms will be updated accordingly.
 <div style="text-align:center; padding:30px; border-top:1px solid #222; color:gray;">
 © 2026 Joel | Still In The Fight | All Rights Reserved
 </div>
+<!-- Background Music -->
+<audio id="bg-music" loop>
+  <source src="faith-theme.mp3" type="audio/mpeg">
+</audio>
 
+<button onclick="document.getElementById('bg-music').play()" 
+style="position:fixed;bottom:20px;right:20px;
+padding:10px 15px;background:#111;color:white;
+border:none;border-radius:5px;cursor:pointer;">
+  Play Atmosphere
+</button>
 </body>
 </html>
