@@ -60,7 +60,7 @@ It just changes fields.
     font-weight:700;
     margin-bottom:20px;">
   
-  </form></section>
+
 <!-- BLOG SECTION -->
 <div style="max-width:900px; margin:auto; padding:40px 20px; border-top:1px solid #333;">
 <h2>Blog</h2> https://afflat3c1.com/trk/lnk/3DF3D7CD-E96F-4A72-9D26-B153F3418388/?o=31052&c=918277&a=788412&k=4027BAAE8686056DA94CAB34F1A4DA10&l=36055
