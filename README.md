@@ -173,12 +173,13 @@ privacy terms will be updated accordingly.
   <source src="music-theme.mp3" type="audio/mpeg">
 </audio>
 
-<button onclick="document.getElementById('bg-music').play(); this.style.display='none';" 
-style="position:fixed;bottom:20px;right:20px;
-padding:12px 18px;background:#000;color:#fff;
-border:none;border-radius:6px;cursor:pointer;font-weight:bold;">
-  ▶ Start Atmosphere
-</button>
+<script>
+document.addEventListener("click", function startMusic() {
+  var music = document.getElementById("bg-music");
+  music.play();
+  document.removeEventListener("click", startMusic);
+});
+</script>
 
 </body>
 </html>
