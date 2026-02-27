@@ -259,7 +259,30 @@ Email: wromasjoel@yahoo.com
     ATHLETE SPOTLIGHT
   </h2>
 
-  <!-- Featured Videos -->
+ 
+<!-- LEGAL -->
+<div style="max-width:900px; margin:auto; padding:40px 20px; border-top:1px solid #333; color:gray; font-size:14px; line-height:1.5;">
+<h3>Disclaimer</h3>
+<p>
+This website reflects personal experiences and opinions.
+It is not medical, legal, or professional advice.
+Readers are responsible for their own decisions and actions.
+</p>
+
+
+<h3>Privacy Notice</h3>
+<p>
+This site does not collect personal data or use tracking cookies.
+If interactive features are added in the future,
+privacy terms will be updated accordingly.
+</p>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center; padding:30px; border-top:1px solid #222; color:gray;">
+© 2026 Joel | Still In The Fight | All Rights Reserved
+</div>
+ <!-- Featured Videos -->
   <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-bottom:50px;">
 
     <iframe width="360" height="215"
@@ -303,29 +326,6 @@ Email: wromasjoel@yahoo.com
   </form>
 
 </section>
-
-<!-- LEGAL -->
-<div style="max-width:900px; margin:auto; padding:40px 20px; border-top:1px solid #333; color:gray; font-size:14px; line-height:1.5;">
-<h3>Disclaimer</h3>
-<p>
-This website reflects personal experiences and opinions.
-It is not medical, legal, or professional advice.
-Readers are responsible for their own decisions and actions.
-</p>
-
-
-<h3>Privacy Notice</h3>
-<p>
-This site does not collect personal data or use tracking cookies.
-If interactive features are added in the future,
-privacy terms will be updated accordingly.
-</p>
-</div>
-
-<!-- FOOTER -->
-<div style="text-align:center; padding:30px; border-top:1px solid #222; color:gray;">
-© 2026 Joel | Still In The Fight | All Rights Reserved
-</div>
 
 </body>
 </html>
