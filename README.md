@@ -252,13 +252,37 @@ send your story.
 <p style="color:lightgray;">
 Email: wromasjoel@yahoo.com
 </p>
-<!-- VIDEO SECTION -->
-<section style="padding:60px 20px; background:#111; color:white; text-align:center;">
+<section style="text-align:center; padding:40px; background:#111; color:white;">
 
-  <h2 style="letter-spacing:2px; font-weight:700; margin-bottom:30px;">
-    ATHLETE SPOTLIGHT
+  <h2 style="letter-spacing:2px; font-weight:700; margin-bottom:20px;">
+    FEATURED ATHLETE VIDEO
   </h2>
 
+  <!-- Embedded YouTube Video -->
+  <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/bQ7uLY_eMRY"
+    title="Athlete Story"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+
+  <br><br>
+
+  <!-- Link To YouTube For Exposure -->
+  <a href="https://www.youtube.com/watch?v=bQ7uLY_eMRY"
+     target="_blank"
+     style="display:inline-block;
+            padding:10px 20px;
+            background:#c00;
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+            border-radius:5px;">
+    ▶ Watch on YouTube
+  </a>
+
+</section>
  
 <!-- LEGAL -->
 <div style="max-width:900px; margin:auto; padding:40px 20px; border-top:1px solid #333; color:gray; font-size:14px; line-height:1.5;">
