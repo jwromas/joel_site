@@ -20,10 +20,7 @@ justify-content:center;
 text-align:center;
 ">
 
-  </form>
-
-</section>
-
+ 
 <div style="background:rgba(0,0,0,0.7); padding:40px;">
 <h1 style="font-size:48px; letter-spacing:3px; margin:0;">
 STILL IN THE FIGHT
