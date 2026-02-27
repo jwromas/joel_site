@@ -5,7 +5,9 @@
 <meta charset="UTF-8">
 <title>Joel | Still In The Fight</title>
 </head>
-<!-- Global Search -->
+<meta name="description" content="Joel Wromas. Athlete. Brotherhood. Discipline. Stories, videos, and mindset built for men who finish strong.">
+<meta name="keywords" content="Joel Wromas, athlete blog, discipline mindset, sports motivation, brotherhood training">
+<meta name="author" content="Joel Wromas"><!-- Global Search -->
 <section style="text-align:center; margin:60px 0;">
 
   <h2 style="
