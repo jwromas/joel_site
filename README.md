@@ -53,36 +53,6 @@ The game never really ends.
 It just changes fields.
 </p>
 </div>
-
-<!-- BLOG SECTION -->
-<div style="max-width:900px; margin:auto; padding:40px 20px; border-top:1px solid #333;">
-<h2>Blog</h2> https://afflat3c1.com/trk/lnk/3DF3D7CD-E96F-4A72-9D26-B153F3418388/?o=31052&c=918277&a=788412&k=4027BAAE8686056DA94CAB34F1A4DA10&l=36055
-<h3>The Mind Still Competes</h3>
-<p style="color:lightgray; line-height:1.6;">
-Football ended before I was ready.
-Injuries don’t ask permission.
-They just arrive.
-
-For years I thought I lost something.
-But time teaches you something different.
-
-The game was never just physical.
-It trained the mind.
-It trained discipline.
-It trained resilience.
-
-Now the field is different.
-
-The opponent isn’t another man.
-It’s regret.
-It’s doubt.
-It’s unfinished conversations.
-
-At 65, I’m still competing.
-
-The body slows.
-The mind decides.
-</p>
 <!-- Global Search -->
 <section style="text-align:center; margin:60px 0;">
 
@@ -129,6 +99,39 @@ The mind decides.
     >
       SEARCH
     </button>
+
+  </form>
+
+</section>
+<!-- BLOG SECTION -->
+<div style="max-width:900px; margin:auto; padding:40px 20px; border-top:1px solid #333;">
+<h2>Blog</h2> https://afflat3c1.com/trk/lnk/3DF3D7CD-E96F-4A72-9D26-B153F3418388/?o=31052&c=918277&a=788412&k=4027BAAE8686056DA94CAB34F1A4DA10&l=36055
+<h3>The Mind Still Competes</h3>
+<p style="color:lightgray; line-height:1.6;">
+Football ended before I was ready.
+Injuries don’t ask permission.
+They just arrive.
+
+For years I thought I lost something.
+But time teaches you something different.
+
+The game was never just physical.
+It trained the mind.
+It trained discipline.
+It trained resilience.
+
+Now the field is different.
+
+The opponent isn’t another man.
+It’s regret.
+It’s doubt.
+It’s unfinished conversations.
+
+At 65, I’m still competing.
+
+The body slows.
+The mind decides.
+</p>
 
 <h3>The Mind Doesn’t Retire</h3>
 <p style="color:lightgray; line-height:1.6;">
