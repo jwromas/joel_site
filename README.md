@@ -169,8 +169,8 @@ privacy terms will be updated accordingly.
 <div style="text-align:center; padding:30px; border-top:1px solid #222; color:gray;">
 © 2026 Joel | Still In The Fight | All Rights Reserved
 </div>
-<audio id="bg-music" loop>
-  <source src="music-theme.mp3" type="audio/mpeg">
+<audio controls>
+  <source src="atmosphere.mp3" type="audio/mpeg">
 </audio>
 
 <script>
