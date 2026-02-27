@@ -176,25 +176,22 @@ privacy terms will be updated accordingly.
 <script>
 const music = document.getElementById("bg-music");
 
-function fadeInAudio(audio, duration = 4000) {
-  audio.volume = 0;
-  audio.play();
-  
-  let step = 0.02;
-  let interval = duration / (1 / step);
-  
-  let fade = setInterval(() => {
-    if (audio.volume < 1) {
-      audio.volume = Math.min(audio.volume + step, 1);
-    } else {
-      clearInterval(fade);
-    }
-  }, interval);
+function startMusic() {
+  music.volume = 0;
+  music.play().then(() => {
+    let fade = setInterval(() => {
+      if (music.volume < 1) {
+        music.volume += 0.02;
+      } else {
+        clearInterval(fade);
+      }
+    }, 100);
+  }).catch(err => console.log(err));
 }
 
-document.addEventListener("click", function startMusic() {
-  fadeInAudio(music, 5000); // 5 second fade in
-  document.removeEventListener("click", startMusic);
+document.addEventListener("click", function handler() {
+  startMusic();
+  document.removeEventListener("click", handler);
 });
 </script>
 
