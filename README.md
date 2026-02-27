@@ -85,7 +85,7 @@ An Athlete’s Reflection on Discipline, Brotherhood, and Finishing Strong
 <div style="max-width:900px; margin:auto; padding:50px 20px;">
 <h2>About Joel</h2>
 <p style="color:lightgray; line-height:1.6;">
-Joel played high school football and faced injuries that ended one chapter.
+Joel played football and faced injuries that ended one chapter.
 But the journey didn’t stop.
 
 Football is brutal. Gladiators collide. Discipline is tested.
