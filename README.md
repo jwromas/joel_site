@@ -276,31 +276,6 @@ privacy terms will be updated accordingly.
 <div style="text-align:center; padding:30px; border-top:1px solid #222; color:gray;">
 © 2026 Joel | Still In The Fight | All Rights Reserved
 </div>
-<audio controls>
-  <source src="atmosphere.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-const music = document.getElementById("bg-music");
-
-function startMusic() {
-  music.volume = 0;
-  music.play().then(() => {
-    let fade = setInterval(() => {
-      if (music.volume < 1) {
-        music.volume += 0.02;
-      } else {
-        clearInterval(fade);
-      }
-    }, 100);
-  }).catch(err => console.log(err));
-}
-
-document.addEventListener("click", function handler() {
-  startMusic();
-  document.removeEventListener("click", handler);
-});
-</script>
 
 </body>
 </html>
