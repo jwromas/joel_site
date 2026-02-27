@@ -252,7 +252,57 @@ send your story.
 <p style="color:lightgray;">
 Email: wromasjoel@yahoo.com
 </p>
+<!-- VIDEO SECTION -->
+<section style="padding:60px 20px; background:#111; color:white; text-align:center;">
 
+  <h2 style="letter-spacing:2px; font-weight:700; margin-bottom:30px;">
+    ATHLETE SPOTLIGHT
+  </h2>
+
+  <!-- Featured Videos -->
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px; margin-bottom:50px;">
+
+    <iframe width="360" height="215"
+      src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+      title="Athlete Story"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+
+    <iframe width="360" height="215"
+      src="https://www.youtube.com/embed/ScMzIvxBSi4"
+      title="Brotherhood Feature"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+
+  </div>
+
+  <!-- Submission Section -->
+  <h3 style="letter-spacing:1px; margin-bottom:15px;">
+    SUBMIT YOUR STORY
+  </h3>
+
+  <p style="max-width:600px; margin:0 auto 20px;">
+    Upload your video to YouTube. Send us the link. If selected, it will be featured here.
+  </p>
+
+  <form action="https://formsubmit.co/wromasjoel@yahoo.com" method="POST" style="max-width:400px; margin:0 auto;">
+    
+    <input type="text" name="name" placeholder="Your Name" required
+      style="width:100%; padding:10px; margin-bottom:10px; background:#000; color:white; border:1px solid #444;">
+
+    <input type="url" name="youtube" placeholder="YouTube Video Link" required
+      style="width:100%; padding:10px; margin-bottom:10px; background:#000; color:white; border:1px solid #444;">
+
+    <button type="submit"
+      style="width:100%; padding:12px; background:black; color:white; border:2px solid white; font-weight:bold; cursor:pointer;">
+      SUBMIT
+    </button>
+
+  </form>
+
+</section>
 
 <!-- LEGAL -->
 <div style="max-width:900px; margin:auto; padding:40px 20px; border-top:1px solid #333; color:gray; font-size:14px; line-height:1.5;">
