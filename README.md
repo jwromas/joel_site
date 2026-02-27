@@ -128,10 +128,10 @@ Athletes who believe in discipline and brotherhood —
 send your story.
 </p>
 <script src="https://giscus.app/client.js"
-        data-repo="joel-site/joel-site"
-        data-repo-id="[ENTER REPO ID HERE]"
-        data-category="[ENTER CATEGORY NAME HERE]"
-        data-category-id="[ENTER CATEGORY ID HERE]"
+        data-repo="jwromas/joel_site"
+        data-repo-id="R_kgDORZxSMg"
+        data-category="Polls"
+        data-category-id="DIC_kwDORZxSMs4C3SC7"
         data-mapping="pathname"
         data-strict="0"
         data-reactions-enabled="1"
