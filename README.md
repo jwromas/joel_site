@@ -174,9 +174,26 @@ privacy terms will be updated accordingly.
 </audio>
 
 <script>
+const music = document.getElementById("bg-music");
+
+function fadeInAudio(audio, duration = 4000) {
+  audio.volume = 0;
+  audio.play();
+  
+  let step = 0.02;
+  let interval = duration / (1 / step);
+  
+  let fade = setInterval(() => {
+    if (audio.volume < 1) {
+      audio.volume = Math.min(audio.volume + step, 1);
+    } else {
+      clearInterval(fade);
+    }
+  }, interval);
+}
+
 document.addEventListener("click", function startMusic() {
-  var music = document.getElementById("bg-music");
-  music.play();
+  fadeInAudio(music, 5000); // 5 second fade in
   document.removeEventListener("click", startMusic);
 });
 </script>
