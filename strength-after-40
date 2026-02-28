@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strength After 40 | Discipline Over Age</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #0f0f0f;
+    color: #ffffff;
+}
+
+h1, h2, h3 {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+}
+
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)),
+                url('hero.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    color: #ccc;
+}
+
+.btn {
+    background: #e67e22;
+    color: white;
+    padding: 14px 28px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #cf711f;
+}
+
+.section {
+    padding: 80px 10%;
+}
+
+.section img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 30px 0;
+    box-shadow: 0 10px 40px rgba(0,0,0,.6);
+}
+
+.section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+}
+
+.section p {
+    color: #ccc;
+    line-height: 1.7;
+    max-width: 800px;
+}
+
+.gear {
+    background: #181818;
+    padding: 30px;
+    border-radius: 6px;
+    margin-top: 30px;
+}
+
+.gear ul {
+    list-style: none;
+    padding: 0;
+}
+
+.gear li {
+    padding: 8px 0;
+    border-bottom: 1px solid #333;
+}
+
+.cta {
+    text-align: center;
+    padding: 100px 20px;
+    background: #111;
+}
+
+.cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #0a0a0a;
+    font-size: 0.9rem;
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO SECTION -->
+<section class="hero">
+    <div>
+        <h1>STRENGTH AFTER 40</h1>
+        <p>No ego. No shortcuts. Just discipline, muscle, and longevity built the right way.</p>
+        <a href="#start" class="btn">Start The Routine</a>
+    </div>
+</section>
+
+<!-- FOUNDATION SECTION -->
+<section class="section" id="start">
+    <h2>The Foundation Builder</h2>
+    <p>
+    Early morning. Garage door cracked. Concrete cold under your hands.
+    This is where discipline lives.
+    Controlled squats. Push-ups. Rows. Planks.
+    Not reckless. Intentional.
+    </p>
+
+    <img src="foundation.jpg" alt="Man training in garage">
+
+    <div class="gear">
+        <h3>Gear Used</h3>
+        <ul>
+            <li>Adjustable Dumbbells</li>
+            <li>Heavy Resistance Bands</li>
+            <li>Workout Mat</li>
+        </ul>
+    </div>
+</section>
+
+<!-- FAT BURN SECTION -->
+<section class="section">
+    <h2>The Fat-Burn Circuit</h2>
+    <p>
+    Sun rising. Kettlebell cutting through cool air.
+    Heart pounding but controlled.
+    Intensity with intelligence.
+    </p>
+
+    <img src="kettlebell.jpg" alt="Man doing kettlebell swings outdoors">
+
+    <div class="gear">
+        <h3>Gear Used</h3>
+        <ul>
+            <li>35lb Kettlebell</li>
+            <li>Weighted Vest (Optional)</li>
+            <li>Outdoor Training Shoes</li>
+        </ul>
+    </div>
+</section>
+
+<!-- CONTROLLED STRENGTH SECTION -->
+<section class="section">
+    <h2>Controlled Strength</h2>
+    <p>
+    Slow goblet squats. Focused presses.
+    Three seconds down. Power up.
+    Strength without joint damage.
+    </p>
+
+    <img src="strength.jpg" alt="Man performing dumbbell RDL">
+
+    <div class="gear">
+        <h3>Gear Used</h3>
+        <ul>
+            <li>Adjustable Bench</li>
+            <li>Hex Dumbbells</li>
+            <li>Lifting Straps</li>
+        </ul>
+    </div>
+</section>
+
+<!-- DISCIPLINE WALK -->
+<section class="section">
+    <h2>The Discipline Walk</h2>
+    <p>
+    Gravel road. Evening light.
+    No headphones.
+    Just footsteps and breathing.
+    Longevity is built in quiet moments.
+    </p>
+
+    <img src="walk.jpg" alt="Man walking on gravel road at sunset">
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta">
+    <h2>Build Strength That Lasts</h2>
+    <p>Train smart. Stay powerful. Refuse decline.</p>
+    <a href="equipment.html" class="btn">View Recommended Equipment</a>
+</section>
+
+<footer>
+© 2026 Strength After 40 | Built For Men Who Refuse To Slow Down
+</footer>
+
+</body>
+</html>strength-after-40.html
+hero.jpg
+foundation.jpg
+kettlebell.jpg
+strength.jpg
+walk.jpg
