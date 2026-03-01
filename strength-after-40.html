@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RED ZONE · complete transformation</title>
+    <title>RED ZONE · fitness identity</title>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <!-- html2canvas -->
@@ -41,6 +41,191 @@
         .header p {
             color: #9ca3af;
             font-size: 1.1rem;
+        }
+
+        /* Identity Bar */
+        .identity-bar {
+            background: #1f2937;
+            border-radius: 60px;
+            padding: 12px 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            border: 1px solid #374151;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 0 15px #ef4444;
+        }
+
+        .user-details {
+            line-height: 1.4;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #ef4444;
+        }
+
+        .user-meta {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .user-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .auth-btn {
+            background: #374151;
+            border: 1px solid #4b5563;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .auth-btn:hover {
+            background: #4b5563;
+        }
+
+        .auth-btn.login {
+            background: #ef4444;
+            border-color: #b91c1c;
+            color: white;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1f2937;
+            border-radius: 40px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid #374151;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .modal h2 {
+            color: #ef4444;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #9ca3af;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 16px;
+            background: #374151;
+            border: 1px solid #4b5563;
+            border-radius: 30px;
+            color: #e5e7eb;
+            font-size: 1rem;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #ef4444;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .modal-btn.primary {
+            background: #ef4444;
+            color: white;
+            border: none;
+        }
+
+        .modal-btn.secondary {
+            background: #374151;
+            color: #e5e7eb;
+            border: 1px solid #4b5563;
+        }
+
+        .switch-auth {
+            text-align: center;
+            margin-top: 20px;
+            color: #9ca3af;
+        }
+
+        .switch-auth span {
+            color: #ef4444;
+            cursor: pointer;
+            font-weight: 600;
         }
 
         .stats {
@@ -585,9 +770,76 @@
 </head>
 <body>
 
+<!-- Identity Modal -->
+<div class="modal" id="authModal">
+    <div class="modal-content" id="loginForm">
+        <h2 id="modalTitle">🔐 LOGIN</h2>
+        
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="username" placeholder="Enter username">
+        </div>
+        
+        <div class="input-group" id="nameGroup" style="display: none;">
+            <label>Full Name</label>
+            <input type="text" id="fullname" placeholder="Enter your name">
+        </div>
+        
+        <div class="input-group" id="ageGroup" style="display: none;">
+            <label>Age</label>
+            <input type="number" id="age" placeholder="Your age">
+        </div>
+        
+        <div class="input-group" id="genderGroup" style="display: none;">
+            <label>Gender</label>
+            <select id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <div class="input-group" id="goalGroup" style="display: none;">
+            <label>Primary Goal</label>
+            <select id="goal">
+                <option value="weight-loss">Weight Loss</option>
+                <option value="weight-gain">Weight Gain</option>
+                <option value="maintenance">Maintenance</option>
+                <option value="strength">Strength</option>
+            </select>
+        </div>
+        
+        <div class="modal-buttons">
+            <button class="modal-btn primary" id="authActionBtn">Login</button>
+            <button class="modal-btn secondary" id="closeModalBtn">Cancel</button>
+        </div>
+        
+        <div class="switch-auth">
+            <span id="switchAuthText">Create new account</span>
+        </div>
+    </div>
+</div>
+
 <div class="header">
-    <h1>🔥 RED ZONE · COMPLETE TRANSFORMATION</h1>
-    <p>workouts · nutrition · supplements · hydration · body targeting · weight goals</p>
+    <h1>🔥 RED ZONE · FITNESS IDENTITY</h1>
+    <p>your personal fitness ecosystem</p>
+</div>
+
+<!-- Identity Bar -->
+<div class="identity-bar" id="identityBar">
+    <div class="user-info">
+        <div class="avatar" id="avatar">👤</div>
+        <div class="user-details">
+            <div class="user-name" id="displayName">Guest User</div>
+            <div class="user-meta" id="userMeta">
+                <span>⚡ not logged in</span>
+            </div>
+        </div>
+    </div>
+    <div class="auth-buttons">
+        <button class="auth-btn login" id="loginBtn">LOGIN / SIGN UP</button>
+        <button class="auth-btn" id="logoutBtn" style="display: none;">LOGOUT</button>
+    </div>
 </div>
 
 <div class="stats">
@@ -1096,7 +1348,7 @@
     </div>
 </div>
 
-<footer>⚡ RED ZONE · complete transformation system ⚡</footer>
+<footer>⚡ RED ZONE · your identity · your progress ⚡</footer>
 
 <script>
     (function() {
@@ -1200,6 +1452,115 @@
         let waterIntake = 0;
         const WATER_GOAL = 3500;
         
+        // Identity System
+        let currentUser = null;
+        let users = {};
+
+        // Load users from localStorage
+        function loadUsers() {
+            try {
+                const savedUsers = localStorage.getItem('redzone_users');
+                if (savedUsers) {
+                    users = JSON.parse(savedUsers);
+                }
+                
+                const savedUser = localStorage.getItem('redzone_currentUser');
+                if (savedUser) {
+                    currentUser = JSON.parse(savedUser);
+                    updateIdentityBar();
+                }
+            } catch (e) {}
+        }
+
+        // Save users
+        function saveUsers() {
+            localStorage.setItem('redzone_users', JSON.stringify(users));
+            if (currentUser) {
+                localStorage.setItem('redzone_currentUser', JSON.stringify(currentUser));
+            }
+        }
+
+        // Update identity bar
+        function updateIdentityBar() {
+            const avatar = document.getElementById('avatar');
+            const displayName = document.getElementById('displayName');
+            const userMeta = document.getElementById('userMeta');
+            const loginBtn = document.getElementById('loginBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+
+            if (currentUser) {
+                // Logged in
+                avatar.innerText = currentUser.fullname.charAt(0).toUpperCase();
+                displayName.innerText = currentUser.fullname;
+                userMeta.innerHTML = `
+                    <span>🎂 ${currentUser.age} yrs</span>
+                    <span>⚧️ ${currentUser.gender}</span>
+                    <span>🎯 ${currentUser.goal.replace('-', ' ')}</span>
+                `;
+                loginBtn.style.display = 'none';
+                logoutBtn.style.display = 'block';
+                
+                // Load user-specific data
+                loadUserData();
+            } else {
+                // Guest
+                avatar.innerText = '👤';
+                displayName.innerText = 'Guest User';
+                userMeta.innerHTML = '<span>⚡ not logged in</span>';
+                loginBtn.style.display = 'block';
+                logoutBtn.style.display = 'none';
+            }
+        }
+
+        // Load user-specific data
+        function loadUserData() {
+            if (!currentUser) return;
+            
+            const userData = users[currentUser.username] || {};
+            history = userData.history || generateSampleHistory();
+            totalExercisesDone = userData.totalExercises || 0;
+            totalCaloriesBurned = userData.totalCalories || 0;
+            waterIntake = userData.waterIntake || 0;
+            
+            // Load workout progress
+            if (userData.workoutProgress) {
+                for (let day in userData.workoutProgress) {
+                    if (workouts[day]) {
+                        for (let i = 0; i < workouts[day].exercises.length; i++) {
+                            if (userData.workoutProgress[day] && userData.workoutProgress[day][i] !== undefined) {
+                                workouts[day].exercises[i].completed = userData.workoutProgress[day][i];
+                            }
+                        }
+                    }
+                }
+            }
+            
+            renderWorkout();
+            renderHistory();
+            updateStats();
+            updateChart();
+        }
+
+        // Save user-specific data
+        function saveUserData() {
+            if (!currentUser) return;
+            
+            const progressObj = {};
+            for (let day in workouts) {
+                progressObj[day] = workouts[day].exercises.map(ex => ex.completed);
+            }
+            
+            users[currentUser.username] = {
+                history: history,
+                totalExercises: totalExercisesDone,
+                totalCalories: totalCaloriesBurned,
+                waterIntake: waterIntake,
+                workoutProgress: progressObj
+            };
+            
+            saveUsers();
+        }
+
         let progressChart = null;
         let currentChartRange = 'week';
         let currentChartType = 'bar';
@@ -1216,40 +1577,128 @@
             });
         });
 
+        // Auth Modal
+        const modal = document.getElementById('authModal');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const switchAuthText = document.getElementById('switchAuthText');
+        const modalTitle = document.getElementById('modalTitle');
+        const authActionBtn = document.getElementById('authActionBtn');
+        const nameGroup = document.getElementById('nameGroup');
+        const ageGroup = document.getElementById('ageGroup');
+        const genderGroup = document.getElementById('genderGroup');
+        const goalGroup = document.getElementById('goalGroup');
+        
+        let isLoginMode = true;
+
+        loginBtn.addEventListener('click', () => {
+            isLoginMode = true;
+            modalTitle.innerText = '🔐 LOGIN';
+            authActionBtn.innerText = 'Login';
+            nameGroup.style.display = 'none';
+            ageGroup.style.display = 'none';
+            genderGroup.style.display = 'none';
+            goalGroup.style.display = 'none';
+            switchAuthText.innerText = 'Create new account';
+            modal.classList.add('active');
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            currentUser = null;
+            localStorage.removeItem('redzone_currentUser');
+            updateIdentityBar();
+            location.reload(); // Reset to guest data
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        switchAuthText.addEventListener('click', () => {
+            isLoginMode = !isLoginMode;
+            if (isLoginMode) {
+                modalTitle.innerText = '🔐 LOGIN';
+                authActionBtn.innerText = 'Login';
+                nameGroup.style.display = 'none';
+                ageGroup.style.display = 'none';
+                genderGroup.style.display = 'none';
+                goalGroup.style.display = 'none';
+                switchAuthText.innerText = 'Create new account';
+            } else {
+                modalTitle.innerText = '📝 SIGN UP';
+                authActionBtn.innerText = 'Sign Up';
+                nameGroup.style.display = 'block';
+                ageGroup.style.display = 'block';
+                genderGroup.style.display = 'block';
+                goalGroup.style.display = 'block';
+                switchAuthText.innerText = 'Back to login';
+            }
+        });
+
+        authActionBtn.addEventListener('click', () => {
+            const username = document.getElementById('username').value.trim();
+            if (!username) {
+                alert('Username required');
+                return;
+            }
+
+            if (isLoginMode) {
+                // Login
+                if (users[username]) {
+                    currentUser = users[username];
+                    updateIdentityBar();
+                    loadUserData();
+                    modal.classList.remove('active');
+                } else {
+                    alert('User not found. Try signing up first.');
+                }
+            } else {
+                // Sign up
+                const fullname = document.getElementById('fullname').value.trim();
+                const age = document.getElementById('age').value;
+                const gender = document.getElementById('gender').value;
+                const goal = document.getElementById('goal').value;
+
+                if (!fullname || !age || !gender || !goal) {
+                    alert('Please fill all fields');
+                    return;
+                }
+
+                if (users[username]) {
+                    alert('Username already exists');
+                    return;
+                }
+
+                currentUser = {
+                    username: username,
+                    fullname: fullname,
+                    age: age,
+                    gender: gender,
+                    goal: goal
+                };
+                users[username] = {
+                    history: generateSampleHistory(),
+                    totalExercises: 0,
+                    totalCalories: 0,
+                    waterIntake: 0,
+                    workoutProgress: {}
+                };
+                
+                saveUsers();
+                updateIdentityBar();
+                loadUserData();
+                modal.classList.remove('active');
+            }
+        });
+
         // Load data
         function loadData() {
-            try {
-                const savedProgress = localStorage.getItem('workoutProgress');
-                if (savedProgress) {
-                    const parsed = JSON.parse(savedProgress);
-                    for (let day in parsed) {
-                        if (workouts[day]) {
-                            for (let i = 0; i < workouts[day].exercises.length; i++) {
-                                if (parsed[day] && parsed[day][i] !== undefined) {
-                                    workouts[day].exercises[i].completed = parsed[day][i];
-                                }
-                            }
-                        }
-                    }
-                }
-
-                const savedHistory = localStorage.getItem('workoutHistory');
-                if (savedHistory) {
-                    history = JSON.parse(savedHistory);
-                } else {
-                    history = generateSampleHistory();
-                }
-
-                const savedTotal = localStorage.getItem('totalExercisesDone');
-                if (savedTotal) totalExercisesDone = parseInt(savedTotal) || 0;
-                
-                const savedCalories = localStorage.getItem('totalCaloriesBurned');
-                if (savedCalories) totalCaloriesBurned = parseInt(savedCalories) || 0;
-                
-                const savedWater = localStorage.getItem('waterIntake');
-                if (savedWater) waterIntake = parseInt(savedWater) || 0;
-
-            } catch (e) {}
+            loadUsers();
+            if (!currentUser) {
+                // Guest data
+                history = generateSampleHistory();
+            }
         }
 
         function generateSampleHistory() {
@@ -1277,15 +1726,20 @@
         }
 
         function saveProgress() {
-            const progressObj = {};
-            for (let day in workouts) {
-                progressObj[day] = workouts[day].exercises.map(ex => ex.completed);
+            if (currentUser) {
+                saveUserData();
+            } else {
+                // Guest save to general storage
+                const progressObj = {};
+                for (let day in workouts) {
+                    progressObj[day] = workouts[day].exercises.map(ex => ex.completed);
+                }
+                localStorage.setItem('guest_workoutProgress', JSON.stringify(progressObj));
+                localStorage.setItem('guest_workoutHistory', JSON.stringify(history));
+                localStorage.setItem('guest_totalExercisesDone', totalExercisesDone.toString());
+                localStorage.setItem('guest_totalCaloriesBurned', totalCaloriesBurned.toString());
+                localStorage.setItem('guest_waterIntake', waterIntake.toString());
             }
-            localStorage.setItem('workoutProgress', JSON.stringify(progressObj));
-            localStorage.setItem('workoutHistory', JSON.stringify(history));
-            localStorage.setItem('totalExercisesDone', totalExercisesDone.toString());
-            localStorage.setItem('totalCaloriesBurned', totalCaloriesBurned.toString());
-            localStorage.setItem('waterIntake', waterIntake.toString());
         }
 
         function renderDaySelector() {
@@ -1620,6 +2074,7 @@
         renderHistory();
         updateStats();
         initChart();
+        updateIdentityBar();
 
         // Event listeners
         document.getElementById('resetDayBtn').addEventListener('click', resetDay);
