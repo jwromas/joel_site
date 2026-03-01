@@ -163,7 +163,57 @@ More posts coming soon.
     (d.head || d.body).appendChild(s);
   })();
 </script>
+<!-- COMMENT SECTION -->
+<div class="section">
+  <h2>Comments</h2>
 
+  <div id="comment-list" style="margin-bottom:20px;"></div>
+
+  <input type="text" id="comment-name" placeholder="Your Name" 
+    style="width:100%;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ccc;">
+
+  <textarea id="comment-text" placeholder="Write your comment..." rows="4"
+    style="width:100%;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ccc;"></textarea>
+
+  <button onclick="addComment()" 
+    style="background:#111;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">
+    Post Comment
+  </button>
+</div>
+
+<script>
+  function loadComments() {
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    const list = document.getElementById('comment-list');
+    list.innerHTML = '';
+
+    comments.forEach(comment => {
+      const div = document.createElement('div');
+      div.style.borderBottom = "1px solid #ccc";
+      div.style.padding = "10px 0";
+      div.innerHTML = "<strong>" + comment.name + "</strong><p>" + comment.text + "</p>";
+      list.appendChild(div);
+    });
+  }
+
+  function addComment() {
+    const name = document.getElementById('comment-name').value;
+    const text = document.getElementById('comment-text').value;
+
+    if (!name || !text) return;
+
+    const comments = JSON.parse(localStorage.getItem('comments')) || [];
+    comments.push({ name, text });
+    localStorage.setItem('comments', JSON.stringify(comments));
+
+    document.getElementById('comment-name').value = '';
+    document.getElementById('comment-text').value = '';
+
+    loadComments();
+  }
+
+  loadComments();
+</script>
 <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
 <footer>
 <p>
