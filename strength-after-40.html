@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Workout · dark edition</title>
-    <!-- Chart.js for progress charts -->
+    <title>RED ZONE · dark fitness</title>
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <!-- html2canvas for screenshot export -->
+    <!-- html2canvas for screenshots -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * {
@@ -43,7 +43,6 @@
             font-size: 1.1rem;
         }
 
-        /* stats row */
         .stats {
             display: flex;
             flex-wrap: wrap;
@@ -60,6 +59,13 @@
         .stat-card {
             flex: 1 1 120px;
             text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3);
         }
 
         .stat-value {
@@ -75,7 +81,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* day selector */
         .day-selector {
             display: flex;
             flex-wrap: wrap;
@@ -94,7 +99,6 @@
             color: #e5e7eb;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .day-btn.active {
@@ -104,7 +108,6 @@
             box-shadow: 0 8px 15px -6px #ef4444;
         }
 
-        /* workout card */
         .workout-card {
             background: #1f2937;
             border-radius: 40px;
@@ -112,6 +115,12 @@
             box-shadow: 0 15px 30px -12px rgba(0,0,0,0.5);
             margin-bottom: 32px;
             border: 1px solid #374151;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .workout-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(1deg);
+            box-shadow: 0 30px 40px rgba(239, 68, 68, 0.2);
         }
 
         .workout-title {
@@ -139,7 +148,6 @@
             font-size: 1.05rem;
         }
 
-        /* exercise list */
         .exercise-list {
             list-style: none;
             margin-bottom: 32px;
@@ -198,11 +206,8 @@
         .checkbox.checked {
             background: #ef4444;
             border-color: #b91c1c;
-            color: white;
-            content: "✓";
         }
 
-        /* progress bar */
         .progress-section {
             margin: 24px 0 16px;
         }
@@ -230,7 +235,6 @@
             transition: width 0.25s;
         }
 
-        /* buttons */
         .action-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -248,7 +252,6 @@
             color: #e5e7eb;
             cursor: pointer;
             transition: all 0.15s;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             flex: 1 1 auto;
         }
 
@@ -257,6 +260,7 @@
             border-color: #b91c1c;
             color: white;
             box-shadow: 0 10px 18px -8px #ef4444;
+            animation: pulse-glow 2s infinite;
         }
 
         .btn-primary:hover {
@@ -267,7 +271,12 @@
             background: #4b5563;
         }
 
-        /* chart section */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px #ef4444; }
+            50% { box-shadow: 0 0 20px #ef4444, 0 0 30px #b91c1c; }
+            100% { box-shadow: 0 0 5px #ef4444; }
+        }
+
         .chart-section {
             background: #1f2937;
             border-radius: 32px;
@@ -293,97 +302,56 @@
             gap: 10px;
         }
 
-        .chart-controls-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-            margin-bottom: 16px;
-        }
-
-        .chart-type-selector {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
-        .chart-btn {
-            background: #374151;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 500;
-            color: #e5e7eb;
-            cursor: pointer;
-            transition: all 0.15s;
-            border: 1px solid transparent;
-        }
-
-        .chart-btn.active {
-            background: #ef4444;
-            color: white;
-        }
-
-        .chart-btn:hover {
-            background: #4b5563;
-        }
-
-        /* metric selector */
-        .metric-selector {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-
-        .metric-btn {
-            background: #374151;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 500;
-            color: #e5e7eb;
-            cursor: pointer;
-            transition: all 0.15s;
-        }
-
-        .metric-btn.active {
-            background: #ef4444;
-            color: white;
-        }
-
-        /* export buttons */
         .export-buttons {
             display: flex;
             gap: 12px;
-            justify-content: flex-end;
-            margin-top: 16px;
         }
 
         .export-btn {
             background: #374151;
             border: 1px solid #4b5563;
-            padding: 10px 20px;
+            padding: 8px 16px;
             border-radius: 30px;
             font-weight: 500;
             color: #e5e7eb;
             cursor: pointer;
             transition: all 0.15s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
         }
 
         .export-btn:hover {
             background: #4b5563;
         }
 
-        /* history */
+        .metric-selector, .chart-type-selector, .chart-controls-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .metric-btn, .chart-btn {
+            background: #374151;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .metric-btn.active, .chart-btn.active {
+            background: #ef4444;
+            color: white;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
         .history-section {
             background: #1f2937;
             border-radius: 32px;
@@ -396,8 +364,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 18px;
-            flex-wrap: wrap;
-            gap: 10px;
         }
 
         .history-title {
@@ -428,7 +394,6 @@
             padding: 16px 0;
         }
 
-        /* reset button */
         .reset-btn {
             background: none;
             border: 1px solid #7f1d1d;
@@ -436,9 +401,7 @@
             padding: 8px 18px;
             border-radius: 30px;
             font-weight: 500;
-            font-size: 0.9rem;
             cursor: pointer;
-            transition: 0.1s;
         }
 
         .reset-btn:hover {
@@ -451,72 +414,43 @@
             color: #9ca3af;
             font-size: 0.9rem;
         }
-
-        /* 3D/Animated effects */
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 5px #ef4444; }
-            50% { box-shadow: 0 0 20px #ef4444, 0 0 30px #b91c1c; }
-            100% { box-shadow: 0 0 5px #ef4444; }
-        }
-
-        .btn-primary {
-            animation: pulse-glow 2s infinite;
-        }
-
-        .stat-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3);
-        }
-
-        .workout-card {
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .workout-card:hover {
-            transform: perspective(1000px) rotateX(2deg) rotateY(1deg);
-            box-shadow: 0 30px 40px rgba(239, 68, 68, 0.2);
-        }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <h1>🏋️ RED ZONE FITNESS</h1>
+    <h1>🔥 RED ZONE FITNESS</h1>
     <p>dark mode · track everything · push harder</p>
 </div>
 
-<!-- stats -->
 <div class="stats">
     <div class="stat-card">
         <div class="stat-value" id="totalWorkouts">0</div>
-        <div class="stat-label">workouts done</div>
+        <div class="stat-label">workouts</div>
     </div>
     <div class="stat-card">
         <div class="stat-value" id="currentStreak">0</div>
-        <div class="stat-label">day streak</div>
+        <div class="stat-label">streak</div>
     </div>
     <div class="stat-card">
         <div class="stat-value" id="totalExercises">0</div>
         <div class="stat-label">exercises</div>
     </div>
+    <div class="stat-card">
+        <div class="stat-value" id="totalCalories">0</div>
+        <div class="stat-label">calories</div>
+    </div>
 </div>
 
-<!-- day selector -->
 <div class="day-selector" id="daySelector"></div>
 
-<!-- main workout card -->
-<div class="workout-card" id="workoutCard">
+<div class="workout-card">
     <div class="workout-title">
         <span id="workoutName">Full Body Strength</span>
         <span class="badge" id="workoutLevel">beginner</span>
     </div>
     <div class="workout-desc" id="workoutDesc">Build strength with bodyweight exercises.</div>
 
-    <!-- progress inside card -->
     <div class="progress-section">
         <div class="progress-label">
             <span>today's progress</span>
@@ -527,17 +461,14 @@
         </div>
     </div>
 
-    <!-- exercise list -->
     <ul class="exercise-list" id="exerciseList"></ul>
 
-    <!-- action buttons -->
     <div class="action-buttons">
         <button class="btn" id="resetDayBtn">↺ reset day</button>
         <button class="btn btn-primary" id="completeWorkoutBtn">✓ complete workout</button>
     </div>
 </div>
 
-<!-- progress chart section -->
 <div class="chart-section" id="chartSection">
     <div class="chart-header">
         <div class="chart-title">
@@ -550,14 +481,12 @@
         </div>
     </div>
 
-    <!-- metric selector -->
     <div class="metric-selector">
         <button class="metric-btn active" data-metric="workouts">🏋️ workouts</button>
         <button class="metric-btn" data-metric="exercises">💪 exercises</button>
         <button class="metric-btn" data-metric="calories">🔥 calories</button>
     </div>
 
-    <!-- chart type selector -->
     <div class="chart-type-selector">
         <button class="chart-btn active" data-type="bar">📊 bar</button>
         <button class="chart-btn" data-type="line">📈 line</button>
@@ -568,7 +497,6 @@
         <canvas id="progressChart"></canvas>
     </div>
 
-    <!-- range selector -->
     <div class="chart-controls-group">
         <button class="chart-btn active" data-range="week">week</button>
         <button class="chart-btn" data-range="month">month</button>
@@ -576,7 +504,6 @@
     </div>
 </div>
 
-<!-- history -->
 <div class="history-section">
     <div class="history-header">
         <div class="history-title">📋 workout history</div>
@@ -585,11 +512,11 @@
     <div id="historyList"></div>
 </div>
 
-<footer>⚡ red zone · every rep counts ⚡</footer>
+<footer>⚡ every rep counts · red zone ⚡</footer>
 
 <script>
     (function() {
-        // ---------- WORKOUT DATA ----------
+        // Workout data
         const workouts = {
             monday: {
                 name: 'Full Body Strength',
@@ -611,10 +538,10 @@
                 exercises: [
                     { name: 'Cat-Cow Stretch', reps: '10 breaths', completed: false },
                     { name: 'Downward Dog', reps: '45 sec', completed: false },
-                    { name: 'World’s Greatest Stretch', reps: '8 each side', completed: false },
+                    { name: 'World\'s Greatest Stretch', reps: '8 each side', completed: false },
                     { name: 'Glute Stretch', reps: '30 sec each', completed: false },
                     { name: 'Thoracic Rotations', reps: '10 each side', completed: false },
-                    { name: 'Child’s Pose', reps: '60 sec', completed: false }
+                    { name: 'Child\'s Pose', reps: '60 sec', completed: false }
                 ]
             },
             wednesday: {
@@ -681,20 +608,18 @@
             }
         };
 
-        // day order
         const dayOrder = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
         let currentDay = 'monday';
         let history = [];
         let totalExercisesDone = 0;
         let totalCaloriesBurned = 0;
         
-        // chart variables
         let progressChart = null;
         let currentChartRange = 'week';
         let currentChartType = 'bar';
         let currentMetric = 'workouts';
 
-        // ---------- load from localStorage ----------
+        // Load data
         function loadData() {
             try {
                 const savedProgress = localStorage.getItem('workoutProgress');
@@ -702,7 +627,7 @@
                     const parsed = JSON.parse(savedProgress);
                     for (let day in parsed) {
                         if (workouts[day]) {
-                            for (let i=0; i<workouts[day].exercises.length; i++) {
+                            for (let i = 0; i < workouts[day].exercises.length; i++) {
                                 if (parsed[day] && parsed[day][i] !== undefined) {
                                     workouts[day].exercises[i].completed = parsed[day][i];
                                 }
@@ -719,15 +644,16 @@
                 }
 
                 const savedTotal = localStorage.getItem('totalExercisesDone');
-                if (savedTotal) totalExercisesDone = parseInt(savedTotal,10) || 0;
+                if (savedTotal) totalExercisesDone = parseInt(savedTotal) || 0;
                 
                 const savedCalories = localStorage.getItem('totalCaloriesBurned');
-                if (savedCalories) totalCaloriesBurned = parseInt(savedCalories,10) || 0;
+                if (savedCalories) totalCaloriesBurned = parseInt(savedCalories) || 0;
 
-            } catch (e) {}
+            } catch (e) {
+                console.log('Error loading data:', e);
+            }
         }
 
-        // generate sample history for demo
         function generateSampleHistory() {
             const sample = [];
             const workoutNames = ['Full Body Strength', 'Lower Body + Core', 'Upper Body + Core', 'Full Body HIIT'];
@@ -738,21 +664,20 @@
                 date.setDate(date.getDate() - i);
                 const dateStr = date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
                 
-                // random workout for each day
                 if (Math.random() > 0.4) {
                     const workout = workoutNames[Math.floor(Math.random() * workoutNames.length)];
+                    const exercises = Math.floor(Math.random() * 20) + 10;
                     sample.push({
                         date: dateStr,
                         workout: workout,
-                        exercises: Math.floor(Math.random() * 20) + 10,
-                        calories: Math.floor(Math.random() * 300) + 150
+                        exercises: exercises,
+                        calories: exercises * 15
                     });
                 }
             }
             return sample;
         }
 
-        // ---------- save to localStorage ----------
         function saveProgress() {
             const progressObj = {};
             for (let day in workouts) {
@@ -764,12 +689,10 @@
             localStorage.setItem('totalCaloriesBurned', totalCaloriesBurned.toString());
         }
 
-        // ---------- render day selector ----------
         function renderDaySelector() {
             const container = document.getElementById('daySelector');
             let html = '';
             dayOrder.forEach(day => {
-                const displayName = day.charAt(0).toUpperCase() + day.slice(1,3);
                 const activeClass = (currentDay === day) ? 'active' : '';
                 html += `<button class="day-btn ${activeClass}" data-day="${day}">${day.slice(0,3)}</button>`;
             });
@@ -777,17 +700,13 @@
 
             document.querySelectorAll('.day-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    const day = e.target.dataset.day;
-                    if (day) {
-                        currentDay = day;
-                        renderDaySelector();
-                        renderWorkout();
-                    }
+                    currentDay = e.target.dataset.day;
+                    renderDaySelector();
+                    renderWorkout();
                 });
             });
         }
 
-        // ---------- render current workout ----------
         function renderWorkout() {
             const w = workouts[currentDay];
             document.getElementById('workoutName').innerText = w.name;
@@ -819,7 +738,7 @@
                         if (!exercise.completed) {
                             exercise.completed = true;
                             totalExercisesDone += 1;
-                            totalCaloriesBurned += 15; // avg calories per exercise
+                            totalCaloriesBurned += 15;
                         } else {
                             exercise.completed = false;
                             totalExercisesDone = Math.max(0, totalExercisesDone - 1);
@@ -850,12 +769,13 @@
             document.getElementById('totalWorkouts').innerText = history.length;
             document.getElementById('currentStreak').innerText = history.length > 0 ? '🔥' + history.length : '0';
             document.getElementById('totalExercises').innerText = totalExercisesDone;
+            document.getElementById('totalCalories').innerText = totalCaloriesBurned;
         }
 
         function renderHistory() {
             const historyEl = document.getElementById('historyList');
             if (history.length === 0) {
-                historyEl.innerHTML = '<div class="empty-history">no workouts logged yet — complete a day!</div>';
+                historyEl.innerHTML = '<div class="empty-history">no workouts logged yet</div>';
                 return;
             }
             let html = '';
@@ -868,13 +788,10 @@
             historyEl.innerHTML = html;
         }
 
-        // ---------- CHART FUNCTIONS ----------
         function initChart() {
             const ctx = document.getElementById('progressChart').getContext('2d');
             
-            if (progressChart) {
-                progressChart.destroy();
-            }
+            if (progressChart) progressChart.destroy();
             
             progressChart = new Chart(ctx, {
                 type: currentChartType,
@@ -884,7 +801,7 @@
                         label: getMetricLabel(),
                         data: [],
                         backgroundColor: getChartColors().background,
-                        borderColor: getChartColors().border,
+                        borderColor: '#ef4444',
                         borderWidth: 2,
                         tension: 0.3,
                         fill: currentChartType === 'line' ? false : true,
@@ -898,34 +815,22 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: false
-                        },
+                        legend: { display: false },
                         tooltip: {
                             callbacks: {
-                                label: function(context) {
-                                    return `${context.raw} ${getMetricLabel().toLowerCase()}`;
-                                }
+                                label: (context) => `${context.raw} ${getMetricLabel().toLowerCase()}`
                             }
                         }
                     },
                     scales: {
                         y: {
                             beginAtZero: true,
-                            grid: {
-                                color: '#374151'
-                            },
-                            ticks: {
-                                color: '#9ca3af'
-                            }
+                            grid: { color: '#374151' },
+                            ticks: { color: '#9ca3af' }
                         },
                         x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: '#9ca3af'
-                            }
+                            grid: { display: false },
+                            ticks: { color: '#9ca3af' }
                         }
                     }
                 }
@@ -947,8 +852,7 @@
             return {
                 background: currentChartType === 'line' 
                     ? 'rgba(239, 68, 68, 0.1)' 
-                    : 'rgba(239, 68, 68, 0.7)',
-                border: '#ef4444'
+                    : 'rgba(239, 68, 68, 0.7)'
             };
         }
 
@@ -960,7 +864,6 @@
             progressChart.data.datasets[0].data = data.values;
             progressChart.data.datasets[0].label = getMetricLabel();
             progressChart.data.datasets[0].backgroundColor = getChartColors().background;
-            progressChart.data.datasets[0].borderColor = getChartColors().border;
             progressChart.update();
             
             document.getElementById('chartRange').innerText = `last ${currentChartRange}`;
@@ -973,23 +876,17 @@
             
             let days = 7;
             if (range === 'month') days = 30;
-            if (range === 'year') days = 12; // months
+            if (range === 'year') days = 12;
             
             if (range === 'year') {
-                // monthly view
                 for (let i = days - 1; i >= 0; i--) {
                     const date = new Date(today);
                     date.setMonth(date.getMonth() - i);
-                    const month = date.toLocaleDateString('en-US', { month: 'short' });
-                    labels.push(month);
+                    labels.push(date.toLocaleDateString('en-US', { month: 'short' }));
                     
                     let total = 0;
-                    const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
-                    const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-                    
                     history.forEach(item => {
-                        const itemDate = new Date(item.date + ', ' + today.getFullYear());
-                        if (itemDate >= monthStart && itemDate <= monthEnd) {
+                        if (item.date.includes(date.toLocaleDateString('en-US', { month: 'short' }))) {
                             if (currentMetric === 'workouts') total += 1;
                             else if (currentMetric === 'exercises') total += item.exercises || 0;
                             else if (currentMetric === 'calories') total += item.calories || 0;
@@ -998,7 +895,6 @@
                     values.push(total);
                 }
             } else {
-                // daily view
                 for (let i = days - 1; i >= 0; i--) {
                     const date = new Date(today);
                     date.setDate(date.getDate() - i);
@@ -1020,7 +916,6 @@
             return { labels, values };
         }
 
-        // complete workout button
         function completeWorkout() {
             const w = workouts[currentDay];
             const allCompleted = w.exercises.every(ex => ex.completed);
@@ -1037,7 +932,7 @@
             
             if (!alreadyCompleted) {
                 const exercisesDone = w.exercises.length;
-                const caloriesBurned = exercisesDone * 15; // avg 15 cal per exercise
+                const caloriesBurned = exercisesDone * 15;
                 
                 history.push({ 
                     date: todayStr, 
@@ -1076,10 +971,75 @@
             }
         }
 
-        // export functions
         function takeScreenshot() {
             const element = document.getElementById('chartSection');
             html2canvas(element).then(canvas => {
                 const link = document.createElement('a');
                 link.download = 'fitness-progress.png';
-                link.href = canvas.to
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+
+        function exportCSV() {
+            let csv = 'Date,Workout,Exercises,Calories\n';
+            history.forEach(item => {
+                csv += `${item.date},${item.workout},${item.exercises || 0},${item.calories || 0}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'fitness-history.csv';
+            a.click();
+        }
+
+        // Initialize
+        loadData();
+        renderDaySelector();
+        renderWorkout();
+        renderHistory();
+        updateStats();
+        initChart();
+
+        // Event listeners
+        document.getElementById('resetDayBtn').addEventListener('click', resetDay);
+        document.getElementById('completeWorkoutBtn').addEventListener('click', completeWorkout);
+        document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
+        document.getElementById('screenshotBtn').addEventListener('click', takeScreenshot);
+        document.getElementById('exportCSVBtn').addEventListener('click', exportCSV);
+
+        // Chart controls
+        document.querySelectorAll('.metric-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.metric-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentMetric = e.target.dataset.metric;
+                updateChart();
+            });
+        });
+
+        document.querySelectorAll('.chart-type-selector .chart-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.chart-type-selector .chart-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentChartType = e.target.dataset.type;
+                initChart();
+            });
+        });
+
+        document.querySelectorAll('.chart-controls-group .chart-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.chart-controls-group .chart-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentChartRange = e.target.dataset.range;
+                updateChart();
+            });
+        });
+
+        window.addEventListener('beforeunload', saveProgress);
+    })();
+</script>
+</body>
+</html>
