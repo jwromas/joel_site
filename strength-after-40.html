@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RED ZONE · dark fitness</title>
+    <title>RED ZONE · complete transformation</title>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <!-- html2canvas for screenshots -->
+    <!-- html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         * {
@@ -20,7 +20,7 @@
             background: #0a0c10;
             color: #e5e7eb;
             padding: 20px 16px 40px;
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -79,6 +79,41 @@
             color: #9ca3af;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+        }
+
+        .main-tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .main-tab {
+            background: #1f2937;
+            border: 1px solid #374151;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .main-tab.active {
+            background: #ef4444;
+            color: white;
+            border-color: #b91c1c;
+            box-shadow: 0 8px 15px -6px #ef4444;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
         }
 
         .day-selector {
@@ -208,6 +243,10 @@
             border-color: #b91c1c;
         }
 
+        .checkbox.checked::after {
+            content: "✓";
+        }
+
         .progress-section {
             margin: 24px 0 16px;
         }
@@ -235,17 +274,10 @@
             transition: width 0.25s;
         }
 
-        .action-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin: 32px 0 20px;
-        }
-
         .btn {
             background: #374151;
             border: 1px solid #4b5563;
-            padding: 14px 28px;
+            padding: 12px 24px;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
@@ -275,6 +307,141 @@
             0% { box-shadow: 0 0 5px #ef4444; }
             50% { box-shadow: 0 0 20px #ef4444, 0 0 30px #b91c1c; }
             100% { box-shadow: 0 0 5px #ef4444; }
+        }
+
+        .nutrition-grid, .supplements-grid, .hydration-grid, .body-parts-grid, .weight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .nutrition-card, .supplement-card, .hydration-card, .body-part-card, .weight-card {
+            background: #1f2937;
+            border-radius: 32px;
+            padding: 24px;
+            border: 1px solid #374151;
+            transition: transform 0.3s;
+        }
+
+        .nutrition-card:hover, .supplement-card:hover, .hydration-card:hover, .body-part-card:hover, .weight-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #ef4444;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meal-item, .supplement-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #374151;
+        }
+
+        .meal-item:last-child, .supplement-item:last-child {
+            border-bottom: none;
+        }
+
+        .meal-name, .supplement-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .meal-desc, .supplement-desc {
+            color: #9ca3af;
+            font-size: 0.95rem;
+        }
+
+        .hydration-tracker {
+            text-align: center;
+        }
+
+        .water-intake {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ef4444;
+            margin: 20px 0;
+        }
+
+        .water-label {
+            color: #9ca3af;
+            margin-bottom: 20px;
+        }
+
+        .water-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .water-btn {
+            background: #374151;
+            border: 1px solid #4b5563;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            color: #e5e7eb;
+        }
+
+        .water-btn:hover {
+            background: #4b5563;
+        }
+
+        .body-part-exercises {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .body-part-exercises li {
+            padding: 8px 0;
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .body-part-exercises li::before {
+            content: "•";
+            color: #ef4444;
+            font-weight: bold;
+        }
+
+        .diet-plan {
+            background: #374151;
+            padding: 16px;
+            border-radius: 24px;
+            margin: 16px 0;
+        }
+
+        .calorie-target {
+            font-size: 2rem;
+            color: #ef4444;
+            font-weight: 700;
+        }
+
+        .macro-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #4b5563;
+        }
+
+        .macro-label {
+            color: #9ca3af;
+        }
+
+        .macro-value {
+            font-weight: 600;
+            color: #ef4444;
         }
 
         .chart-section {
@@ -419,8 +586,8 @@
 <body>
 
 <div class="header">
-    <h1>🔥 RED ZONE FITNESS</h1>
-    <p>dark mode · track everything · push harder</p>
+    <h1>🔥 RED ZONE · COMPLETE TRANSFORMATION</h1>
+    <p>workouts · nutrition · supplements · hydration · body targeting · weight goals</p>
 </div>
 
 <div class="stats">
@@ -440,79 +607,496 @@
         <div class="stat-value" id="totalCalories">0</div>
         <div class="stat-label">calories</div>
     </div>
-</div>
-
-<div class="day-selector" id="daySelector"></div>
-
-<div class="workout-card">
-    <div class="workout-title">
-        <span id="workoutName">Full Body Strength</span>
-        <span class="badge" id="workoutLevel">beginner</span>
-    </div>
-    <div class="workout-desc" id="workoutDesc">Build strength with bodyweight exercises.</div>
-
-    <div class="progress-section">
-        <div class="progress-label">
-            <span>today's progress</span>
-            <span id="progressPercent">0%</span>
-        </div>
-        <div class="progress-bar-bg">
-            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
-        </div>
-    </div>
-
-    <ul class="exercise-list" id="exerciseList"></ul>
-
-    <div class="action-buttons">
-        <button class="btn" id="resetDayBtn">↺ reset day</button>
-        <button class="btn btn-primary" id="completeWorkoutBtn">✓ complete workout</button>
+    <div class="stat-card">
+        <div class="stat-value" id="waterIntake">0</div>
+        <div class="stat-label">water (ml)</div>
     </div>
 </div>
 
-<div class="chart-section" id="chartSection">
-    <div class="chart-header">
-        <div class="chart-title">
-            <span>📊 progress analytics</span>
-            <span class="badge" id="chartRange">last 7 days</span>
+<!-- Main Tabs -->
+<div class="main-tabs">
+    <button class="main-tab active" data-tab="workout">🏋️ WORKOUTS</button>
+    <button class="main-tab" data-tab="nutrition">🥗 NUTRITION</button>
+    <button class="main-tab" data-tab="supplements">💊 SUPPLEMENTS</button>
+    <button class="main-tab" data-tab="hydration">💧 HYDRATION</button>
+    <button class="main-tab" data-tab="bodyparts">🎯 BODY TARGETING</button>
+    <button class="main-tab" data-tab="weight">⚖️ WEIGHT GOALS</button>
+</div>
+
+<!-- WORKOUT SECTION -->
+<div class="content-section active" id="workout-section">
+    <div class="day-selector" id="daySelector"></div>
+
+    <div class="workout-card">
+        <div class="workout-title">
+            <span id="workoutName">Full Body Strength</span>
+            <span class="badge" id="workoutLevel">beginner</span>
         </div>
-        <div class="export-buttons">
-            <button class="export-btn" id="screenshotBtn">📸 screenshot</button>
-            <button class="export-btn" id="exportCSVBtn">📥 export CSV</button>
+        <div class="workout-desc" id="workoutDesc">Build strength with bodyweight exercises.</div>
+
+        <div class="progress-section">
+            <div class="progress-label">
+                <span>today's progress</span>
+                <span id="progressPercent">0%</span>
+            </div>
+            <div class="progress-bar-bg">
+                <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <ul class="exercise-list" id="exerciseList"></ul>
+
+        <div class="action-buttons">
+            <button class="btn" id="resetDayBtn">↺ reset day</button>
+            <button class="btn btn-primary" id="completeWorkoutBtn">✓ complete workout</button>
         </div>
     </div>
 
-    <div class="metric-selector">
-        <button class="metric-btn active" data-metric="workouts">🏋️ workouts</button>
-        <button class="metric-btn" data-metric="exercises">💪 exercises</button>
-        <button class="metric-btn" data-metric="calories">🔥 calories</button>
+    <!-- progress chart -->
+    <div class="chart-section" id="chartSection">
+        <div class="chart-header">
+            <div class="chart-title">
+                <span>📊 progress analytics</span>
+                <span class="badge" id="chartRange">last 7 days</span>
+            </div>
+            <div class="export-buttons">
+                <button class="export-btn" id="screenshotBtn">📸 screenshot</button>
+                <button class="export-btn" id="exportCSVBtn">📥 export CSV</button>
+            </div>
+        </div>
+
+        <div class="metric-selector">
+            <button class="metric-btn active" data-metric="workouts">🏋️ workouts</button>
+            <button class="metric-btn" data-metric="exercises">💪 exercises</button>
+            <button class="metric-btn" data-metric="calories">🔥 calories</button>
+        </div>
+
+        <div class="chart-type-selector">
+            <button class="chart-btn active" data-type="bar">📊 bar</button>
+            <button class="chart-btn" data-type="line">📈 line</button>
+            <button class="chart-btn" data-type="radar">🎯 radar</button>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="progressChart"></canvas>
+        </div>
+
+        <div class="chart-controls-group">
+            <button class="chart-btn active" data-range="week">week</button>
+            <button class="chart-btn" data-range="month">month</button>
+            <button class="chart-btn" data-range="year">year</button>
+        </div>
     </div>
 
-    <div class="chart-type-selector">
-        <button class="chart-btn active" data-type="bar">📊 bar</button>
-        <button class="chart-btn" data-type="line">📈 line</button>
-        <button class="chart-btn" data-type="radar">🎯 radar</button>
-    </div>
-
-    <div class="chart-container">
-        <canvas id="progressChart"></canvas>
-    </div>
-
-    <div class="chart-controls-group">
-        <button class="chart-btn active" data-range="week">week</button>
-        <button class="chart-btn" data-range="month">month</button>
-        <button class="chart-btn" data-range="year">year</button>
+    <div class="history-section">
+        <div class="history-header">
+            <div class="history-title">📋 workout history</div>
+            <button class="reset-btn" id="clearHistoryBtn">clear all</button>
+        </div>
+        <div id="historyList"></div>
     </div>
 </div>
 
-<div class="history-section">
-    <div class="history-header">
-        <div class="history-title">📋 workout history</div>
-        <button class="reset-btn" id="clearHistoryBtn">clear all</button>
+<!-- NUTRITION SECTION -->
+<div class="content-section" id="nutrition-section">
+    <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">🥗 NUTRITION GUIDE</h2>
+    
+    <div class="nutrition-grid">
+        <div class="nutrition-card">
+            <div class="card-title">🌅 BREAKFAST OPTIONS</div>
+            <div class="meal-item">
+                <div class="meal-name">Protein Oats</div>
+                <div class="meal-desc">50g oats, 1 scoop protein, berries, 1 tbsp peanut butter (450 cal)</div>
+            </div>
+            <div class="meal-item">
+                <div class="meal-name">Egg Scramble</div>
+                <div class="meal-desc">3 eggs, spinach, 1 slice toast, avocado (400 cal)</div>
+            </div>
+            <div class="meal-item">
+                <div class="meal-name">Greek Yogurt Bowl</div>
+                <div class="meal-desc">200g Greek yogurt, honey, nuts, banana (350 cal)</div>
+            </div>
+        </div>
+
+        <div class="nutrition-card">
+            <div class="card-title">🌞 LUNCH OPTIONS</div>
+            <div class="meal-item">
+                <div class="meal-name">Grilled Chicken Salad</div>
+                <div class="meal-desc">150g chicken, mixed greens, tomatoes, cucumber, olive oil (400 cal)</div>
+            </div>
+            <div class="meal-item">
+                <div class="meal-name">Quinoa Bowl</div>
+                <div class="meal-desc">Quinoa, chickpeas, roasted veggies, tahini sauce (450 cal)</div>
+            </div>
+            <div class="meal-item">
+                <div class="meal-name">Tuna Wrap</div>
+                <div class="meal-desc">Whole wheat wrap, tuna, lettuce, light mayo (380 cal)</div>
+            </div>
+        </div>
+
+        <div class="nutrition-card">
+            <div class="card-title">🌙 DINNER OPTIONS</div>
+            <div class="meal-item">
+                <div class="meal-name">Salmon & Veggies</div>
+                <div class="meal-desc">150g salmon, broccoli, sweet potato (500 cal)</div>
+            </div>
+            <div class="meal-item">
+                <div class="meal-name">Lean Beef Stir-fry</div>
+                <div class="meal-desc">100g beef, mixed veggies, brown rice (450 cal)</div>
+            </div>
+            <div class="meal-item">
+                <div class="meal-name">Turkey Chili</div>
+                <div class="meal-desc">Lean turkey, beans, tomatoes, spices (400 cal)</div>
+            </div>
+        </div>
+
+        <div class="nutrition-card">
+            <div class="card-title">🍎 SNACKS</div>
+            <div class="meal-item">
+                <div class="meal-name">Protein Bar</div>
+                <div class="meal-desc">20g protein, low sugar (200 cal)</div>
+            </div>
+            <div class="meal-item">
+                <div class="meal-name">Apple + Almonds</div>
+                <div class="meal-desc">1 apple, 15 almonds (180 cal)</div>
+            </div>
+            <div class="meal-item">
+                <div class="meal-name">Greek Yogurt</div>
+                <div class="meal-desc">Single serving, plain (120 cal)</div>
+            </div>
+        </div>
     </div>
-    <div id="historyList"></div>
 </div>
 
-<footer>⚡ every rep counts · red zone ⚡</footer>
+<!-- SUPPLEMENTS SECTION -->
+<div class="content-section" id="supplements-section">
+    <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">💊 SUPPLEMENT GUIDE</h2>
+    
+    <div class="supplements-grid">
+        <div class="supplement-card">
+            <div class="card-title">💪 ESSENTIAL</div>
+            <div class="supplement-item">
+                <div class="supplement-name">Whey Protein</div>
+                <div class="supplement-desc">Post-workout: 25-30g within 30 mins • Builds muscle</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Creatine Monohydrate</div>
+                <div class="supplement-desc">5g daily • Increases strength & power</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Multivitamin</div>
+                <div class="supplement-desc">Daily • Covers nutritional gaps</div>
+            </div>
+        </div>
+
+        <div class="supplement-card">
+            <div class="card-title">⚡ ENERGY & FOCUS</div>
+            <div class="supplement-item">
+                <div class="supplement-name">Caffeine (200mg)</div>
+                <div class="supplement-desc">30 mins pre-workout • Energy & focus</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Beta-Alanine</div>
+                <div class="supplement-desc">3-4g pre-workout • Reduces fatigue</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">L-Citrulline</div>
+                <div class="supplement-desc">6g pre-workout • Better pumps</div>
+            </div>
+        </div>
+
+        <div class="supplement-card">
+            <div class="card-title">🛌 RECOVERY</div>
+            <div class="supplement-item">
+                <div class="supplement-name">Magnesium</div>
+                <div class="supplement-desc">Before bed • Sleep & muscle relaxation</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Omega-3 (Fish Oil)</div>
+                <div class="supplement-desc">2g daily • Joint health & inflammation</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">ZMA</div>
+                <div class="supplement-desc">Before bed • Testosterone & recovery</div>
+            </div>
+        </div>
+
+        <div class="supplement-card">
+            <div class="card-title">⚠️ WARNINGS</div>
+            <div class="supplement-item">
+                <div class="supplement-name">Consult Doctor First</div>
+                <div class="supplement-desc">Especially if on medication</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Stay Hydrated</div>
+                <div class="supplement-desc">Supplements require more water</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Cycle Off</div>
+                <div class="supplement-desc">Take breaks from stimulants</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- HYDRATION SECTION -->
+<div class="content-section" id="hydration-section">
+    <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">💧 HYDRATION TRACKER</h2>
+    
+    <div class="hydration-grid">
+        <div class="hydration-card">
+            <div class="card-title">💧 DAILY WATER INTAKE</div>
+            <div class="hydration-tracker">
+                <div class="water-intake" id="waterDisplay">0ml</div>
+                <div class="water-label">of 3500ml goal</div>
+                <div class="progress-bar-bg" style="height: 20px; margin: 20px 0;">
+                    <div class="progress-fill" id="waterProgress" style="width: 0%;"></div>
+                </div>
+                <div class="water-buttons">
+                    <button class="water-btn" data-water="250">➕ 250ml</button>
+                    <button class="water-btn" data-water="500">➕ 500ml</button>
+                    <button class="water-btn" data-water="1000">➕ 1000ml</button>
+                    <button class="water-btn" id="resetWater">↺ reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hydration-card">
+            <div class="card-title">⏰ HYDRATION SCHEDULE</div>
+            <div class="supplement-item">
+                <div class="supplement-name">Morning (500ml)</div>
+                <div class="supplement-desc">Upon waking • Kickstarts metabolism</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Pre-workout (500ml)</div>
+                <div class="supplement-desc">2 hours before • Optimal performance</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">During workout (500ml)</div>
+                <div class="supplement-desc">Sip throughout • Replace sweat</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Post-workout (500ml)</div>
+                <div class="supplement-desc">Within 1 hour • Recover</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">Evening (1000ml)</div>
+                <div class="supplement-desc">Spread out • Stop 2hrs before bed</div>
+            </div>
+        </div>
+
+        <div class="hydration-card">
+            <div class="card-title">⚠️ DEHYDRATION SIGNS</div>
+            <div class="supplement-item">
+                <div class="supplement-name">⚠️ Dark urine</div>
+                <div class="supplement-desc">Should be pale yellow</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">⚠️ Headache</div>
+                <div class="supplement-desc">Common early sign</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">⚠️ Fatigue</div>
+                <div class="supplement-desc">Even mild dehydration affects energy</div>
+            </div>
+            <div class="supplement-item">
+                <div class="supplement-name">⚠️ Dry mouth</div>
+                <div class="supplement-desc">Drink immediately</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BODY TARGETING SECTION -->
+<div class="content-section" id="bodyparts-section">
+    <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">🎯 TARGET SPECIFIC BODY PARTS</h2>
+    
+    <div class="body-parts-grid">
+        <div class="body-part-card">
+            <div class="card-title">💪 CHEST</div>
+            <ul class="body-part-exercises">
+                <li>Push-ups (wide grip) - 3x12</li>
+                <li>Incline push-ups - 3x10</li>
+                <li>Diamond push-ups - 3x8</li>
+                <li>Chest dips (chair) - 3x10</li>
+            </ul>
+            <div style="margin-top: 16px; color: #9ca3af;">
+                <strong>Nutrition:</strong> Protein within 30 mins post-workout
+            </div>
+        </div>
+
+        <div class="body-part-card">
+            <div class="card-title">🦵 LEGS</div>
+            <ul class="body-part-exercises">
+                <li>Bodyweight squats - 3x15</li>
+                <li>Walking lunges - 3x12 each</li>
+                <li>Glute bridges - 3x15</li>
+                <li>Bulgarian split squats - 3x10</li>
+                <li>Calf raises - 3x20</li>
+            </ul>
+            <div style="margin-top: 16px; color: #9ca3af;">
+                <strong>Nutrition:</strong> Carbs for energy, protein for repair
+            </div>
+        </div>
+
+        <div class="body-part-card">
+            <div class="card-title">💪 BACK</div>
+            <ul class="body-part-exercises">
+                <li>Superman holds - 3x30 sec</li>
+                <li>Reverse snow angels - 3x12</li>
+                <li>Table rows (under table) - 3x12</li>
+                <li>Child's pose stretch - 3x30 sec</li>
+            </ul>
+            <div style="margin-top: 16px; color: #9ca3af;">
+                <strong>Nutrition:</strong> Collagen, vitamin C for connective tissue
+            </div>
+        </div>
+
+        <div class="body-part-card">
+            <div class="card-title">💪 SHOULDERS</div>
+            <ul class="body-part-exercises">
+                <li>Pike push-ups - 3x8</li>
+                <li>Arm circles - 3x30 sec each</li>
+                <li>Plank shoulder taps - 3x20</li>
+                <li>Wall angels - 3x12</li>
+            </ul>
+            <div style="margin-top: 16px; color: #9ca3af;">
+                <strong>Nutrition:</strong> Anti-inflammatory foods (berries, fish)
+            </div>
+        </div>
+
+        <div class="body-part-card">
+            <div class="card-title">💪 ARMS</div>
+            <ul class="body-part-exercises">
+                <li>Tricep dips - 3x12</li>
+                <li>Close grip push-ups - 3x8</li>
+                <li>Reverse dips - 3x10</li>
+                <li>Plank to down dog - 3x10</li>
+            </ul>
+            <div style="margin-top: 16px; color: #9ca3af;">
+                <strong>Nutrition:</strong> Lean protein, BCAAs optional
+            </div>
+        </div>
+
+        <div class="body-part-card">
+            <div class="card-title">💪 CORE</div>
+            <ul class="body-part-exercises">
+                <li>Plank - 3x45 sec</li>
+                <li>Bicycle crunches - 3x20</li>
+                <li>Leg raises - 3x15</li>
+                <li>Russian twists - 3x20</li>
+                <li>Mountain climbers - 3x30 sec</li>
+            </ul>
+            <div style="margin-top: 16px; color: #9ca3af;">
+                <strong>Nutrition:</strong> Hydration, lean protein
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- WEIGHT GOALS SECTION -->
+<div class="content-section" id="weight-section">
+    <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">⚖️ WEIGHT GOALS · LOSS OR GAIN</h2>
+    
+    <div class="weight-grid">
+        <div class="weight-card">
+            <div class="card-title">🔥 WEIGHT LOSS</div>
+            <div class="diet-plan">
+                <div class="calorie-target">1800-2000 cal</div>
+                <div style="color: #9ca3af; margin: 10px 0;">Daily target (deficit of 500 cal)</div>
+                
+                <div class="macro-row">
+                    <span class="macro-label">Protein</span>
+                    <span class="macro-value">150g (30%)</span>
+                </div>
+                <div class="macro-row">
+                    <span class="macro-label">Carbs</span>
+                    <span class="macro-value">200g (40%)</span>
+                </div>
+                <div class="macro-row">
+                    <span class="macro-label">Fats</span>
+                    <span class="macro-value">67g (30%)</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <strong>🥗 Sample Day:</strong><br>
+                • Breakfast: Protein oats (450 cal)<br>
+                • Lunch: Grilled chicken salad (400 cal)<br>
+                • Snack: Apple + almonds (180 cal)<br>
+                • Dinner: Salmon & veggies (500 cal)<br>
+                • Snack: Greek yogurt (120 cal)<br>
+                <span style="color: #ef4444;">Total: ~1650 cal</span>
+            </div>
+            
+            <div style="margin-top: 20px; color: #9ca3af;">
+                <strong>💧 Tips:</strong> Drink water before meals, eat slowly, prioritize protein
+            </div>
+        </div>
+
+        <div class="weight-card">
+            <div class="card-title">💪 WEIGHT GAIN</div>
+            <div class="diet-plan">
+                <div class="calorie-target">2800-3000 cal</div>
+                <div style="color: #9ca3af; margin: 10px 0;">Daily target (surplus of 500 cal)</div>
+                
+                <div class="macro-row">
+                    <span class="macro-label">Protein</span>
+                    <span class="macro-value">180g (25%)</span>
+                </div>
+                <div class="macro-row">
+                    <span class="macro-label">Carbs</span>
+                    <span class="macro-value">375g (50%)</span>
+                </div>
+                <div class="macro-row">
+                    <span class="macro-label">Fats</span>
+                    <span class="macro-value">83g (25%)</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <strong>🥗 Sample Day:</strong><br>
+                • Breakfast: 3 eggs + oats + banana (600 cal)<br>
+                • Snack: Protein shake + nuts (400 cal)<br>
+                • Lunch: Chicken + rice + avocado (700 cal)<br>
+                • Snack: Peanut butter sandwich (400 cal)<br>
+                • Dinner: Beef + potatoes + veggies (700 cal)<br>
+                <span style="color: #ef4444;">Total: ~2800 cal</span>
+            </div>
+            
+            <div style="margin-top: 20px; color: #9ca3af;">
+                <strong>💧 Tips:</strong> Eat frequently, liquid calories help, lift heavy
+            </div>
+        </div>
+
+        <div class="weight-card">
+            <div class="card-title">⚖️ MAINTENANCE</div>
+            <div class="diet-plan">
+                <div class="calorie-target">2300-2500 cal</div>
+                <div style="color: #9ca3af; margin: 10px 0;">Balance intake & output</div>
+                
+                <div class="macro-row">
+                    <span class="macro-label">Protein</span>
+                    <span class="macro-value">160g (28%)</span>
+                </div>
+                <div class="macro-row">
+                    <span class="macro-label">Carbs</span>
+                    <span class="macro-value">275g (44%)</span>
+                </div>
+                <div class="macro-row">
+                    <span class="macro-label">Fats</span>
+                    <span class="macro-value">75g (28%)</span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; color: #9ca3af;">
+                <strong>⚖️ Flexible dieting:</strong> 80/20 rule - 80% whole foods, 20% treats
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>⚡ RED ZONE · complete transformation system ⚡</footer>
 
 <script>
     (function() {
@@ -613,11 +1197,24 @@
         let history = [];
         let totalExercisesDone = 0;
         let totalCaloriesBurned = 0;
+        let waterIntake = 0;
+        const WATER_GOAL = 3500;
         
         let progressChart = null;
         let currentChartRange = 'week';
         let currentChartType = 'bar';
         let currentMetric = 'workouts';
+
+        // Tab switching
+        document.querySelectorAll('.main-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab + '-section').classList.add('active');
+            });
+        });
 
         // Load data
         function loadData() {
@@ -648,10 +1245,11 @@
                 
                 const savedCalories = localStorage.getItem('totalCaloriesBurned');
                 if (savedCalories) totalCaloriesBurned = parseInt(savedCalories) || 0;
+                
+                const savedWater = localStorage.getItem('waterIntake');
+                if (savedWater) waterIntake = parseInt(savedWater) || 0;
 
-            } catch (e) {
-                console.log('Error loading data:', e);
-            }
+            } catch (e) {}
         }
 
         function generateSampleHistory() {
@@ -687,6 +1285,7 @@
             localStorage.setItem('workoutHistory', JSON.stringify(history));
             localStorage.setItem('totalExercisesDone', totalExercisesDone.toString());
             localStorage.setItem('totalCaloriesBurned', totalCaloriesBurned.toString());
+            localStorage.setItem('waterIntake', waterIntake.toString());
         }
 
         function renderDaySelector() {
@@ -717,14 +1316,13 @@
             let itemsHtml = '';
             w.exercises.forEach((ex, index) => {
                 const checkedClass = ex.completed ? 'checked' : '';
-                const checkMark = ex.completed ? '✓' : '';
                 itemsHtml += `
                     <li class="exercise-item">
                         <div class="exercise-info">
                             <span class="exercise-name">${ex.name}</span>
                             <span class="exercise-reps">${ex.reps}</span>
                         </div>
-                        <div class="checkbox ${checkedClass}" data-exercise-index="${index}">${checkMark}</div>
+                        <div class="checkbox ${checkedClass}" data-exercise-index="${index}"></div>
                     </li>
                 `;
             });
@@ -770,6 +1368,10 @@
             document.getElementById('currentStreak').innerText = history.length > 0 ? '🔥' + history.length : '0';
             document.getElementById('totalExercises').innerText = totalExercisesDone;
             document.getElementById('totalCalories').innerText = totalCaloriesBurned;
+            document.getElementById('waterIntake').innerText = waterIntake;
+            document.getElementById('waterDisplay').innerText = waterIntake + 'ml';
+            const waterPercent = Math.min(100, Math.round((waterIntake / WATER_GOAL) * 100));
+            document.getElementById('waterProgress').style.width = waterPercent + '%';
         }
 
         function renderHistory() {
@@ -994,6 +1596,22 @@
             a.download = 'fitness-history.csv';
             a.click();
         }
+
+        // Water tracking
+        document.querySelectorAll('.water-btn[data-water]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                waterIntake += parseInt(e.target.dataset.water);
+                if (waterIntake > WATER_GOAL * 1.5) waterIntake = WATER_GOAL * 1.5;
+                updateStats();
+                saveProgress();
+            });
+        });
+
+        document.getElementById('resetWater').addEventListener('click', () => {
+            waterIntake = 0;
+            updateStats();
+            saveProgress();
+        });
 
         // Initialize
         loadData();
