@@ -144,7 +144,27 @@ More posts coming soon.
 
   </form>
 </div>
+<!-- COMMENT SECTION -->
+<div class="section">
+  <h2>Comments</h2>
+  <div id="disqus_thread"></div>
+</div>
 
+<script>
+  var disqus_config = function () {
+    this.page.url = window.location.href;
+    this.page.identifier = document.title;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://YOUR-SITE-NAME.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+<noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
 <footer>
 <p>
 Legal Disclaimer: This site provides general fitness information.
