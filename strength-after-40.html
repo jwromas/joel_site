@@ -1,103 +1,492 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Still In The Fight | Tactical Strength System</title>
-  <meta charset="UTF-8">
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0b0f0c;
-      color: #f1f1f1;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Workout · dark edition</title>
+    <!-- Chart.js for progress charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- html2canvas for screenshot export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
 
-    header {
-      background-color: #111;
-      padding: 40px 20px;
-      text-align: center;
-      border-bottom: 2px solid #3a5f3a;
-    }
+        body {
+            background: #0a0c10;
+            color: #e5e7eb;
+            padding: 20px 16px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-    header h1 {
-      margin: 0;
-      font-size: 32px;
-      letter-spacing: 2px;
-    }
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
 
-    header p {
-      margin-top: 10px;
-      color: #7fa87f;
-      font-size: 14px;
-      letter-spacing: 1px;
-    }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
 
-    .container {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 20px;
-    }
+        .header p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+        }
 
-    .phase-card {
-      background: #141a15;
-      padding: 25px;
-      margin-bottom: 25px;
-      border-left: 5px solid #4f7f4f;
-    }
+        /* stats row */
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            margin-bottom: 32px;
+            border: 1px solid #374151;
+        }
 
-    .phase-card h2 {
-      margin-top: 0;
-      color: #9fce9f;
-    }
+        .stat-card {
+            flex: 1 1 120px;
+            text-align: center;
+        }
 
-    .status {
-      font-weight: bold;
-      color: #4f7f4f;
-      margin-bottom: 15px;
-    }
-  </style>
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ef4444;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* day selector */
+        .day-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .day-btn {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 40px;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .day-btn.active {
+            background: #ef4444;
+            color: white;
+            border-color: #b91c1c;
+            box-shadow: 0 8px 15px -6px #ef4444;
+        }
+
+        /* workout card */
+        .workout-card {
+            background: #1f2937;
+            border-radius: 40px;
+            padding: 28px 24px;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.5);
+            margin-bottom: 32px;
+            border: 1px solid #374151;
+        }
+
+        .workout-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #374151;
+            color: #ef4444;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 60px;
+        }
+
+        .workout-desc {
+            color: #9ca3af;
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+
+        /* exercise list */
+        .exercise-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .exercise-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid #374151;
+        }
+
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+
+        .exercise-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .exercise-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .exercise-reps {
+            background: #374151;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            color: #e5e7eb;
+            font-weight: 500;
+        }
+
+        .checkbox {
+            width: 26px;
+            height: 26px;
+            border-radius: 30px;
+            border: 2px solid #ef4444;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .checkbox.checked {
+            background: #ef4444;
+            border-color: #b91c1c;
+            color: white;
+            content: "✓";
+        }
+
+        /* progress bar */
+        .progress-section {
+            margin: 24px 0 16px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar-bg {
+            background: #374151;
+            height: 14px;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 14px;
+            background: linear-gradient(90deg, #ef4444, #b91c1c);
+            width: 0%;
+            border-radius: 30px;
+            transition: width 0.25s;
+        }
+
+        /* buttons */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 32px 0 20px;
+        }
+
+        .btn {
+            background: #374151;
+            border: 1px solid #4b5563;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.15s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            flex: 1 1 auto;
+        }
+
+        .btn-primary {
+            background: #ef4444;
+            border-color: #b91c1c;
+            color: white;
+            box-shadow: 0 10px 18px -8px #ef4444;
+        }
+
+        .btn-primary:hover {
+            background: #dc2626;
+        }
+
+        .btn:hover {
+            background: #4b5563;
+        }
+
+        /* chart section */
+        .chart-section {
+            background: #1f2937;
+            border-radius: 32px;
+            padding: 24px;
+            border: 1px solid #374151;
+            margin-bottom: 24px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chart-controls-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .chart-type-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .chart-btn {
+            background: #374151;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: 1px solid transparent;
+        }
+
+        .chart-btn.active {
+            background: #ef4444;
+            color: white;
+        }
+
+        .chart-btn:hover {
+            background: #4b5563;
+        }
+
+        /* metric selector */
+        .metric-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .metric-btn {
+            background: #374151;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .metric-btn.active {
+            background: #ef4444;
+            color: white;
+        }
+
+        /* export buttons */
+        .export-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            margin-top: 16px;
+        }
+
+        .export-btn {
+            background: #374151;
+            border: 1px solid #4b5563;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .export-btn:hover {
+            background: #4b5563;
+        }
+
+        /* history */
+        .history-section {
+            background: #1f2937;
+            border-radius: 32px;
+            padding: 24px;
+            border: 1px solid #374151;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .history-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #374151;
+            color: #e5e7eb;
+        }
+
+        .history-date {
+            font-weight: 500;
+        }
+
+        .history-workout {
+            color: #ef4444;
+            font-weight: 500;
+        }
+
+        .empty-history {
+            color: #9ca3af;
+            font-style: italic;
+            padding: 16px 0;
+        }
+
+        /* reset button */
+        .reset-btn {
+            background: none;
+            border: 1px solid #7f1d1d;
+            color: #ef4444;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+
+        .reset-btn:hover {
+            background: #7f1d1d20;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        /* 3D/Animated effects */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px #ef4444; }
+            50% { box-shadow: 0 0 20px #ef4444, 0 0 30px #b91c1c; }
+            100% { box-shadow: 0 0 5px #ef4444; }
+        }
+
+        .btn-primary {
+            animation: pulse-glow 2s infinite;
+        }
+
+        .stat-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3);
+        }
+
+        .workout-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .workout-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(1deg);
+            box-shadow: 0 30px 40px rgba(239, 68, 68, 0.2);
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>STILL IN THE FIGHT</h1>
-  <p>TACTICAL STRENGTH SYSTEM · OPERATOR PROTOCOL</p>
-</header>
-
-<div class="container">
-
-  <div class="phase-card">
-    <h2>PHASE 1 — FOUNDATION PROTOCOL</h2>
-    <div class="status">STATUS: ACTIVE</div>
-    <p>
-      Mission Objective:
-      Rebuild structural strength. Restore joint integrity.
-      Establish base conditioning.
-    </p>
-  </div>
-
-  <div class="phase-card">
-    <h2>PHASE 2 — STRENGTH DIRECTIVE</h2>
-    <div class="status">STATUS: LOCKED</div>
-    <p>
-      Progressive overload. Power endurance.
-      Posterior chain dominance.
-    </p>
-  </div>
-
-  <div class="phase-card">
-    <h2>PHASE 3 — OPERATOR PERFORMANCE</h2>
-    <div class="status">STATUS: LOCKED</div>
-    <p>
-      Tactical conditioning. Load carry.
-      Performance circuits.
-    </p>
-  </div>
-
-</div>
-
-</body>
-</html>
-
+<div class="header">
+    <h1>🏋️ RED ZONE FITNESS</h1>
+    <p>dark mode · track everything · push harder</p>
 </div>
 
 <!-- stats -->
@@ -148,14 +537,55 @@
     </div>
 </div>
 
-<!-- history -->
-<div class="history-section">
-    <div class="history-title">📋 recent activity</div>
-    <div id="historyList"></div>
-    <button class="reset-btn" id="clearHistoryBtn">clear all history</button>
+<!-- progress chart section -->
+<div class="chart-section" id="chartSection">
+    <div class="chart-header">
+        <div class="chart-title">
+            <span>📊 progress analytics</span>
+            <span class="badge" id="chartRange">last 7 days</span>
+        </div>
+        <div class="export-buttons">
+            <button class="export-btn" id="screenshotBtn">📸 screenshot</button>
+            <button class="export-btn" id="exportCSVBtn">📥 export CSV</button>
+        </div>
+    </div>
+
+    <!-- metric selector -->
+    <div class="metric-selector">
+        <button class="metric-btn active" data-metric="workouts">🏋️ workouts</button>
+        <button class="metric-btn" data-metric="exercises">💪 exercises</button>
+        <button class="metric-btn" data-metric="calories">🔥 calories</button>
+    </div>
+
+    <!-- chart type selector -->
+    <div class="chart-type-selector">
+        <button class="chart-btn active" data-type="bar">📊 bar</button>
+        <button class="chart-btn" data-type="line">📈 line</button>
+        <button class="chart-btn" data-type="radar">🎯 radar</button>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="progressChart"></canvas>
+    </div>
+
+    <!-- range selector -->
+    <div class="chart-controls-group">
+        <button class="chart-btn active" data-range="week">week</button>
+        <button class="chart-btn" data-range="month">month</button>
+        <button class="chart-btn" data-range="year">year</button>
+    </div>
 </div>
 
-<footer>— tap exercises to check off · progress saves automatically —</footer>
+<!-- history -->
+<div class="history-section">
+    <div class="history-header">
+        <div class="history-title">📋 workout history</div>
+        <button class="reset-btn" id="clearHistoryBtn">clear all</button>
+    </div>
+    <div id="historyList"></div>
+</div>
+
+<footer>⚡ red zone · every rep counts ⚡</footer>
 
 <script>
     (function() {
@@ -253,14 +683,20 @@
 
         // day order
         const dayOrder = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
-        let currentDay = 'monday';          // default
-        let history = [];                   // array of { date, workoutName }
+        let currentDay = 'monday';
+        let history = [];
         let totalExercisesDone = 0;
+        let totalCaloriesBurned = 0;
+        
+        // chart variables
+        let progressChart = null;
+        let currentChartRange = 'week';
+        let currentChartType = 'bar';
+        let currentMetric = 'workouts';
 
         // ---------- load from localStorage ----------
         function loadData() {
             try {
-                // load completed states for each day
                 const savedProgress = localStorage.getItem('workoutProgress');
                 if (savedProgress) {
                     const parsed = JSON.parse(savedProgress);
@@ -275,23 +711,45 @@
                     }
                 }
 
-                // load history
                 const savedHistory = localStorage.getItem('workoutHistory');
                 if (savedHistory) {
                     history = JSON.parse(savedHistory);
                 } else {
-                    // some sample history
-                    const today = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric' });
-                    history = [
-                        { date: today, workout: 'Full Body Strength' }
-                    ];
+                    history = generateSampleHistory();
                 }
 
-                // load total exercises done count
                 const savedTotal = localStorage.getItem('totalExercisesDone');
                 if (savedTotal) totalExercisesDone = parseInt(savedTotal,10) || 0;
+                
+                const savedCalories = localStorage.getItem('totalCaloriesBurned');
+                if (savedCalories) totalCaloriesBurned = parseInt(savedCalories,10) || 0;
 
             } catch (e) {}
+        }
+
+        // generate sample history for demo
+        function generateSampleHistory() {
+            const sample = [];
+            const workoutNames = ['Full Body Strength', 'Lower Body + Core', 'Upper Body + Core', 'Full Body HIIT'];
+            const today = new Date();
+            
+            for (let i = 13; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                const dateStr = date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+                
+                // random workout for each day
+                if (Math.random() > 0.4) {
+                    const workout = workoutNames[Math.floor(Math.random() * workoutNames.length)];
+                    sample.push({
+                        date: dateStr,
+                        workout: workout,
+                        exercises: Math.floor(Math.random() * 20) + 10,
+                        calories: Math.floor(Math.random() * 300) + 150
+                    });
+                }
+            }
+            return sample;
         }
 
         // ---------- save to localStorage ----------
@@ -303,6 +761,7 @@
             localStorage.setItem('workoutProgress', JSON.stringify(progressObj));
             localStorage.setItem('workoutHistory', JSON.stringify(history));
             localStorage.setItem('totalExercisesDone', totalExercisesDone.toString());
+            localStorage.setItem('totalCaloriesBurned', totalCaloriesBurned.toString());
         }
 
         // ---------- render day selector ----------
@@ -316,7 +775,6 @@
             });
             container.innerHTML = html;
 
-            // attach listeners
             document.querySelectorAll('.day-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const day = e.target.dataset.day;
@@ -336,7 +794,6 @@
             document.getElementById('workoutLevel').innerText = w.level;
             document.getElementById('workoutDesc').innerText = w.desc;
 
-            // build exercise list
             const listEl = document.getElementById('exerciseList');
             let itemsHtml = '';
             w.exercises.forEach((ex, index) => {
@@ -354,7 +811,6 @@
             });
             listEl.innerHTML = itemsHtml;
 
-            // attach checkbox listeners
             document.querySelectorAll('.checkbox').forEach(cb => {
                 cb.addEventListener('click', (e) => {
                     const idx = e.target.dataset.exerciseIndex;
@@ -363,25 +819,24 @@
                         if (!exercise.completed) {
                             exercise.completed = true;
                             totalExercisesDone += 1;
+                            totalCaloriesBurned += 15; // avg calories per exercise
                         } else {
-                            // optional: allow uncheck? we keep it simple: prevent uncheck? 
-                            // we allow uncheck to fix mistakes
                             exercise.completed = false;
                             totalExercisesDone = Math.max(0, totalExercisesDone - 1);
+                            totalCaloriesBurned = Math.max(0, totalCaloriesBurned - 15);
                         }
                         updateProgress();
                         saveProgress();
-                        renderWorkout();   // re-render to show updated checkboxes
+                        renderWorkout();
                         updateStats();
+                        updateChart();
                     }
                 });
             });
 
-            // update progress bar
             updateProgress();
         }
 
-        // update progress bar and percent
         function updateProgress() {
             const w = workouts[currentDay];
             const total = w.exercises.length;
@@ -391,15 +846,12 @@
             document.getElementById('progressFill').style.width = percent + '%';
         }
 
-        // update stats (total workouts, streak, total exercises)
         function updateStats() {
             document.getElementById('totalWorkouts').innerText = history.length;
-            // simple streak: consecutive days? for simplicity, show history length as streak
             document.getElementById('currentStreak').innerText = history.length > 0 ? '🔥' + history.length : '0';
             document.getElementById('totalExercises').innerText = totalExercisesDone;
         }
 
-        // render history list
         function renderHistory() {
             const historyEl = document.getElementById('historyList');
             if (history.length === 0) {
@@ -407,11 +859,165 @@
                 return;
             }
             let html = '';
-            // show last 5
-            history.slice(-5).reverse().forEach(item => {
-                html += `<div class="history-item"><span class="history-date">${item.date}</span><span class="history-workout">${item.workout}</span></div>`;
+            history.slice(-7).reverse().forEach(item => {
+                html += `<div class="history-item">
+                    <span class="history-date">${item.date}</span>
+                    <span class="history-workout">${item.workout}</span>
+                </div>`;
             });
             historyEl.innerHTML = html;
+        }
+
+        // ---------- CHART FUNCTIONS ----------
+        function initChart() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            
+            if (progressChart) {
+                progressChart.destroy();
+            }
+            
+            progressChart = new Chart(ctx, {
+                type: currentChartType,
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: getMetricLabel(),
+                        data: [],
+                        backgroundColor: getChartColors().background,
+                        borderColor: getChartColors().border,
+                        borderWidth: 2,
+                        tension: 0.3,
+                        fill: currentChartType === 'line' ? false : true,
+                        pointBackgroundColor: '#ef4444',
+                        pointBorderColor: '#ffffff',
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.raw} ${getMetricLabel().toLowerCase()}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#374151'
+                            },
+                            ticks: {
+                                color: '#9ca3af'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: '#9ca3af'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            updateChart();
+        }
+
+        function getMetricLabel() {
+            switch(currentMetric) {
+                case 'workouts': return 'Workouts';
+                case 'exercises': return 'Exercises Done';
+                case 'calories': return 'Calories Burned';
+                default: return 'Workouts';
+            }
+        }
+
+        function getChartColors() {
+            return {
+                background: currentChartType === 'line' 
+                    ? 'rgba(239, 68, 68, 0.1)' 
+                    : 'rgba(239, 68, 68, 0.7)',
+                border: '#ef4444'
+            };
+        }
+
+        function updateChart() {
+            if (!progressChart) return;
+            
+            const data = getChartData(currentChartRange);
+            progressChart.data.labels = data.labels;
+            progressChart.data.datasets[0].data = data.values;
+            progressChart.data.datasets[0].label = getMetricLabel();
+            progressChart.data.datasets[0].backgroundColor = getChartColors().background;
+            progressChart.data.datasets[0].borderColor = getChartColors().border;
+            progressChart.update();
+            
+            document.getElementById('chartRange').innerText = `last ${currentChartRange}`;
+        }
+
+        function getChartData(range) {
+            const labels = [];
+            const values = [];
+            const today = new Date();
+            
+            let days = 7;
+            if (range === 'month') days = 30;
+            if (range === 'year') days = 12; // months
+            
+            if (range === 'year') {
+                // monthly view
+                for (let i = days - 1; i >= 0; i--) {
+                    const date = new Date(today);
+                    date.setMonth(date.getMonth() - i);
+                    const month = date.toLocaleDateString('en-US', { month: 'short' });
+                    labels.push(month);
+                    
+                    let total = 0;
+                    const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
+                    const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+                    
+                    history.forEach(item => {
+                        const itemDate = new Date(item.date + ', ' + today.getFullYear());
+                        if (itemDate >= monthStart && itemDate <= monthEnd) {
+                            if (currentMetric === 'workouts') total += 1;
+                            else if (currentMetric === 'exercises') total += item.exercises || 0;
+                            else if (currentMetric === 'calories') total += item.calories || 0;
+                        }
+                    });
+                    values.push(total);
+                }
+            } else {
+                // daily view
+                for (let i = days - 1; i >= 0; i--) {
+                    const date = new Date(today);
+                    date.setDate(date.getDate() - i);
+                    const dateStr = date.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+                    labels.push(dateStr);
+                    
+                    let total = 0;
+                    history.forEach(item => {
+                        if (item.date === dateStr) {
+                            if (currentMetric === 'workouts') total += 1;
+                            else if (currentMetric === 'exercises') total += item.exercises || 0;
+                            else if (currentMetric === 'calories') total += item.calories || 0;
+                        }
+                    });
+                    values.push(total);
+                }
+            }
+            
+            return { labels, values };
         }
 
         // complete workout button
@@ -419,20 +1025,39 @@
             const w = workouts[currentDay];
             const allCompleted = w.exercises.every(ex => ex.completed);
             if (!allCompleted) {
-                alert('⚠️ finish all exercises first, or just check them off.');
+                alert('⚠️ finish all exercises first!');
                 return;
             }
 
             const todayStr = new Date().toLocaleDateString('en-US', { month:'short', day:'numeric' });
-            // avoid duplicate same day same workout? simple: push anyway
-            history.push({ date: todayStr, workout: w.name });
-            saveProgress();
-            updateStats();
-            renderHistory();
-            alert(`✅ ${w.name} completed! great job.`);
+            
+            const alreadyCompleted = history.some(item => 
+                item.date === todayStr && item.workout === w.name
+            );
+            
+            if (!alreadyCompleted) {
+                const exercisesDone = w.exercises.length;
+                const caloriesBurned = exercisesDone * 15; // avg 15 cal per exercise
+                
+                history.push({ 
+                    date: todayStr, 
+                    workout: w.name,
+                    exercises: exercisesDone,
+                    calories: caloriesBurned
+                });
+                
+                totalCaloriesBurned += caloriesBurned;
+                
+                saveProgress();
+                updateStats();
+                renderHistory();
+                updateChart();
+                alert(`✅ ${w.name} completed! You burned ${caloriesBurned} calories!`);
+            } else {
+                alert('You already completed this workout today!');
+            }
         }
 
-        // reset current day's exercises
         function resetDay() {
             workouts[currentDay].exercises.forEach(ex => ex.completed = false);
             saveProgress();
@@ -440,34 +1065,21 @@
             updateStats();
         }
 
-        // clear all history (with confirm)
         function clearHistory() {
-            if (confirm('Delete all history? progress per day will remain.')) {
+            if (confirm('Delete all history?')) {
                 history = [];
+                totalCaloriesBurned = 0;
                 saveProgress();
                 renderHistory();
                 updateStats();
+                updateChart();
             }
         }
 
-        // ---------- initial load & render ----------
-        loadData();
-        renderDaySelector();
-        renderWorkout();
-        renderHistory();
-        updateStats();
-
-        // attach global buttons
-        document.getElementById('resetDayBtn').addEventListener('click', resetDay);
-        document.getElementById('completeWorkoutBtn').addEventListener('click', completeWorkout);
-        document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
-
-        // save on page exit
-        window.addEventListener('beforeunload', function() {
-            saveProgress();
-        });
-
-    })();
-</script>
-</body>
-</html>
+        // export functions
+        function takeScreenshot() {
+            const element = document.getElementById('chartSection');
+            html2canvas(element).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'fitness-progress.png';
+                link.href = canvas.to
