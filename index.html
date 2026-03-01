@@ -6,52 +6,57 @@
 
 <title>Still In The Fight | Joel</title>
 
-<meta name="description" content="Still In The Fight. Strength, discipline, longevity.">
-<meta name="robots" content="index, follow">
+<meta name="description" content="Still In The Fight. Strength after 40. Discipline. Longevity.">
 
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin:0;
-    background:#0a0a0a;
+    background:#0b0b0b;
     color:white;
     font-family:'Inter', sans-serif;
 }
 
 header {
     text-align:center;
-    padding:100px 20px 40px 20px;
+    padding:120px 20px 60px;
 }
 
 h1 {
     font-family:'Oswald', sans-serif;
-    font-size:4rem;
-    letter-spacing:3px;
+    font-size:4.5rem;
+    letter-spacing:4px;
     margin:0;
 }
 
 .tagline {
-    color:#aaa;
-    margin-top:15px;
+    margin-top:20px;
     font-size:1.2rem;
+    color:#aaa;
 }
 
-.search-section {
+.section {
+    max-width:1000px;
+    margin:80px auto;
+    padding:0 25px;
+}
+
+.search-box {
     text-align:center;
-    margin:50px 0;
+    margin-top:40px;
 }
 
-.search-section input {
-    padding:15px;
+.search-box input {
+    padding:14px;
     width:280px;
     border:none;
     border-radius:6px;
     font-size:16px;
 }
 
-.search-section button {
-    padding:15px 25px;
+.search-box button {
+    padding:14px 24px;
     border:none;
     border-radius:6px;
     background:#c0392b;
@@ -60,27 +65,33 @@ h1 {
     cursor:pointer;
 }
 
-.youtube-link {
+.youtube-section {
     text-align:center;
-    margin:70px 0;
+    margin-top:60px;
 }
 
-.youtube-link a {
-    display:inline-block;
-    padding:25px 50px;
-    background:#111;
-    border:2px solid #c0392b;
-    border-radius:10px;
-    color:white;
-    text-decoration:none;
+iframe {
+    width:90%;
+    max-width:800px;
+    height:450px;
+    border:none;
+}
+
+.blog h2 {
     font-family:'Oswald', sans-serif;
-    letter-spacing:2px;
+    margin-top:50px;
+}
+
+.blog p {
+    line-height:1.8;
+    color:#ddd;
 }
 
 footer {
     text-align:center;
-    padding:40px;
+    padding:50px;
     color:#555;
+    border-top:1px solid #222;
 }
 </style>
 </head>
@@ -88,23 +99,45 @@ footer {
 <body>
 
 <header>
-    <h1>STILL IN THE FIGHT</h1>
-    <div class="tagline">Discipline. Strength. Longevity.</div>
-</header>
+<h1>STILL IN THE FIGHT</h1>
+<div class="tagline">Strength After 40. Discipline. Longevity.</div>
 
-<div class="search-section">
-    <form action="https://www.google.com/search" method="get" target="_blank">
-        <input type="hidden" name="sitesearch" value="jwromas.github.io/joel_site">
-        <input type="text" name="q" placeholder="Search Still In The Fight...">
-        <button type="submit">Search</button>
-    </form>
+<div class="search-box">
+<form action="https://www.google.com/search" method="get" target="_blank">
+<input type="hidden" name="sitesearch" value="jwromas.github.io/joel_site">
+<input type="text" name="q" placeholder="Search Still In The Fight...">
+<button type="submit">Search</button>
+</form>
 </div>
 
-<div class="youtube-link">
-    <a href="https://www.youtube.com/watch?v=bQ7uLY_eMRY&list=PLdiD5QWuvQ7kgeXgcrqMU7Bc__wqkI1rP&index=18"
-       target="_blank">
-       ▶ WATCH TRAINING SERIES ON YOUTUBE
-    </a>
+<div class="youtube-section">
+<iframe src="https://www.youtube.com/embed/bQ7uLY_eMRY"
+allowfullscreen></iframe>
+</div>
+
+</header>
+
+<div class="section blog">
+
+<h2>About Joel</h2>
+<p>
+After 40, most men slow down. Joel chose another path.
+Still In The Fight represents disciplined strength, intelligent training,
+and long-term durability.
+</p>
+
+<h2>The Mission</h2>
+<p>
+This platform is about staying capable. Strong joints. Strong mind.
+No ego lifting. No shortcuts. Just work.
+</p>
+
+<h2>Still In The Fight Blog</h2>
+<p>
+Here you’ll find insights on performance, resilience, and training
+for men who refuse to fade out.
+</p>
+
 </div>
 
 <footer>
