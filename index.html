@@ -168,33 +168,22 @@ More posts coming soon.
     <p>Post your programming. Share adjustments. What are you running this week?</p>
   </div>
 
-  <!-- Giscus Comment System -->
-  <script src="https://giscus.app/client.js"
-        data-repo="jwromas/joel-site-1"
-        data-repo-id="YOUR_REAL_ID"
-        data-category="General"
-        data-category-id="YOUR_REAL_CATEGORY_ID"
-        data-mapping="pathname"
-        data-theme="dark_dimmed"
-        crossorigin="anonymous"
-        async>
-  </script>
+<div id="disqus_thread"></div>
+<script>
+var disqus_config = function () {
+  this.page.url = window.location.href;
+  this.page.identifier = window.location.href;
+};
 
-</div><div style="text-align:center;margin:40px 0;">
-  <h3>Tactical Training Discussion</h3>
-  <p>Post your programming. Share adjustments. What are you running this week?</p>
-</div>  <script src="https://giscus.app/client.js"
-        data-repo="jwromas/joel-site-1"
-        data-repo-id="REPLACE_THIS"
-        data-category="General"
-        data-category-id="REPLACE_THIS"
-        data-mapping="pathname"
-        data-theme="dark"
-        crossorigin="anonymous"
-        async>
-  </script>
-</div>
-  </form>
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://joel_wromas.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view comments powered by Disqus.</noscript>
+
 
 <footer>
 <p>
