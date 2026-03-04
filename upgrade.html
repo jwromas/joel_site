@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RED ZONE · exercise demo library</title>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #0a0c10;
+            color: #e5e7eb;
+            padding: 20px 16px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #9ca3af;
+            font-size: 1.1rem;
+        }
+
+        .identity-bar {
+            background: #1f2937;
+            border-radius: 60px;
+            padding: 12px 24px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            border: 1px solid #374151;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: 0 0 15px #ef4444;
+        }
+
+        .user-details {
+            line-height: 1.4;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #ef4444;
+        }
+
+        .user-meta {
+            color: #9ca3af;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .user-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .auth-btn {
+            background: #374151;
+            border: 1px solid #4b5563;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .auth-btn:hover {
+            background: #4b5563;
+        }
+
+        .auth-btn.login {
+            background: #ef4444;
+            border-color: #b91c1c;
+            color: white;
+        }
+
+        .premium-banner {
+            background: linear-gradient(135deg, #1f2937, #111827);
+            border-radius: 40px;
+            padding: 32px;
+            margin-bottom: 32px;
+            border: 2px solid #ef4444;
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-banner::before {
+            content: "🔥";
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 120px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+
+        .premium-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ef4444;
+            margin-bottom: 16px;
+        }
+
+        .premium-subtitle {
+            font-size: 1.2rem;
+            color: #9ca3af;
+            margin-bottom: 24px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .premium-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .premium-price span {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+
+        .premium-btn {
+            background: #ef4444;
+            border: none;
+            padding: 16px 48px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 24px;
+            box-shadow: 0 10px 25px -5px #ef4444;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .premium-btn:hover {
+            background: #dc2626;
+            transform: scale(1.05);
+        }
+
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            background: #1f2937;
+            padding: 20px;
+            border-radius: 32px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 32px;
+            border: 1px solid #374151;
+        }
+
+        .stat-card {
+            flex: 1 1 120px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(239, 68, 68, 0.3);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ef4444;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .main-tabs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .main-tab {
+            background: #1f2937;
+            border: 1px solid #374151;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .main-tab.active {
+            background: #ef4444;
+            color: white;
+            border-color: #b91c1c;
+            box-shadow: 0 8px 15px -6px #ef4444;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .day-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 32px;
+        }
+
+        .day-btn {
+            background: #1f2937;
+            border: 1px solid #374151;
+            border-radius: 40px;
+            padding: 10px 20px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .day-btn.active {
+            background: #ef4444;
+            color: white;
+            border-color: #b91c1c;
+            box-shadow: 0 8px 15px -6px #ef4444;
+        }
+
+        .workout-card {
+            background: #1f2937;
+            border-radius: 40px;
+            padding: 28px 24px;
+            box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.5);
+            margin-bottom: 32px;
+            border: 1px solid #374151;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .workout-card:hover {
+            transform: perspective(1000px) rotateX(2deg) rotateY(1deg);
+            box-shadow: 0 30px 40px rgba(239, 68, 68, 0.2);
+        }
+
+        .workout-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #374151;
+            color: #ef4444;
+            font-size: 0.9rem;
+            font-weight: 600;
+            padding: 4px 14px;
+            border-radius: 60px;
+        }
+
+        .workout-desc {
+            color: #9ca3af;
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+
+        .timer-section {
+            background: #111827;
+            border-radius: 60px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid #374151;
+            text-align: center;
+        }
+
+        .timer-display {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #ef4444;
+            font-family: monospace;
+            margin: 10px 0;
+            text-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .timer-btn {
+            background: #374151;
+            border: 1px solid #4b5563;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .timer-btn:hover {
+            background: #4b5563;
+        }
+
+        .timer-btn.primary {
+            background: #ef4444;
+            border-color: #b91c1c;
+            color: white;
+        }
+
+        .timer-btn.primary:hover {
+            background: #dc2626;
+        }
+
+        /* Exercise List with Demos */
+        .exercise-list {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .exercise-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            border-bottom: 1px solid #374151;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .exercise-item:hover {
+            background: rgba(239, 68, 68, 0.05);
+            padding-left: 10px;
+            border-radius: 20px;
+        }
+
+        .exercise-item.active {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding-left: 10px;
+            border-radius: 20px;
+        }
+
+        .exercise-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .visual-demo {
+            width: 100px;
+            height: 100px;
+            background: #111827;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #374151;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .exercise-item.active .visual-demo {
+            border-color: #ef4444;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+        }
+
+        .exercise-svg {
+            width: 90px;
+            height: 90px;
+        }
+
+        .exercise-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .exercise-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exercise-reps {
+            background: #374151;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #e5e7eb;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .checkbox {
+            width: 30px;
+            height: 30px;
+            border-radius: 30px;
+            border: 2px solid #ef4444;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .checkbox.checked {
+            background: #ef4444;
+            border-color: #b91c1c;
+        }
+
+        .checkbox.checked::after {
+            content: "✓";
+        }
+
+        .progress-section {
+            margin: 24px 0 16px;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .progress-bar-bg {
+            background: #374151;
+            height: 14px;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 14px;
+            background: linear-gradient(90deg, #ef4444, #b91c1c);
+            width: 0%;
+            border-radius: 30px;
+            transition: width 0.25s;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin: 32px 0 20px;
+        }
+
+        .btn {
+            background: #374151;
+            border: 1px solid #4b5563;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.15s;
+            flex: 1 1 auto;
+        }
+
+        .btn-primary {
+            background: #ef4444;
+            border-color: #b91c1c;
+            color: white;
+            box-shadow: 0 10px 18px -8px #ef4444;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .btn-primary:hover {
+            background: #dc2626;
+        }
+
+        .btn:hover {
+            background: #4b5563;
+        }
+
+        @keyframes pulse-glow {
+            0% {
+                box-shadow: 0 0 5px #ef4444;
+            }
+
+            50% {
+                box-shadow: 0 0 30px #ef4444, 0 0 50px #b91c1c;
+            }
+
+            100% {
+                box-shadow: 0 0 5px #ef4444;
+            }
+        }
+
+        /* EXERCISE DEMO LIBRARY SECTION */
+        .demo-library {
+            margin-top: 48px;
+            padding: 32px;
+            background: #111827;
+            border-radius: 48px;
+            border: 1px solid #374151;
+        }
+
+        .library-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ef4444;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .demo-card {
+            background: #1f2937;
+            border-radius: 32px;
+            padding: 24px;
+            border: 1px solid #374151;
+            transition: all 0.3s;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+            border-color: #ef4444;
+            box-shadow: 0 20px 30px -10px rgba(239, 68, 68, 0.3);
+        }
+
+        .demo-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #374151;
+        }
+
+        .demo-icon {
+            font-size: 2rem;
+        }
+
+        .demo-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ef4444;
+        }
+
+        .demo-canvas {
+            width: 100%;
+            height: 150px;
+            background: #111827;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 1px solid #374151;
+        }
+
+        .demo-svg {
+            width: 140px;
+            height: 140px;
+        }
+
+        .demo-instructions {
+            margin-top: 16px;
+        }
+
+        .demo-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 0;
+            color: #9ca3af;
+        }
+
+        .demo-step::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .demo-cue {
+            background: #374151;
+            padding: 12px;
+            border-radius: 16px;
+            margin-top: 16px;
+            color: #ef4444;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .chart-section {
+            background: #1f2937;
+            border-radius: 32px;
+            padding: 24px;
+            border: 1px solid #374151;
+            margin-bottom: 24px;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .chart-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .export-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .export-btn {
+            background: #374151;
+            border: 1px solid #4b5563;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .export-btn:hover {
+            background: #4b5563;
+        }
+
+        .metric-selector,
+        .chart-type-selector,
+        .chart-controls-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .metric-btn,
+        .chart-btn {
+            background: #374151;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .metric-btn.active,
+        .chart-btn.active {
+            background: #ef4444;
+            color: white;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .history-section {
+            background: #1f2937;
+            border-radius: 32px;
+            padding: 24px;
+            border: 1px solid #374151;
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .history-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #374151;
+            color: #e5e7eb;
+        }
+
+        .history-date {
+            font-weight: 500;
+        }
+
+        .history-workout {
+            color: #ef4444;
+            font-weight: 500;
+        }
+
+        .empty-history {
+            color: #9ca3af;
+            font-style: italic;
+            padding: 16px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 48px;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>🔥 RED ZONE · EXERCISE DEMO LIBRARY</h1>
+        <p>separate demos for each exercise · proper form · voice timer</p>
+    </div>
+
+    <!-- Identity Bar -->
+    <div class="identity-bar" id="identityBar">
+        <div class="user-info">
+            <div class="avatar" id="avatar">👤</div>
+            <div class="user-details">
+                <div class="user-name" id="displayName">Guest User</div>
+                <div class="user-meta" id="userMeta">
+                    <span>⚡ free account</span>
+                </div>
+            </div>
+        </div>
+        <div class="auth-buttons">
+            <button class="auth-btn login" id="loginBtn">LOGIN</button>
+            <button class="auth-btn" id="logoutBtn" style="display: none;">LOGOUT</button>
+        </div>
+    </div>
+
+    <!-- Premium Banner -->
+    <div class="premium-banner">
+        <div class="premium-title">🔥 UNLOCK RED ZONE PREMIUM</div>
+        <div class="premium-subtitle">Get AI coaching, personalized plans, social features, and unlimited access</div>
+        <div class="premium-price">$9.99 <span>/month</span></div>
+        <button class="premium-btn" id="upgradeBtn">UPGRADE NOW</button>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-value" id="totalWorkouts">0</div>
+            <div class="stat-label">workouts</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="currentStreak">0</div>
+            <div class="stat-label">streak</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="totalExercises">0</div>
+            <div class="stat-label">exercises</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="totalCalories">0</div>
+            <div class="stat-label">calories</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="waterIntake">0</div>
+            <div class="stat-label">water (ml)</div>
+        </div>
+    </div>
+
+    <!-- Main Tabs -->
+    <div class="main-tabs">
+        <button class="main-tab active" data-tab="workout">🏋️ WORKOUTS</button>
+        <button class="main-tab" data-tab="demo">📚 DEMO LIBRARY</button>
+        <button class="main-tab" data-tab="nutrition">🥗 NUTRITION</button>
+        <button class="main-tab" data-tab="supplements">💊 SUPPLEMENTS</button>
+        <button class="main-tab" data-tab="hydration">💧 HYDRATION</button>
+        <button class="main-tab" data-tab="bodyparts">🎯 BODY TARGETING</button>
+        <button class="main-tab" data-tab="weight">⚖️ WEIGHT GOALS</button>
+        <button class="main-tab" data-tab="premium">⭐ PREMIUM</button>
+        <button class="main-tab" data-tab="social">🌐 SOCIAL</button>
+        <button class="main-tab" data-tab="coach">🤖 AI COACH</button>
+        <button class="main-tab" data-tab="challenges">🏆 CHALLENGES</button>
+    </div>
+
+    <!-- WORKOUT SECTION -->
+    <div class="content-section active" id="workout-section">
+        <!-- Day Selector -->
+        <div class="day-selector" id="daySelector"></div>
+
+        <!-- Voice Timer -->
+        <div class="timer-section">
+            <div class="timer-display" id="timerDisplay">00:30</div>
+            <div class="timer-controls">
+                <button class="timer-btn" id="set30Sec">30 sec</button>
+                <button class="timer-btn" id="set45Sec">45 sec</button>
+                <button class="timer-btn" id="set60Sec">60 sec</button>
+                <button class="timer-btn primary" id="startTimerBtn">▶ START</button>
+                <button class="timer-btn" id="stopTimerBtn">⏹ STOP</button>
+                <button class="timer-btn" id="resetTimerBtn">↺ RESET</button>
+            </div>
+        </div>
+
+        <!-- Workout Card -->
+        <div class="workout-card">
+            <div class="workout-title">
+                <span id="workoutName">Full Body Strength</span>
+                <span class="badge" id="workoutLevel">beginner</span>
+            </div>
+            <div class="workout-desc" id="workoutDesc">Build strength with bodyweight exercises.</div>
+
+            <!-- Progress Bar -->
+            <div class="progress-section">
+                <div class="progress-label">
+                    <span>today's progress</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- Exercise List -->
+            <ul class="exercise-list" id="exerciseList"></ul>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="btn" id="resetDayBtn">↺ reset day</button>
+                <button class="btn btn-primary" id="completeWorkoutBtn">✓ complete workout</button>
+            </div>
+        </div>
+
+        <!-- Progress Chart -->
+        <div class="chart-section">
+            <div class="chart-header">
+                <div class="chart-title">
+                    <span>📊 progress analytics</span>
+                    <span class="badge" id="chartRange">last 7 days</span>
+                </div>
+                <div class="export-buttons">
+                    <button class="export-btn" id="screenshotBtn">📸 screenshot</button>
+                    <button class="export-btn" id="exportCSVBtn">📥 export CSV</button>
+                </div>
+            </div>
+
+            <div class="metric-selector">
+                <button class="metric-btn active" data-metric="workouts">🏋️ workouts</button>
+                <button class="metric-btn" data-metric="exercises">💪 exercises</button>
+                <button class="metric-btn" data-metric="calories">🔥 calories</button>
+            </div>
+
+            <div class="chart-type-selector">
+                <button class="chart-btn active" data-type="bar">📊 bar</button>
+                <button class="chart-btn" data-type="line">📈 line</button>
+                <button class="chart-btn" data-type="radar">🎯 radar</button>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="progressChart"></canvas>
+            </div>
+
+            <div class="chart-controls-group">
+                <button class="chart-btn active" data-range="week">week</button>
+                <button class="chart-btn" data-range="month">month</button>
+                <button class="chart-btn" data-range="year">year</button>
+            </div>
+        </div>
+
+        <!-- History -->
+        <div class="history-section">
+            <div class="history-header">
+                <div class="history-title">📋 workout history</div>
+                <button class="btn" id="clearHistoryBtn">clear all</button>
+            </div>
+            <div id="historyList"></div>
+        </div>
+    </div>
+
+    <!-- DEMO LIBRARY SECTION -->
+    <div class="content-section" id="demo-section">
+        <div class="demo-library">
+            <div class="library-title">📚 EXERCISE DEMO LIBRARY</div>
+            <div class="demo-grid" id="demoGrid"></div>
+        </div>
+    </div>
+
+    <!-- NUTRITION SECTION -->
+    <div class="content-section" id="nutrition-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">🥗 NUTRITION GUIDE</h2>
+
+        <div class="nutrition-grid">
+            <div class="nutrition-card">
+                <h3>🌅 BREAKFAST</h3>
+                <div class="meal-item">
+                    <div class="meal-name">Protein Oats</div>
+                    <div class="meal-desc">50g oats, 1 scoop protein, berries, 1 tbsp peanut butter (450 cal)</div>
+                </div>
+                <div class="meal-item">
+                    <div class="meal-name">Egg Scramble</div>
+                    <div class="meal-desc">3 eggs, spinach, 1 slice toast, avocado (400 cal)</div>
+                </div>
+                <div class="meal-item">
+                    <div class="meal-name">Greek Yogurt Bowl</div>
+                    <div class="meal-desc">200g Greek yogurt, honey, nuts, banana (350 cal)</div>
+                </div>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>🌞 LUNCH</h3>
+                <div class="meal-item">
+                    <div class="meal-name">Grilled Chicken Salad</div>
+                    <div class="meal-desc">150g chicken, mixed greens, tomatoes, cucumber, olive oil (400 cal)</div>
+                </div>
+                <div class="meal-item">
+                    <div class="meal-name">Quinoa Bowl</div>
+                    <div class="meal-desc">Quinoa, chickpeas, roasted veggies, tahini sauce (450 cal)</div>
+                </div>
+                <div class="meal-item">
+                    <div class="meal-name">Tuna Wrap</div>
+                    <div class="meal-desc">Whole wheat wrap, tuna, lettuce, light mayo (380 cal)</div>
+                </div>
+            </div>
+
+            <div class="nutrition-card">
+                <h3>🌙 DINNER</h3>
+                <div class="meal-item">
+                    <div class="meal-name">Salmon & Veggies</div>
+                    <div class="meal-desc">150g salmon, broccoli, sweet potato (500 cal)</div>
+                </div>
+                <div class="meal-item">
+                    <div class="meal-name">Lean Beef Stir-fry</div>
+                    <div class="meal-desc">100g beef, mixed veggies, brown rice (450 cal)</div>
+                </div>
+                <div class="meal-item">
+                    <div class="meal-name">Turkey Chili</div>
+                    <div class="meal-desc">Lean turkey, beans, tomatoes, spices (400 cal)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUPPLEMENTS SECTION -->
+    <div class="content-section" id="supplements-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">💊 SUPPLEMENT GUIDE</h2>
+
+        <div class="supplements-grid">
+            <div class="supplement-card">
+                <h3>💪 ESSENTIAL</h3>
+                <div class="supplement-item">
+                    <div class="supplement-name">Whey Protein</div>
+                    <div class="supplement-desc">Post-workout: 25-30g within 30 mins</div>
+                </div>
+                <div class="supplement-item">
+                    <div class="supplement-name">Creatine</div>
+                    <div class="supplement-desc">5g daily • Increases strength & power</div>
+                </div>
+                <div class="supplement-item">
+                    <div class="supplement-name">Multivitamin</div>
+                    <div class="supplement-desc">Daily • Covers nutritional gaps</div>
+                </div>
+            </div>
+
+            <div class="supplement-card">
+                <h3>⚡ ENERGY</h3>
+                <div class="supplement-item">
+                    <div class="supplement-name">Caffeine</div>
+                    <div class="supplement-desc">200mg pre-workout • Energy & focus</div>
+                </div>
+                <div class="supplement-item">
+                    <div class="supplement-name">Beta-Alanine</div>
+                    <div class="supplement-desc">3-4g pre-workout • Reduces fatigue</div>
+                </div>
+                <div class="supplement-item">
+                    <div class="supplement-name">L-Citrulline</div>
+                    <div class="supplement-desc">6g pre-workout • Better pumps</div>
+                </div>
+            </div>
+
+            <div class="supplement-card">
+                <h3>🛌 RECOVERY</h3>
+                <div class="supplement-item">
+                    <div class="supplement-name">Magnesium</div>
+                    <div class="supplement-desc">Before bed • Sleep & muscle relaxation</div>
+                </div>
+                <div class="supplement-item">
+                    <div class="supplement-name">Omega-3</div>
+                    <div class="supplement-desc">2g daily • Joint health & inflammation</div>
+                </div>
+                <div class="supplement-item">
+                    <div class="supplement-name">ZMA</div>
+                    <div class="supplement-desc">Before bed • Testosterone & recovery</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HYDRATION SECTION -->
+    <div class="content-section" id="hydration-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">💧 HYDRATION TRACKER</h2>
+
+        <div class="hydration-card">
+            <div style="font-size: 4rem;">💧</div>
+            <div class="water-intake" id="waterDisplay">0ml</div>
+            <div class="progress-bar-bg" style="height: 20px; margin: 20px 0;">
+                <div class="progress-fill" id="waterProgress" style="width: 0%;"></div>
+            </div>
+            <div class="water-buttons">
+                <button class="water-btn" data-water="250">➕ 250ml</button>
+                <button class="water-btn" data-water="500">➕ 500ml</button>
+                <button class="water-btn" data-water="1000">➕ 1000ml</button>
+                <button class="water-btn" id="resetWater">↺ reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BODY TARGETING SECTION -->
+    <div class="content-section" id="bodyparts-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">🎯 TARGET SPECIFIC BODY PARTS</h2>
+
+        <div class="bodyparts-grid">
+            <div class="bodypart-card">
+                <h3>💪 CHEST</h3>
+                <div class="bodypart-exercise"><span>⬆️</span> Push-ups (wide) - 3x12</div>
+                <div class="bodypart-exercise"><span>📈</span> Incline push-ups - 3x10</div>
+                <div class="bodypart-exercise"><span>🔷</span> Diamond push-ups - 3x8</div>
+                <div class="bodypart-exercise"><span>🪑</span> Chest dips - 3x10</div>
+            </div>
+
+            <div class="bodypart-card">
+                <h3>🦵 LEGS</h3>
+                <div class="bodypart-exercise"><span>⬇️</span> Bodyweight squats - 3x15</div>
+                <div class="bodypart-exercise"><span>🚶</span> Walking lunges - 3x12</div>
+                <div class="bodypart-exercise"><span>⬆️</span> Glute bridges - 3x15</div>
+                <div class="bodypart-exercise"><span>🦶</span> Calf raises - 3x20</div>
+            </div>
+
+            <div class="bodypart-card">
+                <h3>💪 BACK</h3>
+                <div class="bodypart-exercise"><span>🦸</span> Superman holds - 3x30 sec</div>
+                <div class="bodypart-exercise"><span>❄️</span> Reverse snow angels - 3x12</div>
+                <div class="bodypart-exercise"><span>🪑</span> Table rows - 3x12</div>
+                <div class="bodypart-exercise"><span>🧘</span> Child's pose - 3x30 sec</div>
+            </div>
+
+            <div class="bodypart-card">
+                <h3>💪 SHOULDERS</h3>
+                <div class="bodypart-exercise"><span>⬆️</span> Pike push-ups - 3x8</div>
+                <div class="bodypart-exercise"><span>🔄</span> Arm circles - 3x30 sec</div>
+                <div class="bodypart-exercise"><span>👆</span> Plank shoulder taps - 3x20</div>
+                <div class="bodypart-exercise"><span>🧱</span> Wall angels - 3x12</div>
+            </div>
+
+            <div class="bodypart-card">
+                <h3>💪 ARMS</h3>
+                <div class="bodypart-exercise"><span>⬇️</span> Tricep dips - 3x12</div>
+                <div class="bodypart-exercise"><span>🔷</span> Close grip push-ups - 3x8</div>
+                <div class="bodypart-exercise"><span>🔄</span> Reverse dips - 3x10</div>
+                <div class="bodypart-exercise"><span>🐕</span> Plank to down dog - 3x10</div>
+            </div>
+
+            <div class="bodypart-card">
+                <h3>💪 CORE</h3>
+                <div class="bodypart-exercise"><span>🧱</span> Plank - 3x45 sec</div>
+                <div class="bodypart-exercise"><span>🚲</span> Bicycle crunches - 3x20</div>
+                <div class="bodypart-exercise"><span>⬆️</span> Leg raises - 3x15</div>
+                <div class="bodypart-exercise"><span>🔄</span> Russian twists - 3x20</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WEIGHT GOALS SECTION -->
+    <div class="content-section" id="weight-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">⚖️ WEIGHT GOALS</h2>
+
+        <div class="weight-grid">
+            <div class="weight-card">
+                <h3>🔥 WEIGHT LOSS</h3>
+                <div class="calorie-target">1800-2000 cal</div>
+                <div class="macro-row"><span class="macro-label">Protein</span> <span class="macro-value">150g</span>
+                </div>
+                <div class="macro-row"><span class="macro-label">Carbs</span> <span class="macro-value">200g</span>
+                </div>
+                <div class="macro-row"><span class="macro-label">Fats</span> <span class="macro-value">67g</span></div>
+            </div>
+
+            <div class="weight-card">
+                <h3>💪 WEIGHT GAIN</h3>
+                <div class="calorie-target">2800-3000 cal</div>
+                <div class="macro-row"><span class="macro-label">Protein</span> <span class="macro-value">180g</span>
+                </div>
+                <div class="macro-row"><span class="macro-label">Carbs</span> <span class="macro-value">375g</span>
+                </div>
+                <div class="macro-row"><span class="macro-label">Fats</span> <span class="macro-value">83g</span></div>
+            </div>
+
+            <div class="weight-card">
+                <h3>⚖️ MAINTENANCE</h3>
+                <div class="calorie-target">2300-2500 cal</div>
+                <div class="macro-row"><span class="macro-label">Protein</span> <span class="macro-value">160g</span>
+                </div>
+                <div class="macro-row"><span class="macro-label">Carbs</span> <span class="macro-value">275g</span>
+                </div>
+                <div class="macro-row"><span class="macro-label">Fats</span> <span class="macro-value">75g</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PREMIUM SECTION -->
+    <div class="content-section" id="premium-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">⭐ PREMIUM FEATURES</h2>
+
+        <div class="premium-grid">
+            <div class="premium-card premium-feature">
+                <div class="premium-icon">🤖</div>
+                <h3>AI PERSONAL COACH</h3>
+                <p>Get personalized workout recommendations based on your progress, goals, and feedback.</p>
+                <ul class="premium-feature-list">
+                    <li>Daily customized workouts</li>
+                    <li>Form correction tips</li>
+                    <li>Progress predictions</li>
+                    <li>Adaptive difficulty</li>
+                </ul>
+            </div>
+
+            <div class="premium-card premium-feature">
+                <div class="premium-icon">🌐</div>
+                <h3>SOCIAL COMMUNITY</h3>
+                <p>Connect with other RED ZONE users, share progress, and stay motivated together.</p>
+                <ul class="premium-feature-list">
+                    <li>Post updates & photos</li>
+                    <li>Follow friends</li>
+                    <li>Group challenges</li>
+                    <li>Leaderboards</li>
+                </ul>
+            </div>
+
+            <div class="premium-card premium-feature">
+                <div class="premium-icon">📊</div>
+                <h3>ADVANCED ANALYTICS</h3>
+                <p>Deep insights into your performance, trends, and predictions.</p>
+                <ul class="premium-feature-list">
+                    <li>Body fat tracking</li>
+                    <li>Muscle group analysis</li>
+                    <li>Recovery recommendations</li>
+                    <li>Sleep & stress tracking</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SOCIAL SECTION -->
+    <div class="content-section" id="social-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">🌐 COMMUNITY</h2>
+
+        <div class="social-feed">
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar">JD</div>
+                    <div><strong>John Doe</strong> · 2h ago</div>
+                </div>
+                <div>🔥 Just completed Day 30! Down 12 pounds and feeling amazing!</div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar">SM</div>
+                    <div><strong>Sarah Miller</strong> · 5h ago</div>
+                </div>
+                <div>💪 New PR: 50 pushups in a row!</div>
+            </div>
+
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-avatar">MT</div>
+                    <div><strong>Mike Thompson</strong> · 1d ago</div>
+                </div>
+                <div>🥗 Quick healthy meal: Grilled chicken + quinoa + veggies</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI COACH SECTION -->
+    <div class="content-section" id="coach-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">🤖 AI COACH</h2>
+
+        <div class="coach-section">
+            <div class="chat-box" id="chatBox">
+                <div class="chat-message coach">
+                    <div class="chat-bubble">👋 Hi! I'm your AI coach. Ask me anything about fitness!</div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ask your coach...">
+                <button id="sendChatBtn">SEND</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CHALLENGES SECTION -->
+    <div class="content-section" id="challenges-section">
+        <h2 style="text-align: center; margin-bottom: 24px; color: #ef4444;">🏆 CHALLENGES</h2>
+
+        <div class="challenges-grid">
+            <div class="challenge-card">
+                <h4>🔥 30-DAY PUSHUP</h4>
+                <div class="progress-bar-bg">
+                    <div class="progress-fill" style="width: 40%;"></div>
+                </div>
+                <p style="margin: 12px 0;">Day 12/30 · 2,345 joined</p>
+                <button class="join-btn active">JOINED</button>
+            </div>
+
+            <div class="challenge-card">
+                <h4>💧 HYDRATION</h4>
+                <div class="progress-bar-bg">
+                    <div class="progress-fill" style="width: 50%;"></div>
+                </div>
+                <p style="margin: 12px 0;">Week 2/4 · 5,678 joined</p>
+                <button class="join-btn">JOIN NOW</button>
+            </div>
+
+            <div class="challenge-card">
+                <h4>⚡ 7-DAY HIIT</h4>
+                <div class="progress-bar-bg">
+                    <div class="progress-fill" style="width: 43%;"></div>
+                </div>
+                <p style="margin: 12px 0;">Day 3/7 · 1,234 joined</p>
+                <button class="join-btn">JOIN NOW</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>⚡ RED ZONE · exercise demo library · voice timer · proper form ⚡</footer>
+
+    <!-- Upgrade Modal -->
+    <div class="modal" id="upgradeModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; z-index: 1000;">
+        <div
+            style="background: #1f2937; border-radius: 40px; padding: 40px; max-width: 500px; width: 90%; border: 2px solid #ef4444;">
+            <h2 style="color: #ef4444; margin-bottom: 24px; text-align: center;">🔥 UPGRADE TO PREMIUM</h2>
+            <p style="color: #9ca3af; text-align: center; margin-bottom: 24px;">This is a demo feature. In a real app,
+                you would connect to Stripe/PayPal here.</p>
+            <button class="btn-primary" style="width: 100%; padding: 16px;" id="closeModalBtn">CLOSE</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // Complete exercise demo library with accurate SVGs for each exercise
+            const exerciseDemos = [
+                {
+                    name: 'Bodyweight Squat',
+                    icon: '⬇️',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head -->
+                        <circle cx="50" cy="20" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Spine (straight back) -->
+                        <line x1="50" y1="28" x2="50" y2="50" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms (forward) -->
+                        <line x1="50" y1="35" x2="35" y2="40" stroke="#ef4444" stroke-width="2.5"/>
+                        <line x1="50" y1="35" x2="65" y2="40" stroke="#ef4444" stroke-width="2.5"/>
+                        <!-- Thighs (parallel) -->
+                        <line x1="50" y1="50" x2="40" y2="70" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="50" y1="50" x2="60" y2="70" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Shins (vertical) -->
+                        <line x1="40" y1="70" x2="40" y2="85" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="60" y1="70" x2="60" y2="85" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Feet -->
+                        <line x1="35" y1="85" x2="45" y2="85" stroke="#ef4444" stroke-width="2"/>
+                        <line x1="55" y1="85" x2="65" y2="85" stroke="#ef4444" stroke-width="2"/>
+                        <!-- 90° angle indicator -->
+                        <path d="M45 60 L45 55 L50 55" stroke="#ef4444" stroke-width="1.5" fill="none"/>
+                        <text x="52" y="53" fill="#ef4444" font-size="6">90°</text>
+                    </svg>
+                `,
+                    steps: [
+                        'Keep back straight, chest up',
+                        'Lower hips back and down',
+                        'Knees track over toes',
+                        'Go to 90° or below',
+                        'Drive through heels to stand'
+                    ],
+                    cue: '🔑 Push knees out, keep weight in heels'
+                },
+                {
+                    name: 'Push-Up',
+                    icon: '⬆️',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head -->
+                        <circle cx="50" cy="20" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Spine -->
+                        <line x1="50" y1="28" x2="50" y2="50" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms (bent) -->
+                        <line x1="50" y1="35" x2="35" y2="45" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="50" y1="35" x2="65" y2="45" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Hands -->
+                        <circle cx="35" cy="48" r="3" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <circle cx="65" cy="48" r="3" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <!-- Legs -->
+                        <line x1="50" y1="50" x2="40" y2="70" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="50" y1="50" x2="60" y2="70" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Feet -->
+                        <line x1="40" y1="73" x2="40" y2="78" stroke="#ef4444" stroke-width="2"/>
+                        <line x1="60" y1="73" x2="60" y2="78" stroke="#ef4444" stroke-width="2"/>
+                        <!-- Elbow angle -->
+                        <path d="M42 42 L42 37 L47 37" stroke="#ef4444" stroke-width="1.5" fill="none"/>
+                        <text x="48" y="35" fill="#ef4444" font-size="6">90°</text>
+                    </svg>
+                `,
+                    steps: [
+                        'Hands shoulder-width apart',
+                        'Body straight from head to heels',
+                        'Lower chest to ground',
+                        'Elbows at 45° angle',
+                        'Press through palms to rise'
+                    ],
+                    cue: '🔑 Keep core tight, don\'t let hips sag'
+                },
+                {
+                    name: 'Lunge',
+                    icon: '🚶',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head -->
+                        <circle cx="50" cy="15" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Torso -->
+                        <line x1="50" y1="23" x2="50" y2="40" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms -->
+                        <line x1="50" y1="30" x2="35" y2="35" stroke="#ef4444" stroke-width="2.5"/>
+                        <line x1="50" y1="30" x2="65" y2="35" stroke="#ef4444" stroke-width="2.5"/>
+                        <!-- Front leg bent -->
+                        <line x1="50" y1="40" x2="60" y2="60" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="60" y1="60" x2="65" y2="75" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Back leg straight -->
+                        <line x1="50" y1="40" x2="35" y2="70" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="35" y1="70" x2="30" y2="83" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Feet -->
+                        <line x1="65" y1="78" x2="70" y2="83" stroke="#ef4444" stroke-width="2"/>
+                        <line x1="30" y1="86" x2="35" y2="86" stroke="#ef4444" stroke-width="2"/>
+                        <!-- Knee angle -->
+                        <path d="M55 55 L55 50 L60 50" stroke="#ef4444" stroke-width="1.5" fill="none"/>
+                        <text x="62" y="48" fill="#ef4444" font-size="6">90°</text>
+                    </svg>
+                `,
+                    steps: [
+                        'Front knee over ankle',
+                        'Back knee hovers above ground',
+                        'Torso upright, shoulders back',
+                        'Both knees at 90°',
+                        'Drive through front heel to rise'
+                    ],
+                    cue: '🔑 Keep front knee behind toes, weight in heel'
+                },
+                {
+                    name: 'Plank',
+                    icon: '🧱',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head -->
+                        <circle cx="30" cy="20" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Spine (straight) -->
+                        <line x1="30" y1="28" x2="70" y2="28" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms -->
+                        <line x1="30" y1="28" x2="25" y2="45" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="70" y1="28" x2="75" y2="45" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Hands -->
+                        <circle cx="25" cy="48" r="3" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <circle cx="75" cy="48" r="3" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <!-- Legs -->
+                        <line x1="70" y1="28" x2="70" y2="55" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="70" y1="55" x2="65" y2="75" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Feet -->
+                        <line x1="65" y1="78" x2="65" y2="83" stroke="#ef4444" stroke-width="2"/>
+                        <!-- Straight line indicator -->
+                        <line x1="30" y1="15" x2="70" y2="15" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    </svg>
+                `,
+                    steps: [
+                        'Body straight from head to heels',
+                        'Core engaged, don\'t sag',
+                        'Shoulders over wrists',
+                        'Feet hip-width apart',
+                        'Breathe steadily, hold position'
+                    ],
+                    cue: '🔑 Squeeze glutes, pull belly button to spine'
+                },
+                {
+                    name: 'Glute Bridge',
+                    icon: '⬆️',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head on ground -->
+                        <circle cx="30" cy="65" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Spine angled up -->
+                        <line x1="30" y1="65" x2="50" y2="45" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="50" y1="45" x2="70" y2="55" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms on ground -->
+                        <line x1="35" y1="65" x2="35" y2="75" stroke="#ef4444" stroke-width="2.5"/>
+                        <line x1="45" y1="60" x2="45" y2="70" stroke="#ef4444" stroke-width="2.5"/>
+                        <!-- Legs bent -->
+                        <line x1="70" y1="55" x2="75" y2="70" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="70" y1="55" x2="65" y2="70" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Feet -->
+                        <line x1="75" y1="73" x2="80" y2="78" stroke="#ef4444" stroke-width="2"/>
+                        <line x1="65" y1="73" x2="60" y2="78" stroke="#ef4444" stroke-width="2"/>
+                        <!-- Lift arrow -->
+                        <line x1="50" y1="35" x2="50" y2="25" stroke="#ef4444" stroke-width="2"/>
+                        <text x="52" y="20" fill="#ef4444" font-size="6">lift</text>
+                    </svg>
+                `,
+                    steps: [
+                        'Lie on back, knees bent',
+                        'Feet flat, hip-width apart',
+                        'Press through heels',
+                        'Lift hips toward ceiling',
+                        'Squeeze glutes at top'
+                    ],
+                    cue: '🔑 Drive through heels, avoid overarching lower back'
+                },
+                {
+                    name: 'Superman',
+                    icon: '🦸',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head lifted -->
+                        <circle cx="30" cy="25" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Spine -->
+                        <line x1="30" y1="33" x2="45" y2="40" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="45" y1="40" x2="60" y2="45" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms lifted -->
+                        <line x1="35" y1="33" x2="25" y2="20" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="45" y1="40" x2="55" y2="30" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Legs lifted -->
+                        <line x1="60" y1="45" x2="65" y2="65" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="60" y1="45" x2="55" y2="65" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Lift arrows -->
+                        <line x1="30" y1="15" x2="30" y2="5" stroke="#ef4444" stroke-width="1.5"/>
+                        <line x1="60" y1="35" x2="60" y2="25" stroke="#ef4444" stroke-width="1.5"/>
+                    </svg>
+                `,
+                    steps: [
+                        'Lie face down, arms extended',
+                        'Lift chest and legs simultaneously',
+                        'Keep neck neutral, gaze down',
+                        'Squeeze glutes and back muscles',
+                        'Hold at top, then lower slowly'
+                    ],
+                    cue: '🔑 Imagine a string pulling chest and thighs up'
+                },
+                {
+                    name: 'Mountain Climber',
+                    icon: '⛰️',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head -->
+                        <circle cx="30" cy="20" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Spine -->
+                        <line x1="30" y1="28" x2="60" y2="35" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms -->
+                        <line x1="30" y1="28" x2="20" y2="45" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="60" y1="35" x2="70" y2="50" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Hands -->
+                        <circle cx="20" cy="48" r="3" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <circle cx="70" cy="53" r="3" fill="none" stroke="#ef4444" stroke-width="2"/>
+                        <!-- Legs (one bent, one straight) -->
+                        <line x1="60" y1="35" x2="65" y2="55" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="60" y1="35" x2="50" y2="60" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Feet -->
+                        <line x1="65" y1="58" x2="70" y2="63" stroke="#ef4444" stroke-width="2"/>
+                        <line x1="50" y1="63" x2="55" y2="68" stroke="#ef4444" stroke-width="2"/>
+                    </svg>
+                `,
+                    steps: [
+                        'Start in plank position',
+                        'Drive one knee toward chest',
+                        'Quickly alternate legs',
+                        'Keep hips down, core tight',
+                        'Move with control and speed'
+                    ],
+                    cue: '🔑 Imagine running in place, keep shoulders over hands'
+                },
+                {
+                    name: 'Burpee',
+                    icon: '💥',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head -->
+                        <circle cx="50" cy="25" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Spine (crouched) -->
+                        <line x1="50" y1="33" x2="45" y2="55" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms -->
+                        <line x1="45" y1="40" x2="30" y2="50" stroke="#ef4444" stroke-width="2.5"/>
+                        <line x1="45" y1="40" x2="60" y2="50" stroke="#ef4444" stroke-width="2.5"/>
+                        <!-- Legs (crouched) -->
+                        <line x1="45" y1="55" x2="35" y2="75" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="45" y1="55" x2="55" y2="75" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Feet -->
+                        <line x1="35" y1="78" x2="40" y2="83" stroke="#ef4444" stroke-width="2"/>
+                        <line x1="55" y1="78" x2="60" y2="83" stroke="#ef4444" stroke-width="2"/>
+                        <!-- Jump arrow -->
+                        <line x1="50" y1="10" x2="50" y2="0" stroke="#ef4444" stroke-width="2"/>
+                        <text x="52" y="5" fill="#ef4444" font-size="6">jump</text>
+                    </svg>
+                `,
+                    steps: [
+                        'Squat down, place hands on ground',
+                        'Jump feet back to plank',
+                        'Perform a push-up (optional)',
+                        'Jump feet forward to hands',
+                        'Explosively jump up, arms overhead'
+                    ],
+                    cue: '🔑 Keep core tight throughout, land softly'
+                },
+                {
+                    name: 'High Knees',
+                    icon: '🏃',
+                    svg: `
+                    <svg viewBox="0 0 100 100" width="140" height="140">
+                        <!-- Head -->
+                        <circle cx="40" cy="15" r="8" fill="none" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Spine -->
+                        <line x1="40" y1="23" x2="50" y2="35" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Arms pumping -->
+                        <line x1="45" y1="25" x2="30" y2="30" stroke="#ef4444" stroke-width="2.5"/>
+                        <line x1="50" y1="35" x2="65" y2="25" stroke="#ef4444" stroke-width="2.5"/>
+                        <!-- Legs (one knee high) -->
+                        <line x1="50" y1="35" x2="55" y2="20" stroke="#ef4444" stroke-width="3"/>
+                        <line x1="50" y1="35" x2="45" y2="50" stroke="#ef4444" stroke-width="3"/>
+                        <!-- Feet -->
+                        <line x1="55" y1="23" x2="60" y2="28" stroke="#ef4444" stroke-width="2"/>
+                        <line x1="45" y1="53" x2="50" y2="58" stroke="#ef4444" stroke-width="2"/>
+                    </svg>
+                `,
+                    steps: [
+                        'Stand tall, engage core',
+                        'Drive knees up to waist height',
+                        'Pump arms opposite legs',
+                        'Land softly on balls of feet',
+                        'Maintain quick, rhythmic pace'
+                    ],
+                    cue: '🔑 Keep chest up, knees high, quick feet'
+                }
+            ];
+
+            // Function to get exercise SVG for workout list
+            function getExerciseSVG(exerciseName) {
+                const demo = exerciseDemos.find(d =>
+                    exerciseName.toLowerCase().includes(d.name.toLowerCase().split(' ')[0].toLowerCase())
+                );
+                return demo ? demo.svg : exerciseDemos[0].svg;
+            }
+
+            // Function to render demo library
+            function renderDemoLibrary() {
+                const demoGrid = document.getElementById('demoGrid');
+                let html = '';
+
+                exerciseDemos.forEach(demo => {
+                    html += `
+                    <div class="demo-card">
+                        <div class="demo-header">
+                            <span class="demo-icon">${demo.icon}</span>
+                            <span class="demo-name">${demo.name}</span>
+                        </div>
+                        <div class="demo-canvas">
+                            ${demo.svg}
+                        </div>
+                        <div class="demo-instructions">
+                            ${demo.steps.map(step => `<div class="demo-step">${step}</div>`).join('')}
+                            <div class="demo-cue">${demo.cue}</div>
+                        </div>
+                    </div>
+                `;
+                });
+
+                demoGrid.innerHTML = html;
+            }
+
+            // Workout data with all exercises
+            const workouts = {
+                monday: {
+                    name: 'Full Body Strength',
+                    level: 'beginner',
+                    desc: 'Build strength & burn fat with basic moves.',
+                    exercises: [
+                        { name: 'Bodyweight Squats', reps: '15 reps', completed: false },
+                        { name: 'Push-Ups (knees ok)', reps: '12 reps', completed: false },
+                        { name: 'Reverse Lunges', reps: '12 each leg', completed: false },
+                        { name: 'Plank', reps: '45 seconds', completed: false },
+                        { name: 'Glute Bridges', reps: '15 reps', completed: false },
+                        { name: 'Superman Holds', reps: '12 reps', completed: false }
+                    ]
+                },
+                tuesday: {
+                    name: 'Active Recovery',
+                    level: 'light',
+                    desc: 'Mobility, stretching & light movement.',
+                    exercises: [
+                        { name: 'Cat-Cow Stretch', reps: '10 breaths', completed: false },
+                        { name: 'Downward Dog', reps: '45 sec', completed: false },
+                        { name: 'World\'s Greatest Stretch', reps: '8 each side', completed: false },
+                        { name: 'Glute Stretch', reps: '30 sec each', completed: false },
+                        { name: 'Thoracic Rotations', reps: '10 each side', completed: false },
+                        { name: 'Child\'s Pose', reps: '60 sec', completed: false }
+                    ]
+                },
+                wednesday: {
+                    name: 'Lower Body + Core',
+                    level: 'intermediate',
+                    desc: 'Sculpt legs and tighten core.',
+                    exercises: [
+                        { name: 'Squat Pulses', reps: '20 reps', completed: false },
+                        { name: 'Walking Lunges', reps: '10 each leg', completed: false },
+                        { name: 'Donkey Kicks', reps: '15 each leg', completed: false },
+                        { name: 'Fire Hydrants', reps: '15 each leg', completed: false },
+                        { name: 'Bicycle Crunches', reps: '20 total', completed: false },
+                        { name: 'Leg Raises', reps: '15 reps', completed: false }
+                    ]
+                },
+                thursday: {
+                    name: 'Cardio & Core',
+                    level: 'beginner',
+                    desc: 'Get heart pumping, no jumping needed.',
+                    exercises: [
+                        { name: 'High Knees (march)', reps: '40 sec', completed: false },
+                        { name: 'Mountain Climbers', reps: '30 sec', completed: false },
+                        { name: 'Plank Shoulder Taps', reps: '20 taps', completed: false },
+                        { name: 'Butt Kicks', reps: '40 sec', completed: false },
+                        { name: 'Flutter Kicks', reps: '30 sec', completed: false },
+                        { name: 'Russian Twists', reps: '20 twists', completed: false }
+                    ]
+                },
+                friday: {
+                    name: 'Upper Body + Core',
+                    level: 'intermediate',
+                    desc: 'Strengthen arms, shoulders & abs.',
+                    exercises: [
+                        { name: 'Push-Ups (wide)', reps: '12 reps', completed: false },
+                        { name: 'Tricep Dips (chair)', reps: '12 reps', completed: false },
+                        { name: 'Plank to Downward Dog', reps: '10 reps', completed: false },
+                        { name: 'Mountain Climbers', reps: '30 sec', completed: false },
+                        { name: 'Side Plank (each)', reps: '30 sec', completed: false },
+                        { name: 'Arm Circles', reps: '30 sec fwd/bwd', completed: false }
+                    ]
+                },
+                saturday: {
+                    name: 'Full Body HIIT',
+                    level: 'advanced',
+                    desc: 'Burn fat fast — 40s work / 20s rest.',
+                    exercises: [
+                        { name: 'High Knees', reps: '40 sec', completed: false },
+                        { name: 'Jump Squats', reps: '40 sec', completed: false },
+                        { name: 'Burpees (no push-up)', reps: '40 sec', completed: false },
+                        { name: 'Mountain Climbers', reps: '40 sec', completed: false },
+                        { name: 'Glute Bridge Marches', reps: '40 sec', completed: false },
+                        { name: 'Plank Jacks', reps: '40 sec', completed: false }
+                    ]
+                },
+                sunday: {
+                    name: 'Rest & Stretch',
+                    level: 'light',
+                    desc: 'Recovery day — gentle stretching.',
+                    exercises: [
+                        { name: 'Full Body Stretch', reps: '5 min', completed: false },
+                        { name: 'Foam Rolling (if available)', reps: '5 min', completed: false },
+                        { name: 'Deep Breathing', reps: '3 min', completed: false }
+                    ]
+                }
+            };
+
+            const dayOrder = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
+            let currentDay = 'monday';
+            let history = [];
+            let totalExercisesDone = 0;
+            let totalCaloriesBurned = 0;
+            let waterIntake = 0;
+            const WATER_GOAL = 3500;
+
+            // Chart variables
+            let progressChart = null;
+            let currentChartRange = 'week';
+            let currentChartType = 'bar';
+            let currentMetric = 'workouts';
+
+            // Timer variables
+            let timerInterval = null;
+            let timerSeconds = 30;
+            let timerRunning = false;
+            let currentExerciseIndex = -1;
+
+            // User Data
+            let currentUser = null;
+            let isPremium = false;
+
+            // Speech Synthesis
+            const synth = window.speechSynthesis;
+
+            function speak(text) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 0.9;
+                utterance.pitch = 1;
+                utterance.volume = 1;
+                synth.speak(utterance);
+            }
+
+            // Timer functions
+            function updateTimerDisplay() {
+                const mins = Math.floor(timerSeconds / 60);
+                const secs = timerSeconds % 60;
+                document.getElementById('timerDisplay').innerText =
+                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+
+            function startTimer() {
+                if (timerRunning) return;
+                timerRunning = true;
+                speak("Begin");
+                timerInterval = setInterval(() => {
+                    if (timerSeconds > 0) {
+                        timerSeconds--;
+                        updateTimerDisplay();
+
+                        if (timerSeconds <= 3 && timerSeconds > 0) {
+                            speak(timerSeconds.toString());
+                        }
+                    } else {
+                        stopTimer();
+                        speak("Stop");
+                        if (currentExerciseIndex !== -1) {
+                            const exercise = workouts[currentDay].exercises[currentExerciseIndex];
+                            if (!exercise.completed) {
+                                exercise.completed = true;
+                                totalExercisesDone += 1;
+                                totalCaloriesBurned += 15;
+                                updateProgress();
+                                saveProgress();
+                                renderWorkout();
+                                updateStats();
+                                updateChart();
+                            }
+                        }
+                    }
+                }, 1000);
+            }
+
+            function stopTimer() {
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                timerRunning = false;
+            }
+
+            function resetTimer() {
+                stopTimer();
+                timerSeconds = 30;
+                updateTimerDisplay();
+                currentExerciseIndex = -1;
+                document.querySelectorAll('.exercise-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+            }
+
+            // Load data
+            function loadData() {
+                try {
+                    const savedProgress = localStorage.getItem('workoutProgress');
+                    if (savedProgress) {
+                        const parsed = JSON.parse(savedProgress);
+                        for (let day in parsed) {
+                            if (workouts[day]) {
+                                for (let i = 0; i < workouts[day].exercises.length; i++) {
+                                    if (parsed[day] && parsed[day][i] !== undefined) {
+                                        workouts[day].exercises[i].completed = parsed[day][i];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    const savedHistory = localStorage.getItem('workoutHistory');
+                    if (savedHistory) {
+                        history = JSON.parse(savedHistory);
+                    } else {
+                        history = generateSampleHistory();
+                    }
+
+                    const savedTotal = localStorage.getItem('totalExercisesDone');
+                    if (savedTotal) totalExercisesDone = parseInt(savedTotal) || 0;
+
+                    const savedCalories = localStorage.getItem('totalCaloriesBurned');
+                    if (savedCalories) totalCaloriesBurned = parseInt(savedCalories) || 0;
+
+                    const savedWater = localStorage.getItem('waterIntake');
+                    if (savedWater) waterIntake = parseInt(savedWater) || 0;
+
+                    const savedUser = localStorage.getItem('redzone_currentUser');
+                    if (savedUser) {
+                        currentUser = JSON.parse(savedUser);
+                    }
+
+                    isPremium = localStorage.getItem('redzone_premium') === 'true';
+
+                } catch (e) { }
+            }
+
+            function generateSampleHistory() {
+                const sample = [];
+                const workoutNames = ['Full Body Strength', 'Lower Body + Core', 'Upper Body + Core', 'Full Body HIIT'];
+                const today = new Date();
+
+                for (let i = 13; i >= 0; i--) {
+                    const date = new Date(today);
+                    date.setDate(date.getDate() - i);
+                    const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+                    if (Math.random() > 0.4) {
+                        const workout = workoutNames[Math.floor(Math.random() * workoutNames.length)];
+                        const exercises = Math.floor(Math.random() * 20) + 10;
+                        sample.push({
+                            date: dateStr,
+                            workout: workout,
+                            exercises: exercises,
+                            calories: exercises * 15
+                        });
+                    }
+                }
+                return sample;
+            }
+
+            function saveProgress() {
+                const progressObj = {};
+                for (let day in workouts) {
+                    progressObj[day] = workouts[day].exercises.map(ex => ex.completed);
+                }
+                localStorage.setItem('workoutProgress', JSON.stringify(progressObj));
+                localStorage.setItem('workoutHistory', JSON.stringify(history));
+                localStorage.setItem('totalExercisesDone', totalExercisesDone.toString());
+                localStorage.setItem('totalCaloriesBurned', totalCaloriesBurned.toString());
+                localStorage.setItem('waterIntake', waterIntake.toString());
+            }
+
+            function renderDaySelector() {
+                const container = document.getElementById('daySelector');
+                let html = '';
+                dayOrder.forEach(day => {
+                    const activeClass = (currentDay === day) ? 'active' : '';
+                    html += `<button class="day-btn ${activeClass}" data-day="${day}">${day.slice(0, 3)}</button>`;
+                });
+                container.innerHTML = html;
+
+                document.querySelectorAll('.day-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        currentDay = e.target.dataset.day;
+                        renderDaySelector();
+                        renderWorkout();
+                        resetTimer();
+                    });
+                });
+            }
+
+            function renderWorkout() {
+                const w = workouts[currentDay];
+                document.getElementById('workoutName').innerText = w.name;
+                document.getElementById('workoutLevel').innerText = w.level;
+                document.getElementById('workoutDesc').innerText = w.desc;
+
+                const listEl = document.getElementById('exerciseList');
+                let itemsHtml = '';
+                w.exercises.forEach((ex, index) => {
+                    const checkedClass = ex.completed ? 'checked' : '';
+                    const svg = getExerciseSVG(ex.name);
+                    const activeClass = (index === currentExerciseIndex && timerRunning) ? 'active' : '';
+                    itemsHtml += `
+                    <li class="exercise-item ${activeClass}" data-exercise-index="${index}">
+                        <div class="exercise-info">
+                            <div class="visual-demo">
+                                ${svg}
+                            </div>
+                            <div class="exercise-details">
+                                <span class="exercise-name">${ex.name}</span>
+                                <span class="exercise-reps">${ex.reps}</span>
+                            </div>
+                        </div>
+                        <div class="checkbox ${checkedClass}" data-exercise-index="${index}"></div>
+                    </li>
+                `;
+                });
+                listEl.innerHTML = itemsHtml;
+
+                document.querySelectorAll('.exercise-item').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        if (e.target.classList.contains('checkbox')) return;
+
+                        const idx = parseInt(item.dataset.exerciseIndex);
+                        if (!isNaN(idx)) {
+                            document.querySelectorAll('.exercise-item').forEach(el => {
+                                el.classList.remove('active');
+                            });
+                            item.classList.add('active');
+                            currentExerciseIndex = idx;
+
+                            const exercise = workouts[currentDay].exercises[idx];
+                            if (exercise.reps.includes('sec')) {
+                                const seconds = parseInt(exercise.reps) || 30;
+                                timerSeconds = seconds;
+                            } else {
+                                timerSeconds = 30;
+                            }
+                            updateTimerDisplay();
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.checkbox').forEach(cb => {
+                    cb.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const idx = e.target.dataset.exerciseIndex;
+                        if (idx !== undefined) {
+                            const exercise = workouts[currentDay].exercises[idx];
+                            if (!exercise.completed) {
+                                exercise.completed = true;
+                                totalExercisesDone += 1;
+                                totalCaloriesBurned += 15;
+                            } else {
+                                exercise.completed = false;
+                                totalExercisesDone = Math.max(0, totalExercisesDone - 1);
+                                totalCaloriesBurned = Math.max(0, totalCaloriesBurned - 15);
+                            }
+                            updateProgress();
+                            saveProgress();
+                            renderWorkout();
+                            updateStats();
+                            updateChart();
+                        }
+                    });
+                });
+
+                updateProgress();
+            }
+
+            function updateProgress() {
+                const w = workouts[currentDay];
+                const total = w.exercises.length;
+                const done = w.exercises.filter(ex => ex.completed).length;
+                const percent = total > 0 ? Math.round((done / total) * 100) : 0;
+                document.getElementById('progressPercent').innerText = percent + '%';
+                document.getElementById('progressFill').style.width = percent + '%';
+            }
+
+            function updateStats() {
+                document.getElementById('totalWorkouts').innerText = history.length;
+                document.getElementById('currentStreak').innerText = history.length > 0 ? history.length : '0';
+                document.getElementById('totalExercises').innerText = totalExercisesDone;
+                document.getElementById('totalCalories').innerText = totalCaloriesBurned;
+                document.getElementById('waterIntake').innerText = waterIntake;
+                document.getElementById('waterDisplay').innerText = waterIntake + 'ml';
+                const waterPercent = Math.min(100, Math.round((waterIntake / WATER_GOAL) * 100));
+                document.getElementById('waterProgress').style.width = waterPercent + '%';
+            }
+
+            function renderHistory() {
+                const historyEl = document.getElementById('historyList');
+                if (history.length === 0) {
+                    historyEl.innerHTML = '<div class="empty-history">no workouts logged yet</div>';
+                    return;
+                }
+                let html = '';
+                history.slice(-7).reverse().forEach(item => {
+                    html += `<div class="history-item">
+                    <span class="history-date">${item.date}</span>
+                    <span class="history-workout">${item.workout}</span>
+                </div>`;
+                });
+                historyEl.innerHTML = html;
+            }
+
+            function initChart() {
+                const ctx = document.getElementById('progressChart').getContext('2d');
+
+                if (progressChart) progressChart.destroy();
+
+                progressChart = new Chart(ctx, {
+                    type: currentChartType,
+                    data: {
+                        labels: [],
+                        datasets: [{
+                            label: getMetricLabel(),
+                            data: [],
+                            backgroundColor: getChartColors().background,
+                            borderColor: '#ef4444',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: currentChartType === 'line' ? false : true,
+                            pointBackgroundColor: '#ef4444',
+                            pointBorderColor: '#ffffff',
+                            pointRadius: 4,
+                            pointHoverRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                callbacks: {
+                                    label: (context) => `${context.raw} ${getMetricLabel().toLowerCase()}`
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: { color: '#374151' },
+                                ticks: { color: '#9ca3af' }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { color: '#9ca3af' }
+                            }
+                        }
+                    }
+                });
+
+                updateChart();
+            }
+
+            function getMetricLabel() {
+                switch (currentMetric) {
+                    case 'workouts': return 'Workouts';
+                    case 'exercises': return 'Exercises';
+                    case 'calories': return 'Calories';
+                    default: return 'Workouts';
+                }
+            }
+
+            function getChartColors() {
+                return {
+                    background: currentChartType === 'line'
+                        ? 'rgba(239, 68, 68, 0.1)'
+                        : 'rgba(239, 68, 68, 0.7)'
+                };
+            }
+
+            function updateChart() {
+                if (!progressChart) return;
+
+                const data = getChartData(currentChartRange);
+                progressChart.data.labels = data.labels;
+                progressChart.data.datasets[0].data = data.values;
+                progressChart.data.datasets[0].label = getMetricLabel();
+                progressChart.data.datasets[0].backgroundColor = getChartColors().background;
+                progressChart.update();
+
+                document.getElementById('chartRange').innerText = `last ${currentChartRange}`;
+            }
+
+            function getChartData(range) {
+                const labels = [];
+                const values = [];
+                const today = new Date();
+
+                let days = 7;
+                if (range === 'month') days = 30;
+                if (range === 'year') days = 12;
+
+                if (range === 'year') {
+                    for (let i = days - 1; i >= 0; i--) {
+                        const date = new Date(today);
+                        date.setMonth(date.getMonth() - i);
+                        labels.push(date.toLocaleDateString('en-US', { month: 'short' }));
+
+                        let total = 0;
+                        history.forEach(item => {
+                            if (item.date.includes(date.toLocaleDateString('en-US', { month: 'short' }))) {
+                                if (currentMetric === 'workouts') total += 1;
+                                else if (currentMetric === 'exercises') total += item.exercises || 0;
+                                else if (currentMetric === 'calories') total += item.calories || 0;
+                            }
+                        });
+                        values.push(total);
+                    }
+                } else {
+                    for (let i = days - 1; i >= 0; i--) {
+                        const date = new Date(today);
+                        date.setDate(date.getDate() - i);
+                        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        labels.push(dateStr);
+
+                        let total = 0;
+                        history.forEach(item => {
+                            if (item.date === dateStr) {
+                                if (currentMetric === 'workouts') total += 1;
+                                else if (currentMetric === 'exercises') total += item.exercises || 0;
+                                else if (currentMetric === 'calories') total += item.calories || 0;
+                            }
+                        });
+                        values.push(total);
+                    }
+                }
+
+                return { labels, values };
+            }
+
+            function completeWorkout() {
+                const w = workouts[currentDay];
+                const allCompleted = w.exercises.every(ex => ex.completed);
+                if (!allCompleted) {
+                    alert('⚠️ finish all exercises first!');
+                    return;
+                }
+
+                const todayStr = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+                const alreadyCompleted = history.some(item =>
+                    item.date === todayStr && item.workout === w.name
+                );
+
+                if (!alreadyCompleted) {
+                    const exercisesDone = w.exercises.length;
+                    const caloriesBurned = exercisesDone * 15;
+
+                    history.push({
+                        date: todayStr,
+                        workout: w.name,
+                        exercises: exercisesDone,
+                        calories: caloriesBurned
+                    });
+
+                    totalCaloriesBurned += caloriesBurned;
+
+                    saveProgress();
+                    updateStats();
+                    renderHistory();
+                    updateChart();
+                    alert(`✅ ${w.name} completed! You burned ${caloriesBurned} calories!`);
+                } else {
+                    alert('You already completed this workout today!');
+                }
+            }
+
+            function resetDay() {
+                workouts[currentDay].exercises.forEach(ex => ex.completed = false);
+                saveProgress();
+                renderWorkout();
+                updateStats();
+            }
+
+            function clearHistory() {
+                if (confirm('Delete all history?')) {
+                    history = [];
+                    totalCaloriesBurned = 0;
+                    saveProgress();
+                    renderHistory();
+                    updateStats();
+                    updateChart();
+                }
+            }
+
+            function takeScreenshot() {
+                const element = document.querySelector('.chart-section');
+                html2canvas(element).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = 'progress.png';
+                    link.href = canvas.toDataURL();
+                    link.click();
+                });
+            }
+
+            function exportCSV() {
+                let csv = 'Date,Workout,Exercises,Calories\n';
+                history.forEach(item => {
+                    csv += `${item.date},${item.workout},${item.exercises || 0},${item.calories || 0}\n`;
+                });
+
+                const blob = new Blob([csv], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'history.csv';
+                a.click();
+            }
+
+            // Update identity bar
+            function updateIdentityBar() {
+                const avatar = document.getElementById('avatar');
+                const displayName = document.getElementById('displayName');
+                const userMeta = document.getElementById('userMeta');
+                const loginBtn = document.getElementById('loginBtn');
+                const logoutBtn = document.getElementById('logoutBtn');
+
+                if (currentUser) {
+                    avatar.innerText = currentUser.name ? currentUser.name.charAt(0).toUpperCase() : 'U';
+                    displayName.innerText = currentUser.name || 'User';
+                    userMeta.innerHTML = `<span>⚡ ${isPremium ? 'premium' : 'free'}</span>`;
+                    loginBtn.style.display = 'none';
+                    logoutBtn.style.display = 'block';
+                } else {
+                    avatar.innerText = '👤';
+                    displayName.innerText = 'Guest User';
+                    userMeta.innerHTML = '<span>⚡ free</span>';
+                    loginBtn.style.display = 'block';
+                    logoutBtn.style.display = 'none';
+                }
+            }
+
+            // Tab switching
+            document.querySelectorAll('.main-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab + '-section').classList.add('active');
+                });
+            });
+
+            // Login/Logout
+            document.getElementById('loginBtn').addEventListener('click', () => {
+                const name = prompt('Enter your name:');
+                if (name) {
+                    currentUser = { name: name };
+                    localStorage.setItem('redzone_currentUser', JSON.stringify(currentUser));
+                    updateIdentityBar();
+                }
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', () => {
+                currentUser = null;
+                localStorage.removeItem('redzone_currentUser');
+                updateIdentityBar();
+            });
+
+            // Water tracking
+            document.querySelectorAll('.water-btn[data-water]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    waterIntake += parseInt(e.target.dataset.water);
+                    if (waterIntake > WATER_GOAL * 1.5) waterIntake = WATER_GOAL * 1.5;
+                    updateStats();
+                    saveProgress();
+                });
+            });
+
+            document.getElementById('resetWater').addEventListener('click', () => {
+                waterIntake = 0;
+                updateStats();
+                saveProgress();
+            });
+
+            // Timer controls
+            document.getElementById('set30Sec').addEventListener('click', () => {
+                stopTimer();
+                timerSeconds = 30;
+                updateTimerDisplay();
+            });
+
+            document.getElementById('set45Sec').addEventListener('click', () => {
+                stopTimer();
+                timerSeconds = 45;
+                updateTimerDisplay();
+            });
+
+            document.getElementById('set60Sec').addEventListener('click', () => {
+                stopTimer();
+                timerSeconds = 60;
+                updateTimerDisplay();
+            });
+
+            document.getElementById('startTimerBtn').addEventListener('click', startTimer);
+            document.getElementById('stopTimerBtn').addEventListener('click', stopTimer);
+            document.getElementById('resetTimerBtn').addEventListener('click', resetTimer);
+
+            // Upgrade modal
+            const modal = document.getElementById('upgradeModal');
+            const upgradeBtn = document.getElementById('upgradeBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+
+            upgradeBtn.addEventListener('click', () => {
+                modal.style.display = 'flex';
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                if (currentUser) {
+                    isPremium = true;
+                    localStorage.setItem('redzone_premium', 'true');
+                    updateIdentityBar();
+                }
+            });
+
+            // AI Coach
+            const chatInput = document.getElementById('chatInput');
+            const sendChatBtn = document.getElementById('sendChatBtn');
+            const chatBox = document.getElementById('chatBox');
+
+            const coachResponses = [
+                "Great question! For beginners, start with bodyweight exercises 3x/week.",
+                "Focus on form over weight. Master technique first!",
+                "Rest days are crucial! Muscles grow during recovery.",
+                "Drink water before, during, and after workouts.",
+                "Track your progress! Photos and measurements matter more than the scale."
+            ];
+
+            sendChatBtn.addEventListener('click', () => {
+                if (!isPremium) {
+                    alert('Premium feature! Upgrade to chat with AI coach.');
+                    return;
+                }
+
+                const question = chatInput.value.trim();
+                if (!question) return;
+
+                const userMsg = document.createElement('div');
+                userMsg.className = 'chat-message user';
+                userMsg.innerHTML = `<div class="chat-bubble">${question}</div>`;
+                chatBox.appendChild(userMsg);
+
+                setTimeout(() => {
+                    const coachMsg = document.createElement('div');
+                    coachMsg.className = 'chat-message coach';
+                    const response = coachResponses[Math.floor(Math.random() * coachResponses.length)];
+                    coachMsg.innerHTML = `<div class="chat-bubble">${response}</div>`;
+                    chatBox.appendChild(coachMsg);
+                    chatBox.scrollTop = chatBox.scrollHeight;
+                }, 1000);
+
+                chatInput.value = '';
+            });
+
+            // Challenge join buttons
+            document.querySelectorAll('.join-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    if (!currentUser) {
+                        alert('Please login to join challenges!');
+                        return;
+                    }
+
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        this.innerText = 'JOIN NOW';
+                    } else {
+                        this.classList.add('active');
+                        this.innerText = 'JOINED';
+                    }
+                });
+            });
+
+            // Initialize everything
+            loadData();
+            renderDaySelector();
+            renderWorkout();
+            renderHistory();
+            updateStats();
+            initChart();
+            updateIdentityBar();
+            updateTimerDisplay();
+            renderDemoLibrary();
+
+            // Event listeners
+            document.getElementById('resetDayBtn').addEventListener('click', resetDay);
+            document.getElementById('completeWorkoutBtn').addEventListener('click', completeWorkout);
+            document.getElementById('clearHistoryBtn').addEventListener('click', clearHistory);
+            document.getElementById('screenshotBtn').addEventListener('click', takeScreenshot);
+            document.getElementById('exportCSVBtn').addEventListener('click', exportCSV);
+
+            // Chart controls
+            document.querySelectorAll('.metric-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.metric-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentMetric = e.target.dataset.metric;
+                    updateChart();
+                });
+            });
+
+            document.querySelectorAll('.chart-type-selector .chart-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.chart-type-selector .chart-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentChartType = e.target.dataset.type;
+                    initChart();
+                });
+            });
+
+            document.querySelectorAll('.chart-controls-group .chart-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.chart-controls-group .chart-btn').forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    currentChartRange = e.target.dataset.range;
+                    updateChart();
+                });
+            });
+
+            // Save on exit
+            window.addEventListener('beforeunload', saveProgress);
+        })();
+    </script>
+</body>
+
+</html>
