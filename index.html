@@ -115,39 +115,12 @@ footer {
   </a>
 <div class="section">
 
-<h2>Search</h2>
-
-<input type="text" id="searchInput" placeholder="Search this page">
-
-<button onclick="searchPage()">Search</button>
-
-</div>
-
-<script>
-
-function searchPage(){
-
-let input = document.getElementById("searchInput").value.toLowerCase()
-
-let content = document.body.innerText.toLowerCase()
-
-if(content.includes(input)){
-
-alert("Result found on this page")
-
-}
-
-else{
-
-alert("No results found")
-
-}
-
-}
-
-</script>
-
-
+<form action="https://duckduckgo.com/" method="GET" target="_blank">
+  <input type="text" name="q" placeholder="Search the web...">
+  <input type="hidden" name="kl" value="us-en">  <!-- region -->
+  <input type="hidden" name="kp" value="1">      <!-- safe search moderate -->
+  <button type="submit">Search</button>
+</form>
 
 <div class="section">
 <h2>About Joel</h2>
