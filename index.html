@@ -206,7 +206,17 @@ var disqus_config = function () {
 })();
 </script>
 <noscript>Please enable JavaScript to view comments powered by Disqus.</noscript>
+<!-- 📌 PIN GALLERY ADD-ON -->
+<div class="section">
+  <h2>📌 Pin Gallery</h2>
+  <p>Create and share visual content for traffic.</p>
 
+  <button onclick="generateGalleryPins()" style="padding:12px 20px;background:red;color:white;border:none;border-radius:6px;cursor:pointer;">
+    Generate Pins
+  </button>
+
+  <div id="pinGallery" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:20px;"></div>
+</div>
 
 <footer>
 <p>
@@ -215,6 +225,129 @@ Consult a medical professional before beginning any exercise program.
 </p>
 <p>© 2026 Still In The Fight. All rights reserved.</p>
 </footer>
+<script>
+function generateGalleryPins(){
 
+  const gallery = document.getElementById('pinGallery');
+  gallery.innerHTML = '';
+
+  const images = [
+    "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
+    "https://images.unsplash.com/photo-1493558103817-58b2924bce98",
+    "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1"
+  ];
+
+  const titles = [
+    "Stay Strong Every Day",
+    "Discipline Builds Power",
+    "Still In The Fight",
+    "Train Hard Live Strong"
+  ];
+
+  for(let i=0;i<8;i++){
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 1000;
+    canvas.height = 1500;
+    const ctx = canvas.getContext('2d');
+
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.src = images[Math.floor(Math.random()*images.length)] + "?w=1000";
+
+    const title = titles[Math.floor(Math.random()*titles.length)];
+    const desc = title + " | Strength • Discipline • Longevity";
+
+    img.onload = function(){
+
+      ctx.drawImage(img,0,0,1000,1500);
+
+      // overlay
+      const grad = ctx.createLinearGradient(0,0,0,1500);
+      grad.addColorStop(0,"rgba(0,0,0,0.3)");
+      grad.addColorStop(1,"rgba(0,0,0,0.8)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0,0,1000,1500);
+
+      // text
+      ctx.fillStyle="#fff";
+      ctx.font="bold 80px Arial";
+      ctx.textAlign="center";
+      wrapText(ctx,title,500,700,800,100);
+
+      const imgURL = canvas.toDataURL("image/png");
+
+      const box = document.createElement('div');
+      box.style.width="180px";
+      box.style.display="flex";
+      box.style.flexDirection="column";
+      box.style.alignItems="center";
+      box.style.gap="6px";
+
+      const image = document.createElement('img');
+      image.src = imgURL;
+      image.style.width="180px";
+      image.style.borderRadius="8px";
+      image.style.cursor="pointer";
+
+      image.onclick = ()=> window.open(window.location.href,'_blank');
+
+      // download
+      const downloadBtn = document.createElement('button');
+      downloadBtn.innerText="Download";
+      downloadBtn.style.background="red";
+      downloadBtn.style.color="white";
+      downloadBtn.style.border="none";
+      downloadBtn.style.padding="6px";
+      downloadBtn.style.cursor="pointer";
+
+      downloadBtn.onclick = ()=>{
+        const a=document.createElement('a');
+        a.href=imgURL;
+        a.download=title.replace(/\s+/g,'_')+".png";
+        a.click();
+      };
+
+      // pinterest share
+      const pinBtn = document.createElement('button');
+      pinBtn.innerText="Pin It";
+      pinBtn.style.background="#bd081c";
+      pinBtn.style.color="white";
+      pinBtn.style.border="none";
+      pinBtn.style.padding="6px";
+      pinBtn.style.cursor="pointer";
+
+      pinBtn.onclick = ()=>{
+        const pinURL = `https://www.pinterest.com/pin/create/button/?url=${encodeURIComponent(window.location.href)}&media=${encodeURIComponent(imgURL)}&description=${encodeURIComponent(desc)}`;
+        window.open(pinURL,'_blank');
+      };
+
+      box.appendChild(image);
+      box.appendChild(downloadBtn);
+      box.appendChild(pinBtn);
+
+      gallery.appendChild(box);
+    };
+  }
+}
+
+function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+  let words = text.split(' ');
+  let line = '';
+  for(let n=0;n<words.length;n++){
+    let testLine = line + words[n] + ' ';
+    let metrics = ctx.measureText(testLine);
+    if(metrics.width > maxWidth && n>0){
+      ctx.fillText(line, x, y);
+      line = words[n] + ' ';
+      y += lineHeight;
+    } else {
+      line = testLine;
+    }
+  }
+  ctx.fillText(line, x, y);
+}
+</script>
 </body>
 </html>
