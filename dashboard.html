@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background: #3b82f6;
+            color: white;
+            cursor: pointer;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>📊 Analytics Dashboard</h1>
+
+<div class="grid">
+
+    <div class="card">
+        <h3>Total Events</h3>
+        <p id="totalEvents">0</p>
+    </div>
+
+    <div class="card">
+        <h3>Session User ID</h3>
+        <p id="userId">-</p>
+    </div>
+
+    <div class="card">
+        <h3>30+ Min Sessions</h3>
+        <p id="longSessions">0</p>
+    </div>
+
+</div>
+
+<div class="card">
+    <h3>Event Log</h3>
+    <pre id="logOutput"></pre>
+</div>
+
+<button onclick="loadData()">🔄 Refresh Data</button>
+
+<script>
+function loadData() {
+    const logs = JSON.parse(localStorage.getItem("analytics_logs") || "[]");
+
+    document.getElementById("totalEvents").innerText = logs.length;
+
+    let userId = localStorage.getItem("uid") || "unknown";
+    document.getElementById("userId").innerText = userId;
+
+    let longSessions = logs.filter(l => l.event === "long_session_30min").length;
+    document.getElementById("longSessions").innerText = longSessions;
+
+    document.getElementById("logOutput").innerText =
+        JSON.stringify(logs.slice(-20), null, 2);
+}
+
+loadData();
+setInterval(loadData, 5000);
+</script>
+
+</body>
+</html>
