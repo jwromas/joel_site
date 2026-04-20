@@ -1,99 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Analytics Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Analytics Agent Chat</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            margin: 0;
-            padding: 20px;
-        }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: white;
+}
 
-        h1 {
-            margin-bottom: 10px;
-        }
+.container {
+    max-width: 800px;
+    margin: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
-        .card {
-            background: #1e293b;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 10px;
-        }
+.header {
+    padding: 15px;
+    background: #111827;
+    text-align: center;
+    font-weight: bold;
+}
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
+.chat {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+}
 
-        button {
-            padding: 10px;
-            border: none;
-            border-radius: 6px;
-            background: #3b82f6;
-            color: white;
-            cursor: pointer;
-        }
+.msg {
+    margin: 10px 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    max-width: 70%;
+    white-space: pre-wrap;
+}
 
-        pre {
-            white-space: pre-wrap;
-            font-size: 12px;
-        }
-    </style>
+.user {
+    background: #2563eb;
+    margin-left: auto;
+}
+
+.bot {
+    background: #1f2937;
+    margin-right: auto;
+}
+
+.input-bar {
+    display: flex;
+    padding: 10px;
+    background: #111827;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+button {
+    margin-left: 10px;
+    padding: 10px 15px;
+    border: none;
+    background: #22c55e;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+</style>
 </head>
 
 <body>
 
-<h1>📊 Analytics Dashboard</h1>
+<div class="container">
 
-<div class="grid">
-
-    <div class="card">
-        <h3>Total Events</h3>
-        <p id="totalEvents">0</p>
+    <div class="header">
+        📊 Analytics AI Agent
     </div>
 
-    <div class="card">
-        <h3>Session User ID</h3>
-        <p id="userId">-</p>
-    </div>
+    <div id="chat" class="chat"></div>
 
-    <div class="card">
-        <h3>30+ Min Sessions</h3>
-        <p id="longSessions">0</p>
+    <div class="input-bar">
+        <input id="input" placeholder="Ask your analytics agent..." />
+        <button onclick="send()">Send</button>
     </div>
 
 </div>
-
-<div class="card">
-    <h3>Event Log</h3>
-    <pre id="logOutput"></pre>
-</div>
-
-<button onclick="loadData()">🔄 Refresh Data</button>
 
 <script>
-function loadData() {
-    const logs = JSON.parse(localStorage.getItem("analytics_logs") || "[]");
+const chat = document.getElementById("chat");
 
-    document.getElementById("totalEvents").innerText = logs.length;
-
-    let userId = localStorage.getItem("uid") || "unknown";
-    document.getElementById("userId").innerText = userId;
-
-    let longSessions = logs.filter(l => l.event === "long_session_30min").length;
-    document.getElementById("longSessions").innerText = longSessions;
-
-    document.getElementById("logOutput").innerText =
-        JSON.stringify(logs.slice(-20), null, 2);
+function addMsg(text, type) {
+    const div = document.createElement("div");
+    div.className = "msg " + type;
+    div.textContent = text;
+    chat.appendChild(div);
+    chat.scrollTop = chat.scrollHeight;
 }
 
-loadData();
-setInterval(loadData, 5000);
+async function send() {
+    const input = document.getElementById("input");
+    const text = input.value;
+    if (!text) return;
+
+    addMsg(text, "user");
+    input.value = "";
+
+    const res = await fetch("http://127.0.0.1:5050/chat", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ message: text })
+    });
+
+    const data = await res.json();
+    addMsg(data.reply || "No response", "bot");
+}
 </script>
 
 </body>
