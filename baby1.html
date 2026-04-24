@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Lala's Lavender Soul Sanctuary • Your Music, Your Cats</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing: border-box; }
+    body { font-family: 'Quicksand', sans-serif; background: radial-gradient(circle at 10% 30%, #2a1a3a, #180e24); color: #f0e6ff; padding: 2rem 1.5rem; }
+    .container { max-width: 1300px; margin: 0 auto; }
+    h1 { font-size: 3rem; background: linear-gradient(135deg, #e2b0ff, #aa7ae0); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 0.5rem; }
+    .subhead { color: #cba6ff; border-left: 4px solid #b87bff; padding-left: 1.2rem; margin-bottom: 2rem; font-weight: 500; }
+    .card { background: rgba(33, 20, 50, 0.7); backdrop-filter: blur(12px); border-radius: 2rem; padding: 1.6rem; margin-bottom: 2rem; border: 1px solid #6a3faf; transition: 0.2s; }
+    .card:hover { border-color: #c58aff; }
+    .section-title { display: flex; align-items: center; gap: 12px; margin-bottom: 1.3rem; font-size: 1.6rem; color: #e0b3ff; border-left: 5px solid #c084fc; padding-left: 1rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem; }
+    .message-list, .comment-list { max-height: 280px; overflow-y: auto; background: #201235cc; border-radius: 1.5rem; padding: 1rem; margin-bottom: 1rem; border: 1px solid #5c3d8c; }
+    .chat-message, .comment-item { background: #372356cc; border-radius: 1.2rem; padding: 0.7rem 1rem; margin-bottom: 0.8rem; border-left: 3px solid #c084fc; display: flex; justify-content: space-between; align-items: center; }
+    .chat-content, .comment-content { flex: 1; }
+    .chat-name { font-weight: 700; color: #e0b3ff; margin-right: 0.8rem; }
+    .chat-time, .comment-time { font-size: 0.7rem; color: #bfa3df; }
+    .delete-msg, .delete-comment { background: none; border: none; color: #ffaa88; cursor: pointer; font-size: 1rem; padding: 0 0.3rem; margin-left: 0.5rem; }
+    .delete-msg:hover, .delete-comment:hover { color: #ff5555; }
+    input, textarea, button { border-radius: 2rem; border: none; padding: 0.7rem 1rem; font-family: inherit; }
+    input, textarea { background: #2a1a3ecc; border: 1px solid #6a3faf; color: white; width: 100%; margin-bottom: 0.8rem; }
+    button { background: #b87bff; color: #1c0e2a; font-weight: 600; cursor: pointer; transition: 0.2s; }
+    button:hover { background: #d8a6ff; transform: scale(0.98); }
+    .badge { background: #4a2c70; color: #e0b3ff; border-radius: 2rem; padding: 0.25rem 1rem; font-size: 0.75rem; display: inline-block; }
+    .music-sidebar { background: #2e1b46cc; border-radius: 1.5rem; padding: 1rem; }
+    .music-track { background: #2e1b46; border-radius: 1.2rem; padding: 0.6rem 1rem; margin: 0.8rem 0; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; border: 1px solid #734fb0; }
+    audio { flex: 1; min-width: 160px; border-radius: 2rem; height: 32px; }
+    .cat-upload-area { margin-top: 1rem; text-align: center; }
+    .cat-gallery { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; justify-content: center; }
+    .cat-card { background: #2d1b46aa; border-radius: 1.5rem; padding: 0.6rem; text-align: center; width: 110px; }
+    .cat-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #c58aff; }
+    .remove-cat-btn { background: #733faa; padding: 2px 8px; font-size: 0.7rem; margin-top: 5px; }
+    footer { text-align: center; margin-top: 2rem; color: #bba6da; }
+    .music-limit { font-size: 0.7rem; margin-top: 0.5rem; color: #bfa3df; }
+    .admin-bar { text-align: center; margin: 1rem 0; }
+    .admin-btn { background: #4a2c70; color: #e0b3ff; border: 1px solid #c58aff; padding: 0.3rem 1rem; font-size: 0.8rem; }
+    .disclaimer { font-size: 0.7rem; text-align: center; color: #a382bf; margin-top: 2rem; border-top: 1px solid #6a3faf; padding-top: 1rem; }
+    @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div style="text-align: center;">
+    <h1>💜 Lala's Lavender Soul Sanctuary</h1>
+    <div class="subhead">your music, your cats, your sacred circle</div>
+  </div>
+
+  <!-- CHAT + COMMENTS row -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="section-title"><i class="fas fa-comment-dots"></i> ✨ Whispering Lotus Chat ✨</div>
+      <div id="chatMessages" class="message-list"></div>
+      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+        <input type="text" id="chatNameInput" placeholder="Your soul name" value="MysticHeart" style="flex:1;">
+        <input type="text" id="chatMsgInput" placeholder="Share a blessing..." style="flex:2;">
+        <button id="sendChatBtn"><i class="fas fa-feather-alt"></i> Send</button>
+      </div>
+      <div class="badge" style="margin-top:0.8rem;">✨ connected · messages live in your browser ✨</div>
+    </div>
+    <div class="card">
+      <div class="section-title"><i class="fas fa-leaf"></i> 🌸 Heartfelt Comments</div>
+      <div id="commentList" class="comment-list"></div>
+      <input type="text" id="commentName" placeholder="Your name" value="Kind Soul">
+      <textarea id="commentText" rows="2" placeholder="Leave a gentle thought..."></textarea>
+      <button id="addCommentBtn"><i class="fas fa-feather-pointed"></i> Post comment</button>
+    </div>
+  </div>
+
+  <!-- VIDEO UPLOAD + YOUR MUSIC (upload only - up to 7 tracks) -->
+  <div class="grid-2">
+    <div class="card">
+      <div class="section-title"><i class="fas fa-video"></i> 📿 Sacred Vision Upload</div>
+      <input type="file" id="videoUpload" accept="video/mp4,video/webm,video/ogg" />
+      <div id="videoPreviewArea">
+        <video id="uploadedVideo" width="100%" controls style="border-radius:1.2rem; max-height:240px; display: none;">
+          <source id="videoSource" src="" type="video/mp4">
+        </video>
+        <div id="videoPlaceholder" style="background:#2c1b44; border-radius:1.5rem; padding:1.5rem; text-align:center;">
+          <i class="fas fa-cloud-upload-alt" style="font-size:2rem;"></i>
+          <p>✨ upload a healing video (mantra, nature, meditation) ✨</p>
+        </div>
+      </div>
+      <button id="clearVideoBtn" style="margin-top:0.8rem;"><i class="fas fa-trash-alt"></i> Remove video</button>
+    </div>
+
+    <!-- YOUR MUSIC ONLY – up to 7 uploads -->
+    <div class="card">
+      <div class="section-title"><i class="fas fa-music"></i> 🎵 Your Personal Music</div>
+      <div class="music-sidebar" id="musicSidebar">
+        <div id="customMusicList"></div>
+        <div style="margin-top:1rem;">
+          <label class="badge"><i class="fas fa-upload"></i> Upload your own spiritual music</label>
+          <input type="file" id="musicUpload" accept="audio/mpeg,audio/wav,audio/ogg" multiple style="margin-top:0.5rem;">
+          <div class="music-limit">🎶 up to 7 tracks allowed</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAT CORNER (upload your own cat photos) -->
+  <div class="card">
+    <div class="section-title"><i class="fas fa-cat"></i> 🐱 Cat Corner · upload your own cat photos</div>
+    <div id="catGallery" class="cat-gallery"></div>
+    <div class="cat-upload-area">
+      <label class="badge"><i class="fas fa-camera"></i> Add a cat picture</label>
+      <input type="file" id="catUpload" accept="image/jpeg,image/png,image/jpg,image/webp" style="margin-top:0.5rem;">
+    </div>
+    <p style="font-size:0.75rem; margin-top:0.8rem; text-align:center;"><i class="fas fa-paw"></i> your furry friends live here</p>
+  </div>
+
+  <!-- ADMIN MODE BUTTON -->
+  <div class="admin-bar">
+    <button id="adminModeBtn" class="admin-btn"><i class="fas fa-lock"></i> 🔐 Admin Mode</button>
+  </div>
+
+  <!-- LICENSE & PRIVACY DISCLAIMER -->
+  <div class="disclaimer">
+    <i class="fas fa-scroll"></i> <strong>License & Privacy Disclaimer</strong><br>
+    All content uploaded (music, videos, images, messages) is stored locally in your browser's localStorage and is not transmitted to any external server. This website is for personal, non‑commercial use. The administrator may delete any content that violates this peaceful space. By using this site, you agree to respect the sanctuary's loving and compassionate atmosphere. 💜
+  </div>
+
+  <footer>💜 Lala's Lavender Soul Sanctuary – upload your music, your cats, your peace. 💜</footer>
+</div>
+
+<script>
+  // ---------- ADMIN MODE (password protected) ----------
+  let isAdmin = false;
+  const ADMIN_PASSWORD = "lala4444";
+
+  document.getElementById('adminModeBtn').addEventListener('click', () => {
+    if (isAdmin) {
+      isAdmin = false;
+      document.getElementById('adminModeBtn').innerHTML = '<i class="fas fa-lock"></i> 🔐 Admin Mode';
+      renderChat();
+      renderComments();
+      return;
+    }
+    const pwd = prompt("Enter admin password to enable deletion:");
+    if (pwd === ADMIN_PASSWORD) {
+      isAdmin = true;
+      document.getElementById('adminModeBtn').innerHTML = '<i class="fas fa-lock-open"></i> 🗝️ Admin Mode (ON)';
+      renderChat();
+      renderComments();
+    } else if (pwd !== null) {
+      alert("Wrong password. Deletion remains disabled.");
+    }
+  });
+
+  // ---------- CHAT ----------
+  let chatMessages = JSON.parse(localStorage.getItem('lalaChat')) || [];
+  function renderChat() {
+    const container = document.getElementById('chatMessages');
+    if (!container) return;
+    if (chatMessages.length === 0) { container.innerHTML = '<div style="text-align:center; color:#c7a7ff;"><i class="fas fa-feather-alt"></i> start a gentle conversation...</div>'; return; }
+    let html = '';
+    chatMessages.forEach((m, idx) => {
+      html += `<div class="chat-message" data-idx="${idx}">
+        <div class="chat-content">
+          <span class="chat-name">${escapeHtml(m.name)}</span>
+          <span class="chat-time">${m.time}</span>
+          <div class="chat-text">${escapeHtml(m.text)}</div>
+        </div>`;
+      if (isAdmin) {
+        html += `<button class="delete-msg" data-idx="${idx}" data-type="chat">🗑️</button>`;
+      }
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+    if (isAdmin) {
+      document.querySelectorAll('.delete-msg[data-type="chat"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(btn.getAttribute('data-idx'));
+          if (!isNaN(idx)) {
+            chatMessages.splice(idx, 1);
+            localStorage.setItem('lalaChat', JSON.stringify(chatMessages));
+            renderChat();
+          }
+        });
+      });
+    }
+  }
+  function addChatMessage(name, text) {
+    if (!name.trim()) name = "SoulFriend";
+    if (!text.trim()) return;
+    chatMessages.unshift({ name: name.trim(), text: text.trim(), time: new Date().toLocaleString() });
+    if (chatMessages.length > 150) chatMessages = chatMessages.slice(0,150);
+    localStorage.setItem('lalaChat', JSON.stringify(chatMessages));
+    renderChat();
+    document.getElementById('chatMsgInput').value = '';
+  }
+
+  // ---------- COMMENTS ----------
+  let comments = JSON.parse(localStorage.getItem('lalaComments')) || [];
+  function renderComments() {
+    const container = document.getElementById('commentList');
+    if (!container) return;
+    if (comments.length === 0) { container.innerHTML = '<div style="text-align:center; color:#c7a7ff;"><i class="fas fa-dove"></i> be the first to leave a blessing...</div>'; return; }
+    let html = '';
+    comments.forEach((c, idx) => {
+      html += `<div class="comment-item" data-idx="${idx}">
+        <div class="comment-content">
+          <span class="chat-name">💜 ${escapeHtml(c.name)}</span>
+          <span class="comment-time">${c.time}</span>
+          <div class="comment-text">${escapeHtml(c.text)}</div>
+        </div>`;
+      if (isAdmin) {
+        html += `<button class="delete-comment" data-idx="${idx}" data-type="comment">🗑️</button>`;
+      }
+      html += `</div>`;
+    });
+    container.innerHTML = html;
+    if (isAdmin) {
+      document.querySelectorAll('.delete-comment[data-type="comment"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const idx = parseInt(btn.getAttribute('data-idx'));
+          if (!isNaN(idx)) {
+            comments.splice(idx, 1);
+            localStorage.setItem('lalaComments', JSON.stringify(comments));
+            renderComments();
+          }
+        });
+      });
+    }
+  }
+  function addComment(name, text) {
+    if (!name.trim()) name = "Kind Spirit";
+    if (!text.trim()) return;
+    comments.unshift({ name: name.trim(), text: text.trim(), time: new Date().toLocaleString() });
+    if (comments.length > 150) comments = comments.slice(0,150);
+    localStorage.setItem('lalaComments', JSON.stringify(comments));
+    renderComments();
+    document.getElementById('commentText').value = '';
+  }
+
+  function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
+
+  // ---------- VIDEO UPLOAD ----------
+  const videoInput = document.getElementById('videoUpload');
+  const uploadedVideo = document.getElementById('uploadedVideo');
+  const videoSource = document.getElementById('videoSource');
+  const videoPlaceholderDiv = document.getElementById('videoPlaceholder');
+  const clearVideoBtn = document.getElementById('clearVideoBtn');
+  videoInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('video/')) {
+      const url = URL.createObjectURL(file);
+      videoSource.src = url;
+      uploadedVideo.load();
+      uploadedVideo.style.display = 'block';
+      videoPlaceholderDiv.style.display = 'none';
+    } else alert('Please upload a video file');
+  });
+  clearVideoBtn.addEventListener('click', () => {
+    uploadedVideo.pause();
+    uploadedVideo.style.display = 'none';
+    videoPlaceholderDiv.style.display = 'block';
+    videoSource.src = '';
+    videoInput.value = '';
+    if (uploadedVideo.src) URL.revokeObjectURL(uploadedVideo.src);
+  });
+
+  // ---------- MUSIC UPLOAD (max 7 tracks, session only) ----------
+  let customTracks = [];
+  const MAX_TRACKS = 7;   // <--- changed from 6 to 7
+  const musicUpload = document.getElementById('musicUpload');
+  const customMusicListDiv = document.getElementById('customMusicList');
+  
+  function renderCustomMusic() {
+    if (!customMusicListDiv) return;
+    if (customTracks.length === 0) {
+      customMusicListDiv.innerHTML = '<div class="badge" style="margin-bottom:0.5rem;">🎵 upload up to 7 tracks (flutes, whales, piano, waves)</div>';
+      return;
+    }
+    let html = '';
+    customTracks.forEach((track, idx) => {
+      html += `<div class="music-track">
+        <i class="fas fa-peace"></i>
+        <span>✨ ${escapeHtml(track.name)}</span>
+        <audio controls src="${track.url}" preload="metadata"></audio>
+        <button style="background:#5a3980; width:auto; padding:0.2rem 0.8rem;" data-idx="${idx}" class="remove-custom">🗑️</button>
+      </div>`;
+    });
+    if (customTracks.length < MAX_TRACKS) {
+      html += `<div class="badge" style="margin-top:0.5rem; display:inline-block;">${MAX_TRACKS - customTracks.length} slots left</div>`;
+    }
+    customMusicListDiv.innerHTML = html;
+    document.querySelectorAll('.remove-custom').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const idx = btn.getAttribute('data-idx');
+        if (idx !== null) {
+          URL.revokeObjectURL(customTracks[idx].url);
+          customTracks.splice(idx, 1);
+          renderCustomMusic();
+        }
+      });
+    });
+  }
+
+  musicUpload.addEventListener('change', (e) => {
+    const files = Array.from(e.target.files);
+    const remainingSlots = MAX_TRACKS - customTracks.length;
+    if (files.length > remainingSlots) {
+      alert(`You can only add ${remainingSlots} more track(s). Maximum is ${MAX_TRACKS}.`);
+      musicUpload.value = '';
+      return;
+    }
+    for (const file of files) {
+      if (file && file.type.startsWith('audio/')) {
+        const url = URL.createObjectURL(file);
+        customTracks.push({ name: file.name, url });
+      } else {
+        alert('Please upload audio files only (mp3, wav, ogg)');
+      }
+    }
+    renderCustomMusic();
+    musicUpload.value = '';
+  });
+
+  // ---------- CAT CORNER ----------
+  let catImages = JSON.parse(localStorage.getItem('lalaCats')) || [
+    "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "https://images.pexels.com/photos/127028/pexels-photo-127028.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "https://images.pexels.com/photos/257532/pexels-photo-257532.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+  ];
+  function renderCats() {
+    const gallery = document.getElementById('catGallery');
+    if (!gallery) return;
+    if (catImages.length === 0) { gallery.innerHTML = '<div class="badge">🐾 upload a cat photo to start</div>'; return; }
+    let html = '';
+    catImages.forEach((imgSrc, idx) => {
+      html += `<div class="cat-card"><img src="${imgSrc}" alt="cat"><div><button class="remove-cat-btn" data-idx="${idx}" style="background:#733faa; margin-top:5px;">✖</button></div></div>`;
+    });
+    gallery.innerHTML = html;
+    document.querySelectorAll('.remove-cat-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const idx = btn.getAttribute('data-idx');
+        if (idx !== null) { catImages.splice(idx,1); localStorage.setItem('lalaCats', JSON.stringify(catImages)); renderCats(); }
+      });
+    });
+  }
+  const catUploadInput = document.getElementById('catUpload');
+  catUploadInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(ev) {
+        catImages.push(ev.target.result);
+        localStorage.setItem('lalaCats', JSON.stringify(catImages));
+        renderCats();
+      };
+      reader.readAsDataURL(file);
+      catUploadInput.value = '';
+    } else alert('Please select an image file');
+  });
+
+  // ---------- EVENT LISTENERS ----------
+  document.getElementById('sendChatBtn').addEventListener('click', () => addChatMessage(document.getElementById('chatNameInput').value, document.getElementById('chatMsgInput').value));
+  document.getElementById('chatMsgInput').addEventListener('keypress', e => { if(e.key === 'Enter') document.getElementById('sendChatBtn').click(); });
+  document.getElementById('addCommentBtn').addEventListener('click', () => addComment(document.getElementById('commentName').value, document.getElementById('commentText').value));
+
+  renderChat(); renderComments(); renderCustomMusic(); renderCats();
+  if (comments.length === 0) setTimeout(() => { if(comments.length===0) addComment('Lala','💜 Welcome, dear one. Upload your sacred music and cat friends.'); }, 800);
+</script>
+</body>
+</html>
