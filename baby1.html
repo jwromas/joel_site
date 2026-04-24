@@ -31,15 +31,15 @@
     .music-sidebar { background: #2e1b46cc; border-radius: 1.5rem; padding: 1rem; }
     .music-track { background: #2e1b46; border-radius: 1.2rem; padding: 0.6rem 1rem; margin: 0.8rem 0; display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; border: 1px solid #734fb0; }
     audio { flex: 1; min-width: 160px; border-radius: 2rem; height: 32px; }
-    .cat-upload-area { margin-top: 1rem; text-align: center; }
     .cat-gallery { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1rem 0; justify-content: center; }
     .cat-card { background: #2d1b46aa; border-radius: 1.5rem; padding: 0.6rem; text-align: center; width: 110px; }
     .cat-card img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid #c58aff; }
     .remove-cat-btn { background: #733faa; padding: 2px 8px; font-size: 0.7rem; margin-top: 5px; }
     footer { text-align: center; margin-top: 2rem; color: #bba6da; }
     .music-limit { font-size: 0.7rem; margin-top: 0.5rem; color: #bfa3df; }
-    .admin-bar { text-align: center; margin: 1rem 0; }
-    .admin-btn { background: #4a2c70; color: #e0b3ff; border: 1px solid #c58aff; padding: 0.3rem 1rem; font-size: 0.8rem; }
+    .admin-bar, .backup-bar { text-align: center; margin: 1rem 0; }
+    .admin-btn, .backup-btn { background: #4a2c70; color: #e0b3ff; border: 1px solid #c58aff; padding: 0.3rem 1rem; font-size: 0.8rem; margin: 0 0.2rem; }
+    .warning-box { background: #6a3fafcc; border-left: 5px solid #ffaa88; padding: 0.5rem 1rem; border-radius: 1rem; margin-bottom: 1rem; font-size: 0.8rem; text-align: center; }
     .disclaimer { font-size: 0.7rem; text-align: center; color: #a382bf; margin-top: 2rem; border-top: 1px solid #6a3faf; padding-top: 1rem; }
     @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
   </style>
@@ -49,6 +49,14 @@
   <div style="text-align: center;">
     <h1>💜 Lala's Lavender Soul Sanctuary</h1>
     <div class="subhead">your music, your cats, your sacred circle</div>
+  </div>
+
+  <!-- BIG WARNING ABOUT MOVING -->
+  <div class="warning-box">
+    ⚠️ <strong style="font-size:1rem;">IMPORTANT – READ BEFORE MOVING THIS FILE</strong><br>
+    If you move this HTML file to another folder, all <strong>music, videos, cat pictures, chat and comments will vanish</strong>.<br>
+    <strong>ALWAYS click "💾 Backup All Data" BEFORE moving the file, then move it, reopen it, and click "📂 Restore from Backup".</strong><br>
+    Without a backup, your uploaded content will be lost forever.
   </div>
 
   <!-- CHAT + COMMENTS row -->
@@ -72,7 +80,7 @@
     </div>
   </div>
 
-  <!-- VIDEO UPLOAD + YOUR MUSIC (upload only - up to 7 tracks) -->
+  <!-- VIDEO UPLOAD + YOUR MUSIC (up to 7 tracks) -->
   <div class="grid-2">
     <div class="card">
       <div class="section-title"><i class="fas fa-video"></i> 📿 Sacred Vision Upload</div>
@@ -89,10 +97,10 @@
       <button id="clearVideoBtn" style="margin-top:0.8rem;"><i class="fas fa-trash-alt"></i> Remove video</button>
     </div>
 
-    <!-- YOUR MUSIC ONLY – up to 7 uploads -->
+    <!-- YOUR MUSIC – up to 7 tracks -->
     <div class="card">
       <div class="section-title"><i class="fas fa-music"></i> 🎵 Your Personal Music</div>
-      <div class="music-sidebar" id="musicSidebar">
+      <div class="music-sidebar">
         <div id="customMusicList"></div>
         <div style="margin-top:1rem;">
           <label class="badge"><i class="fas fa-upload"></i> Upload your own spiritual music</label>
@@ -103,20 +111,22 @@
     </div>
   </div>
 
-  <!-- CAT CORNER (upload your own cat photos) -->
+  <!-- CAT CORNER -->
   <div class="card">
     <div class="section-title"><i class="fas fa-cat"></i> 🐱 Cat Corner · upload your own cat photos</div>
     <div id="catGallery" class="cat-gallery"></div>
-    <div class="cat-upload-area">
+    <div class="cat-upload-area" style="text-align:center; margin-top:1rem;">
       <label class="badge"><i class="fas fa-camera"></i> Add a cat picture</label>
       <input type="file" id="catUpload" accept="image/jpeg,image/png,image/jpg,image/webp" style="margin-top:0.5rem;">
     </div>
     <p style="font-size:0.75rem; margin-top:0.8rem; text-align:center;"><i class="fas fa-paw"></i> your furry friends live here</p>
   </div>
 
-  <!-- ADMIN MODE BUTTON -->
+  <!-- ADMIN MODE & BACKUP BUTTONS -->
   <div class="admin-bar">
     <button id="adminModeBtn" class="admin-btn"><i class="fas fa-lock"></i> 🔐 Admin Mode</button>
+    <button id="exportBtn" class="backup-btn"><i class="fas fa-download"></i> 💾 Backup All Data</button>
+    <button id="importBtn" class="backup-btn"><i class="fas fa-upload"></i> 📂 Restore from Backup</button>
   </div>
 
   <!-- LICENSE & PRIVACY DISCLAIMER -->
@@ -152,8 +162,152 @@
     }
   });
 
-  // ---------- CHAT ----------
+  // ---------- DATA STORE (localStorage keys) ----------
   let chatMessages = JSON.parse(localStorage.getItem('lalaChat')) || [];
+  let comments = JSON.parse(localStorage.getItem('lalaComments')) || [];
+  let catImages = JSON.parse(localStorage.getItem('lalaCats')) || [
+    "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "https://images.pexels.com/photos/127028/pexels-photo-127028.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "https://images.pexels.com/photos/257532/pexels-photo-257532.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
+    "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
+  ];
+  let customTracks = [];   // music tracks (url + name)
+  let currentVideoDataURL = null;  // video as dataURL (for backup)
+
+  // ---------- VIDEO UPLOAD (store as dataURL for backup) ----------
+  const videoInput = document.getElementById('videoUpload');
+  const uploadedVideo = document.getElementById('uploadedVideo');
+  const videoSource = document.getElementById('videoSource');
+  const videoPlaceholderDiv = document.getElementById('videoPlaceholder');
+  const clearVideoBtn = document.getElementById('clearVideoBtn');
+
+  function setVideoFromDataURL(dataURL) {
+    if (dataURL) {
+      videoSource.src = dataURL;
+      uploadedVideo.load();
+      uploadedVideo.style.display = 'block';
+      videoPlaceholderDiv.style.display = 'none';
+      currentVideoDataURL = dataURL;
+    } else {
+      uploadedVideo.pause();
+      uploadedVideo.style.display = 'none';
+      videoPlaceholderDiv.style.display = 'block';
+      videoSource.src = '';
+      currentVideoDataURL = null;
+    }
+  }
+
+  videoInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith('video/')) {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const dataURL = ev.target.result;
+        setVideoFromDataURL(dataURL);
+      };
+      reader.readAsDataURL(file);
+    } else alert('Please upload a video file');
+  });
+
+  clearVideoBtn.addEventListener('click', () => {
+    setVideoFromDataURL(null);
+    videoInput.value = '';
+  });
+
+  // ---------- BACKUP & RESTORE (includes video, music, cat pics, chat, comments) ----------
+  async function exportAllData() {
+    // Convert music tracks (blob URLs) to dataURLs
+    const musicData = [];
+    for (const track of customTracks) {
+      try {
+        const response = await fetch(track.url);
+        const blob = await response.blob();
+        const dataURL = await new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
+        });
+        musicData.push({ name: track.name, dataURL: dataURL });
+      } catch (err) {
+        console.warn("Could not backup track", track.name, err);
+      }
+    }
+    const exportObj = {
+      version: 2,
+      chatMessages: chatMessages,
+      comments: comments,
+      catImages: catImages,
+      musicTracks: musicData,
+      videoDataURL: currentVideoDataURL || null
+    };
+    const jsonStr = JSON.stringify(exportObj);
+    const blob = new Blob([jsonStr], {type: "application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = "lala_sanctuary_backup.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    alert("✅ Backup saved! After moving the file, use 'Restore from Backup' to reload all data.");
+  }
+
+  async function importAllData(file) {
+    const reader = new FileReader();
+    reader.onload = async function(e) {
+      try {
+        const data = JSON.parse(e.target.result);
+        if (data.version === 1 || data.version === 2) {
+          // restore chat, comments, cat images
+          chatMessages = data.chatMessages || [];
+          comments = data.comments || [];
+          catImages = data.catImages || [];
+          localStorage.setItem('lalaChat', JSON.stringify(chatMessages));
+          localStorage.setItem('lalaComments', JSON.stringify(comments));
+          localStorage.setItem('lalaCats', JSON.stringify(catImages));
+
+          // restore music tracks
+          customTracks.forEach(track => URL.revokeObjectURL(track.url));
+          customTracks = [];
+          for (const trackData of (data.musicTracks || [])) {
+            const response = await fetch(trackData.dataURL);
+            const blob = await response.blob();
+            const url = URL.createObjectURL(blob);
+            customTracks.push({ name: trackData.name, url: url });
+          }
+          // restore video
+          if (data.videoDataURL) {
+            setVideoFromDataURL(data.videoDataURL);
+          } else {
+            setVideoFromDataURL(null);
+          }
+          // re-render UI
+          renderChat(); renderComments(); renderCats(); renderCustomMusic();
+          alert("✅ Restore successful! Your music, video, cats, chat and comments have been reloaded.");
+        } else {
+          alert("Unknown backup format.");
+        }
+      } catch(err) {
+        alert("Error reading backup file: " + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  document.getElementById('exportBtn').addEventListener('click', exportAllData);
+  document.getElementById('importBtn').addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.onchange = (e) => {
+      if (input.files.length) importAllData(input.files[0]);
+    };
+    input.click();
+  });
+
+  // ---------- CHAT RENDER ----------
   function renderChat() {
     const container = document.getElementById('chatMessages');
     if (!container) return;
@@ -196,7 +350,6 @@
   }
 
   // ---------- COMMENTS ----------
-  let comments = JSON.parse(localStorage.getItem('lalaComments')) || [];
   function renderComments() {
     const container = document.getElementById('commentList');
     if (!container) return;
@@ -240,34 +393,8 @@
 
   function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
 
-  // ---------- VIDEO UPLOAD ----------
-  const videoInput = document.getElementById('videoUpload');
-  const uploadedVideo = document.getElementById('uploadedVideo');
-  const videoSource = document.getElementById('videoSource');
-  const videoPlaceholderDiv = document.getElementById('videoPlaceholder');
-  const clearVideoBtn = document.getElementById('clearVideoBtn');
-  videoInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file && file.type.startsWith('video/')) {
-      const url = URL.createObjectURL(file);
-      videoSource.src = url;
-      uploadedVideo.load();
-      uploadedVideo.style.display = 'block';
-      videoPlaceholderDiv.style.display = 'none';
-    } else alert('Please upload a video file');
-  });
-  clearVideoBtn.addEventListener('click', () => {
-    uploadedVideo.pause();
-    uploadedVideo.style.display = 'none';
-    videoPlaceholderDiv.style.display = 'block';
-    videoSource.src = '';
-    videoInput.value = '';
-    if (uploadedVideo.src) URL.revokeObjectURL(uploadedVideo.src);
-  });
-
-  // ---------- MUSIC UPLOAD (max 7 tracks, session only) ----------
-  let customTracks = [];
-  const MAX_TRACKS = 7;   // <--- changed from 6 to 7
+  // ---------- MUSIC UPLOAD (max 7 tracks) ----------
+  const MAX_TRACKS = 7;
   const musicUpload = document.getElementById('musicUpload');
   const customMusicListDiv = document.getElementById('customMusicList');
   
@@ -323,13 +450,6 @@
   });
 
   // ---------- CAT CORNER ----------
-  let catImages = JSON.parse(localStorage.getItem('lalaCats')) || [
-    "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
-    "https://images.pexels.com/photos/127028/pexels-photo-127028.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
-    "https://images.pexels.com/photos/1741205/pexels-photo-1741205.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
-    "https://images.pexels.com/photos/257532/pexels-photo-257532.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop",
-    "https://images.pexels.com/photos/617278/pexels-photo-617278.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop"
-  ];
   function renderCats() {
     const gallery = document.getElementById('catGallery');
     if (!gallery) return;
@@ -366,7 +486,7 @@
   document.getElementById('chatMsgInput').addEventListener('keypress', e => { if(e.key === 'Enter') document.getElementById('sendChatBtn').click(); });
   document.getElementById('addCommentBtn').addEventListener('click', () => addComment(document.getElementById('commentName').value, document.getElementById('commentText').value));
 
-  renderChat(); renderComments(); renderCustomMusic(); renderCats();
+  renderChat(); renderComments(); renderCats(); renderCustomMusic();
   if (comments.length === 0) setTimeout(() => { if(comments.length===0) addComment('Lala','💜 Welcome, dear one. Upload your sacred music and cat friends.'); }, 800);
 </script>
 </body>
