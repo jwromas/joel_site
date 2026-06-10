@@ -3,263 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxury Tool</title>
+    <!-- Primary Meta Tags -->
+    <title>Joel Journeys | Bespoke Luxury Travel & Global Logistics</title>
+    <meta name="title" content="Joel Journeys | Bespoke Luxury Travel & Global Logistics">
+    <meta name="description" content="Curated high-end travel experiences and seamless VIP logistics for the discerning traveler. From private jets to hidden villas, we architect the extraordinary.">
+    <meta name="keywords" content="luxury travel, bespoke itineraries, VIP concierge, private jet logistics, luxury travel architect, exclusive destinations, high net worth travel">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://joeljourneys.com/">
+    <meta property="og:title" content="Joel Journeys | Bespoke Luxury Travel">
+    <meta property="og:description" content="The gold standard in luxury travel logistics. Curating exclusive experiences for those who demand the extraordinary.">
+    <meta property="og:image" content="https://joeljourneys.com/images/hero-luxury.jpg">
+
+    <!-- Amalfi Page Meta -->
+    <meta name="title" content="The Amalfi Azure | Bespoke Italy Experience | Joel Journeys">
+    <meta name="description" content="A curated 7-day odyssey through Positano and Capri. Private yacht charters, cliffside villas, and exclusive VIP access to the Amalfi Coast.">
+    <meta name="keywords" content="Amalfi Coast luxury tour, private yacht Capri, Positano luxury villa, bespoke Italy itinerary, VIP Amalfi Coast guide">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://joeljourneys.com/demo.html">
+    <meta property="og:title" content="The Amalfi Azure | Experience Italy's Elite Coast">
+    <meta property="og:description" content="Step into a world of turquoise waters and cliffside elegance. A fully curated luxury logistics plan for the Amalfi Coast.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1533105079728-727973ef270a">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary-color: #333;
-            --secondary-color: #666;
-            --background-color: #f9f9f9;
+            --luxury-gold: #c5a059;
+            --deep-navy: #0a1a2f;
+            --soft-cream: #fdfbf7;
+            --text-main: #2c2c2c;
+            --text-light: #666666;
+            --white: #ffffff;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--primary-color);
-            background-color: var(--background-color);
-        }
-
-        .light-mode {
-            background-color: var(--background-color);
-        }
-
-        .dark-mode {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        header {
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 1em;
-            text-align: center;
-            position: relative;
-        }
-
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 50px;
-        }
-
-        nav li {
-            margin-right: 20px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .hero-section {
-            background-image: linear-gradient(to bottom, var(--primary-color), var(--background-color));
-            padding: 3em 2em;
-            text-align: center;
-            color: white;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--soft-cream); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.8; }
         
-        /* TOOL STYLING - Integrated to fit your layout */
-        .tool-container {
-            max-width: 600px;
-            margin: 20px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        /* --- HERO SECTION --- */
+        .hero { 
+            height: 80vh; 
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1533105079728-727973ef270a?q=80&w=2000') center/cover no-repeat; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            color: var(--white);
+            padding: 0 20px;
         }
-        .tool-input {
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-            width: 100%;
-            text-align: center;
-        }
-        .tool-btn {
-            padding: 12px;
-            background: #fff;
-            color: #333;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-        .tool-btn:hover { background: #ddd; }
-        #result {
-            margin-top: 20px;
-            text-align: left;
-            background: rgba(255,255,255,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 0.9em;
-            display: none;
-        }
-
-        .feature-section {
-            background-color: var(--secondary-color);
-            padding: 1.5em;
-            color: #fff;
-        }
-
-        .testimonials-section {
-            background-image: linear-gradient(to bottom, var(--primary-color), var(--background-color));
-            padding: 2em;
-            text-align: center;
-        }
-
-        .testimonial-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #fff;
-            margin-bottom: 20px;
-        }
-
-        blockquote {
-            font-size: 1.5em;
-            font-weight: bold;
+        .hero-content h1 { 
+            font-family: 'Playfair Display', serif; 
+            font-size: clamp(2.5rem, 6vw, 4.5rem); 
+            font-weight: 400; 
             margin-bottom: 10px;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .hero-content p { 
+            font-size: 1.2rem; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            font-weight: 300; 
+            margin-bottom: 30px;
         }
 
-        .testimonial-author {
-            color: var(--secondary-color);
+        /* --- QUICK RESOURCES BAR --- */
+        .quick-resources { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 12px; 
+            padding: 30px 20px; 
+            max-width: 1000px; 
+            margin: -40px auto 0; 
+            position: relative; 
+            z-index: 2; 
+        }
+        .qr-link {
+            background: var(--white);
+            color: var(--deep-navy);
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+        .qr-link:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        .qr-link.gold { background: var(--luxury-gold); color: var(--white); border-color: var(--luxury-gold); }
+
+        /* --- INTRODUCTION --- */
+        .intro { max-width: 800px; margin: 80px auto; text-align: center; padding: 0 20px; }
+        .intro h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px; color: var(--deep-navy); }
+        .intro p { font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; }
+
+        /* --- ITINERARY TIMELINE --- */
+        .itinerary { max-width: 900px; margin: 0 auto 80px; padding: 0 20px; }
+        .day-block { 
+            display: flex; 
+            gap: 40px; 
+            margin-bottom: 60px; 
+            background: var(--white); 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--luxury-gold);
+        }
+        .day-number { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 3rem; 
+            color: var(--luxury-gold); 
+            font-weight: 700; 
+            min-width: 80px; 
+        }
+        .day-content h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px; color: var(--deep-navy); }
+        .day-content p { color: var(--text-light); margin-bottom: 20px; }
+        
+        .booking-links { display: flex; gap: 15px; flex-wrap: wrap; }
+        .book-btn { 
+            background: var(--deep-navy); 
+            color: var(--white); 
+            text-decoration: none; 
+            padding: 10px 20px; 
+            border-radius: 50px; 
+            font-size: 0.85rem; 
+            font-weight: 600; 
+            transition: 0.3s;
+            border: 1px solid var(--deep-navy);
+        }
+        .book-btn:hover { background: transparent; color: var(--deep-navy); }
+        .book-btn.gold { background: var(--luxury-gold); border-color: var(--luxury-gold); color: var(--white); }
+
+        /* --- WHITE LABEL SECTION --- */
+        .wl-section { 
+            background: var(--deep-navy); 
+            color: var(--white); 
+            padding: 80px 20px; 
+            text-align: center; 
+        }
+        .wl-section h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; }
+        .wl-section p { margin-bottom: 40px; opacity: 0.8; font-weight: 300; }
+        
+        .wl-container { 
+            max-width: 1100px; 
+            margin: 0 auto 40px; 
+            background: var(--white); 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
-        #toggle-dark-mode {
-            background-color: var(--primary-color);
-            border: none;
-            padding: 0.5em 1em;
-            font-size: 16px;
-            cursor: pointer;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
+        footer { text-align: center; padding: 40px; color: var(--text-light); font-size: 0.8rem; letter-spacing: 2px; }
+
+        @media (max-width: 768px) {
+            .hero { height: 60vh; }
+            .quick-resources { margin-top: -20px; gap: 8px; padding: 20px 15px; }
+            .qr-link { font-size: 0.75rem; padding: 10px 16px; }
+            .hero-content p { font-size: 0.85rem; letter-spacing: 2px; }
+            .intro { margin: 40px auto; }
+            .intro h2 { font-size: 1.8rem; }
+            .intro p { font-size: 1rem; }
+            .day-block { flex-direction: column; gap: 10px; padding: 20px; }
+            .day-number { text-align: center; margin-bottom: 10px; font-size: 2.2rem; min-width: auto; }
+            .day-content h3 { font-size: 1.4rem; }
+            .booking-links { flex-direction: column; }
+            .book-btn { width: 100%; text-align: center; padding: 14px 20px; font-size: 0.9rem; }
+            .wl-section { padding: 40px 15px; }
+            .wl-section h2 { font-size: 1.6rem; }
+            .wl-container { padding: 10px; }
+            footer { padding: 30px 15px; font-size: 0.7rem; }
         }
 
-        #toggle-dark-mode:hover {
-            background-color: #555;
+        @media (max-width: 480px) {
+            .hero { height: 50vh; }
+            .hero-content h1 { font-size: 2rem; }
+            .intro h2 { font-size: 1.5rem; }
+            .day-block { padding: 15px; border-left-width: 3px; }
+            .day-content h3 { font-size: 1.2rem; }
         }
     </style>
 </head>
-<body class="light-mode">
-        <header>
-          <nav>
-            <ul>
-                <!-- REPLACE THE # WITH YOUR URLS BELOW -->
-                <li><a href="https://jwromas.github.io/adcamp/">Home</a></li> <!-- Put your index.html link here -->
-                <li><a href="https://jwromas.github.io/adcamp/auth.html">About</a></li> <!-- Put your about.html link here -->
-                <li><a href="mailto:wromasjoe@gmail.com">Contact</a></li> <!-- Put your contact.html link here -->
-                <li><a href="https://jwromas.github.io/adcamp/tools.html" style="color: #d4af37; font-weight: bold;">Premium Tool</a></li> <!-- Put your analyzer.html link here -->
-            </ul>
-          </nav> 
-        </header>
+<body>
 
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-content">
+            <p>A Signature Journey</p>
+            <h1>The Amalfi <span style="font-style: italic;">Azure</span></h1>
+        </div>
+    </div>
 
-    <main role="contentinfo">
-        <section class="hero-section">
-            <h1>Product Trend Analyzer</h1>
-            <p>Enter a niche to discover high-ticket potential and market demand.</p>
-            
-            <div class="tool-container">
-                <input type="text" id="nicheInput" class="tool-input" placeholder="e.g. AI Automation, Luxury Watches, Skincare...">
-                <button id="analyzeBtn" class="tool-btn">Analyze Market Trends</button>
-                <div id="result"></div>
+    <!-- QUICK RESOURCES -->
+    <div class="quick-resources">
+        <a href="https://tinyurl.com/bdzary8x" target="_blank" class="qr-link">Emerald Grotto & Coast Tour</a>
+        <a href="https://tinyurl.com/3jwem57h" target="_blank" class="qr-link">Pompeii & Amalfi Day Trip</a>
+        <a href="https://tinyurl.com/4zmhrbrr" target="_blank" class="qr-link">Capri & Blue Grotto Boat Tour</a>
+        <a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" class="qr-link gold">Transportation Portal</a>
+    </div>
+
+    <!-- INTRO -->
+    <div class="intro">
+        <h2 class="section-title">Where Elegance Meets the Ocean</h2>
+        <p>A meticulously curated 7-day odyssey through the cliffs of Positano, the gardens of Ravello, and the crystal waters of Capri. Every transfer is seamless; every moment is exclusive.</p>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div style="text-align:center; max-width: 800px; margin: 0 auto 40px auto; padding: 0 20px;">
+        <p style="font-size: 0.9rem; color: var(--luxury-gold); font-weight: 600; font-style: italic;">
+            Notice: Please always call ahead to confirm times and dates for all private services.
+        </p>
+    </div>
+
+    <!-- ITINERARY -->
+    <div class="itinerary">
+        
+        <!-- DAY 1 -->
+        <div class="day-block">
+            <div class="day-number">01</div>
+            <div class="day-content">
+                <h3>The Arrival & Sanctuary</h3>
+                <p>Arrive via private chauffeur from Naples. Check into your cliffside sanctuary with a champagne welcome and panoramic views of the Tyrrhenian Sea.</p>
+                <div class="booking-links">
+                    <a href="https://getrentacar.tpo.lv/dibGVgdU" class="book-btn">Book Private Transfer</a>
+                    <a href="https://tpo.lv/jPCfTILL" class="book-btn gold">Reserve Villa</a>
+                    <a href="https://aviasales.tpo.lv/utRYWVFa" class="book-btn">Book Flights</a>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <section class="feature-section">
-            <h2>Key Features</h2>
-            <ul>
-                <li>Demand Volume Prediction</li>
-                <li>Competition Level Analysis</li>
-                <li>High-Ticket Angle Suggestions</li>
-            </ul>
-        </section>
-
-        <section class="testimonials-section">
-            <h2>Clients Say It's Best</h2>
-            <div class="testimonial-container">
-                <blockquote>
-                    <p>"I found my winning product in seconds using this tool!"</p>
-                    <cite>Sarah J., E-com Founder</cite>
-                </blockquote>
-                <div class="testimonial-author">— Sarah J.</div>
+        <!-- DAY 2 -->
+        <div class="day-block">
+            <div class="day-number">02</div>
+            <div class="day-content">
+                <h3>Azure Horizons</h3>
+                <p>A full-day private yacht charter exploring the hidden grottoes of Capri. Includes a gourmet lunch prepared on board by a private chef.</p>
+                <div class="booking-links">
+                    <a href="https://searadar.tpo.lv/A9iLJHms" class="book-btn gold">Book Private Yacht Charter</a>
+                </div>
             </div>
-        </section>
-    </main>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="day-block">
+            <div class="day-number">03</div>
+            <div class="day-content">
+                <h3>The Art of the Coast</h3>
+                <p>A private guided walk through the vertical village of Positano, followed by an exclusive tasting at a heritage lemon grove.</p>
+                <div class="booking-links">
+                    <a href="https://klook.tpo.lv/DTtmhB7W" class="book-btn">Book VIP Guide</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 4 (Placeholder) -->
+        <div class="day-block">
+            <div class="day-number">04</div>
+            <div class="day-content">
+                <h3>Ravello Heights</h3>
+                <p>Explore the gardens of Villa Cimbrone and the music of the mountains. A day of peace, poetry, and high-altitude luxury.</p>
+                <div class="booking-links">
+                    <a href="https://wegotrip.tpo.lv/IIvRgn0d" class="book-btn gold">Reserve Experience</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 5 (Placeholder) -->
+        <div class="day-block">
+            <div class="day-number">05</div>
+            <div class="day-content">
+                <h3>Intui Travel Experience</h3>
+                <p>Curated tours and excursions across the Amalfi Coast. Private guides, small groups, and authentic local encounters.</p>
+                <div class="booking-links">
+                    <a href="https://intui.tpo.lv/HLYMscXw" class="book-btn gold">Book Intui Tour</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 6 (Placeholder) -->
+        <div class="day-block">
+            <div class="day-number">06</div>
+            <div class="day-content">
+                <h3>Secret Shores</h3>
+                <p>Discover the hidden coves of the coast via a private tender boat. A day of seclusion, swimming, and serenity.</p>
+                <div class="booking-links">
+                    <a href="https://wegotrip.tpo.lv/IIvRgn0d" class="book-btn gold">Reserve Boat Tour</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 7 (Placeholder) -->
+        <div class="day-block">
+            <div class="day-number">07</div>
+            <div class="day-content">
+                <h3>The Final Ascent</h3>
+                <p>A final morning of leisure before your private transfer carries you back to Naples for your journey home.</p>
+                <div class="booking-links">
+                    <a href="https://aviasales.tpo.lv/utRYWVFa" class="book-btn">Book Departure Flight</a>
+                    <a href="https://getrentacar.tpo.lv/dibGVgdU" class="book-btn gold">Book Departure Transfer</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- WHITE LABEL LOGISTICS SECTION -->
+    <div class="wl-section">
+        <h2>Custom Logistics Portal</h2>
+        <p>Manage your flights and global arrangements through our secure portal.</p>
+        
+        <!-- SEARCH ENGINE -->
+        <div class="wl-container">
+            <div id="tpwl-search"></div>
+        </div>
+
+        <!-- TICKETS & OFFERS -->
+        <div class="wl-container">
+            <div id="tpwl-tickets"></div>
+        </div>
+    </div>
 
     <footer>
-        <p>&copy; 2023 Luxury Tool. All rights reserved.</p>
+        <p>JOEL JOURNEYS • LUXURY TOURS 2026 • BESPOKE LOGISTICS</p>
+        <p style="margin-top:10px;">Contact: j_wromas@yahoo.com</p>
+        <p style="margin-top:20px; font-size: 0.6rem; opacity: 0.6;">
+            Legal Brief: All bookings are subject to provider terms. 
+            Licensed under the Apache License, Version 2.0.
+        </p>
     </footer>
 
-    <button id="toggle-dark-mode">Switch to Dark Mode!</button>
-
-    <script>
-        function init() {
-            const toggleDarkMode = document.getElementById('toggle-dark-mode');
-            const body = document.body;
-
-            function toggleDarkModeFunctionality() {
-                if (body.classList.contains('light-mode')) {
-                    body.classList.remove('light-mode');
-                    body.classList.add('dark-mode');
-                    toggleDarkMode.textContent = 'Switch to Light Mode!';
-                } else {
-                    body.classList.remove('dark-mode');
-                    body.classList.add('light-mode');
-                    toggleDarkMode.textContent = 'Switch to Dark Mode!';
-                }
-            }
-            toggleDarkMode.addEventListener('click', toggleDarkModeFunctionality);
-
-            // --- PRODUCT TREND LOGIC ---
-            const analyzeBtn = document.getElementById('analyzeBtn');
-            const nicheInput = document.getElementById('nicheInput');
-            const resultDiv = document.getElementById('result');
-
-            analyzeBtn.addEventListener('click', () => {
-                const niche = nicheInput.value.trim();
-                if (!niche) {
-                    resultDiv.innerText = "❌ Please enter a niche or product!";
-                    resultDiv.style.display = "block";
-                    return;
-                }
-
-                resultDiv.style.display = "block";
-                resultDiv.innerText = "Scanning market data...";
-
-                setTimeout(() => {
-                    const demand = Math.floor(Math.random() * (100 - 70) + 70);
-                    const competition = ["Low", "Medium", "High"][Math.floor(Math.random() * 3)];
-                    const angles = [
-                        "Focus on 'Time-Saving' for high-net-worth individuals.",
-                        "Position as an 'Exclusive Luxury' membership service.",
-                        "Target the 'Efficiency' angle for B2B scaling.",
-                        "Focus on 'Health and Longevity' for the premium market."
-                    ];
-                    const randomAngle = angles[Math.floor(Math.random() * angles.length)];
-                    
-                    resultDiv.innerHTML = `
-                        <strong>Market Demand:</strong> ${demand}% <br>
-                        <strong>Competition:</strong> ${competition} <br>
-                        <strong>Recommended Angle:</strong> ${randomAngle}
-                    `;
-                }, 1200);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
+<script type="module" src="https://tpemb.com/wl_web/main.js?wl_id=18577"></script>
 </body>
 </html>
