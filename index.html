@@ -28,6 +28,15 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
+    <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
+      (function () {
+          var script = document.createElement("script");
+          script.async = 1;
+          script.src = 'https://emrldtp.com/NTM4MTEz.js?t=538113';
+          document.head.appendChild(script);
+      })();
+    </script>
+
     <style>
         :root {
             --luxury-gold: #c5a059;
@@ -41,9 +50,9 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--soft-cream); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.8; }
         
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION (SHORTENED) --- */
         .hero { 
-            height: 80vh; 
+            height: 50vh; 
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
                         url('https://images.unsplash.com/photo-1533105079728-727973ef270a?q=80&w=2000') center/cover no-repeat; 
             display: flex; 
@@ -68,6 +77,26 @@
             margin-bottom: 30px;
         }
 
+        /* --- WHITE LABEL SECTION (MOVED TO TOP) --- */
+        .wl-section { 
+            background: var(--deep-navy); 
+            color: var(--white); 
+            padding: 60px 20px; 
+            text-align: center; 
+        }
+        .wl-section h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; }
+        .wl-section p { margin-bottom: 40px; opacity: 0.8; font-weight: 300; }
+        
+        .wl-container { 
+            max-width: 1100px; 
+            margin: 0 auto 40px; 
+            background: var(--white); 
+            padding: 20px; 
+            border-radius: 15px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            min-height: 200px;
+        }
+
         /* --- QUICK RESOURCES BAR --- */
         .quick-resources { 
             display: flex; 
@@ -76,7 +105,7 @@
             gap: 12px; 
             padding: 30px 20px; 
             max-width: 1000px; 
-            margin: -40px auto 0; 
+            margin: 0 auto; 
             position: relative; 
             z-index: 2; 
         }
@@ -97,7 +126,7 @@
         .qr-link.gold { background: var(--luxury-gold); color: var(--white); border-color: var(--luxury-gold); }
 
         /* --- INTRODUCTION --- */
-        .intro { max-width: 800px; margin: 80px auto; text-align: center; padding: 0 20px; }
+        .intro { max-width: 800px; margin: 60px auto; text-align: center; padding: 0 20px; }
         .intro h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px; color: var(--deep-navy); }
         .intro p { font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; }
 
@@ -138,30 +167,11 @@
         .book-btn:hover { background: transparent; color: var(--deep-navy); }
         .book-btn.gold { background: var(--luxury-gold); border-color: var(--luxury-gold); color: var(--white); }
 
-        /* --- WHITE LABEL SECTION --- */
-        .wl-section { 
-            background: var(--deep-navy); 
-            color: var(--white); 
-            padding: 80px 20px; 
-            text-align: center; 
-        }
-        .wl-section h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; }
-        .wl-section p { margin-bottom: 40px; opacity: 0.8; font-weight: 300; }
-        
-        .wl-container { 
-            max-width: 1100px; 
-            margin: 0 auto 40px; 
-            background: var(--white); 
-            padding: 20px; 
-            border-radius: 15px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
         footer { text-align: center; padding: 40px; color: var(--text-light); font-size: 0.8rem; letter-spacing: 2px; }
 
         @media (max-width: 768px) {
-            .hero { height: 60vh; }
-            .quick-resources { margin-top: -20px; gap: 8px; padding: 20px 15px; }
+            .hero { height: 40vh; }
+            .quick-resources { margin-top: 0; gap: 8px; padding: 20px 15px; }
             .qr-link { font-size: 0.75rem; padding: 10px 16px; }
             .hero-content p { font-size: 0.85rem; letter-spacing: 2px; }
             .intro { margin: 40px auto; }
@@ -177,23 +187,29 @@
             .wl-container { padding: 10px; }
             footer { padding: 30px 15px; font-size: 0.7rem; }
         }
-
-        @media (max-width: 480px) {
-            .hero { height: 50vh; }
-            .hero-content h1 { font-size: 2rem; }
-            .intro h2 { font-size: 1.5rem; }
-            .day-block { padding: 15px; border-left-width: 3px; }
-            .day-content h3 { font-size: 1.2rem; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- HERO -->
+    <!-- HERO (SHORTENED) -->
     <div class="hero">
         <div class="hero-content">
             <p>A Signature Journey</p>
             <h1>The Amalfi <span style="font-style: italic;">Azure</span></h1>
+        </div>
+    </div>
+
+    <!-- FLIGHT SEARCH -->
+    <div class="wl-section" id="flights">
+        <h2>Custom Logistics Portal</h2>
+        <p>Manage your flights and global arrangements through our secure portal.</p>
+        
+        <div class="wl-container">
+            <div id="tpwl-search"></div>
+        </div>
+
+        <div class="wl-container">
+            <div id="tpwl-tickets"></div>
         </div>
     </div>
 
@@ -259,7 +275,7 @@
             </div>
         </div>
 
-        <!-- DAY 4 (Placeholder) -->
+        <!-- DAY 4 -->
         <div class="day-block">
             <div class="day-number">04</div>
             <div class="day-content">
@@ -271,7 +287,7 @@
             </div>
         </div>
 
-        <!-- DAY 5 (Placeholder) -->
+        <!-- DAY 5 -->
         <div class="day-block">
             <div class="day-number">05</div>
             <div class="day-content">
@@ -283,7 +299,7 @@
             </div>
         </div>
 
-        <!-- DAY 6 (Placeholder) -->
+        <!-- DAY 6 -->
         <div class="day-block">
             <div class="day-number">06</div>
             <div class="day-content">
@@ -295,7 +311,7 @@
             </div>
         </div>
 
-        <!-- DAY 7 (Placeholder) -->
+        <!-- DAY 7 -->
         <div class="day-block">
             <div class="day-number">07</div>
             <div class="day-content">
@@ -310,20 +326,11 @@
 
     </div>
 
-    <!-- WHITE LABEL LOGISTICS SECTION -->
-    <div class="wl-section">
-        <h2>Custom Logistics Portal</h2>
-        <p>Manage your flights and global arrangements through our secure portal.</p>
-        
-        <!-- SEARCH ENGINE -->
-        <div class="wl-container">
-            <div id="tpwl-search"></div>
-        </div>
-
-        <!-- TICKETS & OFFERS -->
-        <div class="wl-container">
-            <div id="tpwl-tickets"></div>
-        </div>
+    <!-- SHOP BUTTON ONLY SECTION -->
+    <div style="text-align: center; padding: 80px 20px; background-color: var(--white);">
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--deep-navy); margin-bottom: 15px;">The Signature Boutique</h2>
+        <p style="margin-bottom: 30px; color: var(--text-light); max-width: 600px; margin-left: auto; margin-right: auto;">Browse our curated global collection of exclusive excursions and VIP upgrades.</p>
+        <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding: 15px 40px; font-size: 1rem;">VISIT THE SHOP</a>
     </div>
 
     <footer>
