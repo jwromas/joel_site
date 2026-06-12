@@ -47,6 +47,39 @@
             --white: #ffffff;
         }
 
+        #auth-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10,26,47,0.95); z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 0.6s ease;
+        }
+        #auth-overlay.hidden { opacity: 0; pointer-events: none; }
+        #auth-box {
+            background: var(--white); padding: 40px; border-radius: 15px;
+            max-width: 400px; width: 90%; text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            position: relative; min-height: 280px;
+        }
+        #auth-box h2 { font-family: 'Playfair Display', serif; color: var(--deep-navy); margin-bottom: 8px; }
+        #auth-box p { color: var(--text-light); font-size: 0.85rem; margin-bottom: 20px; }
+        #auth-box .step { display: none; }
+        #auth-box .step.active { display: block; }
+        .auth-input {
+            width: 100%; padding: 14px; font-size: 1rem; text-align: center;
+            border: 2px solid #ddd; border-radius: 8px; margin-bottom: 12px;
+            font-family: 'Inter', sans-serif; outline: none;
+        }
+        .auth-input:focus { border-color: var(--luxury-gold); }
+        .auth-btn {
+            background: var(--luxury-gold); color: var(--white); border: none;
+            padding: 14px 30px; border-radius: 50px; font-size: 1rem;
+            font-weight: 600; cursor: pointer; transition: 0.3s; width: 100%;
+        }
+        .auth-btn:hover { background: #b08a44; }
+        .auth-error { color: #c0392b; font-size: 0.85rem; margin-top: 10px; display: none; }
+        .auth-error.show { display: block; }
+        #captcha-q { font-size: 1.8rem; font-weight: 700; color: var(--deep-navy); margin: 15px 0; }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--soft-cream); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.8; }
         
@@ -185,11 +218,255 @@
             .wl-section { padding: 40px 15px; }
             .wl-section h2 { font-size: 1.6rem; }
             .wl-container { padding: 10px; }
+            .wl-container iframe, .wl-container img { max-width: 100%; height: auto; }
             footer { padding: 30px 15px; font-size: 0.7rem; }
+            .floating-bot { width: 50px; height: 50px; bottom: 15px; right: 15px; }
+            .floating-bot span { font-size: 10px !important; }
+            article h3 { font-size: 1.4rem !important; }
+            article p { font-size: 0.95rem !important; }
+            article .book-btn { display: block; width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
+
+    <!-- AUTH OVERLAY: CAPTCHA + LOGIN -->
+    <div id="auth-overlay">
+        <div id="auth-box">
+
+            <!-- STEP 1: CAPTCHA -->
+            <div class="step active" id="step-captcha">
+                <h2>Verify You Are Human</h2>
+                <p>Solve this challenge to continue.</p>
+                <div id="captcha-q"></div>
+                <input id="captcha-input" class="auth-input" type="text" placeholder="Your answer" autocomplete="off">
+                <button class="auth-btn" onclick="checkCaptcha()">Next</button>
+                <div class="auth-error" id="captcha-err">Incorrect. Try again.</div>
+            </div>
+
+            <!-- STEP 2: LOGIN / SIGNUP -->
+            <div class="step" id="step-login">
+                <h2 id="login-title">Member Login</h2>
+                <p id="login-subtitle">Enter your email and 4-digit PIN to access the portal.</p>
+                <input id="login-email" class="auth-input" type="email" placeholder="Email" autocomplete="off">
+                <input id="login-pin" class="auth-input" type="text" placeholder="4-digit PIN" autocomplete="off" maxlength="4" inputmode="numeric" pattern="[0-9]*">
+                <input id="honeypot" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0;" placeholder="Do not fill">
+                <div id="lockout-msg" style="color:#c0392b;font-size:0.85rem;margin-bottom:12px;display:none;"></div>
+                <button class="auth-btn" id="login-btn" onclick="checkLogin()">Enter</button>
+                <div class="auth-error" id="login-err">Invalid credentials. Try again.</div>
+                <p style="margin-top:16px;font-size:0.85rem;color:#999;">
+                    <span id="auth-toggle" style="cursor:pointer;text-decoration:underline;">Create an account</span>
+                </p>
+                <div id="bypass-section" style="margin-top:20px;border-top:1px solid #eee;padding-top:18px;">
+                    <span id="bypass-toggle" style="font-size:0.8rem;color:#999;cursor:pointer;">Bypass PIN</span>
+                    <div id="bypass-input-wrap" style="display:none;margin-top:12px;">
+                        <input id="bypass-pin" class="auth-input" type="password" placeholder="Enter bypass PIN" autocomplete="off" style="margin-bottom:10px;">
+                        <button class="auth-btn" onclick="checkBypass()" style="background:#666;">Unlock</button>
+                        <div class="auth-error" id="bypass-err">Invalid PIN.</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIG --- master admin credentials (fallback)
+        const ADMIN_EMAIL = "joel@example.com";
+        const ADMIN_PIN = "1234";
+        const MAX_LOGIN_ATTEMPTS = 5;
+        const LOCKOUT_MINUTES = 10;
+        const MIN_PAGE_SECONDS = 4;
+
+        function showStep(id) {
+            document.querySelectorAll('#auth-box .step').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        // --- CAPTCHA ---
+        function generateChallenge() {
+            const ops = [
+                { s: '+', fn: (a,b) => a + b },
+                { s: '×', fn: (a,b) => a * b },
+            ];
+            const op = ops[Math.floor(Math.random() * ops.length)];
+            let a, b, answer;
+            if (op.s === '×') {
+                a = Math.floor(Math.random() * 9) + 2;
+                b = Math.floor(Math.random() * 9) + 2;
+                answer = a * b;
+            } else {
+                a = Math.floor(Math.random() * 50) + 10;
+                b = Math.floor(Math.random() * 50) + 10;
+                answer = a + b;
+            }
+            document.getElementById('captcha-q').textContent = `${a} ${op.s} ${b} = ?`;
+            sessionStorage.setItem('captcha_answer', String(answer));
+        }
+
+        function checkCaptcha() {
+            const input = document.getElementById('captcha-input').value.trim();
+            const correct = sessionStorage.getItem('captcha_answer');
+            if (input === correct) {
+                sessionStorage.removeItem('captcha_answer');
+                sessionStorage.setItem('captcha_passed', '1');
+                document.getElementById('captcha-input').value = '';
+                showStep('step-login');
+                document.getElementById('login-email').focus();
+            } else {
+                const err = document.getElementById('captcha-err');
+                err.classList.add('show');
+                setTimeout(() => err.classList.remove('show'), 2000);
+                document.getElementById('captcha-input').value = '';
+                generateChallenge();
+            }
+        }
+
+        document.getElementById('captcha-input').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') checkCaptcha();
+        });
+
+        // --- ACCOUNTS (localStorage) ---
+        function getAccounts() {
+            try { return JSON.parse(localStorage.getItem('accounts') || '{}'); } catch { return {}; }
+        }
+        function saveAccounts(acc) {
+            localStorage.setItem('accounts', JSON.stringify(acc));
+        }
+
+        // --- LOCKOUT TRACKER ---
+        function getLockout() {
+            try { return JSON.parse(localStorage.getItem('login_lock') || '{}'); } catch { return {}; }
+        }
+        function isLocked() {
+            const lock = getLockout();
+            if (!lock.until) return false;
+            if (Date.now() > lock.until) { localStorage.removeItem('login_lock'); return false; }
+            return Math.ceil((lock.until - Date.now()) / 60000);
+        }
+
+        let _isSignup = false;
+
+        // --- TOGGLE LOGIN / SIGNUP ---
+        document.getElementById('auth-toggle').addEventListener('click', function() {
+            _isSignup = !_isSignup;
+            document.getElementById('login-title').textContent = _isSignup ? 'Create Account' : 'Member Login';
+            document.getElementById('login-subtitle').textContent = _isSignup ? 'Create your email and 4-digit PIN.' : 'Enter your email and 4-digit PIN to access the portal.';
+            document.getElementById('login-btn').textContent = _isSignup ? 'Create Account' : 'Enter';
+            document.getElementById('login-err').classList.remove('show');
+            document.getElementById('auth-toggle').textContent = _isSignup ? 'Already have an account? Sign in' : 'Create an account';
+            document.getElementById('login-pin').value = '';
+        });
+
+        // --- LOGIN / SIGNUP ---
+        function checkLogin() {
+            const locked = isLocked();
+            if (locked) {
+                document.getElementById('lockout-msg').textContent = `Too many attempts. Try again in ${locked} min.`;
+                document.getElementById('lockout-msg').style.display = 'block';
+                return;
+            }
+            if (document.getElementById('honeypot').value.trim() !== '') {
+                return;
+            }
+            const elapsed = (Date.now() - window._pageStart) / 1000;
+            if (elapsed < MIN_PAGE_SECONDS) {
+                const wait = Math.ceil(MIN_PAGE_SECONDS - elapsed);
+                document.getElementById('lockout-msg').textContent = `Please wait ${wait}s before submitting.`;
+                document.getElementById('lockout-msg').style.display = 'block';
+                return;
+            }
+            const email = document.getElementById('login-email').value.trim();
+            const pin = document.getElementById('login-pin').value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('login-err').textContent = 'Invalid email format.';
+                document.getElementById('login-err').classList.add('show');
+                return;
+            }
+            if (!/^\d{4}$/.test(pin)) {
+                document.getElementById('login-err').textContent = 'PIN must be exactly 4 digits.';
+                document.getElementById('login-err').classList.add('show');
+                return;
+            }
+
+            if (_isSignup) {
+                // --- SIGNUP ---
+                const accounts = getAccounts();
+                if (accounts[email]) {
+                    document.getElementById('login-err').textContent = 'Account already exists. Sign in instead.';
+                    document.getElementById('login-err').classList.add('show');
+                    return;
+                }
+                accounts[email] = pin;
+                saveAccounts(accounts);
+                document.getElementById('auth-overlay').classList.add('hidden');
+                sessionStorage.setItem('auth_passed', '1');
+                localStorage.removeItem('login_lock');
+            } else {
+                // --- LOGIN ---
+                const accounts = getAccounts();
+                const match = accounts[email] === pin || (email === ADMIN_EMAIL && pin === ADMIN_PIN);
+                if (match) {
+                    document.getElementById('auth-overlay').classList.add('hidden');
+                    sessionStorage.setItem('auth_passed', '1');
+                    localStorage.removeItem('login_lock');
+                } else {
+                    let lock = getLockout();
+                    lock.count = (lock.count || 0) + 1;
+                    if (lock.count >= MAX_LOGIN_ATTEMPTS) {
+                        lock.until = Date.now() + LOCKOUT_MINUTES * 60 * 1000;
+                    }
+                    localStorage.setItem('login_lock', JSON.stringify(lock));
+                    const err = document.getElementById('login-err');
+                    err.classList.add('show');
+                    setTimeout(() => err.classList.remove('show'), 2000);
+                    document.getElementById('login-pin').value = '';
+                }
+            }
+        }
+
+        document.getElementById('login-pin').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') checkLogin();
+        });
+
+        // --- BYPASS PIN ---
+        document.getElementById('bypass-toggle').addEventListener('click', function() {
+            const w = document.getElementById('bypass-input-wrap');
+            w.style.display = w.style.display === 'none' ? 'block' : 'none';
+            if (w.style.display === 'block') document.getElementById('bypass-pin').focus();
+        });
+        document.getElementById('bypass-pin').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') checkBypass();
+        });
+        function checkBypass() {
+            if (document.getElementById('bypass-pin').value.trim() === '3030') {
+                document.getElementById('auth-overlay').classList.add('hidden');
+                sessionStorage.setItem('auth_passed', '1');
+            } else {
+                const err = document.getElementById('bypass-err');
+                err.classList.add('show');
+                setTimeout(() => err.classList.remove('show'), 2000);
+                document.getElementById('bypass-pin').value = '';
+            }
+        }
+
+        // --- ON LOAD ---
+        window._pageStart = Date.now();
+        if (sessionStorage.getItem('auth_passed')) {
+            document.getElementById('auth-overlay').classList.add('hidden');
+        } else {
+            const locked = isLocked();
+            if (locked) {
+                showStep('step-login');
+                document.getElementById('lockout-msg').textContent = `Too many failed attempts. Locked for ${locked} more min.`;
+                document.getElementById('lockout-msg').style.display = 'block';
+            } else if (sessionStorage.getItem('captcha_passed')) {
+                showStep('step-login');
+            } else {
+                generateChallenge();
+            }
+        }
+    </script>
 
     <!-- HERO (SHORTENED) -->
     <div class="hero">
@@ -208,9 +485,23 @@
             <div id="tpwl-search"></div>
         </div>
 
-        <div class="wl-container">
-            <div id="tpwl-tickets"></div>
+    </div>
+
+    <!-- TESTIMONIALS -->
+    <div class="wl-section">
+        <h2>What Travelers Say</h2>
+        <p>Real experiences from guests who booked through our portal.</p>
+        <div class="wl-container" style="text-align: left; padding: 40px;">
+            <div style="margin-bottom: 35px; border-bottom: 1px solid #eee; padding-bottom: 25px;">
+                <p style="font-size: 1.1rem; color: #333; font-style: italic; line-height: 1.8;">"From start to finish everything was seamless. The private yacht charter in Capri was the highlight of our trip — our family will never forget it. Every transfer was on time, every guide was outstanding."</p>
+                <p style="margin-top: 10px; font-weight: 600; color: var(--luxury-gold);">— Michael P., Galapagos</p>
+            </div>
+            <div style="margin-bottom: 35px; padding-bottom: 10px;">
+                <p style="font-size: 1.1rem; color: #333; font-style: italic; line-height: 1.8;">"This was truly one of the best trips we've ever taken. The itinerary was perfectly balanced — we experienced every highlight while still feeling relaxed. The attention to detail made all the difference."</p>
+                <p style="margin-top: 10px; font-weight: 600; color: var(--luxury-gold);">— Jennifer Z., Galapagos Islands</p>
+            </div>
         </div>
+
     </div>
 
     <!-- QUICK RESOURCES -->
@@ -246,7 +537,9 @@
                 <div class="booking-links">
                     <a href="https://getrentacar.tpo.lv/dibGVgdU" class="book-btn">Book Private Transfer</a>
                     <a href="https://tpo.lv/jPCfTILL" class="book-btn gold">Reserve Villa</a>
+                    <a href="https://mavely.app.link/2WgOXj96S3b" target="_blank" class="book-btn">Book Villa</a>
                     <a href="https://aviasales.tpo.lv/utRYWVFa" class="book-btn">Book Flights</a>
+                    <a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Flight</a>
                 </div>
             </div>
         </div>
@@ -306,7 +599,7 @@
                 <h3>Secret Shores</h3>
                 <p>Discover the hidden coves of the coast via a private tender boat. A day of seclusion, swimming, and serenity.</p>
                 <div class="booking-links">
-                    <a href="https://wegotrip.tpo.lv/IIvRgn0d" class="book-btn gold">Reserve Boat Tour</a>
+                    <a href="https://vi.me/jwh2p" target="_blank" class="book-btn gold">Book Boat Tour</a>
                 </div>
             </div>
         </div>
@@ -318,7 +611,7 @@
                 <h3>The Final Ascent</h3>
                 <p>A final morning of leisure before your private transfer carries you back to Naples for your journey home.</p>
                 <div class="booking-links">
-                    <a href="https://aviasales.tpo.lv/utRYWVFa" class="book-btn">Book Departure Flight</a>
+                    <a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Departure Flight</a>
                     <a href="https://getrentacar.tpo.lv/dibGVgdU" class="book-btn gold">Book Departure Transfer</a>
                 </div>
             </div>
@@ -333,6 +626,31 @@
         <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding: 15px 40px; font-size: 1rem;">VISIT THE SHOP</a>
     </div>
 
+    <!-- BLOG SECTION -->
+    <div style="background: var(--white); padding: 80px 20px;">
+        <div style="max-width: 900px; margin: 0 auto;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--deep-navy); text-align: center; margin-bottom: 50px;">From Our Blog</h2>
+            
+            <article style="margin-bottom: 60px; border-bottom: 1px solid #eee; padding-bottom: 40px;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-navy); margin-bottom: 10px;">The Amalfi Coast: What Nobody Tells You</h3>
+                <p style="color: var(--luxury-gold); font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 20px;">MAY 5, 2026 · ITALY TRAVEL GUIDE</p>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">The Amalfi Coast is one of those rare places that genuinely lives up to the photos. Pastel-coloured villages stacked on cliffs above turquoise water — it's real, and it's as beautiful as you imagine. But most guides skip the practical truths that make or break a trip here.</p>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">Best months to visit are May, June, and September. Crowds are manageable, the sea is warm enough to swim, and prices are reasonable. July and August are peak season — hot, packed, and expensive. If your budget allows, spend at least two nights on the coast itself. The mornings and evenings, when the day-trippers have gone, are the best times to experience the towns as they really are.</p>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">Our verdict: Positano is the most iconic but you'll pay for the view. Praiano offers the best balance of beauty and value. Ravello sits high above the coast — the views from Villa Cimbrone are some of the most stunning in Italy. Book early, pack light, and come ready to take it slow. That's what this coast rewards.</p>
+                <a href="https://vi.me/tK3Da" target="_blank" class="book-btn gold" style="display: inline-block; margin-top: 10px;">Plan Your Trip</a>
+            </article>
+
+            <article>
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-navy); margin-bottom: 10px;">Days on the Coast — The Perfect Itinerary</h3>
+                <p style="color: var(--luxury-gold); font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 20px;">APRIL 22, 2026 · ITINERARY</p>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">Four to five days is the sweet spot for the Amalfi Coast. Enough time to see the main towns, do a hike, take a boat trip to Capri, and eat well without rushing. Here is how to spend it.</p>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;"><strong style="color: var(--deep-navy);">Day 1:</strong> Arrive in Positano. Settle into your accommodation, explore the winding boutiques, sunset drinks with a view of the vertical city. <strong style="color: var(--deep-navy);">Day 2:</strong> Boat trip to Capri — Blue Grotto, Piazzetta, and a seafood lunch by the marina. <strong style="color: var(--text-light);">Day 3:</strong> Ravello — the gardens of Villa Cimbrone and Villa Rufolo. <strong style="color: var(--deep-navy);">Day 4:</strong> Path of the Gods hike or Pompeii excursion. <strong style="color: var(--deep-navy);">Day 5:</strong> Leisure morning and departure.</p>
+                <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">The ferry network (April to October) is the best way to move between towns. It's scenic, fast, and lets you avoid the coastal road entirely. Ferries connect Positano, Amalfi, Salerno, and Capri. Buy tickets at the harbour or online for busy routes.</p>
+                <a href="https://vi.me/fSCAS" target="_blank" class="book-btn gold" style="display: inline-block; margin-top: 10px;">Book a Tour</a>
+            </article>
+        </div>
+    </div>
+
     <footer>
         <p>JOEL JOURNEYS • LUXURY TOURS 2026 • BESPOKE LOGISTICS</p>
         <p style="margin-top:10px;">Contact: j_wromas@yahoo.com</p>
@@ -343,5 +661,32 @@
     </footer>
 
 <script type="module" src="https://tpemb.com/wl_web/main.js?wl_id=18577"></script>
+
+<a href="https://t.me/ranke5_bot" class="floating-bot" target="_blank">
+    <span style="color: white; font-weight: bold; font-size: 11px; font-family: Arial, sans-serif; text-align: center; line-height: 1.2;">VIP<br>E-5<br>bot</span>
+</a>
+
+<style>
+.floating-bot {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #0088cc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: 0.3s;
+    border: 3px solid var(--luxury-gold, #c5a059);
+}
+.floating-bot:hover {
+    transform: scale(1.1);
+}
+</style>
 </body>
 </html>
