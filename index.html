@@ -62,8 +62,6 @@
         }
         #auth-box h2 { font-family: 'Playfair Display', serif; color: var(--deep-navy); margin-bottom: 8px; }
         #auth-box p { color: var(--text-light); font-size: 0.85rem; margin-bottom: 20px; }
-        #auth-box .step { display: none; }
-        #auth-box .step.active { display: block; }
         .auth-input {
             width: 100%; padding: 14px; font-size: 1rem; text-align: center;
             border: 2px solid #ddd; border-radius: 8px; margin-bottom: 12px;
@@ -78,7 +76,6 @@
         .auth-btn:hover { background: #b08a44; }
         .auth-error { color: #c0392b; font-size: 0.85rem; margin-top: 10px; display: none; }
         .auth-error.show { display: block; }
-        #captcha-q { font-size: 1.8rem; font-weight: 700; color: var(--deep-navy); margin: 15px 0; }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--soft-cream); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.8; }
@@ -230,202 +227,91 @@
 </head>
 <body>
 
-    <!-- AUTH OVERLAY: CAPTCHA + LOGIN -->
+    <!-- AUTH OVERLAY: EMAIL + CAPTCHA CHECKBOX -->
     <div id="auth-overlay">
         <div id="auth-box">
-
-            <!-- STEP 1: CAPTCHA -->
-            <div class="step active" id="step-captcha">
-                <h2>Verify You Are Human</h2>
-                <p>Solve this challenge to continue.</p>
-                <div id="captcha-q"></div>
-                <input id="captcha-input" class="auth-input" type="text" placeholder="Your answer" autocomplete="off">
-                <button class="auth-btn" onclick="checkCaptcha()">Next</button>
-                <div class="auth-error" id="captcha-err">Incorrect. Try again.</div>
+            <h2>Welcome to Joel Journeys</h2>
+            <p>Enter your email and verify you are human.</p>
+            <input id="gate-email" class="auth-input" type="email" placeholder="Your email" autocomplete="off">
+            
+            <div id="captcha-box" style="display:flex;align-items:center;justify-content:center;gap:12px;margin:15px 0;padding:14px;border:2px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;transition:0.3s;user-select:none;" onclick="toggleCaptcha()">
+                <div id="captcha-check" style="width:24px;height:24px;border:2px solid #999;border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;transition:0.3s;flex-shrink:0;">✓</div>
+                <span id="captcha-label" style="font-size:0.95rem;color:#555;font-family:'Inter',sans-serif;">I am not a robot</span>
+                <div id="captcha-spinner" style="display:none;width:24px;height:24px;border:3px solid #ddd;border-top-color:#32a8dd;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0;"></div>
             </div>
-
-            <!-- STEP 2: LOGIN / SIGNUP -->
-            <div class="step" id="step-login">
-                <h2 id="login-title">Member Login</h2>
-                <p id="login-subtitle">Enter your email and 4-digit PIN to access the portal.</p>
-                <input id="login-email" class="auth-input" type="email" placeholder="Email" autocomplete="off">
-                <input id="login-pin" class="auth-input" type="text" placeholder="4-digit PIN" autocomplete="off" maxlength="4" inputmode="numeric" pattern="[0-9]*">
-                <input id="honeypot" type="text" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;opacity:0;" placeholder="Do not fill">
-                <div id="lockout-msg" style="color:#c0392b;font-size:0.85rem;margin-bottom:12px;display:none;"></div>
-                <button class="auth-btn" id="login-btn" onclick="checkLogin()">Enter</button>
-                <div class="auth-error" id="login-err">Invalid credentials. Try again.</div>
-                <p style="margin-top:16px;font-size:0.85rem;color:#999;">
-                    <span id="auth-toggle" style="cursor:pointer;text-decoration:underline;">Create an account</span>
-                </p>
-                <div id="bypass-section" style="margin-top:20px;border-top:1px solid #eee;padding-top:18px;">
-                    <span id="bypass-toggle" style="font-size:0.8rem;color:#999;cursor:pointer;">Bypass PIN</span>
-                    <div id="bypass-input-wrap" style="display:none;margin-top:12px;">
-                        <input id="bypass-pin" class="auth-input" type="password" placeholder="Enter bypass PIN" autocomplete="off" style="margin-bottom:10px;">
-                        <button class="auth-btn" onclick="checkBypass()" style="background:#666;">Unlock</button>
-                        <div class="auth-error" id="bypass-err">Invalid PIN.</div>
-                    </div>
+            
+            <button class="auth-btn" id="gate-btn" onclick="passGate()" disabled style="opacity:0.5;">Enter</button>
+            <div class="auth-error" id="gate-err">Please enter a valid email.</div>
+            <div style="margin-top:20px;border-top:1px solid #eee;padding-top:16px;">
+                <span id="bypass-toggle" style="font-size:0.8rem;color:#999;cursor:pointer;">Bypass</span>
+                <div id="bypass-input-wrap" style="display:none;margin-top:10px;">
+                    <input id="bypass-pin" class="auth-input" type="password" placeholder="Enter bypass PIN" autocomplete="off" style="margin-bottom:8px;">
+                    <button class="auth-btn" onclick="checkBypass()" style="background:#666;">Unlock</button>
+                    <div class="auth-error" id="bypass-err">Invalid PIN.</div>
                 </div>
             </div>
-
         </div>
     </div>
 
+    <style>
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+
     <script>
-        // --- CONFIG --- master admin credentials (fallback)
-        const ADMIN_EMAIL = "joel@example.com";
-        const ADMIN_PIN = "1234";
-        const MAX_LOGIN_ATTEMPTS = 5;
-        const LOCKOUT_MINUTES = 10;
-        const MIN_PAGE_SECONDS = 4;
+        let captchaDone = false;
 
-        function showStep(id) {
-            document.querySelectorAll('#auth-box .step').forEach(s => s.classList.remove('active'));
-            document.getElementById(id).classList.add('active');
+        function toggleCaptcha() {
+            if (captchaDone) return;
+            const check = document.getElementById('captcha-check');
+            const label = document.getElementById('captcha-label');
+            const spinner = document.getElementById('captcha-spinner');
+            const box = document.getElementById('captcha-box');
+            check.style.display = 'none';
+            label.style.display = 'none';
+            spinner.style.display = 'block';
+            box.style.borderColor = '#32a8dd';
+            box.style.cursor = 'default';
+            setTimeout(function() {
+                spinner.style.display = 'none';
+                check.style.display = 'flex';
+                check.style.background = '#32a8dd';
+                check.style.borderColor = '#32a8dd';
+                check.style.color = '#fff';
+                label.textContent = 'Verified';
+                label.style.color = '#32a8dd';
+                captchaDone = true;
+                box.style.borderColor = '#32a8dd';
+                document.getElementById('gate-btn').disabled = false;
+                document.getElementById('gate-btn').style.opacity = '1';
+            }, 1200);
         }
 
-        // --- CAPTCHA ---
-        function generateChallenge() {
-            const questions = [
-                { q: "What color is a clear sky?", a: "blue" },
-                { q: "How many days in a week?", a: "7" },
-                { q: "What planet do we live on?", a: "earth" },
-                { q: "What gas do we breathe?", a: "oxygen" },
-                { q: "How many hours in a day?", a: "24" },
-                { q: "What month comes after June?", a: "july" },
-                { q: "How many legs does a dog have?", a: "4" },
-                { q: "What animal says 'moo'?", a: "cow" },
-            ];
-            const c = questions[Math.floor(Math.random() * questions.length)];
-            document.getElementById('captcha-q').textContent = c.q;
-            sessionStorage.setItem('captcha_answer', c.a.toLowerCase());
-        }
-
-        function checkCaptcha() {
-            const input = document.getElementById('captcha-input').value.trim();
-            const correct = sessionStorage.getItem('captcha_answer');
-            if (input === correct) {
-                sessionStorage.removeItem('captcha_answer');
-                sessionStorage.setItem('captcha_passed', '1');
-                document.getElementById('captcha-input').value = '';
-                showStep('step-login');
-                document.getElementById('login-email').focus();
-            } else {
-                const err = document.getElementById('captcha-err');
+        function passGate() {
+            const email = document.getElementById('gate-email').value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                const err = document.getElementById('gate-err');
                 err.classList.add('show');
                 setTimeout(() => err.classList.remove('show'), 2000);
-                document.getElementById('captcha-input').value = '';
-                generateChallenge();
+                return;
             }
+            if (!captchaDone) return;
+            localStorage.setItem('auth_email', email);
+            localStorage.setItem('auth_passed', '1');
+            document.cookie = "auth_passed=1; path=/; max-age=86400; SameSite=Lax";
+            document.getElementById('auth-overlay').classList.add('hidden');
         }
 
-        document.getElementById('captcha-input').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') checkCaptcha();
+        document.getElementById('gate-email').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && captchaDone) passGate();
         });
 
-        // --- ACCOUNTS (localStorage) ---
-        function getAccounts() {
-            try { return JSON.parse(localStorage.getItem('accounts') || '{}'); } catch { return {}; }
-        }
-        function saveAccounts(acc) {
-            localStorage.setItem('accounts', JSON.stringify(acc));
-        }
-
-        // --- LOCKOUT TRACKER ---
-        function getLockout() {
-            try { return JSON.parse(localStorage.getItem('login_lock') || '{}'); } catch { return {}; }
-        }
-        function isLocked() {
-            const lock = getLockout();
-            if (!lock.until) return false;
-            if (Date.now() > lock.until) { localStorage.removeItem('login_lock'); return false; }
-            return Math.ceil((lock.until - Date.now()) / 60000);
-        }
-
-        let _isSignup = false;
-
-        // --- TOGGLE LOGIN / SIGNUP ---
-        document.getElementById('auth-toggle').addEventListener('click', function() {
-            _isSignup = !_isSignup;
-            document.getElementById('login-title').textContent = _isSignup ? 'Create Account' : 'Member Login';
-            document.getElementById('login-subtitle').textContent = _isSignup ? 'Create your email and 4-digit PIN.' : 'Enter your email and 4-digit PIN to access the portal.';
-            document.getElementById('login-btn').textContent = _isSignup ? 'Create Account' : 'Enter';
-            document.getElementById('login-err').classList.remove('show');
-            document.getElementById('auth-toggle').textContent = _isSignup ? 'Already have an account? Sign in' : 'Create an account';
-            document.getElementById('login-pin').value = '';
-        });
-
-        // --- LOGIN / SIGNUP ---
-        function checkLogin() {
-            const locked = isLocked();
-            if (locked) {
-                document.getElementById('lockout-msg').textContent = `Too many attempts. Try again in ${locked} min.`;
-                document.getElementById('lockout-msg').style.display = 'block';
-                return;
-            }
-            if (document.getElementById('honeypot').value.trim() !== '') {
-                return;
-            }
-            const elapsed = (Date.now() - window._pageStart) / 1000;
-            if (elapsed < MIN_PAGE_SECONDS) {
-                const wait = Math.ceil(MIN_PAGE_SECONDS - elapsed);
-                document.getElementById('lockout-msg').textContent = `Please wait ${wait}s before submitting.`;
-                document.getElementById('lockout-msg').style.display = 'block';
-                return;
-            }
-            const email = document.getElementById('login-email').value.trim();
-            const pin = document.getElementById('login-pin').value.trim();
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                document.getElementById('login-err').textContent = 'Invalid email format.';
-                document.getElementById('login-err').classList.add('show');
-                return;
-            }
-            if (!/^\d{4}$/.test(pin)) {
-                document.getElementById('login-err').textContent = 'PIN must be exactly 4 digits.';
-                document.getElementById('login-err').classList.add('show');
-                return;
-            }
-
-            if (_isSignup) {
-                // --- SIGNUP ---
-                const accounts = getAccounts();
-                if (accounts[email]) {
-                    document.getElementById('login-err').textContent = 'Account already exists. Sign in instead.';
-                    document.getElementById('login-err').classList.add('show');
-                    return;
-                }
-                accounts[email] = pin;
-                saveAccounts(accounts);
+        window.addEventListener('pageshow', function() {
+            if (localStorage.getItem('auth_passed')) {
                 document.getElementById('auth-overlay').classList.add('hidden');
-                localStorage.setItem('auth_passed', '1');
-                setAuthCookie();
-                localStorage.removeItem('login_lock');
-            } else {
-                // --- LOGIN ---
-                const accounts = getAccounts();
-                const match = accounts[email] === pin || (email === ADMIN_EMAIL && pin === ADMIN_PIN);
-                if (match) {
-                    document.getElementById('auth-overlay').classList.add('hidden');
-                    localStorage.setItem('auth_passed', '1');
-                    setAuthCookie();
-                    localStorage.removeItem('login_lock');
-                } else {
-                    let lock = getLockout();
-                    lock.count = (lock.count || 0) + 1;
-                    if (lock.count >= MAX_LOGIN_ATTEMPTS) {
-                        lock.until = Date.now() + LOCKOUT_MINUTES * 60 * 1000;
-                    }
-                    localStorage.setItem('login_lock', JSON.stringify(lock));
-                    const err = document.getElementById('login-err');
-                    err.classList.add('show');
-                    setTimeout(() => err.classList.remove('show'), 2000);
-                    document.getElementById('login-pin').value = '';
-                }
             }
-        }
-
-        document.getElementById('login-pin').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') checkLogin();
         });
+
+        document.getElementById('gate-email').focus();
 
         // --- BYPASS PIN ---
         document.getElementById('bypass-toggle').addEventListener('click', function() {
@@ -440,7 +326,7 @@
             if (document.getElementById('bypass-pin').value.trim() === '3030') {
                 document.getElementById('auth-overlay').classList.add('hidden');
                 localStorage.setItem('auth_passed', '1');
-                setAuthCookie();
+                document.cookie = "auth_passed=1; path=/; max-age=86400; SameSite=Lax";
             } else {
                 const err = document.getElementById('bypass-err');
                 err.classList.add('show');
@@ -449,41 +335,13 @@
             }
         }
 
-        // --- PAGESHOW: handle bfcache restore ---
-        window.addEventListener('pageshow', function() {
-            if (localStorage.getItem('auth_passed') || getAuthCookie()) {
-                localStorage.setItem('auth_passed', '1');
-                setAuthCookie();
-                document.getElementById('auth-overlay').classList.add('hidden');
-            }
-        });
-
-        // --- COOKIE HELPERS ---
-        function setAuthCookie() { document.cookie = "auth_passed=1; path=/; max-age=86400; SameSite=Lax"; }
-        function getAuthCookie() { return document.cookie.split('; ').find(r=>r.startsWith('auth_passed=')); }
-        function clearAuthCookie() { document.cookie = "auth_passed=; path=/; max-age=0"; }
-
-        // --- ON LOAD ---
-        window._pageStart = Date.now();
         if (window.location.search.includes('logout=1')) {
             localStorage.removeItem('auth_passed');
-            clearAuthCookie();
+            localStorage.removeItem('auth_email');
+            document.cookie = "auth_passed=; path=/; max-age=0";
         }
-        if (localStorage.getItem('auth_passed') || getAuthCookie()) {
-            localStorage.setItem('auth_passed', '1');
-            setAuthCookie();
+        if (localStorage.getItem('auth_passed')) {
             document.getElementById('auth-overlay').classList.add('hidden');
-        } else {
-            const locked = isLocked();
-            if (locked) {
-                showStep('step-login');
-                document.getElementById('lockout-msg').textContent = `Too many failed attempts. Locked for ${locked} more min.`;
-                document.getElementById('lockout-msg').style.display = 'block';
-            } else if (sessionStorage.getItem('captcha_passed')) {
-                showStep('step-login');
-            } else {
-                generateChallenge();
-            }
         }
     </script>
 
@@ -508,7 +366,7 @@
     <!-- FLIGHT & HOTEL SEARCH -->
     <div class="wl-section" id="flights">
         <h2>Custom Logistics Portal</h2>
-        <p>Search flights and hotels for your journey.</p>
+        <p>Search flights and hotels for your journey. <a href="?logout=1" style="color:#fff;text-decoration:underline;opacity:0.6;font-size:0.8rem;">Logout</a></p>
         
         <div class="wl-container">
             <div id="tpwl-search"></div>
