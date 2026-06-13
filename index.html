@@ -285,23 +285,19 @@
 
         // --- CAPTCHA ---
         function generateChallenge() {
-            const ops = [
-                { s: '+', fn: (a,b) => a + b },
-                { s: '×', fn: (a,b) => a * b },
+            const questions = [
+                { q: "What color is a clear sky?", a: "blue" },
+                { q: "How many days in a week?", a: "7" },
+                { q: "What planet do we live on?", a: "earth" },
+                { q: "What gas do we breathe?", a: "oxygen" },
+                { q: "How many hours in a day?", a: "24" },
+                { q: "What month comes after June?", a: "july" },
+                { q: "How many legs does a dog have?", a: "4" },
+                { q: "What animal says 'moo'?", a: "cow" },
             ];
-            const op = ops[Math.floor(Math.random() * ops.length)];
-            let a, b, answer;
-            if (op.s === '×') {
-                a = Math.floor(Math.random() * 9) + 2;
-                b = Math.floor(Math.random() * 9) + 2;
-                answer = a * b;
-            } else {
-                a = Math.floor(Math.random() * 50) + 10;
-                b = Math.floor(Math.random() * 50) + 10;
-                answer = a + b;
-            }
-            document.getElementById('captcha-q').textContent = `${a} ${op.s} ${b} = ?`;
-            sessionStorage.setItem('captcha_answer', String(answer));
+            const c = questions[Math.floor(Math.random() * questions.length)];
+            document.getElementById('captcha-q').textContent = c.q;
+            sessionStorage.setItem('captcha_answer', c.a.toLowerCase());
         }
 
         function checkCaptcha() {
@@ -400,7 +396,8 @@
                 accounts[email] = pin;
                 saveAccounts(accounts);
                 document.getElementById('auth-overlay').classList.add('hidden');
-                sessionStorage.setItem('auth_passed', '1');
+                localStorage.setItem('auth_passed', '1');
+                setAuthCookie();
                 localStorage.removeItem('login_lock');
             } else {
                 // --- LOGIN ---
@@ -408,7 +405,8 @@
                 const match = accounts[email] === pin || (email === ADMIN_EMAIL && pin === ADMIN_PIN);
                 if (match) {
                     document.getElementById('auth-overlay').classList.add('hidden');
-                    sessionStorage.setItem('auth_passed', '1');
+                    localStorage.setItem('auth_passed', '1');
+                    setAuthCookie();
                     localStorage.removeItem('login_lock');
                 } else {
                     let lock = getLockout();
@@ -441,7 +439,8 @@
         function checkBypass() {
             if (document.getElementById('bypass-pin').value.trim() === '3030') {
                 document.getElementById('auth-overlay').classList.add('hidden');
-                sessionStorage.setItem('auth_passed', '1');
+                localStorage.setItem('auth_passed', '1');
+                setAuthCookie();
             } else {
                 const err = document.getElementById('bypass-err');
                 err.classList.add('show');
@@ -450,9 +449,29 @@
             }
         }
 
+        // --- PAGESHOW: handle bfcache restore ---
+        window.addEventListener('pageshow', function() {
+            if (localStorage.getItem('auth_passed') || getAuthCookie()) {
+                localStorage.setItem('auth_passed', '1');
+                setAuthCookie();
+                document.getElementById('auth-overlay').classList.add('hidden');
+            }
+        });
+
+        // --- COOKIE HELPERS ---
+        function setAuthCookie() { document.cookie = "auth_passed=1; path=/; max-age=86400; SameSite=Lax"; }
+        function getAuthCookie() { return document.cookie.split('; ').find(r=>r.startsWith('auth_passed=')); }
+        function clearAuthCookie() { document.cookie = "auth_passed=; path=/; max-age=0"; }
+
         // --- ON LOAD ---
         window._pageStart = Date.now();
-        if (sessionStorage.getItem('auth_passed')) {
+        if (window.location.search.includes('logout=1')) {
+            localStorage.removeItem('auth_passed');
+            clearAuthCookie();
+        }
+        if (localStorage.getItem('auth_passed') || getAuthCookie()) {
+            localStorage.setItem('auth_passed', '1');
+            setAuthCookie();
             document.getElementById('auth-overlay').classList.add('hidden');
         } else {
             const locked = isLocked();
@@ -482,6 +501,7 @@
         <p>Manage your flights and global arrangements through our secure portal.</p>
         
         <div class="wl-container">
+            <div id="tpwl-tickets"></div>
             <div id="tpwl-search"></div>
         </div>
 
@@ -651,6 +671,16 @@
         </div>
     </div>
 
+<script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
+  (function () {
+        var script = document.createElement("script");
+        script.async = 1;
+        script.type = "module";
+        script.src = "https://tpemb.com/wl_web/main.js?wl_id=18577";
+        document.head.appendChild(script);
+      })();
+</script>
+
     <footer>
         <p>JOEL JOURNEYS • LUXURY TOURS 2026 • BESPOKE LOGISTICS</p>
         <p style="margin-top:10px;">Contact: j_wromas@yahoo.com</p>
@@ -659,8 +689,6 @@
             Licensed under the Apache License, Version 2.0.
         </p>
     </footer>
-
-<script type="module" src="https://tpemb.com/wl_web/main.js?wl_id=18577"></script>
 
 <a href="https://t.me/ranke5_bot" class="floating-bot" target="_blank">
     <span style="color: white; font-weight: bold; font-size: 11px; font-family: Arial, sans-serif; text-align: center; line-height: 1.2;">VIP<br>E-5<br>bot</span>
