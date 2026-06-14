@@ -14,7 +14,7 @@
     <meta property="og:url" content="https://joeljourneys.com/">
     <meta property="og:title" content="Joel Journeys | Bespoke Luxury Travel">
     <meta property="og:description" content="The gold standard in luxury travel logistics. Curating exclusive experiences for those who demand the extraordinary.">
-    <meta property="og:image" content="https://joeljourneys.com/images/hero-luxury.jpg">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1533105079728-727973ef270a">
 
     <!-- Amalfi Page Meta -->
     <meta name="title" content="The Amalfi Azure | Bespoke Italy Experience | Joel Journeys">
@@ -44,6 +44,7 @@
     <!-- End Google Tag Manager -->
 
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✈️</text></svg>">
     
     <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
       (function () {
@@ -200,6 +201,8 @@
         .day-content p { color: var(--text-light); margin-bottom: 20px; }
         
         .booking-links { display: flex; gap: 15px; flex-wrap: wrap; }
+
+
         .book-btn { 
             background: var(--deep-navy); 
             color: var(--white); 
@@ -214,6 +217,22 @@
         .book-btn:hover { background: transparent; color: var(--deep-navy); }
         .book-btn.gold { background: var(--luxury-gold); border-color: var(--luxury-gold); color: var(--white); }
 
+        nav { position: sticky; top: 0; z-index: 100; background: var(--deep-navy); font-family: 'Inter', sans-serif; transition: 0.3s; }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 56px; }
+        .nav-logo { font-family: 'Playfair Display', serif; color: var(--luxury-gold); text-decoration: none; font-size: 1rem; letter-spacing: 2px; font-weight: 700; }
+        .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; padding: 4px 8px; }
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.5px; padding: 6px 14px; border-radius: 50px; transition: 0.3s; font-weight: 500; }
+        .nav-links a:hover, .nav-links a.active { color: var(--white); background: rgba(255,255,255,0.1); }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: var(--deep-navy); padding: 10px 20px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.1); }
+            .nav-links.open { display: flex; }
+            .nav-links a { width: 100%; padding: 12px 16px; font-size: 0.9rem; }
+        }
+        #back-top { position: fixed; bottom: 20px; left: 20px; width: 44px; height: 44px; border-radius: 50%; background: var(--deep-navy); color: var(--white); border: 2px solid var(--luxury-gold); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 100; opacity: 0; pointer-events: none; transition: 0.3s; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        #back-top.visible { opacity: 1; pointer-events: auto; }
+        #back-top:hover { transform: translateY(-3px); background: var(--luxury-gold); color: var(--deep-navy); }
         footer { text-align: center; padding: 40px; color: var(--text-light); font-size: 0.8rem; letter-spacing: 2px; }
 
         @media (max-width: 768px) {
@@ -234,8 +253,8 @@
             .wl-container { padding: 10px; }
             .wl-container iframe, .wl-container img { max-width: 100%; height: auto; }
             footer { padding: 30px 15px; font-size: 0.7rem; }
-            .floating-bot { width: 50px; height: 50px; bottom: 15px; right: 15px; }
-            .floating-bot span { font-size: 10px !important; }
+            .floating-bot { width: 46px; height: 46px; bottom: 15px; }
+            .floating-bot span { font-size: 9px !important; }
             article h3 { font-size: 1.4rem !important; }
             article p { font-size: 0.95rem !important; }
             article .book-btn { display: block; width: 100%; text-align: center; }
@@ -247,6 +266,22 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GT-5R7P44VX"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+
+    <!-- STICKY NAVBAR -->
+    <nav id="topnav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">JOEL JOURNEYS</a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+            <div class="nav-links" id="nav-links">
+                <a href="#flights">Flights</a>
+                <a href="#hotels">Stay</a>
+                <a href="#itinerary">Itinerary</a>
+                <a href="#shop">Shop</a>
+                <a href="#blog">Blog</a>
+                <a href="/policies.html">Policies</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- AUTH OVERLAY: EMAIL + CAPTCHA CHECKBOX -->
     <div id="auth-overlay">
@@ -364,6 +399,39 @@
         if (localStorage.getItem('auth_passed')) {
             document.getElementById('auth-overlay').classList.add('hidden');
         }
+
+        // --- HAMBURGER TOGGLE ---
+        document.getElementById('nav-toggle').addEventListener('click', function() {
+            document.getElementById('nav-links').classList.toggle('open');
+        });
+        document.querySelectorAll('#nav-links a').forEach(function(a) {
+            a.addEventListener('click', function() {
+                document.getElementById('nav-links').classList.remove('open');
+            });
+        });
+
+        // --- BACK TO TOP ---
+        var backBtn = document.createElement('div');
+        backBtn.id = 'back-top';
+        backBtn.innerHTML = '↑';
+        backBtn.setAttribute('aria-label', 'Back to top');
+        document.body.appendChild(backBtn);
+        backBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+        window.addEventListener('scroll', function() {
+            backBtn.classList.toggle('visible', window.scrollY > 400);
+        });
+
+        // --- SCROLL SPY ---
+        var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+        window.addEventListener('scroll', function() {
+            var fromTop = window.scrollY + 80;
+            navLinks.forEach(function(link) {
+                var section = document.getElementById(link.getAttribute('href').slice(1));
+                if (section) {
+                    link.classList.toggle('active', section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop);
+                }
+            });
+        });
     </script>
 
     <!-- HERO (SHORTENED) -->
@@ -398,7 +466,7 @@
     </div>
 
     <!-- HOTELS -->
-    <div class="wl-section" style="background: var(--white);">
+    <div id="hotels" class="wl-section" style="background: var(--white);">
         <h2 style="font-family: 'Playfair Display', serif; color: var(--deep-navy);">Find Your Stay</h2>
         <p style="color: var(--text-light);">Browse curated hotels and accommodations for your journey.</p>
         <div style="max-width: 1100px; margin: 0 auto; padding: 20px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
@@ -430,7 +498,9 @@
         <a href="https://tinyurl.com/bdzary8x" target="_blank" class="qr-link">Emerald Grotto & Coast Tour</a>
         <a href="https://tinyurl.com/3jwem57h" target="_blank" class="qr-link">Pompeii & Amalfi Day Trip</a>
         <a href="https://tinyurl.com/4zmhrbrr" target="_blank" class="qr-link">Capri & Blue Grotto Boat Tour</a>
-        <a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" class="qr-link gold">Transportation Portal</a>
+        <a href="https://www.timeflys.co/?aff=TF113" target="_blank" class="qr-link">Private Jet</a>
+        <a href="https://mavely.app.link/koAUFbQGW3b" target="_blank" class="qr-link gold">Stay</a>
+        <a href="https://getcarrental.tpo.lv/G4VtE4W1" target="_blank" class="qr-link gold">Transportation</a>
     </div>
 
     <!-- INTRO -->
@@ -447,7 +517,7 @@
     </div>
 
     <!-- ITINERARY -->
-    <div class="itinerary">
+    <div id="itinerary" class="itinerary">
         
         <!-- DAY 1 -->
         <div class="day-block">
@@ -456,7 +526,7 @@
                 <h3>The Arrival & Sanctuary</h3>
                 <p>Arrive via private chauffeur from Naples. Check into your cliffside sanctuary with a champagne welcome and panoramic views of the Tyrrhenian Sea.</p>
                 <div class="booking-links">
-                    <a href="https://getrentacar.tpo.lv/dibGVgdU" class="book-btn">Book Private Transfer</a>
+                    <a href="https://getcarrental.tpo.lv/dibGVgdU" class="book-btn">Book Private Transfer</a>
                     <a href="https://tpo.lv/jPCfTILL" class="book-btn gold">Reserve Villa</a>
                     <a href="https://mavely.app.link/2WgOXj96S3b" target="_blank" class="book-btn">Book Villa</a>
                     <a href="https://aviasales.tpo.lv/utRYWVFa" class="book-btn">Book Flights</a>
@@ -533,7 +603,7 @@
                 <p>A final morning of leisure before your private transfer carries you back to Naples for your journey home.</p>
                 <div class="booking-links">
                     <a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Departure Flight</a>
-                    <a href="https://getrentacar.tpo.lv/dibGVgdU" class="book-btn gold">Book Departure Transfer</a>
+                    <a href="https://getcarrental.tpo.lv/dibGVgdU" class="book-btn gold">Book Departure Transfer</a>
                 </div>
             </div>
         </div>
@@ -541,14 +611,14 @@
     </div>
 
     <!-- SHOP BUTTON ONLY SECTION -->
-    <div style="text-align: center; padding: 80px 20px; background-color: var(--white);">
+    <div id="shop" style="text-align: center; padding: 80px 20px; background-color: var(--white);">
         <h2 style="font-family: 'Playfair Display', serif; color: var(--deep-navy); margin-bottom: 15px;">The Signature Boutique</h2>
         <p style="margin-bottom: 30px; color: var(--text-light); max-width: 600px; margin-left: auto; margin-right: auto;">Browse our curated global collection of exclusive excursions and VIP upgrades.</p>
         <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding: 15px 40px; font-size: 1rem;">VISIT THE SHOP</a>
     </div>
 
     <!-- BLOG SECTION -->
-    <div style="background: var(--white); padding: 80px 20px;">
+    <div id="blog" style="background: var(--white); padding: 80px 20px;">
         <div style="max-width: 900px; margin: 0 auto;">
             <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--deep-navy); text-align: center; margin-bottom: 50px;">From Our Blog</h2>
             
@@ -576,23 +646,25 @@
         <p>JOEL JOURNEYS • LUXURY TOURS 2026 • BESPOKE LOGISTICS</p>
         <p style="margin-top:10px;">Contact: j_wromas@yahoo.com</p>
         <p style="margin-top:20px; font-size: 0.6rem; opacity: 0.6;">
-            Legal Brief: All bookings are subject to provider terms. 
-            Licensed under the Apache License, Version 2.0.
+            By using this site you agree to our <a href="/policies.html" style="color:#c5a059;">Policies</a>. 
+            All bookings subject to provider terms. Affiliate links may earn commission.
         </p>
     </footer>
 
-<a href="https://t.me/ranke5_bot" class="floating-bot" target="_blank">
-    <span style="color: white; font-weight: bold; font-size: 11px; font-family: Arial, sans-serif; text-align: center; line-height: 1.2;">VIP<br>E-5<br>bot</span>
+<a href="https://discord.gg/eTZDUy72P" class="floating-bot" id="fb-discord" target="_blank">
+    <span style="color: white; font-weight: bold; font-size: 10px; font-family: Arial, sans-serif; text-align: center; line-height: 1.2;">Join<br>DC</span>
+</a>
+
+<a href="https://t.me/ranke5_bot" class="floating-bot" id="fb-telegram" target="_blank">
+    <span style="color: white; font-weight: bold; font-size: 10px; font-family: Arial, sans-serif; text-align: center; line-height: 1.2;">VIP<br>E-5<br>bot</span>
 </a>
 
 <style>
 .floating-bot {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    width: 60px;
-    height: 60px;
-    background-color: #0088cc;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -600,3 +672,18 @@
     text-decoration: none;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     z-index: 1000;
+    transition: 0.3s;
+    border: 3px solid var(--luxury-gold, #c5a059);
+}
+.floating-bot:hover { transform: scale(1.1); }
+#fb-telegram { right: 20px; background-color: #0088cc; }
+#fb-discord { right: 82px; background-color: #5865F2; }
+@media (max-width: 768px) {
+    .floating-bot { width: 46px; height: 46px; bottom: 15px; }
+    .floating-bot span { font-size: 9px !important; }
+    #fb-telegram { right: 15px; }
+    #fb-discord { right: 67px; }
+}
+</style>
+</body>
+</html>
