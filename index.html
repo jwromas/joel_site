@@ -34,6 +34,25 @@
       gtag('js', new Date());
       gtag('config', 'G-JK8SJWYVP7');
     </script>
+    <script>
+      document.addEventListener('click', function(e) {
+        var t = e.target.closest('a');
+        if (!t || !t.href) return;
+        var h = t.href;
+        var sites = ['timeflys','gettransfer','getcarrental','vi.me','qeeq','compensair','mavely','jets.partners','joeljourneys'];
+        for (var i = 0; i < sites.length; i++) {
+          if (h.indexOf(sites[i]) > -1) {
+            gtag('event', 'click', {
+              'event_category': 'affiliate',
+              'event_label': sites[i],
+              'transport_type': 'beacon',
+              'value': 1
+            });
+            break;
+          }
+        }
+      });
+    </script>
 
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -500,7 +519,7 @@
         <a href="https://tinyurl.com/4zmhrbrr" target="_blank" class="qr-link">Capri & Blue Grotto Boat Tour</a>
         <a href="https://www.timeflys.co/?aff=TF113" target="_blank" class="qr-link">Private Jet</a>
         <a href="https://mavely.app.link/koAUFbQGW3b" target="_blank" class="qr-link gold">Stay</a>
-        <a href="https://getcarrental.tpo.lv/G4VtE4W1" target="_blank" class="qr-link gold">Transportation</a>
+        <a href="https://qeeq.tpo.lv/dOqGaFg8" target="_blank" class="qr-link gold">Transportation</a>
     </div>
 
     <!-- INTRO -->
@@ -526,8 +545,8 @@
                 <h3>The Arrival & Sanctuary</h3>
                 <p>Arrive via private chauffeur from Naples. Check into your cliffside sanctuary with a champagne welcome and panoramic views of the Tyrrhenian Sea.</p>
                 <div class="booking-links">
-                    <a href="https://getcarrental.tpo.lv/dibGVgdU" class="book-btn">Book Private Transfer</a>
-                    <a href="https://tpo.lv/jPCfTILL" class="book-btn gold">Reserve Villa</a>
+                    <a href="https://tp.media/r?campaign_id=147&marker=737825&p=4439&trs=538003&u=https%3A%2F%2Fgettransfer.com" class="book-btn">Book Private Transfer</a>
+                    <a href="https://www.aviasales.com/hotels?marker=737825" class="book-btn gold">Reserve Villa</a>
                     <a href="https://mavely.app.link/2WgOXj96S3b" target="_blank" class="book-btn">Book Villa</a>
                     <a href="https://aviasales.tpo.lv/utRYWVFa" class="book-btn">Book Flights</a>
                     <a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Flight</a>
@@ -603,7 +622,7 @@
                 <p>A final morning of leisure before your private transfer carries you back to Naples for your journey home.</p>
                 <div class="booking-links">
                     <a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Departure Flight</a>
-                    <a href="https://getcarrental.tpo.lv/dibGVgdU" class="book-btn gold">Book Departure Transfer</a>
+                    <a href="https://tp.media/r?campaign_id=147&marker=737825&p=4439&trs=538003&u=https%3A%2F%2Fgettransfer.com" class="book-btn gold">Book Departure Transfer</a>
                 </div>
             </div>
         </div>
@@ -722,5 +741,8 @@
     #fb-discord { right: 67px; }
 }
 </style>
+<footer style="text-align:center; padding:20px; color:#888; font-size:13px; border-top:1px solid #333; margin-top:40px;">
+    &copy; 2026 Joel Journeys. All rights reserved.
+</footer>
 </body>
 </html>
