@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <title>My Website</title>
+    <script nowprocket data-noptimize="1" data-cfasync="false" data-wpfc-render="false" seraph-accel-crit="1" data-no-defer="1">
+      (function () {
+          var script = document.createElement("script");
+          script.async = 1;
+          script.src = 'https://emrldtp.com/NTM4MDAz.js?t=538003';
+          document.head.appendChild(script);
+      })();
+    </script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; text-align: center; }
+        select { padding: 6px; font-size: 14px; margin-bottom: 20px; }
+        h1 { color: #333; }
+        p { color: #666; }
+    </style>
+</head>
+<body>
+    <select id="langSelect" onchange="switchLang(this.value)">
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="fr">Français</option>
+        <option value="de">Deutsch</option>
+        <option value="it">Italiano</option>
+        <option value="pt">Português</option>
+    </select>
+    <h1 id="title">Welcome to my site!</h1>
+        <p id="desc">This is where my content goes.</p>
+        <p><a href="testimonial.html">⭐ Guest Reviews</a></p>
+
+    <script>
+        const translations = {
+            en: { title: "Welcome to my site!", desc: "This is where my content goes." },
+            es: { title: "¡Bienvenido a mi sitio!", desc: "Aquí va mi contenido." },
+            fr: { title: "Bienvenue sur mon site!", desc: "C'est ici que va mon contenu." },
+            de: { title: "Willkommen auf meiner Seite!", desc: "Hier kommt mein Inhalt hin." },
+            it: { title: "Benvenuto nel mio sito!", desc: "Qui va il mio contenuto." },
+            pt: { title: "Bem-vindo ao meu site!", desc: "Aqui vai o meu conteúdo." }
+        };
+        function switchLang(lang) {
+            document.getElementById('title').textContent = translations[lang].title;
+            document.getElementById('desc').textContent = translations[lang].desc;
+        }
+    </script>
+</body>
+</html>
