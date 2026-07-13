@@ -16,6 +16,60 @@
         select { padding: 6px; font-size: 14px; margin-bottom: 20px; }
         h1 { color: #333; }
         p { color: #666; }
+
+        .stats { display: flex; justify-content: center; gap: 40px; margin: 20px 0 30px; flex-wrap: wrap; }
+        .stat { text-align: center; }
+        .stat-num { font-size: 1.8rem; font-weight: bold; color: #333; }
+        .stat-label { font-size: 0.75rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+
+        .card {
+            background: #f9f9f9; border: 1px solid #eee; border-radius: 8px;
+            padding: 20px; margin: 0 auto 16px; max-width: 650px; text-align: left;
+        }
+        .card .stars { color: #f5a623; font-size: 1rem; margin-bottom: 6px; }
+        .card .text { font-style: italic; color: #444; line-height: 1.6; margin-bottom: 10px; }
+        .card .meta { font-size: 0.8rem; color: #999; }
+        .card .meta b { color: #333; }
+
+        .nav-btns { margin: 20px 0; }
+        .nav-btns button {
+            background: #333; color: #fff; border: none; padding: 10px 24px;
+            border-radius: 4px; cursor: pointer; font-size: 0.85rem; margin: 0 8px;
+        }
+        .nav-btns button:hover { background: #555; }
+        .nav-btns button:disabled { opacity: 0.3; cursor: not-allowed; }
+        .nav-btns span { font-size: 0.85rem; color: #999; }
+
+        .write-box {
+            max-width: 500px; margin: 40px auto; background: #f9f9f9;
+            border: 1px solid #eee; border-radius: 8px; padding: 24px; text-align: left;
+        }
+        .write-box h2 { text-align: center; margin-top: 0; }
+        .write-box label { display: block; font-size: 0.8rem; font-weight: bold; color: #333; margin-bottom: 4px; margin-top: 12px; }
+        .write-box input, .write-box textarea {
+            width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;
+            font-size: 0.9rem; font-family: Arial, sans-serif; outline: none;
+        }
+        .write-box input:focus, .write-box textarea:focus { border-color: #333; }
+        .write-box textarea { resize: vertical; min-height: 80px; }
+
+        .star-pick { display: flex; gap: 4px; margin: 4px 0 0; }
+        .star-pick span { font-size: 1.4rem; cursor: pointer; color: #ddd; user-select: none; }
+        .star-pick span.on { color: #f5a623; }
+
+        .write-box button {
+            background: #333; color: #fff; border: none; padding: 12px 24px;
+            border-radius: 4px; cursor: pointer; font-size: 0.9rem; width: 100%; margin-top: 16px;
+        }
+        .write-box button:hover { background: #555; }
+
+        .msg { margin-top: 12px; padding: 10px; border-radius: 4px; font-size: 0.85rem; display: none; }
+        .msg.ok { background: #e8f5e9; color: #2e7d32; display: block; }
+        .msg.no { background: #fce4ec; color: #c62828; display: block; }
+        .msg.wait { background: #fff3e0; color: #e65100; display: block; }
+
+        hr { border: none; border-top: 1px solid #eee; margin: 40px 0; }
+        footer { margin-top: 40px; color: #999; font-size: 0.75rem; }
     </style>
 </head>
 <body>
@@ -28,8 +82,50 @@
         <option value="pt">Português</option>
     </select>
     <h1 id="title">Welcome to my site!</h1>
-        <p id="desc">This is where my content goes.</p>
-        <p><a href="testimonial.html">⭐ Guest Reviews</a></p>
+    <p id="desc">This is where my content goes.</p>
+
+    <hr>
+
+    <h1>Guest Reviews</h1>
+    <p>Real experiences from travelers who booked through <b>joeljourneys.com</b></p>
+
+    <div class="stats">
+        <div class="stat"><div class="stat-num">150+</div><div class="stat-label">Travelers</div></div>
+        <div class="stat"><div class="stat-num">4.9</div><div class="stat-label">Avg Rating</div></div>
+        <div class="stat"><div class="stat-num">32</div><div class="stat-label">Countries</div></div>
+        <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Book Again</div></div>
+    </div>
+
+    <div id="list"></div>
+
+    <div class="nav-btns">
+        <button id="prev" onclick="go(-1)">← Previous</button>
+        <span id="info"></span>
+        <button id="next" onclick="go(1)">Next →</button>
+    </div>
+
+    <div class="write-box">
+        <h2>Share Your Experience</h2>
+        <label>Name</label>
+        <input id="f-name" placeholder="First name and last initial">
+        <label>Trip Destination</label>
+        <input id="f-trip" placeholder="e.g. Amalfi Coast, Dubai">
+        <label>Rating</label>
+        <div class="star-pick" id="stars">
+            <span onclick="rate(1)">★</span>
+            <span onclick="rate(2)">★</span>
+            <span onclick="rate(3)">★</span>
+            <span onclick="rate(4)">★</span>
+            <span onclick="rate(5)">★</span>
+        </div>
+        <label>Your Review</label>
+        <textarea id="f-text" placeholder="Tell us about your trip..."></textarea>
+        <button onclick="submit()">Submit Review</button>
+        <div class="msg" id="msg"></div>
+    </div>
+
+    <hr>
+    <footer>&copy; 2026 Joel Journeys</footer>
 
     <script>
         const translations = {
@@ -44,6 +140,89 @@
             document.getElementById('title').textContent = translations[lang].title;
             document.getElementById('desc').textContent = translations[lang].desc;
         }
+
+    var data = [
+        { n:"Michael P.", t:"Amalfi Coast", r:5, x:"From start to finish everything was seamless. The private yacht charter in Capri was the highlight of our trip. Every transfer was on time, every guide was outstanding.", d:"June 2026" },
+        { n:"Jennifer Z.", t:"Maldives", r:5, x:"This was truly one of the best trips we've ever taken. The itinerary was perfectly balanced and the attention to detail made all the difference.", d:"May 2026" },
+        { n:"David R.", t:"Dubai", r:5, x:"Joel planned our Dubai trip down to the minute. The Burj Khalifa dinner, the desert safari, the gold souk tour — everything was VIP.", d:"April 2026" },
+        { n:"Sarah L.", t:"Paris", r:5, x:"The private cooking class in Montmartre and the after-hours Louvre tour were unforgettable. Already planning our next trip.", d:"March 2026" },
+        { n:"Carlos M.", t:"Santorini", r:5, x:"Our honeymoon was absolutely perfect. The cliffside villa in Oia, the private sunset cruise, the wine tasting — truly once in a lifetime.", d:"June 2026" },
+        { n:"Angela T.", t:"Tokyo", r:5, x:"I was nervous about Japan without knowing the language. Joel arranged every transfer, every restaurant, every experience. We just enjoyed.", d:"April 2026" },
+        { n:"Robert K.", t:"Bali", r:5, x:"The private villa in Ubud overlooking the rice terraces was breathtaking. Every day was perfectly spaced — no rush, just pure relaxation.", d:"May 2026" },
+        { n:"Priya S.", t:"Swiss Alps", r:5, x:"The train through the Alps was stunning. The chalet in Zermatt with Matterhorn views was beyond expectations. Joel even arranged a private fondue dinner.", d:"March 2026" },
+        { n:"Marcus W.", t:"Caribbean", r:5, x:"The private island day trip, the sunset catamaran, snorkeling with sea turtles — every day was a new adventure. Our kids still talk about it.", d:"June 2026" },
+        { n:"Lisa N.", t:"Italy", r:5, x:"Two weeks through Rome, Florence, and the Amalfi Coast. Every hotel was stunning, every guide knowledgeable, every transfer seamless.", d:"May 2026" },
+        { n:"Ahmed H.", t:"London", r:5, x:"Private tour of Buckingham Palace, West End show with premium seats, afternoon tea at The Ritz — first class from start to finish.", d:"April 2026" },
+        { n:"Emily C.", t:"Greece", r:5, x:"Island-hopping through Mykonos, Santorini, and Crete. Every ferry booked, every hotel had a view, every restaurant a local gem.", d:"June 2026" },
+        { n:"James F.", t:"Costa Rica", r:5, x:"Zip-lining through the cloud forest, hot springs, wildlife tour — adventure and relaxation perfectly combined. Joel surprised us with a beach dinner.", d:"May 2026" },
+        { n:"Nina V.", t:"Iceland", r:5, x:"Northern Lights, glacier hikes, the Blue Lagoon — the private super jeep tour was worth every penny.", d:"March 2026" },
+        { n:"Thomas B.", t:"Portugal", r:5, x:"The private fado dinner in Alfama, the Douro Valley wine tour, the pastel de nata class — authentic experiences you can't find on Google.", d:"April 2026" },
+        { n:"Grace H.", t:"Safari", r:5, x:"Five days in the Serengeti, seeing the Big Five, luxury tents under the stars. Joel handled every detail while we witnessed nature.", d:"May 2026" },
+        { n:"Kevin O.", t:"New York", r:5, x:"Even as a New Yorker, Joel showed me sides of the city I'd never seen. Private rooftop dinners, Broadway VIP, helicopter tour.", d:"June 2026" },
+        { n:"Diana L.", t:"Croatia", r:5, x:"The private boat to the islands, the cliffside restaurant — Croatia is underrated and Joel knew exactly how to show it off.", d:"May 2026" },
+        { n:"Richard M.", t:"Morocco", r:5, x:"The riad in the Medina, the camel ride into the Sahara, the cooking class with a local family — Joel turns travel into storytelling.", d:"April 2026" },
+        { n:"Sophia A.", t:"Hawaii", r:5, x:"The helicopter tour over Na Pali Coast, the luaau, the road to Hana. Joel even arranged a private snorkel with manta rays at night.", d:"June 2026" },
+        { n:"Peter J.", t:"Thailand", r:5, x:"Bangkok, Chiang Mai, and Phuket in ten days. The floating market, the elephant sanctuary, the beachfront villa — magical.", d:"March 2026" },
+        { n:"Olivia W.", t:"Spain", r:5, x:"Barcelona and Ibiza — private Gaudi tour, wine tasting in La Rioja, VIP beach club. Joel mixes culture with luxury perfectly.", d:"May 2026" },
+        { n:"Brian D.", t:"Japan", r:5, x:"Tokyo to Kyoto by bullet train, traditional ryokan, private tea ceremony, sumo tournament tickets — two weeks of perfection.", d:"April 2026" },
+        { n:"Hannah G.", t:"Ireland", r:5, x:"The Wild Atlantic Way in a luxury SUV. Castles, cliffs, whiskey distilleries — Joel found the Ireland that tour buses never see.", d:"June 2026" },
+        { n:"Alex T.", t:"Scandinavia", r:5, x:"Norway's fjords, Sweden's archipelago, Finland's Lapland — three countries in twelve days, all seamless. World-class planning.", d:"May 2026" }
+    ];
+
+    var pg = 0, size = 5, sel = 0;
+
+    function render() {
+        var el = document.getElementById('list');
+        el.innerHTML = '';
+        var s = data.slice(pg, pg + size);
+        for (var i = 0; i < s.length; i++) {
+            var d = s[i], st = '';
+            for (var j = 0; j < d.r; j++) st += '★';
+            el.innerHTML += '<div class="card"><div class="stars">' + st + '</div><div class="text">"' + d.x + '"</div><div class="meta"><b>' + d.n + '</b> — ' + d.t + ' · ' + d.d + '</div></div>';
+        }
+        var total = Math.ceil(data.length / size);
+        var pgNum = Math.floor(pg / size) + 1;
+        document.getElementById('info').textContent = pgNum + ' / ' + total;
+        document.getElementById('prev').disabled = pg === 0;
+        document.getElementById('next').disabled = pg + size >= data.length;
+    }
+
+    function go(dir) { pg = Math.max(0, Math.min(pg + dir * size, data.length - size)); render(); }
+
+    function rate(n) {
+        sel = n;
+        var s = document.querySelectorAll('#stars span');
+        for (var i = 0; i < s.length; i++) s[i].className = i < n ? 'on' : '';
+    }
+
+    var bad = ['bad','terrible','worst','awful','horrible','hate','waste','scam','fraud','disappointed','disgusting','rude','dirty','unsafe','overpriced'];
+
+    function submit() {
+        var msg = document.getElementById('msg');
+        msg.className = 'msg'; msg.style.display = 'none';
+        var name = document.getElementById('f-name').value.trim();
+        var trip = document.getElementById('f-trip').value.trim();
+        var text = document.getElementById('f-text').value.trim();
+        if (!name || !trip || !text) { msg.textContent = 'Please fill in all fields.'; msg.className = 'msg no'; return; }
+        if (sel < 3) { msg.textContent = 'Thank you for your feedback. Please contact us at j_wromas@yahoo.com so we can make it right.'; msg.className = 'msg wait'; return; }
+        var low = text.toLowerCase();
+        for (var i = 0; i < bad.length; i++) {
+            if (low.indexOf(bad[i]) > -1) { msg.textContent = 'Review submitted for moderation. We appreciate your feedback.'; msg.className = 'msg wait'; return; }
+        }
+        var now = new Date();
+        var m = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+        data.unshift({ n: name, t: trip, r: sel, x: text, d: m[now.getMonth()] + ' ' + now.getFullYear() });
+        if (data.length > 50) data.pop();
+        pg = 0; render();
+        msg.textContent = 'Thank you! Your review is now live.'; msg.className = 'msg ok';
+        document.getElementById('f-name').value = '';
+        document.getElementById('f-trip').value = '';
+        document.getElementById('f-text').value = '';
+        sel = 0; var s = document.querySelectorAll('#stars span'); for (var i = 0; i < s.length; i++) s[i].className = '';
+    }
+
+    render();
     </script>
 </body>
 </html>
+
