@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Trip | Joel Journeys</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0f1a; color: #e0e0e0; font-family: 'Inter', sans-serif; min-height: 100vh; }
+
+        .hero {
+            background: linear-gradient(135deg, #0a1628 0%, #0d2847 50%, #0a1628 100%);
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(0,150,255,0.2);
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: #fff; margin-bottom: 10px; }
+        .hero p { color: #8b949e; font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+        .container { max-width: 600px; margin: 0 auto; padding: 30px 20px 60px; }
+
+        .form-card {
+            background: linear-gradient(135deg, #161b22, #1c2333);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #0096ff;
+            margin: 24px 0 12px;
+        }
+        .section-title:first-child { margin-top: 0; }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            color: #8b949e;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus, textarea:focus { border-color: #0096ff; }
+        select option { background: #0d1117; color: #e0e0e0; }
+        textarea { resize: vertical; min-height: 80px; }
+
+        .row { display: flex; gap: 12px; }
+        .row > div { flex: 1; }
+
+        .budget-options { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+        .budget-opt {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: #8b949e;
+            transition: all 0.2s;
+            flex: 1;
+            text-align: center;
+            min-width: 120px;
+        }
+        .budget-opt:hover { border-color: #0096ff; color: #e0e0e0; }
+        .budget-opt.active { border-color: #0096ff; background: rgba(0,150,255,0.1); color: #0096ff; }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #0096ff, #0070cc);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 8px;
+        }
+        .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,150,255,0.3); }
+        .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .success-msg {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .success-msg .icon { font-size: 3rem; margin-bottom: 16px; }
+        .success-msg h2 { color: #3fb950; margin-bottom: 10px; }
+        .success-msg p { color: #8b949e; }
+
+        .footer { text-align: center; padding: 20px; color: #484f58; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <h1>Plan Your Trip</h1>
+    <p>Tell us where you want to go and we'll craft a custom itinerary with the best deals.</p>
+</div>
+
+<div class="container">
+    <div class="form-card" id="bookingForm">
+        <div class="section-title">Destination</div>
+
+        <label>Where do you want to go?</label>
+        <select id="destination">
+            <option value="">Select destination</option>
+            <option value="Bahamas">Bahamas</option>
+            <option value="Caribbean">Caribbean (Other)</option>
+            <option value="Mexico">Mexico</option>
+            <option value="Europe">Europe</option>
+            <option value="Asia">Asia</option>
+            <option value="Africa">Africa / Safari</option>
+            <option value="South America">South America</option>
+            <option value="USA">USA</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label>Specific city or resort?</label>
+        <input type="text" id="city" placeholder="e.g. Nassau, Santorini, Bali">
+
+        <div class="section-title">Travel Dates</div>
+        <div class="row">
+            <div>
+                <label>Check-in</label>
+                <input type="date" id="checkin">
+            </div>
+            <div>
+                <label>Check-out</label>
+                <input type="date" id="checkout">
+            </div>
+        </div>
+
+        <label>Flexible dates?</label>
+        <select id="flexible">
+            <option value="Exact dates">Exact dates</option>
+            <option value="Within 1 week">Within 1 week</option>
+            <option value="Within 2 weeks">Within 2 weeks</option>
+            <option value="Within 1 month">Within 1 month</option>
+            <option value="Flexible">Fully flexible</option>
+        </select>
+
+        <div class="section-title">Travelers</div>
+        <div class="row">
+            <div>
+                <label>Adults</label>
+                <select id="adults">
+                    <option value="1">1</option>
+                    <option value="2" selected>2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6+</option>
+                </select>
+            </div>
+            <div>
+                <label>Children</label>
+                <select id="children">
+                    <option value="0" selected>0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4+</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section-title">Budget</div>
+        <label>Per person budget (optional)</label>
+        <div class="budget-options">
+            <div class="budget-opt" data-val="Under $1,000" onclick="pickBudget(this)">Under $1K</div>
+            <div class="budget-opt" data-val="$1,000 - $3,000" onclick="pickBudget(this)">$1K - $3K</div>
+            <div class="budget-opt" data-val="$3,000 - $5,000" onclick="pickBudget(this)">$3K - $5K</div>
+            <div class="budget-opt" data-val="$5,000 - $10,000" onclick="pickBudget(this)">$5K - $10K</div>
+            <div class="budget-opt" data-val="$10,000+" onclick="pickBudget(this)">$10K+</div>
+        </div>
+
+        <div class="section-title">Trip Type</div>
+        <label>What kind of trip?</label>
+        <select id="tripType">
+            <option value="Leisure">Beach / Leisure</option>
+            <option value="Adventure">Adventure</option>
+            <option value="Romance">Romance / Honeymoon</option>
+            <option value="Family">Family Vacation</option>
+            <option value="Luxury">Luxury / VIP</option>
+            <option value="Business">Business Travel</option>
+            <option value="Cruise">Cruise</option>
+            <option value="Safari">Safari</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <div class="section-title">Your Details</div>
+        <div class="row">
+            <div>
+                <label>First Name</label>
+                <input type="text" id="firstName" placeholder="First name" required>
+            </div>
+            <div>
+                <label>Last Name</label>
+                <input type="text" id="lastName" placeholder="Last name">
+            </div>
+        </div>
+
+        <label>Email</label>
+        <input type="email" id="email" placeholder="your@email.com" required>
+
+        <label>Phone (optional)</label>
+        <input type="tel" id="phone" placeholder="+1 (555) 000-0000">
+
+        <label>Anything else we should know?</label>
+        <textarea id="notes" placeholder="Special requests, dietary needs, accessibility, celebrations..."></textarea>
+
+        <!-- Honeypot — bots fill this, humans don't -->
+        <div style="position:absolute;left:-9999px;" aria-hidden="true">
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <!-- Simple math check -->
+        <div class="section-title">Quick Check</div>
+        <label>What is <span id="mathQ"></span>?</label>
+        <input type="text" id="mathAnswer" placeholder="Enter the number" required inputmode="numeric">
+
+        <button class="submit-btn" id="submitBtn" onclick="submitBooking()">Request Booking</button>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+        <div class="icon">✈️</div>
+        <h2>Request Received!</h2>
+        <p>We'll review your trip details and get back to you within 24 hours with a custom itinerary and pricing.</p>
+        <p style="margin-top: 16px; color: #0096ff;">Check your email for confirmation.</p>
+    </div>
+</div>
+
+<div class="footer">&copy; 2026 Joel Journeys — Luxury Travel Concierge</div>
+
+<script>
+var selectedBudget = '';
+
+// Generate random math question on load
+var mathA, mathB;
+function genMath() {
+    mathA = Math.floor(Math.random() * 20) + 1;
+    mathB = Math.floor(Math.random() * 20) + 1;
+    document.getElementById('mathQ').textContent = mathA + ' + ' + mathB;
+}
+genMath();
+
+function pickBudget(el) {
+    document.querySelectorAll('.budget-opt').forEach(function(e) { e.classList.remove('active'); });
+    el.classList.add('active');
+    selectedBudget = el.getAttribute('data-val');
+}
+
+var DISCORD_WEBHOOK = 'https://discordapp.com/api/webhooks/1520933969410134217/aQxj9HTuYxY9EHhzZYTlG-pXKDf69i1PY8cvY8MFBy3YrOPLpK4LPPvSIZcGk86XFDOg';
+
+// Rate limit: prevent rapid submissions
+var lastSubmit = 0;
+
+async function submitBooking() {
+    var btn = document.getElementById('submitBtn');
+    var firstName = document.getElementById('firstName').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var dest = document.getElementById('destination').value;
+    var honeypot = document.getElementById('website').value;
+    var mathAns = document.getElementById('mathAnswer').value.trim();
+
+    // Honeypot check — bots fill hidden fields
+    if (honeypot) return;
+
+    // Rate limit — max 1 submission per 30 seconds
+    var now = Date.now();
+    if (now - lastSubmit < 30000) {
+        alert('Please wait a moment before submitting again.');
+        return;
+    }
+
+    if (!firstName || !email || !dest) {
+        alert('Please fill in your name, email, and destination.');
+        return;
+    }
+
+    // Email format check
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    // Math check
+    if (parseInt(mathAns) !== mathA + mathB) {
+        alert('Incorrect answer. Please try the math question again.');
+        genMath();
+        document.getElementById('mathAnswer').value = '';
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Finding your deals...';
+    lastSubmit = Date.now();
+
+    var booking = {
+        destination: dest,
+        city: document.getElementById('city').value.trim(),
+        checkin: document.getElementById('checkin').value,
+        checkout: document.getElementById('checkout').value,
+        flexible: document.getElementById('flexible').value,
+        adults: document.getElementById('adults').value,
+        children: document.getElementById('children').value,
+        budget: selectedBudget || 'Not specified',
+        tripType: document.getElementById('tripType').value,
+        name: firstName + ' ' + document.getElementById('lastName').value.trim(),
+        email: email,
+        phone: document.getElementById('phone').value.trim(),
+        notes: document.getElementById('notes').value.trim(),
+        time: new Date().toLocaleString()
+    };
+
+    var msg = '**New Booking Request**\n\n' +
+        '**Name:** ' + booking.name + '\n' +
+        '**Email:** ' + booking.email + '\n' +
+        (booking.phone ? '**Phone:** ' + booking.phone + '\n' : '') +
+        '**Destination:** ' + booking.destination + (booking.city ? ' — ' + booking.city : '') + '\n' +
+        '**Dates:** ' + (booking.checkin || 'TBD') + ' to ' + (booking.checkout || 'TBD') + '\n' +
+        '**Flexibility:** ' + booking.flexible + '\n' +
+        '**Travelers:** ' + booking.adults + ' adults, ' + booking.children + ' children\n' +
+        '**Budget:** ' + booking.budget + '\n' +
+        '**Trip Type:** ' + booking.tripType + '\n' +
+        (booking.notes ? '**Notes:** ' + booking.notes + '\n' : '') +
+        '**Submitted:** ' + booking.time;
+
+    try {
+        await fetch(DISCORD_WEBHOOK, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: msg })
+        });
+    } catch(e) {}
+
+    // Map destination to affiliate links
+    var links = {
+        'Bahamas': 'https://mavely.app.link/usQKPX9SN3b',
+        'Caribbean': 'https://vi.me/s/joel-journeys-vip',
+        'Mexico': 'https://aviasales.tpo.lv/2GVGFfSj',
+        'Europe': 'https://aviasales.tpo.lv/2GVGFfSj',
+        'Asia': 'https://aviasales.tpo.lv/2GVGFfSj',
+        'Africa': 'https://vi.me/s/joel-journeys-vip',
+        'South America': 'https://aviasales.tpo.lv/2GVGFfSj',
+        'USA': 'https://aviasales.tpo.lv/2GVGFfSj',
+        'Other': 'https://joeljourneys.com/'
+    };
+
+    // Show success with link
+    document.getElementById('bookingForm').style.display = 'none';
+    var successEl = document.getElementById('successMsg');
+    successEl.style.display = 'block';
+
+    var destLink = links[dest] || 'https://joeljourneys.com/';
+    successEl.innerHTML = '<div class="icon">✈️</div>' +
+        '<h2>Thanks ' + firstName + '!</h2>' +
+        '<p style="margin-bottom:20px;color:#8b949e;">Your ' + dest + ' deals are ready. Tap a link below to book now:</p>' +
+        '<div style="margin:24px 0;display:flex;flex-direction:column;gap:12px;">' +
+        '<a href="https://www.timeflys.co/?aff=TF113" target="_blank" style="display:block;background:linear-gradient(135deg,#0096ff,#0070cc);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">✈️ Book a Private Jet — TimeFlys</a>' +
+        '<a href="https://aviasales.tpo.lv/2GVGFfSj" target="_blank" style="display:block;background:linear-gradient(135deg,#238636,#1a7f37);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">✈️ Book Flights — Aviasales</a>' +
+        '<a href="' + destLink + '" target="_blank" style="display:block;background:linear-gradient(135deg,#8957e5,#6e40c9);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🏨 Find Hotels & Resorts</a>' +
+        '<a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" style="display:block;background:linear-gradient(135deg,#6e40c9,#5533a0);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🚗 Rent a Car — GetRentacar</a>' +
+        '<a href="https://vi.me/s/joel-journeys-vip" target="_blank" style="display:block;background:linear-gradient(135deg,#d29922,#b8860b);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🏖️ Tours & Activities — Viator</a>' +
+        '<a href="https://searadar.com/yacht-charter/bahamas" target="_blank" style="display:block;background:linear-gradient(135deg,#1f6feb,#1158c7);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🌴 Yacht Charter — SeaRadar</a>' +
+        '<a href="https://plans.gigsky.com/27H3X8P/2CTPL/?uid=5" target="_blank" style="display:block;background:linear-gradient(135deg,#3fb950,#2ea043);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">📱 Get Travel eSIM — GigSky</a>' +
+        '</div>' +
+        '<p style="color:#8b949e;font-size:0.85rem;">Click any link above to book. We\'ll follow up within 24 hours to help with your trip.</p>';
+}
+</script>
+
+</body>
+</html>
