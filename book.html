@@ -140,12 +140,67 @@
         <div class="section-title">Travel Dates</div>
         <div class="row">
             <div>
-                <label>Check-in</label>
-                <input type="date" id="checkin">
+                <label>Check-in Month</label>
+                <select id="checkinMonth">
+                    <option value="">Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
             </div>
             <div>
-                <label>Check-out</label>
-                <input type="date" id="checkout">
+                <label>Day</label>
+                <select id="checkinDay">
+                    <option value="">Day</option>
+                </select>
+            </div>
+            <div>
+                <label>Year</label>
+                <select id="checkinYear">
+                    <option value="">Year</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label>Check-out Month</label>
+                <select id="checkoutMonth">
+                    <option value="">Month</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                </select>
+            </div>
+            <div>
+                <label>Day</label>
+                <select id="checkoutDay">
+                    <option value="">Day</option>
+                </select>
+            </div>
+            <div>
+                <label>Year</label>
+                <select id="checkoutYear">
+                    <option value="">Year</option>
+                </select>
             </div>
         </div>
 
@@ -254,7 +309,53 @@
 <script>
 var selectedBudget = '';
 
-// Generate random math question on load
+// Populate day and year dropdowns
+function populateDays(selectId) {
+    var sel = document.getElementById(selectId);
+    for (var d = 1; d <= 31; d++) {
+        var opt = document.createElement('option');
+        opt.value = d < 10 ? '0' + d : '' + d;
+        opt.textContent = d;
+        sel.appendChild(opt);
+    }
+}
+function populateYears(selectId) {
+    var sel = document.getElementById(selectId);
+    var thisYear = new Date().getFullYear();
+    for (var y = thisYear; y <= thisYear + 2; y++) {
+        var opt = document.createElement('option');
+        opt.value = y;
+        opt.textContent = y;
+        sel.appendChild(opt);
+    }
+}
+populateDays('checkinDay');
+populateDays('checkoutDay');
+populateYears('checkinYear');
+populateYears('checkoutYear');
+
+// Set default check-in to tomorrow, check-out to +7 days
+var today = new Date();
+var tomorrow = new Date(today);
+tomorrow.setDate(tomorrow.getDate() + 1);
+var nextWeek = new Date(today);
+nextWeek.setDate(nextWeek.getDate() + 8);
+document.getElementById('checkinMonth').value = (tomorrow.getMonth() + 1 < 10 ? '0' : '') + (tomorrow.getMonth() + 1);
+document.getElementById('checkinDay').value = (tomorrow.getDate() < 10 ? '0' : '') + tomorrow.getDate();
+document.getElementById('checkinYear').value = tomorrow.getFullYear();
+document.getElementById('checkoutMonth').value = (nextWeek.getMonth() + 1 < 10 ? '0' : '') + (nextWeek.getMonth() + 1);
+document.getElementById('checkoutDay').value = (nextWeek.getDate() < 10 ? '0' : '') + nextWeek.getDate();
+document.getElementById('checkoutYear').value = nextWeek.getFullYear();
+
+// Build date string from dropdowns
+function buildDate(monthId, dayId, yearId) {
+    var m = document.getElementById(monthId).value;
+    var d = document.getElementById(dayId).value;
+    var y = document.getElementById(yearId).value;
+    if (!m || !d || !y) return '';
+    return y + '-' + m + '-' + d;
+}
+
 var mathA, mathB;
 function genMath() {
     mathA = Math.floor(Math.random() * 20) + 1;
@@ -269,9 +370,46 @@ function pickBudget(el) {
     selectedBudget = el.getAttribute('data-val');
 }
 
+// Parse budget string into min/max numbers
+function parseBudget(budget) {
+    if (!budget || budget === 'Not specified') return { min: 0, max: Infinity };
+    if (budget === 'Under $1,000') return { min: 0, max: 1000 };
+    if (budget === '$1,000 - $3,000') return { min: 1000, max: 3000 };
+    if (budget === '$3,000 - $5,000') return { min: 3000, max: 5000 };
+    if (budget === '$5,000 - $10,000') return { min: 5000, max: 10000 };
+    if (budget === '$10,000+') return { min: 10000, max: Infinity };
+    return { min: 0, max: Infinity };
+}
+
+// Extract numeric price from deal string like "From $48" or "$299"
+function extractPrice(priceStr) {
+    if (!priceStr) return null;
+    var match = priceStr.replace(/,/g, '').match(/\$(\d+)/);
+    return match ? parseInt(match[1]) : null;
+}
+
+// Destination keywords for matching
+var DEST_KEYWORDS = {
+    'Bahamas': ['bahamas', 'nassau', 'paradise island', 'exuma'],
+    'Caribbean': ['caribbean', 'jamaica', 'dominican', 'cancun', 'puerto rico', 'barbados', 'st. lucia', 'aruba', 'turks'],
+    'Mexico': ['mexico', 'cancun', 'puerto vallarta', 'cabo', 'riviera maya'],
+    'Europe': ['paris', 'london', 'rome', 'barcelona', 'amsterdam', 'tokyo', 'europe'],
+    'Asia': ['tokyo', 'bali', 'thailand', 'vietnam', 'japan', 'asia', 'dubai'],
+    'Africa': ['africa', 'safari', 'kenya', 'tanzania', 'south africa'],
+    'South America': ['brazil', 'argentina', 'peru', 'colombia', 'chile', 'south america'],
+    'USA': ['orlando', 'miami', 'fort myers', 'new york', 'atlanta', 'fort lauderdale', 'jacksonville', 'tampa']
+};
+
+// Match deal destination to user's selected destination
+function matchesDestination(deal, dest) {
+    if (!dest || dest === 'Other') return true;
+    var dealText = ((deal.title || '') + ' ' + (deal.destination || '') + ' ' + (deal.origin || '')).toLowerCase();
+    var keywords = DEST_KEYWORDS[dest] || [];
+    return keywords.some(function(kw) { return dealText.includes(kw.toLowerCase()); });
+}
+
 var DISCORD_WEBHOOK = 'https://discordapp.com/api/webhooks/1520933969410134217/aQxj9HTuYxY9EHhzZYTlG-pXKDf69i1PY8cvY8MFBy3YrOPLpK4LPPvSIZcGk86XFDOg';
 
-// Rate limit: prevent rapid submissions
 var lastSubmit = 0;
 
 async function submitBooking() {
@@ -282,10 +420,8 @@ async function submitBooking() {
     var honeypot = document.getElementById('website').value;
     var mathAns = document.getElementById('mathAnswer').value.trim();
 
-    // Honeypot check — bots fill hidden fields
     if (honeypot) return;
 
-    // Rate limit — max 1 submission per 30 seconds
     var now = Date.now();
     if (now - lastSubmit < 30000) {
         alert('Please wait a moment before submitting again.');
@@ -297,13 +433,11 @@ async function submitBooking() {
         return;
     }
 
-    // Email format check
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         alert('Please enter a valid email address.');
         return;
     }
 
-    // Math check
     if (parseInt(mathAns) !== mathA + mathB) {
         alert('Incorrect answer. Please try the math question again.');
         genMath();
@@ -318,8 +452,8 @@ async function submitBooking() {
     var booking = {
         destination: dest,
         city: document.getElementById('city').value.trim(),
-        checkin: document.getElementById('checkin').value,
-        checkout: document.getElementById('checkout').value,
+        checkin: buildDate('checkinMonth', 'checkinDay', 'checkinYear'),
+        checkout: buildDate('checkoutMonth', 'checkoutDay', 'checkoutYear'),
         flexible: document.getElementById('flexible').value,
         adults: document.getElementById('adults').value,
         children: document.getElementById('children').value,
@@ -353,40 +487,151 @@ async function submitBooking() {
         });
     } catch(e) {}
 
-    // Map destination to affiliate links
-    var links = {
-        'Bahamas': 'https://mavely.app.link/usQKPX9SN3b',
-        'Caribbean': 'https://vi.me/s/joel-journeys-vip',
-        'Mexico': 'https://aviasales.tpo.lv/2GVGFfSj',
-        'Europe': 'https://aviasales.tpo.lv/2GVGFfSj',
-        'Asia': 'https://aviasales.tpo.lv/2GVGFfSj',
-        'Africa': 'https://vi.me/s/joel-journeys-vip',
-        'South America': 'https://aviasales.tpo.lv/2GVGFfSj',
-        'USA': 'https://aviasales.tpo.lv/2GVGFfSj',
-        'Other': 'https://joeljourneys.com/'
-    };
+    // Show BEST live deals from live_deals.json — by budget, then by destination
+    var budget = parseBudget(booking.budget);
+    var matchedDeals = [];
+    var destDeals = [];
 
-    // Show success with link
+    try {
+        var resp = await fetch('live_deals.json');
+        var data = await resp.json();
+        var allDeals = data.deals || [];
+
+        // First: best deals matching their destination within budget
+        destDeals = allDeals.filter(function(d) {
+            var price = extractPrice(d.price);
+            if (price === null) return false;
+            if (budget.max !== Infinity && price > budget.max) return false;
+            if (budget.min !== 0 && price < budget.min) return false;
+            if (!matchesDestination(d, dest)) return false;
+            return true;
+        }).slice(0, 4);
+
+        // Then: best deals anywhere within budget (different destinations = ideas)
+        var otherDeals = allDeals.filter(function(d) {
+            var price = extractPrice(d.price);
+            if (price === null) return false;
+            if (budget.max !== Infinity && price > budget.max) return false;
+            if (budget.min !== 0 && price < budget.min) return false;
+            if (matchesDestination(d, dest)) return false;
+            return true;
+        }).slice(0, 4);
+
+        // Fallback: if no curated deals in budget, pull best deals from all lower prices
+        if (destDeals.length === 0 && otherDeals.length === 0) {
+            destDeals = allDeals.filter(function(d) {
+                var price = extractPrice(d.price);
+                if (price === null) return false;
+                if (!matchesDestination(d, dest)) return false;
+                return true;
+            }).slice(0, 4);
+
+            otherDeals = allDeals.filter(function(d) {
+                var price = extractPrice(d.price);
+                if (price === null) return false;
+                if (matchesDestination(d, dest)) return false;
+                return true;
+            }).slice(0, 4);
+        }
+
+        matchedDeals = destDeals.concat(otherDeals);
+    } catch(e) {}
+
+    // Build deal cards — only real verified prices
+    var TYPE_ICONS = { 'Flight': '\u2708\uFE0F', 'Hotel': '\uD83C\uDFE8', 'Car Rental': '\uD83D\uDE97', 'eSIM': '\uD83D\uDCF1' };
+
+    var dealsHtml = '';
+    if (destDeals.length > 0) {
+        dealsHtml = '<div style="margin:20px 0;">' +
+            '<div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:#3fb950;margin-bottom:14px;">Live ' + dest + ' Deals</div>';
+        destDeals.forEach(function(d) {
+            var icon = TYPE_ICONS[d.type] || '\uD83C\uDF1F';
+            var link = d.affiliateUrl || d.link || 'https://joeljourneys.com/';
+            dealsHtml += '<div style="background:#0d1117;border:1px solid #30363d;border-left:3px solid #3fb950;border-radius:8px;padding:14px;margin-bottom:10px;">' +
+                '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">' + icon + ' ' + d.title + '</div>' +
+                (d.destination ? '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">' + d.origin + ' to ' + d.destination + '</div>' : '') +
+                '</div>' +
+                '<a href="' + link + '" target="_blank" style="background:#3fb950;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">' + d.price + '</a>' +
+                '</div></div>';
+        });
+        dealsHtml += '</div>';
+    }
+
+    if (otherDeals.length > 0) {
+        dealsHtml += '<div style="margin:20px 0;">' +
+            '<div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:#f0883e;margin-bottom:14px;">More Deals Within Your Budget</div>';
+        otherDeals.forEach(function(d) {
+            var icon = TYPE_ICONS[d.type] || '\uD83C\uDF1F';
+            var link = d.affiliateUrl || d.link || 'https://joeljourneys.com/';
+            dealsHtml += '<div style="background:#0d1117;border:1px solid #30363d;border-left:3px solid #f0883e;border-radius:8px;padding:14px;margin-bottom:10px;">' +
+                '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">' + icon + ' ' + d.title + '</div>' +
+                (d.destination ? '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">' + d.origin + ' to ' + d.destination + '</div>' : '') +
+                '</div>' +
+                '<a href="' + link + '" target="_blank" style="background:#f0883e;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">' + d.price + '</a>' +
+                '</div></div>';
+        });
+        dealsHtml += '</div>';
+    }
+
+    // Bonus Deals — always show as extra search options
+    var bonusHtml = '';
+    var bonusTitle = 'Bonus Deals — Search Live Prices';
+
+    bonusHtml = '<div style="margin:20px 0;">' +
+        '<div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:#00d4ff;margin-bottom:14px;">' + bonusTitle + '</div>' +
+        // Flight search card
+        '<a href="https://aviasales.tpo.lv/2GVGFfSj" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #00d4ff;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\u2708\uFE0F Flight Search</div>' +
+                '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Search thousands of flights \u2014 ' + dest + (booking.city ? ', ' + booking.city : '') + '</div>' +
+                '<div style="color:#00d4ff;font-size:0.75rem;margin-top:4px;">Live prices from multiple airlines</div></div>' +
+                '<span style="background:#00d4ff;color:#000;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search Now</span>' +
+            '</div></a>' +
+        // Hotel search card
+        '<a href="https://www.aviasales.com/hotels?marker=737825" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #8957e5;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83C\uDFE8 Hotel Search</div>' +
+                '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Compare hotel prices worldwide \u2014 ' + dest + '</div>' +
+                '<div style="color:#8957e5;font-size:0.75rem;margin-top:4px;">Live results, real-time availability</div></div>' +
+                '<span style="background:#8957e5;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search Hotels</span>' +
+            '</div></a>' +
+        // Tours card
+        '<a href="https://vi.me/s/joel-journeys-vip" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #d29922;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83C\uDFD6\uFE0F Tours & Activities</div>' +
+                '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Top-rated experiences at ' + dest + '</div>' +
+                '<div style="color:#d29922;font-size:0.75rem;margin-top:4px;">From $79 \u2014 guided tours, day trips & more</div></div>' +
+                '<span style="background:#d29922;color:#000;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Browse</span>' +
+            '</div></a>' +
+        // Car rental card
+        '<a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #6e40c9;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+            '<div style="display:flex;justify-content:space-between;align-items:center;">' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83D\uDE97 Car Rental</div>' +
+                '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Compare car rental prices at your destination</div>' +
+                '<div style="color:#6e40c9;font-size:0.75rem;margin-top:4px;">Best rates from major rental agencies</div></div>' +
+                '<span style="background:#6e40c9;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search</span>' +
+            '</div></a>' +
+        '</div>';
+
+    // Never show "no deals" — always show bonus deals
+
     document.getElementById('bookingForm').style.display = 'none';
     var successEl = document.getElementById('successMsg');
     successEl.style.display = 'block';
 
-    var destLink = links[dest] || 'https://joeljourneys.com/';
-    successEl.innerHTML = '<div class="icon">✈️</div>' +
+    successEl.innerHTML = '<div class="icon">\u2708\uFE0F</div>' +
         '<h2>Thanks ' + firstName + '!</h2>' +
-        '<p style="margin-bottom:20px;color:#8b949e;">Your ' + dest + ' deals are ready. Tap a link below to book now:</p>' +
-        '<div style="margin:24px 0;display:flex;flex-direction:column;gap:12px;">' +
-        '<a href="https://www.timeflys.co/?aff=TF113" target="_blank" style="display:block;background:linear-gradient(135deg,#0096ff,#0070cc);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">✈️ Book a Private Jet — TimeFlys</a>' +
-        '<a href="https://aviasales.tpo.lv/2GVGFfSj" target="_blank" style="display:block;background:linear-gradient(135deg,#238636,#1a7f37);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">✈️ Book Flights — Aviasales</a>' +
-        '<a href="' + destLink + '" target="_blank" style="display:block;background:linear-gradient(135deg,#8957e5,#6e40c9);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🏨 Find Hotels & Resorts</a>' +
-        '<a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" style="display:block;background:linear-gradient(135deg,#6e40c9,#5533a0);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🚗 Rent a Car — GetRentacar</a>' +
-        '<a href="https://vi.me/s/joel-journeys-vip" target="_blank" style="display:block;background:linear-gradient(135deg,#d29922,#b8860b);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🏖️ Tours & Activities — Viator</a>' +
-        '<a href="https://searadar.com/yacht-charter/bahamas" target="_blank" style="display:block;background:linear-gradient(135deg,#1f6feb,#1158c7);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🌴 Yacht Charter — SeaRadar</a>' +
-        '<a href="https://plans.gigsky.com/27H3X8P/2CTPL/?uid=5" target="_blank" style="display:block;background:linear-gradient(135deg,#3fb950,#2ea043);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">📱 Get Travel eSIM — GigSky</a>' +
-        '<a href="https://gettransfer.tpo.lv/WQdyH8Vd" target="_blank" style="display:block;background:linear-gradient(135deg,#da3633,#b62324);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🚗 Private Transfer — GetTransfer</a>' +
-        '<a href="https://tiqets.tpo.lv/lmg00NTF" target="_blank" style="display:block;background:linear-gradient(135deg,#f0883e,#db6d28);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🎟️ Attraction Tickets — Tiqets</a>' +
-        '<a href="https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com" target="_blank" style="display:block;background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;">🎫 Concert & Sports Tickets — TicketNetwork</a>' +
-        '</div>' +
-        '<p style="color:#8b949e;font-size:0.85rem;">Click any link above to book. We\'ll follow up within 24 hours to help with your trip.</p>' +
-        '<div style="margin-top:30px;padding:20px;background:#161b22;border:1px solid #30363d;border-radius:12px;">' +
-        '<div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:#0096ff;margin-bottom:12px;">Search Flights & Hotels</div>' +
+        '<p style="margin-bottom:6px;color:#8b949e;">' + dest + (booking.city ? ' \u2014 ' + booking.city : '') + ' | ' + booking.adults + ' adults | ' + booking.budget + '</p>' +
+        '<p style="margin-bottom:12px;color:#8b949e;font-size:0.85rem;">' + (booking.checkin || 'Dates TBD') + (booking.checkout ? ' to ' + booking.checkout : '') + '</p>' +
+        dealsHtml +
+        bonusHtml +
+        '<p style="color:#8b949e;font-size:0.85rem;margin:16px 0;">' + (booking.notes ? '<strong style="color:#f0883e;">Special Requests:</strong> ' + booking.notes + ' — click any deal above or search below!' : 'Click any deal above to book, or search more options below.') + '</p>' +
+        '<a href="https://joeljourneys.com" target="_blank" style="display:block;background:linear-gradient(135deg,#0096ff,#0070cc);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;text-align:center;margin:16px 0;">Browse All Deals at joeljourneys.com</a>';
+
+}
+</script>
+
+</body>
+</html>
