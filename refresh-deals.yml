@@ -1,0 +1,51 @@
+name: Refresh Live Deals
+
+on:
+  schedule:
+    - cron: '0 8 1,15 * *'   # 1st and 15th of every month at 8 AM UTC
+  workflow_dispatch:          # manual trigger button
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-deals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install dotenv axios
+
+      - name: Create .env from secrets
+        run: |
+          cat > .env << EOF
+          TRAVELPAYOUTS_API_TOKEN=${{ secrets.TRAVELPAYOUTS_API_TOKEN }}
+          VIATOR_API_KEY=${{ secrets.VIATOR_API_KEY }}
+          VIATOR_PARTNER_KEY=${{ secrets.VIATOR_PARTNER_KEY }}
+          TICKETMASTER_API_KEY=${{ secrets.TICKETMASTER_API_KEY }}
+          TICKETMASTER_API_SECRET=${{ secrets.TICKETMASTER_API_SECRET }}
+          GETTRANSFER_API_KEY=${{ secrets.GETTRANSFER_API_KEY }}
+          EOF
+
+      - name: Fetch live deals
+        run: node deploy/fetch_live_deals.js
+
+      - name: Copy to root for server fallback
+        run: cp deploy/live_deals.json ./live_deals.json
+
+      - name: Commit updated deals
+        run: |
+          git config user.name "JungleWorld Bot"
+          git config user.email "bot@joeljourneys.com"
+          git add deploy/live_deals.json live_deals.json
+          timestamp=$(date -u +"%Y-%m-%d %H:%M UTC")
+          git diff --cached --quiet && echo "No changes to commit" && exit 0
+          git commit -m "Refresh live deals ($timestamp)"
+          git push
