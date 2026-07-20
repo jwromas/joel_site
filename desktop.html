@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joel Journeys — Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #21262d;
+            margin-bottom: 24px;
+        }
+        .header h1 { font-size: 1.8rem; font-weight: 600; color: #fff; }
+        .header .subtitle { color: #8b949e; font-size: 0.9rem; margin-top: 4px; }
+        #clock { font-size: 2.4rem; font-weight: 700; color: #58a6ff; margin-top: 8px; }
+        #date { color: #8b949e; font-size: 0.85rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #161b22;
+            border: 1px solid #21262d;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8b949e;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-title .icon { font-size: 1rem; }
+
+        .link-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .link {
+            background: #0d1117;
+            border: 1px solid #21262d;
+            border-radius: 8px;
+            padding: 10px 16px;
+            color: #e6edf3;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .link:hover {
+            border-color: #58a6ff;
+            background: #1c2333;
+            transform: translateY(-1px);
+        }
+        .link .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .dot-blue { background: #58a6ff; }
+        .dot-green { background: #3fb950; }
+        .dot-purple { background: #bc8cff; }
+        .dot-orange { background: #d29922; }
+        .dot-red { background: #f85149; }
+        .dot-pink { background: #f778ba; }
+        .dot-cyan { background: #39d2c0; }
+
+        .status-bar {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            padding: 16px 0;
+            margin-top: 24px;
+            border-top: 1px solid #21262d;
+            flex-wrap: wrap;
+        }
+        .status-item { text-align: center; }
+        .status-item .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #484f58;
+        }
+        .status-item .value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #3fb950;
+            margin-top: 2px;
+        }
+
+        @media (max-width: 700px) {
+            .grid { grid-template-columns: 1fr; }
+            #clock { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Joel Journeys</h1>
+    <div class="subtitle">Desktop Dashboard</div>
+    <div id="clock">--:--:--</div>
+    <div id="date">--</div>
+</div>
+
+<div class="grid">
+
+    <div class="card">
+        <div class="card-title"><span class="icon">&#9992;</span> Travel & Booking</div>
+        <div class="link-grid">
+            <a href="https://joeljourneys.com" target="_blank" class="link"><span class="dot dot-blue"></span>Joel Journeys</a>
+            <a href="https://joeljourneys.com/book.html" target="_blank" class="link"><span class="dot dot-green"></span>Booking Form</a>
+            <a href="https://www.timeflys.co/?aff=TF113" target="_blank" class="link"><span class="dot dot-purple"></span>TimeFlys Jets</a>
+            <a href="https://aviasales.tpo.lv/2GVGFfSj" target="_blank" class="link"><span class="dot dot-cyan"></span>Flights</a>
+            <a href="https://mavely.app.link/usQKPX9SN3b" target="_blank" class="link"><span class="dot dot-orange"></span>Atlantis Bahamas</a>
+            <a href="https://vi.me/s/joel-journeys-vip" target="_blank" class="link"><span class="dot dot-pink"></span>Viator Tours</a>
+            <a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" class="link"><span class="dot dot-red"></span>Car Rental</a>
+            <a href="https://plans.gigsky.com/27H3X8P/2CTPL/?uid=5" target="_blank" class="link"><span class="dot dot-green"></span>Travel eSIM</a>
+            <a href="https://gettransfer.tpo.lv/WQdyH8Vd" target="_blank" class="link"><span class="dot dot-purple"></span>Transfers</a>
+            <a href="https://tiqets.tpo.lv/lmg00NTF" target="_blank" class="link"><span class="dot dot-orange"></span>Tiqets Tickets</a>
+            <a href="https://www.bluebirdyellowtaxi.com" target="_blank" class="link"><span class="dot dot-cyan"></span>Bluebird Taxi</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="icon">&#128187;</span> Apps & Tools</div>
+        <div class="link-grid">
+            <a href="https://discord.com/channels/@me" target="_blank" class="link"><span class="dot dot-purple"></span>Discord</a>
+            <a href="https://web.whatsapp.com" target="_blank" class="link"><span class="dot dot-green"></span>WhatsApp</a>
+            <a href="https://studio.youtube.com" target="_blank" class="link"><span class="dot dot-red"></span>YouTube Studio</a>
+            <a href="https://mail.yahoo.com" target="_blank" class="link"><span class="dot dot-orange"></span>Yahoo Mail</a>
+            <a href="https://www.linkedin.com" target="_blank" class="link"><span class="dot dot-blue"></span>LinkedIn</a>
+            <a href="https://github.com/jwromas/joel_site" target="_blank" class="link"><span class="dot dot-purple"></span>GitHub Repo</a>
+            <a href="https://mail.google.com" target="_blank" class="link"><span class="dot dot-orange"></span>Gmail</a>
+            <a href="https://calendar.google.com" target="_blank" class="link"><span class="dot dot-cyan"></span>Calendar</a>
+            <a href="http://localhost:11434" target="_blank" class="link"><span class="dot dot-purple"></span>Ollama</a>
+            <a href="https://opencode.ai" target="_blank" class="link"><span class="dot dot-cyan"></span>OpenCode</a>
+            <a href="file:///C:/Users/Joel/AppData/Local/Programs/@opencode-aidesktop/OpenCode.exe" class="link"><span class="dot dot-cyan"></span>OpenCode Desktop</a>
+            <a href="file:///C:/Users/Joel/AppData/Local/Programs/Microsoft VS Code Insiders/Code%20-%20Insiders.exe" class="link"><span class="dot dot-blue"></span>VS Code</a>
+            <a href="file:///C:/Program%20Files/obs-studio/bin/64bit/obs64.exe" class="link"><span class="dot dot-purple"></span>OBS Studio</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="icon">&#128736;</span> Bots & Servers</div>
+        <div class="link-grid">
+            <a href="http://localhost:3000" target="_blank" class="link"><span class="dot dot-green"></span>Express Server</a>
+            <a href="https://discord.com/channels/@me" target="_blank" class="link"><span class="dot dot-purple"></span>Discord Bot</a>
+            <a href="https://t.me" target="_blank" class="link"><span class="dot dot-cyan"></span>Telegram Bot</a>
+            <a href="https://joeljourneys.com/mybot.html" target="_blank" class="link"><span class="dot dot-orange"></span>Main Website</a>
+            <a href="https://www.youtube.com/watch?v=GinUungufd0" target="_blank" class="link"><span class="dot dot-red"></span>Live Stream</a>
+            <a href="http://localhost:3000/book.html" target="_blank" class="link"><span class="dot dot-blue"></span>Local Book Page</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-title"><span class="icon">&#128196;</span> Files & Folders</div>
+        <div class="link-grid">
+            <a href="file:///C:/Users/Joel/Desktop/JungleWorld" class="link"><span class="dot dot-green"></span>JungleWorld</a>
+            <a href="file:///C:/Users/Joel/Desktop/JungleWorld/deploy" class="link"><span class="dot dot-blue"></span>Deploy Folder</a>
+            <a href="file:///C:/Users/Joel/Desktop/JungleWorld/cli" class="link"><span class="dot dot-orange"></span>CLI Tools</a>
+            <a href="file:///C:/Users/Joel/Desktop" class="link"><span class="dot dot-purple"></span>Desktop</a>
+            <a href="file:///C:/Users/Joel/Desktop/JungleWorld/obs-assets" class="link"><span class="dot dot-cyan"></span>OBS Assets</a>
+            <a href="file:///C:/Users/Joel/Desktop/JungleWorld/deploy/live_deals.json" class="link"><span class="dot dot-red"></span>Live Deals</a>
+        </div>
+    </div>
+
+</div>
+
+<div class="status-bar">
+    <div class="status-item">
+        <div class="label">System</div>
+        <div class="value" style="color:#3fb950;">Online</div>
+    </div>
+    <div class="status-item">
+        <div class="label">Last Refresh</div>
+        <div class="value" id="lastRefresh" style="color:#8b949e;">--</div>
+    </div>
+    <div class="status-item">
+        <div class="label">Shortcuts</div>
+        <div class="value" id="shortcutCount" style="color:#58a6ff;">--</div>
+    </div>
+</div>
+
+<script>
+function updateClock() {
+    var now = new Date();
+    var h = ('0' + now.getHours()).slice(-2);
+    var m = ('0' + now.getMinutes()).slice(-2);
+    var s = ('0' + now.getSeconds()).slice(-2);
+    document.getElementById('clock').textContent = h + ':' + m + ':' + s;
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    document.getElementById('date').textContent = days[now.getDay()] + ', ' + months[now.getMonth()] + ' ' + now.getDate() + ', ' + now.getFullYear();
+}
+function updateStatus() {
+    var now = new Date();
+    var h = ('0' + now.getHours()).slice(-2);
+    var m = ('0' + now.getMinutes()).slice(-2);
+    document.getElementById('lastRefresh').textContent = h + ':' + m;
+    var count = document.querySelectorAll('.link').length;
+    document.getElementById('shortcutCount').textContent = count + ' links';
+}
+updateClock();
+updateStatus();
+setInterval(updateClock, 1000);
+</script>
+</body>
+</html>

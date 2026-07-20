@@ -552,7 +552,7 @@ async function submitBooking() {
                 '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">' + icon + ' ' + d.title + '</div>' +
                 (d.destination ? '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">' + d.origin + ' to ' + d.destination + '</div>' : '') +
                 '</div>' +
-                '<a href="' + link + '" target="_blank" style="background:#3fb950;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">' + d.price + '</a>' +
+                '<div onclick="window.open(\'' + link.replace(/'/g,"\\'") + '\',\'_blank\')" style="background:#3fb950;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;cursor:pointer;">' + d.price + '</div>' +
                 '</div></div>';
         });
         dealsHtml += '</div>';
@@ -569,7 +569,7 @@ async function submitBooking() {
                 '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">' + icon + ' ' + d.title + '</div>' +
                 (d.destination ? '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">' + d.origin + ' to ' + d.destination + '</div>' : '') +
                 '</div>' +
-                '<a href="' + link + '" target="_blank" style="background:#f0883e;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">' + d.price + '</a>' +
+                '<div onclick="window.open(\'' + link.replace(/'/g,"\\'") + '\',\'_blank\')" style="background:#f0883e;color:#fff;padding:8px 14px;border-radius:6px;text-decoration:none;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;cursor:pointer;">' + d.price + '</div>' +
                 '</div></div>';
         });
         dealsHtml += '</div>';
@@ -582,61 +582,61 @@ async function submitBooking() {
     bonusHtml = '<div style="margin:20px 0;">' +
         '<div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;color:#00d4ff;margin-bottom:14px;">' + bonusTitle + '</div>' +
         // Flight search card
-        '<a href="https://aviasales.tpo.lv/2GVGFfSj" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #00d4ff;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+        '<div onclick="window.open(\'https://aviasales.tpo.lv/2GVGFfSj\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #00d4ff;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\u2708\uFE0F Flight Search</div>' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\u2708\uFE0F Get a Flight Quote</div>' +
                 '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Search thousands of flights \u2014 ' + dest + (booking.city ? ', ' + booking.city : '') + '</div>' +
                 '<div style="color:#00d4ff;font-size:0.75rem;margin-top:4px;">Live prices from multiple airlines</div></div>' +
-                '<span style="background:#00d4ff;color:#000;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search Now</span>' +
-            '</div></a>' +
+                '<span style="background:#00d4ff;color:#000;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search Flights</span>' +
+            '</div></div>' +
         // Hotel search card
-        '<a href="https://www.aviasales.com/hotels?marker=737825" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #8957e5;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+        '<div onclick="window.open(\'https://www.aviasales.com/hotels?marker=737825\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #8957e5;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83C\uDFE8 Hotel Search</div>' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83C\uDFE8 Reserve a Stay</div>' +
                 '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Compare hotel prices worldwide \u2014 ' + dest + '</div>' +
                 '<div style="color:#8957e5;font-size:0.75rem;margin-top:4px;">Live results, real-time availability</div></div>' +
                 '<span style="background:#8957e5;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search Hotels</span>' +
-            '</div></a>' +
+            '</div></div>' +
         // Tours card
-        '<a href="https://vi.me/s/joel-journeys-vip" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #d29922;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+        '<div onclick="window.open(\'https://vi.me/s/joel-journeys-vip\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #d29922;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83C\uDFD6\uFE0F Tours & Activities</div>' +
-                '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Top-rated experiences at ' + dest + '</div>' +
-                '<div style="color:#d29922;font-size:0.75rem;margin-top:4px;">From $79 \u2014 guided tours, day trips & more</div></div>' +
-                '<span style="background:#d29922;color:#000;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Browse</span>' +
-            '</div></a>' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83C\uDFD6\uFE0F Book an Experience</div>' +
+                '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Top-rated tours & activities at ' + dest + '</div>' +
+                '<div style="color:#d29922;font-size:0.75rem;margin-top:4px;">Guided tours, day trips & more</div></div>' +
+                '<span style="background:#d29922;color:#000;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Browse Tours</span>' +
+            '</div></div>' +
         // Car rental card
-        '<a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #6e40c9;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+        '<div onclick="window.open(\'https://getrentacar.tpo.lv/G4VtE4W1\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #6e40c9;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83D\uDE97 Car Rental</div>' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83D\uDE97 Get a Car Rental</div>' +
                 '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Compare car rental prices at your destination</div>' +
                 '<div style="color:#6e40c9;font-size:0.75rem;margin-top:4px;">Best rates from major rental agencies</div></div>' +
-                '<span style="background:#6e40c9;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search</span>' +
-            '</div></a>' +
+                '<span style="background:#6e40c9;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search Cars</span>' +
+            '</div></div>' +
         // GigSky eSIM card
-        '<a href="https://plans.gigsky.com/27H3X8P/2CTPL/?uid=5" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #1f6feb;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+        '<div onclick="window.open(\'https://plans.gigsky.com/27H3X8P/2CTPL/?uid=5\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #1f6feb;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83D\uDCF6 GigSky eSIM — Stay Connected</div>' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83D\uDCF1 Get a Travel eSIM</div>' +
                 '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Data plans from $2.99 \u2014 190+ countries, instant activation</div>' +
                 '<div style="color:#1f6feb;font-size:0.75rem;margin-top:4px;">Use code JOELSKY for 10% off \u2014 global, regional & cruise eSIMs</div></div>' +
                 '<span style="background:#1f6feb;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Get eSIM</span>' +
-            '</div></a>' +
+            '</div></div>' +
         // TimeFlys Private Jets card
-        '<a href="https://www.timeflys.co/?aff=TF113" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #f85149;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+        '<div onclick="window.open(\'https://www.timeflys.co/?aff=TF113\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #f85149;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\u2708\uFE0F TimeFlys — Private Jet Charter</div>' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\u2708\uFE0F Charter a Private Jet</div>' +
                 '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Luxury private jets \u2014 LA, Miami, New York, London & more</div>' +
                 '<div style="color:#f85149;font-size:0.75rem;margin-top:4px;">Charter flights from $3,500 \u2014 Phenom 300 to Gulfstream G650</div></div>' +
-                '<span style="background:#f85149;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Charter</span>' +
-            '</div></a>' +
+                '<span style="background:#f85149;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Charter Jet</span>' +
+            '</div></div>' +
         // Cruise Deals card
-        '<a href="https://mavely.app.link/KgesyNYsV3b" target="_blank" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #3fb950;border-radius:8px;padding:14px;margin-bottom:10px;text-decoration:none;">' +
+        '<div onclick="window.open(\'https://mavely.app.link/KgesyNYsV3b\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #3fb950;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;">' +
-                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83C\uDFDD\uFE0F Cruise Deals — Mavely</div>' +
+                '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83C\uDFDD\uFE0F Browse Cruise Deals</div>' +
                 '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">All major cruise lines \u2014 Carnival, Royal Caribbean, Norwegian, Disney</div>' +
                 '<div style="color:#3fb950;font-size:0.75rem;margin-top:4px;">No booking fees \u2014 flexible payment plans \u2014 best price guarantee</div></div>' +
                 '<span style="background:#3fb950;color:#000;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Browse Cruises</span>' +
-            '</div></a>' +
+            '</div></div>' +
         '</div>';
 
     // Never show "no deals" — always show bonus deals
@@ -652,7 +652,7 @@ async function submitBooking() {
         dealsHtml +
         bonusHtml +
         '<p style="color:#8b949e;font-size:0.85rem;margin:16px 0;">' + (booking.notes ? '<strong style="color:#f0883e;">Special Requests:</strong> ' + booking.notes + ' — click any deal above or search below!' : 'Click any deal above to book, or search more options below.') + '</p>' +
-        '<a href="https://joeljourneys.com" target="_blank" style="display:block;background:linear-gradient(135deg,#0096ff,#0070cc);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;text-align:center;margin:16px 0;">Browse All Deals at joeljourneys.com</a>';
+        '<div onclick="window.open(\'https://joeljourneys.com\',\'_blank\')" style="display:block;background:linear-gradient(135deg,#0096ff,#0070cc);color:#fff;padding:14px 20px;border-radius:8px;text-decoration:none;font-weight:600;text-align:center;margin:16px 0;cursor:pointer;">Browse All Deals at joeljourneys.com</div>';
 
 }
 </script>
