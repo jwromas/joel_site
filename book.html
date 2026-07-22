@@ -408,7 +408,7 @@ function matchesDestination(deal, dest) {
     return keywords.some(function(kw) { return dealText.includes(kw.toLowerCase()); });
 }
 
-var DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1528448623753560205/A8FKPVSOOmxKkdRwqB5QuuJpiKzK3VHdqnmoP4EzXCm5H_IvJqQQlDrvoCX4z3BTWA5j';
+var DISCORD_WEBHOOK = 'https://discordapp.com/api/webhooks/1529571432764538920/M3eQtmxNoV_Gd8D2N1lkj5TfdD59qjV6aFyeL5ckq9S-6EXX2AbiXNzKJnZNdFqEQZRw';
 
 var lastSubmit = 0;
 
@@ -656,6 +656,8 @@ async function submitBooking() {
 
 }
 </script>
-
+<script>
+fetch('/track', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({page:'book.html', referrer:document.referrer||'direct'})});
+</script>
 </body>
 </html>

@@ -496,7 +496,7 @@
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1980336152611329&ev=PageView&noscript=1" /></noscript>
 
 <script>
-const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1528448623753560205/A8FKPVSOOmxKkdRwqB5QuuJpiKzK3VHdqnmoP4EzXCm5H_IvJqQQlDrvoCX4z3BTWA5j";
+const DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1529571432764538920/M3eQtmxNoV_Gd8D2N1lkj5TfdD59qjV6aFyeL5ckq9S-6EXX2AbiXNzKJnZNdFqEQZRw";
 async function fireDiscord(payload) { try { await fetch(DISCORD_WEBHOOK, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }); } catch (e) {} }
 (function() { fireDiscord({ content: "**Joel Journeys — Page Visit**\nUser: " + (localStorage.getItem('auth_email') || 'Guest') + "\nPage: " + window.location.href + "\nTime: " + new Date().toLocaleString() }); })();
 document.addEventListener('click', function(e) {
