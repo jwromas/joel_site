@@ -127,122 +127,38 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--soft-cream); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.8; }
         
-        /* --- HERO SECTION (SHORTENED) --- */
         .hero { 
             height: 50vh; 
             background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
                         url('https://images.unsplash.com/photo-1533105079728-727973ef270a?q=80&w=2000') center/cover no-repeat; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center; 
-            color: var(--white);
-            padding: 0 20px;
+            display: flex; align-items: center; justify-content: center; text-align: center; 
+            color: var(--white); padding: 0 20px;
         }
-        .hero-content h1 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: clamp(2.5rem, 6vw, 4.5rem); 
-            font-weight: 400; 
-            margin-bottom: 10px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
-        .hero-content p { 
-            font-size: 1.2rem; 
-            letter-spacing: 3px; 
-            text-transform: uppercase; 
-            font-weight: 300; 
-            margin-bottom: 30px;
-        }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; margin-bottom: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 1.2rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300; margin-bottom: 30px; }
 
-        /* --- WHITE LABEL SECTION (MOVED TO TOP) --- */
-        .wl-section { 
-            background: var(--deep-navy); 
-            color: var(--white); 
-            padding: 60px 20px; 
-            text-align: center; 
-        }
+        .wl-section { background: var(--deep-navy); color: var(--white); padding: 60px 20px; text-align: center; }
         .wl-section h2 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 10px; }
         .wl-section p { margin-bottom: 40px; opacity: 0.8; font-weight: 300; }
-        
-        .wl-container { 
-            max-width: 1100px; 
-            margin: 0 auto 40px; 
-            background: var(--white); 
-            padding: 20px; 
-            border-radius: 15px; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            min-height: 200px;
-        }
+        .wl-container { max-width: 1100px; margin: 0 auto 40px; background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); min-height: 200px; }
 
-        /* --- QUICK RESOURCES BAR --- */
-        .quick-resources { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; 
-            gap: 12px; 
-            padding: 30px 20px; 
-            max-width: 1000px; 
-            margin: 0 auto; 
-            position: relative; 
-            z-index: 2; 
-        }
-        .qr-link {
-            background: var(--white);
-            color: var(--deep-navy);
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: 0.3s;
-            border: 1px solid #eee;
-        }
+        .quick-resources { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; padding: 30px 20px; max-width: 1000px; margin: 0 auto; position: relative; z-index: 2; }
+        .qr-link { background: var(--white); color: var(--deep-navy); text-decoration: none; padding: 12px 24px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; border: 1px solid #eee; }
         .qr-link:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
         .qr-link.gold { background: var(--luxury-gold); color: var(--white); border-color: var(--luxury-gold); }
 
-        /* --- INTRODUCTION --- */
         .intro { max-width: 800px; margin: 60px auto; text-align: center; padding: 0 20px; }
         .intro h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px; color: var(--deep-navy); }
         .intro p { font-size: 1.1rem; color: var(--text-light); margin-bottom: 40px; }
 
-        /* --- ITINERARY TIMELINE --- */
         .itinerary { max-width: 900px; margin: 0 auto 80px; padding: 0 20px; }
-        .day-block { 
-            display: flex; 
-            gap: 40px; 
-            margin-bottom: 60px; 
-            background: var(--white); 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border-left: 5px solid var(--luxury-gold);
-        }
-        .day-number { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 3rem; 
-            color: var(--luxury-gold); 
-            font-weight: 700; 
-            min-width: 80px; 
-        }
+        .day-block { display: flex; gap: 40px; margin-bottom: 60px; background: var(--white); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border-left: 5px solid var(--luxury-gold); }
+        .day-number { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--luxury-gold); font-weight: 700; min-width: 80px; }
         .day-content h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 15px; color: var(--deep-navy); }
         .day-content p { color: var(--text-light); margin-bottom: 20px; }
-        
         .booking-links { display: flex; gap: 15px; flex-wrap: wrap; }
 
-
-        .book-btn { 
-            background: var(--deep-navy); 
-            color: var(--white); 
-            text-decoration: none; 
-            padding: 10px 20px; 
-            border-radius: 50px; 
-            font-size: 0.85rem; 
-            font-weight: 600; 
-            transition: 0.3s;
-            border: 1px solid var(--deep-navy);
-        }
+        .book-btn { background: var(--deep-navy); color: var(--white); text-decoration: none; padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: 0.3s; border: 1px solid var(--deep-navy); }
         .book-btn:hover { background: transparent; color: var(--deep-navy); }
         .book-btn.gold { background: var(--luxury-gold); border-color: var(--luxury-gold); color: var(--white); }
 
@@ -296,14 +212,10 @@
     </style>
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GT-5R7P44VX"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GT-5R7P44VX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div id="google_translate_element"></div>
 
-    <!-- STICKY NAVBAR -->
     <nav id="topnav">
         <div class="nav-inner">
             <a href="#" class="nav-logo">JOEL JOURNEYS</a>
@@ -321,19 +233,16 @@
         </div>
     </nav>
 
-    <!-- AUTH OVERLAY: EMAIL + CAPTCHA CHECKBOX -->
     <div id="auth-overlay">
         <div id="auth-box">
             <h2>Welcome to Joel Journeys</h2>
             <p>Enter your email and verify you are human.</p>
             <input id="gate-email" class="auth-input" type="email" placeholder="Your email" autocomplete="off">
-            
             <div id="captcha-box" style="display:flex;align-items:center;justify-content:center;gap:12px;margin:15px 0;padding:14px;border:2px solid #ddd;border-radius:8px;background:#f9f9f9;cursor:pointer;transition:0.3s;user-select:none;" onclick="toggleCaptcha()">
                 <div id="captcha-check" style="width:24px;height:24px;border:2px solid #999;border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;color:#fff;transition:0.3s;flex-shrink:0;">✓</div>
                 <span id="captcha-label" style="font-size:0.95rem;color:#555;font-family:'Inter',sans-serif;">I am not a robot</span>
                 <div id="captcha-spinner" style="display:none;width:24px;height:24px;border:3px solid #ddd;border-top-color:#32a8dd;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0;"></div>
             </div>
-            
             <button class="auth-btn" id="gate-btn" onclick="passGate()" disabled style="opacity:0.5;">Enter</button>
             <div class="auth-error" id="gate-err">Please enter a valid email.</div>
             <div style="margin-top:20px;border-top:1px solid #eee;padding-top:16px;">
@@ -347,132 +256,61 @@
         </div>
     </div>
 
-    <style>
-        @keyframes spin { to { transform: rotate(360deg); } }
-    </style>
+    <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
 
     <script>
         let captchaDone = false;
-
         function toggleCaptcha() {
             if (captchaDone) return;
             const check = document.getElementById('captcha-check');
             const label = document.getElementById('captcha-label');
             const spinner = document.getElementById('captcha-spinner');
             const box = document.getElementById('captcha-box');
-            check.style.display = 'none';
-            label.style.display = 'none';
-            spinner.style.display = 'block';
-            box.style.borderColor = '#32a8dd';
-            box.style.cursor = 'default';
+            check.style.display = 'none'; label.style.display = 'none'; spinner.style.display = 'block';
+            box.style.borderColor = '#32a8dd'; box.style.cursor = 'default';
             setTimeout(function() {
-                spinner.style.display = 'none';
-                check.style.display = 'flex';
-                check.style.background = '#32a8dd';
-                check.style.borderColor = '#32a8dd';
-                check.style.color = '#fff';
-                label.textContent = 'Verified';
-                label.style.color = '#32a8dd';
-                captchaDone = true;
-                box.style.borderColor = '#32a8dd';
-                document.getElementById('gate-btn').disabled = false;
-                document.getElementById('gate-btn').style.opacity = '1';
+                spinner.style.display = 'none'; check.style.display = 'flex'; check.style.background = '#32a8dd';
+                check.style.borderColor = '#32a8dd'; check.style.color = '#fff'; label.textContent = 'Verified';
+                label.style.color = '#32a8dd'; captchaDone = true; box.style.borderColor = '#32a8dd';
+                document.getElementById('gate-btn').disabled = false; document.getElementById('gate-btn').style.opacity = '1';
             }, 1200);
         }
-
         function passGate() {
             const email = document.getElementById('gate-email').value.trim();
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                const err = document.getElementById('gate-err');
-                err.classList.add('show');
-                setTimeout(() => err.classList.remove('show'), 2000);
-                return;
-            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { const err = document.getElementById('gate-err'); err.classList.add('show'); setTimeout(() => err.classList.remove('show'), 2000); return; }
             if (!captchaDone) return;
-            localStorage.setItem('auth_email', email);
-            localStorage.setItem('auth_passed', '1');
+            localStorage.setItem('auth_email', email); localStorage.setItem('auth_passed', '1');
             document.cookie = "auth_passed=1; path=/; max-age=86400; SameSite=Lax";
             document.getElementById('auth-overlay').classList.add('hidden');
         }
-
-        document.getElementById('gate-email').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' && captchaDone) passGate();
-        });
-
-        window.addEventListener('pageshow', function() {
-            if (localStorage.getItem('auth_passed')) {
-                document.getElementById('auth-overlay').classList.add('hidden');
-            }
-        });
-
+        document.getElementById('gate-email').addEventListener('keydown', function(e) { if (e.key === 'Enter' && captchaDone) passGate(); });
+        window.addEventListener('pageshow', function() { if (localStorage.getItem('auth_passed')) { document.getElementById('auth-overlay').classList.add('hidden'); } });
         document.getElementById('gate-email').focus();
-
-        // --- BYPASS PIN ---
-        document.getElementById('bypass-toggle').addEventListener('click', function() {
-            const w = document.getElementById('bypass-input-wrap');
-            w.style.display = w.style.display === 'none' ? 'block' : 'none';
-            if (w.style.display === 'block') document.getElementById('bypass-pin').focus();
-        });
-        document.getElementById('bypass-pin').addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') checkBypass();
-        });
+        document.getElementById('bypass-toggle').addEventListener('click', function() { const w = document.getElementById('bypass-input-wrap'); w.style.display = w.style.display === 'none' ? 'block' : 'none'; if (w.style.display === 'block') document.getElementById('bypass-pin').focus(); });
+        document.getElementById('bypass-pin').addEventListener('keydown', function(e) { if (e.key === 'Enter') checkBypass(); });
         function checkBypass() {
             if (document.getElementById('bypass-pin').value.trim() === '3030') {
-                document.getElementById('auth-overlay').classList.add('hidden');
-                localStorage.setItem('auth_passed', '1');
+                document.getElementById('auth-overlay').classList.add('hidden'); localStorage.setItem('auth_passed', '1');
                 document.cookie = "auth_passed=1; path=/; max-age=86400; SameSite=Lax";
-            } else {
-                const err = document.getElementById('bypass-err');
-                err.classList.add('show');
-                setTimeout(() => err.classList.remove('show'), 2000);
-                document.getElementById('bypass-pin').value = '';
-            }
+            } else { const err = document.getElementById('bypass-err'); err.classList.add('show'); setTimeout(() => err.classList.remove('show'), 2000); document.getElementById('bypass-pin').value = ''; }
         }
-
-        if (window.location.search.includes('logout=1')) {
-            localStorage.removeItem('auth_passed');
-            localStorage.removeItem('auth_email');
-            document.cookie = "auth_passed=; path=/; max-age=0";
-        }
-        if (localStorage.getItem('auth_passed')) {
-            document.getElementById('auth-overlay').classList.add('hidden');
-        }
-
-        // --- HAMBURGER TOGGLE ---
-        document.getElementById('nav-toggle').addEventListener('click', function() {
-            document.getElementById('nav-links').classList.toggle('open');
-        });
-        document.querySelectorAll('#nav-links a').forEach(function(a) {
-            a.addEventListener('click', function() {
-                document.getElementById('nav-links').classList.remove('open');
-            });
-        });
-
-        // --- BACK TO TOP ---
-        var backBtn = document.createElement('div');
-        backBtn.id = 'back-top';
-        backBtn.innerHTML = '↑';
-        backBtn.setAttribute('aria-label', 'Back to top');
-        document.body.appendChild(backBtn);
+        if (window.location.search.includes('logout=1')) { localStorage.removeItem('auth_passed'); localStorage.removeItem('auth_email'); document.cookie = "auth_passed=; path=/; max-age=0"; }
+        if (localStorage.getItem('auth_passed')) { document.getElementById('auth-overlay').classList.add('hidden'); }
+        document.getElementById('nav-toggle').addEventListener('click', function() { document.getElementById('nav-links').classList.toggle('open'); });
+        document.querySelectorAll('#nav-links a').forEach(function(a) { a.addEventListener('click', function() { document.getElementById('nav-links').classList.remove('open'); }); });
+        var backBtn = document.createElement('div'); backBtn.id = 'back-top'; backBtn.innerHTML = '↑'; backBtn.setAttribute('aria-label', 'Back to top'); document.body.appendChild(backBtn);
         backBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
-        window.addEventListener('scroll', function() {
-            backBtn.classList.toggle('visible', window.scrollY > 400);
-        });
-
-        // --- SCROLL SPY ---
+        window.addEventListener('scroll', function() { backBtn.classList.toggle('visible', window.scrollY > 400); });
         var navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
         window.addEventListener('scroll', function() {
             var fromTop = window.scrollY + 80;
             navLinks.forEach(function(link) {
                 var section = document.getElementById(link.getAttribute('href').slice(1));
-                if (section) {
-                    link.classList.toggle('active', section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop);
-                }
+                if (section) { link.classList.toggle('active', section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop); }
             });
         });
     </script>
 
-    <!-- HERO (SHORTENED) -->
     <div class="hero">
         <div class="hero-content">
             <p>A Signature Journey</p>
@@ -490,20 +328,29 @@
       })();
 </script>
 
-    <!-- FLIGHT & HOTEL SEARCH -->
     <div class="wl-section" id="flights">
         <h2>Custom Logistics Portal</h2>
         <p>Search flights and hotels for your journey. <a href="?logout=1" style="color:#fff;text-decoration:underline;opacity:0.6;font-size:0.8rem;">Logout</a></p>
-        
         <div class="wl-container">
             <div id="tpwl-search"></div>
             <div id="tpwl-tickets"></div>
             <script async src="https://tpemb.com/content?currency=usd&trs=538003&shmarker=737825&show_hotels=true&powered_by=true&locale=en&searchUrl=www.aviasales.com%2Fsearch&primary_override=%2332a8dd&color_button=%2332a8dd&color_icons=%2332a8dd&dark=%23262626&light=%23FFFFFF&secondary=%23FFFFFF&special=%23C4C4C4&color_focused=%2332a8dd&border_radius=0&plain=false&promo_id=7879&campaign_id=100" charset="utf-8"></script>
+            <script>
+            (function() {
+                function hideCheap(root) {
+                    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+                    var nodes = [];
+                    while (walker.nextNode()) nodes.push(walker.currentNode);
+                    nodes.forEach(function(n) { if (n.textContent.toLowerCase().indexOf('cheap') > -1) { n.textContent = n.textContent.replace(/cheap/gi, 'best'); } });
+                }
+                var obs = new MutationObserver(function(mutations) { mutations.forEach(function(m) { m.addedNodes.forEach(function(node) { if (node.nodeType === 1) hideCheap(node); }); }); });
+                obs.observe(document.body, { childList: true, subtree: true });
+                hideCheap(document.body);
+            })();
+            </script>
         </div>
-
     </div>
 
-    <!-- HOTELS -->
     <div id="hotels" class="wl-section" style="background: var(--white);">
         <h2 style="font-family: 'Playfair Display', serif; color: var(--deep-navy);">Find Your Stay</h2>
         <p style="color: var(--text-light);">Browse curated hotels and accommodations for your journey.</p>
@@ -514,7 +361,6 @@
         </div>
     </div>
 
-    <!-- TESTIMONIALS -->
     <div class="wl-section">
         <h2>What Travelers Say</h2>
         <p>Real experiences from guests who booked through our portal.</p>
@@ -528,10 +374,8 @@
                 <p style="margin-top: 10px; font-weight: 600; color: var(--luxury-gold);">— Jennifer Z., Galapagos Islands</p>
             </div>
         </div>
-
     </div>
 
-    <!-- QUICK RESOURCES -->
     <div class="quick-resources">
         <a href="https://tinyurl.com/bdzary8x" target="_blank" class="qr-link">Emerald Grotto & Coast Tour</a>
         <a href="https://tinyurl.com/3jwem57h" target="_blank" class="qr-link">Pompeii & Amalfi Day Trip</a>
@@ -541,233 +385,34 @@
         <a href="https://qeeq.tpo.lv/dOqGaFg8" target="_blank" class="qr-link gold">Transportation</a>
     </div>
 
-    <!-- INTRO -->
     <div class="intro">
         <h2 class="section-title">Where Elegance Meets the Ocean</h2>
         <p>A meticulously curated 7-day odyssey through the cliffs of Positano, the gardens of Ravello, and the crystal waters of Capri. Every transfer is seamless; every moment is exclusive.</p>
     </div>
 
-    <!-- DISCLAIMER -->
     <div style="text-align:center; max-width: 800px; margin: 0 auto 40px auto; padding: 0 20px;">
-        <p style="font-size: 0.9rem; color: var(--luxury-gold); font-weight: 600; font-style: italic;">
-            Notice: Please always call ahead to confirm times and dates for all private services.
-        </p>
+        <p style="font-size: 0.9rem; color: var(--luxury-gold); font-weight: 600; font-style: italic;">Notice: Please always call ahead to confirm times and dates for all private services.</p>
     </div>
 
-    <!-- ITINERARY -->
     <div id="itinerary" class="itinerary">
-        
-        <!-- DAY 1 -->
-        <div class="day-block">
-            <div class="day-number">01</div>
-            <div class="day-content">
-                <h3>The Arrival & Sanctuary</h3>
-                <p>Arrive via private chauffeur from Naples. Check into your cliffside sanctuary with a champagne welcome and panoramic views of the Tyrrhenian Sea.</p>
-                <div class="booking-links">
-                    <a href="https://tp.media/r?campaign_id=147&marker=737825&p=4439&trs=538003&u=https%3A%2F%2Fgettransfer.com" class="book-btn">Book Private Transfer</a>
-                    <a href="https://www.aviasales.com/hotels?marker=737825" class="book-btn gold">Reserve Villa</a>
-                    <a href="https://mavely.app.link/2WgOXj96S3b" target="_blank" class="book-btn">Book Villa</a>
-                    <a href="https://aviasales.tpo.lv/utRYWVFa" class="book-btn">Book Flights</a>
-                    <a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Flight</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 2 -->
-        <div class="day-block">
-            <div class="day-number">02</div>
-            <div class="day-content">
-                <h3>Azure Horizons</h3>
-                <p>A full-day private yacht charter exploring the hidden grottoes of Capri. Includes a gourmet lunch prepared on board by a private chef.</p>
-                <div class="booking-links">
-                    <a href="https://searadar.tpo.lv/A9iLJHms" class="book-btn gold">Book Private Yacht Charter</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 3 -->
-        <div class="day-block">
-            <div class="day-number">03</div>
-            <div class="day-content">
-                <h3>The Art of the Coast</h3>
-                <p>A private guided walk through the vertical village of Positano, followed by an exclusive tasting at a heritage lemon grove.</p>
-                <div class="booking-links">
-                    <a href="https://klook.tpo.lv/DTtmhB7W" class="book-btn">Book VIP Guide</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 4 -->
-        <div class="day-block">
-            <div class="day-number">04</div>
-            <div class="day-content">
-                <h3>Ravello Heights</h3>
-                <p>Explore the gardens of Villa Cimbrone and the music of the mountains. A day of peace, poetry, and high-altitude luxury.</p>
-                <div class="booking-links">
-                    <a href="https://wegotrip.tpo.lv/IIvRgn0d" class="book-btn gold">Reserve Experience</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 5 -->
-        <div class="day-block">
-            <div class="day-number">05</div>
-            <div class="day-content">
-                <h3>Intui Travel Experience</h3>
-                <p>Curated tours and excursions across the Amalfi Coast. Private guides, small groups, and authentic local encounters.</p>
-                <div class="booking-links">
-                    <a href="https://intui.tpo.lv/HLYMscXw" class="book-btn gold">Book Intui Tour</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 6 -->
-        <div class="day-block">
-            <div class="day-number">06</div>
-            <div class="day-content">
-                <h3>Secret Shores</h3>
-                <p>Discover the hidden coves of the coast via a private tender boat. A day of seclusion, swimming, and serenity.</p>
-                <div class="booking-links">
-                    <a href="https://vi.me/jwh2p" target="_blank" class="book-btn gold">Book Boat Tour</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- DAY 7 -->
-        <div class="day-block">
-            <div class="day-number">07</div>
-            <div class="day-content">
-                <h3>The Final Ascent</h3>
-                <p>A final morning of leisure before your private transfer carries you back to Naples for your journey home.</p>
-                <div class="booking-links">
-                    <a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Departure Flight</a>
-                    <a href="https://tp.media/r?campaign_id=147&marker=737825&p=4439&trs=538003&u=https%3A%2F%2Fgettransfer.com" class="book-btn gold">Book Departure Transfer</a>
-                </div>
-            </div>
-        </div>
-
+        <div class="day-block"><div class="day-number">01</div><div class="day-content"><h3>The Arrival & Sanctuary</h3><p>Arrive via private chauffeur from Naples. Check into your cliffside sanctuary with a champagne welcome and panoramic views of the Tyrrhenian Sea.</p><div class="booking-links"><a href="https://tp.media/r?campaign_id=147&marker=737825&p=4439&trs=538003&u=https%3A%2F%2Fgettransfer.com" class="book-btn">Book Private Transfer</a><a href="https://www.aviasales.com/hotels?marker=737825" class="book-btn gold">Reserve Villa</a><a href="https://mavely.app.link/2WgOXj96S3b" target="_blank" class="book-btn">Book Villa</a><a href="https://aviasales.tpo.lv/utRYWVFa" class="book-btn">Book Flights</a><a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Flight</a></div></div></div>
+        <div class="day-block"><div class="day-number">02</div><div class="day-content"><h3>Azure Horizons</h3><p>A full-day private yacht charter exploring the hidden grottoes of Capri. Includes a gourmet lunch prepared on board by a private chef.</p><div class="booking-links"><a href="https://searadar.tpo.lv/A9iLJHms" class="book-btn gold">Book Private Yacht Charter</a></div></div></div>
+        <div class="day-block"><div class="day-number">03</div><div class="day-content"><h3>The Art of the Coast</h3><p>A private guided walk through the vertical village of Positano, followed by an exclusive tasting at a heritage lemon grove.</p><div class="booking-links"><a href="https://klook.tpo.lv/DTtmhB7W" class="book-btn">Book VIP Guide</a></div></div></div>
+        <div class="day-block"><div class="day-number">04</div><div class="day-content"><h3>Ravello Heights</h3><p>Explore the gardens of Villa Cimbrone and the music of the mountains. A day of peace, poetry, and high-altitude luxury.</p><div class="booking-links"><a href="https://wegotrip.tpo.lv/IIvRgn0d" class="book-btn gold">Reserve Experience</a></div></div></div>
+        <div class="day-block"><div class="day-number">05</div><div class="day-content"><h3>Intui Travel Experience</h3><p>Curated tours and excursions across the Amalfi Coast. Private guides, small groups, and authentic local encounters.</p><div class="booking-links"><a href="https://intui.tpo.lv/HLYMscXw" class="book-btn gold">Book Intui Tour</a></div></div></div>
+        <div class="day-block"><div class="day-number">06</div><div class="day-content"><h3>Secret Shores</h3><p>Discover the hidden coves of the coast via a private tender boat. A day of seclusion, swimming, and serenity.</p><div class="booking-links"><a href="https://vi.me/jwh2p" target="_blank" class="book-btn gold">Book Boat Tour</a></div></div></div>
+        <div class="day-block"><div class="day-number">07</div><div class="day-content"><h3>The Final Ascent</h3><p>A final morning of leisure before your private transfer carries you back to Naples for your journey home.</p><div class="booking-links"><a href="https://mavely.app.link/kiCTklA7S3b" target="_blank" class="book-btn gold">Book Departure Flight</a><a href="https://tp.media/r?campaign_id=147&marker=737825&p=4439&trs=538003&u=https%3A%2F%2Fgettransfer.com" class="book-btn gold">Book Departure Transfer</a></div></div></div>
     </div>
 
-    <!-- TRAVEL PLANNING PROCESS INFOGRAPHIC -->
-    <div id="planning" style="background: var(--deep-navy); padding: 80px 20px;">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--white); text-align: center; margin-bottom: 10px;">Your Journey, Simplified</h2>
-            <p style="text-align: center; color: rgba(255,255,255,0.6); margin-bottom: 50px; font-weight: 300;">From first contact to safe return — here's how we take care of everything.</p>
-
-            <!-- STEP FLOW -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 60px;">
-                
-                <div style="text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(197,160,89,0.3);">
-                    <div style="width: 60px; height: 60px; background: var(--luxury-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">✈️</div>
-                    <div style="color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px;">STEP 01</div>
-                    <h3 style="font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.2rem; margin-bottom: 10px;">Inquire</h3>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Reach out via Discord, Telegram, or our booking form. Tell us where you want to go.</p>
-                </div>
-
-                <div style="text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(197,160,89,0.3);">
-                    <div style="width: 60px; height: 60px; background: var(--luxury-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">📋</div>
-                    <div style="color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px;">STEP 02</div>
-                    <h3 style="font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.2rem; margin-bottom: 10px;">Customize</h3>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">We craft a bespoke itinerary with flights, transfers, excursions, and stays — all tailored to you.</p>
-                </div>
-
-                <div style="text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(197,160,89,0.3);">
-                    <div style="width: 60px; height: 60px; background: var(--luxury-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">✅</div>
-                    <div style="color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px;">STEP 03</div>
-                    <h3 style="font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.2rem; margin-bottom: 10px;">Confirm</h3>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Review your plan, confirm bookings.</p>
-                </div>
-
-                <div style="text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(197,160,89,0.3);">
-                    <div style="width: 60px; height: 60px; background: var(--luxury-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">🌍</div>
-                    <div style="color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px;">STEP 04</div>
-                    <h3 style="font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.2rem; margin-bottom: 10px;">Travel</h3>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">We're with you 24/7 — rebooking, rerouting, and handling anything that comes up.</p>
-                </div>
-            </div>
-
-            <!-- WHAT TO EXPECT -->
-            <div style="background: rgba(255,255,255,0.03); border-radius: 15px; padding: 40px; margin-bottom: 40px; border: 1px solid rgba(197,160,89,0.2);">
-                <h3 style="font-family: 'Playfair Display', serif; color: var(--luxury-gold); font-size: 1.4rem; margin-bottom: 20px; text-align: center;">What to Expect</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                    <div>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 12px;">✦ Response within 2 hours during business hours</p>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 12px;">✦ Full transparency — no hidden fees</p>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">✦ 24/7 concierge support while traveling</p>
-                    </div>
-                    <div>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 12px;">✦ Free cancellation on most bookings</p>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 12px;">✦ Personalized travel dossier with all confirmations</p>
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">✦ Real-time deal alerts for your destination</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- TRAVEL TIPS + AREA INFO -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
-                <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; border: 1px solid rgba(197,160,89,0.2);">
-                    <h3 style="font-family: 'Playfair Display', serif; color: var(--luxury-gold); font-size: 1.2rem; margin-bottom: 15px;">Travel Tips</h3>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Always carry a copy of your passport and visa</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Notify your bank of travel dates to avoid card blocks</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Download offline maps for your destination</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Keep emergency cash in local currency</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8;">• Book airport transfers in advance</p>
-                </div>
-                <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; border: 1px solid rgba(197,160,89,0.2);">
-                    <h3 style="font-family: 'Playfair Display', serif; color: var(--luxury-gold); font-size: 1.2rem; margin-bottom: 15px;">Amalfi Coast Info</h3>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• <strong style="color: rgba(255,255,255,0.8);">Best time:</strong> April–June or September–October</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• <strong style="color: rgba(255,255,255,0.8);">Currency:</strong> Euro (EUR)</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• <strong style="color: rgba(255,255,255,0.8);">Language:</strong> Italian (English widely spoken in tourist areas)</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• <strong style="color: rgba(255,255,255,0.8);">Transport:</strong> Ferries run May–October; private car recommended</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8;">• <strong style="color: rgba(255,255,255,0.8);">Currency tip:</strong> Carry cash for small villages and taxis</p>
-                </div>
-            </div>
-
-            <!-- SAFE RETURN + EMERGENCY -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
-                <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; border: 1px solid rgba(197,160,89,0.2);">
-                    <h3 style="font-family: 'Playfair Display', serif; color: var(--luxury-gold); font-size: 1.2rem; margin-bottom: 15px;">Getting Home Safely</h3>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Confirm return transfers 24 hours before departure</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Alternative transport arranged instantly if needed</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Keep boarding pass and ID accessible at all times</p>
-                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8;">• Arrive at the airport 2.5 hours before international flights</p>
-                </div>
-                <div style="background: linear-gradient(135deg, rgba(192,57,43,0.2), rgba(197,160,89,0.1)); border-radius: 15px; padding: 30px; border: 1px solid rgba(192,57,43,0.3);">
-                    <h3 style="font-family: 'Playfair Display', serif; color: #e74c3c; font-size: 1.2rem; margin-bottom: 15px;">Emergency Contacts</h3>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 10px;"><strong style="color: var(--white);">EU Emergency:</strong> 112 (all services)</p>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 10px;"><strong style="color: var(--white);">Police:</strong> 113</p>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 10px;"><strong style="color: var(--white);">Ambulance:</strong> 118</p>
-                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 15px;"><strong style="color: var(--white);">Coast Guard:</strong> 1530</p>
-                    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
-                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 8px;"><strong style="color: var(--luxury-gold);">Joel Journeys 24/7:</strong></p>
-                        <a href="https://discord.gg/XskM3NATxm" target="_blank" style="display: inline-block; background: #5865F2; color: var(--white); padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Join Our Discord</a>
-                        <a href="https://t.me/+n6glHFtFcOY3NjIx" target="_blank" style="display: inline-block; background: #0088cc; color: var(--white); padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-left: 8px;">Telegram</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CONTACT CTA -->
-            <div style="text-align: center;">
-                <a href="book.html" style="display: inline-block; background: var(--luxury-gold); color: var(--white); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: 0.3s;">Start Planning Your Journey</a>
-                <a href="https://jwromas.github.io/adcamp/" target="_blank" style="display: inline-block; background: transparent; color: var(--luxury-gold); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; border: 2px solid var(--luxury-gold); margin-left: 15px; transition: 0.3s;">Additional Services</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- SHOP BUTTON ONLY SECTION -->
     <div id="shop" style="text-align: center; padding: 80px 20px; background-color: var(--white);">
         <h2 style="font-family: 'Playfair Display', serif; color: var(--deep-navy); margin-bottom: 15px;">The Signature Boutique</h2>
         <p style="margin-bottom: 30px; color: var(--text-light); max-width: 600px; margin-left: auto; margin-right: auto;">Browse our curated global collection of exclusive excursions and VIP upgrades.</p>
         <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding: 15px 40px; font-size: 1rem;">VISIT THE SHOP</a>
     </div>
 
-    <!-- BLOG SECTION -->
     <div id="blog" style="background: var(--white); padding: 80px 20px;">
         <div style="max-width: 900px; margin: 0 auto;">
             <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--deep-navy); text-align: center; margin-bottom: 50px;">From Our Blog</h2>
-            
-
-
             <article style="margin-bottom: 60px; border-bottom: 1px solid #eee; padding-bottom: 40px;">
                 <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-navy); margin-bottom: 10px;">Private Jet Travel: The Insider's Guide</h3>
                 <p style="color: var(--luxury-gold); font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 20px;">JUNE 10, 2026 · LUXURY TRAVEL</p>
@@ -776,7 +421,6 @@
                 <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">Our pick: for European travel, TimeFlys consistently offers the best balance of pricing and aircraft quality. We've used them for Amalfi, Ibiza, and Saint-Tropez routes with flawless results.</p>
                 <a href="https://www.timeflys.co/?aff=TF113" target="_blank" class="book-btn gold" style="display: inline-block; margin-top: 10px;">Browse Private Jets</a>
             </article>
-
             <article style="margin-bottom: 60px; border-bottom: 1px solid #eee; padding-bottom: 40px;">
                 <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-navy); margin-bottom: 10px;">Why Every Trip Needs a Concierge</h3>
                 <p style="color: var(--luxury-gold); font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 20px;">MAY 28, 2026 · TRAVEL TIPS</p>
@@ -785,7 +429,6 @@
                 <p style="color: var(--text-light); line-height: 1.8; margin-bottom: 15px;">For the price of one upgrade, you can have a concierge manage your entire trip. The peace of mind alone is worth it. The real magic, though, is the access — tables, tours, and experiences that never appear on public booking platforms.</p>
                 <a href="https://vi.me/tK3Da" target="_blank" class="book-btn gold" style="display: inline-block; margin-top: 10px;">Plan Your Journey</a>
             </article>
-
             <article>
                 <h3 style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--deep-navy); margin-bottom: 10px;">Beyond Positano: Hidden Gems of the Amalfi</h3>
                 <p style="color: var(--luxury-gold); font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 20px;">JUNE 18, 2026 · DESTINATIONS</p>
@@ -796,231 +439,71 @@
         </div>
     </div>
 
-    <!-- VIATOR DEALS SECTION -->
     <div id="deals" style="background:var(--soft-cream);padding:80px 20px;">
         <div style="max-width:1000px;margin:0 auto;">
             <h2 style="font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--deep-navy);text-align:center;margin-bottom:10px;">Curated Viator Experiences</h2>
             <p style="text-align:center;color:var(--text-light);margin-bottom:50px;">Top-rated tours and excursions on the Amalfi Coast — book with confidence.</p>
-
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;">
-
-                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
-                    <div style="height:180px;background:url('https://images.unsplash.com/photo-1533105079728-727973ef270a?w=600&h=400&fit=crop') center/cover;"></div>
-                    <div style="padding:20px;">
-                        <p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">BOAT TOUR · MOST POPULAR</p>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Amalfi Coast Boat Tour with Positano Visit</h3>
-                        <p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Full-day small-group cruise from Sorrento. Swim stops, limoncello tasting, and free time in Positano and Amalfi.</p>
-                        <p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $165</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 8 hours · Max 12 guests</span></p>
-                        <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a>
-                    </div>
-                </div>
-
-                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
-                    <div style="height:180px;background:url('https://images.unsplash.com/photo-1599827552590-4f0ce133c5a3?w=600&h=400&fit=crop') center/cover;"></div>
-                    <div style="padding:20px;">
-                        <p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">PRIVATE TOUR · TOP RATED</p>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Pompeii & Amalfi Coast Private Day Trip</h3>
-                        <p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Private driving tour with flexible pickup. Explore Pompeii ruins, Positano, and choose Amalfi or Ravello.</p>
-                        <p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $437</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 8 hours · Private group</span></p>
-                        <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a>
-                    </div>
-                </div>
-
-                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
-                    <div style="height:180px;background:url('https://images.unsplash.com/photo-1589308072229-cb9e1f1a8e1a?w=600&h=400&fit=crop') center/cover;"></div>
-                    <div style="padding:20px;">
-                        <p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">HIKING · BEST SELLER</p>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Path of the Gods Guided Hike</h3>
-                        <p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Guided trek along the legendary Sentiero degli Dei with panoramic coastal views. Transfer from Sorrento included.</p>
-                        <p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $89</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 5 hours · Guided</span></p>
-                        <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a>
-                    </div>
-                </div>
-
-                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
-                    <div style="height:180px;background:url('https://images.unsplash.com/photo-1560107647-23c0f6b33e33?w=600&h=400&fit=crop') center/cover;"></div>
-                    <div style="padding:20px;">
-                        <p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">CAPRI · MUST DO</p>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Capri & Blue Grotto Boat Tour</h3>
-                        <p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Full-day excursion to the island of Capri. Blue Grotto visit, free time in Capri town, and coastal cruise.</p>
-                        <p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $129</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 7 hours · Small group</span></p>
-                        <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a>
-                    </div>
-                </div>
-
-                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
-                    <div style="height:180px;background:url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&h=400&fit=crop') center/cover;"></div>
-                    <div style="padding:20px;">
-                        <p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">FOOD & WINE · EXPERIENCE</p>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Pizza & Gelato Making Class</h3>
-                        <p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Learn to make authentic Neapolitan pizza and gelato from a local chef. Includes ingredients, recipes, and lunch.</p>
-                        <p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $79</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 3 hours · Hands-on</span></p>
-                        <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a>
-                    </div>
-                </div>
-
-                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);">
-                    <div style="height:180px;background:url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=600&h=400&fit=crop') center/cover;"></div>
-                    <div style="padding:20px;">
-                        <p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">LUXURY · PRIVATE</p>
-                        <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Private Yacht Charter — Amalfi Coast</h3>
-                        <p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Exclusive private yacht with skipper. Custom itinerary, prosecco on board, swimming stops, and gourmet lunch.</p>
-                        <p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $1,200</strong> <span style="color:var(--text-light);font-size:0.8rem;">· Full day · Private</span></p>
-                        <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a>
-                    </div>
-                </div>
-
+                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);"><div style="height:180px;background:url('https://images.unsplash.com/photo-1533105079728-727973ef270a?w=600&h=400&fit=crop') center/cover;"></div><div style="padding:20px;"><p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">BOAT TOUR · MOST POPULAR</p><h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Amalfi Coast Boat Tour with Positano Visit</h3><p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Full-day small-group cruise from Sorrento. Swim stops, limoncello tasting, and free time in Positano and Amalfi.</p><p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $165</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 8 hours · Max 12 guests</span></p><a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a></div></div>
+                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);"><div style="height:180px;background:url('https://images.unsplash.com/photo-1599827552590-4f0ce133c5a3?w=600&h=400&fit=crop') center/cover;"></div><div style="padding:20px;"><p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">PRIVATE TOUR · TOP RATED</p><h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Pompeii & Amalfi Coast Private Day Trip</h3><p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Private driving tour with flexible pickup. Explore Pompeii ruins, Positano, and choose Amalfi or Ravello.</p><p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $437</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 8 hours · Private group</span></p><a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a></div></div>
+                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);"><div style="height:180px;background:url('https://images.unsplash.com/photo-1589308072229-cb9e1f1a8e1a?w=600&h=400&fit=crop') center/cover;"></div><div style="padding:20px;"><p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">HIKING · BEST SELLER</p><h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Path of the Gods Guided Hike</h3><p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Guided trek along the legendary Sentiero degli Dei with panoramic coastal views. Transfer from Sorrento included.</p><p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $89</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 5 hours · Guided</span></p><a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a></div></div>
+                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);"><div style="height:180px;background:url('https://images.unsplash.com/photo-1560107647-23c0f6b33e33?w=600&h=400&fit=crop') center/cover;"></div><div style="padding:20px;"><p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">CAPRI · MUST DO</p><h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Capri & Blue Grotto Boat Tour</h3><p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Full-day excursion to the island of Capri. Blue Grotto visit, free time in Capri town, and coastal cruise.</p><p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $129</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 7 hours · Small group</span></p><a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a></div></div>
+                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);"><div style="height:180px;background:url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&h=400&fit=crop') center/cover;"></div><div style="padding:20px;"><p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">FOOD & WINE · EXPERIENCE</p><h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Pizza & Gelato Making Class</h3><p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Learn to make authentic Neapolitan pizza and gelato from a local chef. Includes ingredients, recipes, and lunch.</p><p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $79</strong> <span style="color:var(--text-light);font-size:0.8rem;">· 3 hours · Hands-on</span></p><a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a></div></div>
+                <div style="background:var(--white);border-radius:15px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.08);"><div style="height:180px;background:url('https://images.unsplash.com/photo-1523531294919-4bcd7c65e216?w=600&h=400&fit=crop') center/cover;"></div><div style="padding:20px;"><p style="color:var(--luxury-gold);font-size:0.75rem;letter-spacing:1px;margin-bottom:6px;">LUXURY · PRIVATE</p><h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--deep-navy);margin-bottom:8px;">Private Yacht Charter — Amalfi Coast</h3><p style="color:var(--text-light);font-size:0.85rem;line-height:1.6;margin-bottom:12px;">Exclusive private yacht with skipper. Custom itinerary, prosecco on board, swimming stops, and gourmet lunch.</p><p style="font-size:0.9rem;margin-bottom:12px;"><strong style="color:var(--deep-navy);">From $1,200</strong> <span style="color:var(--text-light);font-size:0.8rem;">· Full day · Private</span></p><a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:10px 18px;font-size:0.8rem;">Book on Viator</a></div></div>
             </div>
-
-            <div style="text-align:center;margin-top:40px;">
-                <a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:15px 40px;font-size:1rem;">View All Viator Deals</a>
-            </div>
+            <div style="text-align:center;margin-top:40px;"><a href="https://viator.com/partner-shop/joel-journeys-vip" target="_blank" class="book-btn gold" style="padding:15px 40px;font-size:1rem;">View All Viator Deals</a></div>
         </div>
     </div>
 
-    <!-- MAP SECTION -->
     <div id="map" style="background:var(--deep-navy);padding:60px 20px;text-align:center;">
         <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--white);margin-bottom:10px;">Explore the World</h2>
         <p style="color:rgba(255,255,255,0.7);margin-bottom:30px;font-weight:300;">Your Location · Roma Antica · Caribbean Blue</p>
         <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
-            <div class="map-card" style="padding:0;background:transparent;border:none;box-shadow:none;height:350px;">
-                <div style="position:relative;padding:6px;background:linear-gradient(135deg,#d4a017,#ffd700,#b8860b,#ffd700,#d4a017);border-radius:18px;box-shadow:0 0 30px rgba(255,215,0,0.15),0 20px 40px rgba(0,0,0,0.5);height:100%;">
-                    <div style="border-radius:12px;overflow:hidden;position:relative;background:#000;height:100%;">
-                        <iframe id="loc-map" src="https://www.google.com/maps?q=28.5383,-81.3792&z=13&output=embed&hl=en" width="100%" height="100%" style="border:0;display:block;position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        <div style="position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;border:2px solid rgba(255,215,0,0.3);pointer-events:none;"></div>
-                        <div id="loc-tag" style="position:absolute;top:8px;right:10px;background:rgba(0,0,0,0.7);color:#ffd700;padding:3px 10px;border-radius:6px;font-size:0.65rem;font-family:monospace;border:1px solid rgba(255,215,0,0.2);">locating...</div>
-                    </div>
-                </div>
-            </div>
+            <div class="map-card" style="padding:0;background:transparent;border:none;box-shadow:none;height:350px;"><div style="position:relative;padding:6px;background:linear-gradient(135deg,#d4a017,#ffd700,#b8860b,#ffd700,#d4a017);border-radius:18px;box-shadow:0 0 30px rgba(255,215,0,0.15),0 20px 40px rgba(0,0,0,0.5);height:100%;"><div style="border-radius:12px;overflow:hidden;position:relative;background:#000;height:100%;"><iframe id="loc-map" src="https://www.google.com/maps?q=28.5383,-81.3792&z=13&output=embed&hl=en" width="100%" height="100%" style="border:0;display:block;position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div style="position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;border:2px solid rgba(255,215,0,0.3);pointer-events:none;"></div><div id="loc-tag" style="position:absolute;top:8px;right:10px;background:rgba(0,0,0,0.7);color:#ffd700;padding:3px 10px;border-radius:6px;font-size:0.65rem;font-family:monospace;border:1px solid rgba(255,215,0,0.2);">locating...</div></div></div></div>
             <script>
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function(pos) {
-                const lat = pos.coords.latitude;
-                const lng = pos.coords.longitude;
-                document.getElementById('loc-map').src = 'https://www.google.com/maps?q=' + lat + ',' + lng + '&z=15&output=embed&hl=en';
-                document.getElementById('loc-tag').textContent = '✦ ' + lat.toFixed(4) + ', ' + lng.toFixed(4);
-              });
-            }
+            if (navigator.geolocation) { navigator.geolocation.getCurrentPosition(function(pos) { const lat = pos.coords.latitude; const lng = pos.coords.longitude; document.getElementById('loc-map').src = 'https://www.google.com/maps?q=' + lat + ',' + lng + '&z=15&output=embed&hl=en'; document.getElementById('loc-tag').textContent = '✦ ' + lat.toFixed(4) + ', ' + lng.toFixed(4); }); }
             </script>
-            <div class="map-card" style="height:350px;padding:6px;background:linear-gradient(135deg,#d4a017,#ffd700,#b8860b,#ffd700,#d4a017);border-radius:18px;box-shadow:0 0 30px rgba(255,215,0,0.15),0 20px 40px rgba(0,0,0,0.5);">
-                <div style="border-radius:12px;overflow:hidden;position:relative;background:#000;height:100%;">
-                    <iframe src="https://www.google.com/maps?q=Rome,Italy&z=12&output=embed&hl=en" width="100%" height="100%" style="border:0;display:block;position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    <div style="position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;border:2px solid rgba(255,215,0,0.3);pointer-events:none;"></div>
-                </div>
-                <div class="map-label">Rome · Italy</div>
-            </div>
+            <div class="map-card" style="height:350px;padding:6px;background:linear-gradient(135deg,#d4a017,#ffd700,#b8860b,#ffd700,#d4a017);border-radius:18px;box-shadow:0 0 30px rgba(255,215,0,0.15),0 20px 40px rgba(0,0,0,0.5);"><div style="border-radius:12px;overflow:hidden;position:relative;background:#000;height:100%;"><iframe src="https://www.google.com/maps?q=Rome,Italy&z=12&output=embed&hl=en" width="100%" height="100%" style="border:0;display:block;position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div style="position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;border:2px solid rgba(255,215,0,0.3);pointer-events:none;"></div></div><div class="map-label">Rome · Italy</div></div>
         </div>
-        <div class="map-card" style="max-width:1100px;margin:0 auto;height:380px;padding:6px;background:linear-gradient(135deg,#d4a017,#ffd700,#b8860b,#ffd700,#d4a017);border-radius:18px;box-shadow:0 0 30px rgba(255,215,0,0.15),0 20px 40px rgba(0,0,0,0.5);">
-            <div style="border-radius:12px;overflow:hidden;position:relative;background:#000;height:100%;">
-                <iframe src="https://www.google.com/maps?q=Caribbean+Sea&z=6&output=embed&hl=en" width="100%" height="100%" style="border:0;display:block;position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                <div style="position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;border:2px solid rgba(255,215,0,0.3);pointer-events:none;"></div>
-            </div>
-            <div class="map-label">Caribbean Sea</div>
-        </div>
+        <div class="map-card" style="max-width:1100px;margin:0 auto;height:380px;padding:6px;background:linear-gradient(135deg,#d4a017,#ffd700,#b8860b,#ffd700,#d4a017);border-radius:18px;box-shadow:0 0 30px rgba(255,215,0,0.15),0 20px 40px rgba(0,0,0,0.5);"><div style="border-radius:12px;overflow:hidden;position:relative;background:#000;height:100%;"><iframe src="https://www.google.com/maps?q=Caribbean+Sea&z=6&output=embed&hl=en" width="100%" height="100%" style="border:0;display:block;position:absolute;top:0;left:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe><div style="position:absolute;top:0;left:0;right:0;bottom:0;border-radius:12px;border:2px solid rgba(255,215,0,0.3);pointer-events:none;"></div></div><div class="map-label">Caribbean Sea</div></div>
     </div>
-    <style>
-    .map-card{position:relative;border-radius:15px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.5);background:#000;border:1px solid rgba(255,215,0,0.15);}
-    .map-label{position:absolute;bottom:10px;left:10px;z-index:10;background:rgba(0,0,0,0.75);color:#fff;padding:5px 14px;border-radius:8px;font-size:0.75rem;font-family:'Inter',sans-serif;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.1);}
-    </style>
+    <style>.map-card{position:relative;border-radius:15px;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,0.5);background:#000;border:1px solid rgba(255,215,0,0.15);}.map-label{position:absolute;bottom:10px;left:10px;z-index:10;background:rgba(0,0,0,0.75);color:#fff;padding:5px 14px;border-radius:8px;font-size:0.75rem;font-family:'Inter',sans-serif;backdrop-filter:blur(4px);border:1px solid rgba(255,255,255,0.1);}</style>
 
-
-<a href="https://discord.gg/XskM3NATxm" class="floating-bot" id="fb-discord" target="_blank">
-    <span style="color:white;font-weight:bold;font-size:10px;font-family:Arial,sans-serif;text-align:center;line-height:1.2;">Luxury<br>Tours</span>
-</a>
-<a href="https://t.me/+n6glHFtFcOY3NjIx" class="floating-bot" id="fb-telegram" target="_blank">
-    <span style="color:white;font-weight:bold;font-size:10px;font-family:Arial,sans-serif;text-align:center;line-height:1.2;">Luxury<br>Travel</span>
-</a>
-<style>
-.floating-bot{position:fixed;bottom:20px;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:1000;transition:0.3s;border:3px solid var(--luxury-gold,#c5a059);}
-.floating-bot:hover{transform:scale(1.1);}
-#fb-telegram{right:20px;background-color:#0088cc;}
-#fb-discord{right:82px;background-color:#5865F2;}
-@media(max-width:768px){.floating-bot{width:46px;height:46px;bottom:15px;}.floating-bot span{font-size:9px!important;}#fb-telegram{right:15px;}#fb-discord{right:67px;}}
-</style>
+<a href="https://discord.gg/XskM3NATxm" class="floating-bot" id="fb-discord" target="_blank"><span style="color:white;font-weight:bold;font-size:10px;font-family:Arial,sans-serif;text-align:center;line-height:1.2;">Luxury<br>Tours</span></a>
+<a href="https://t.me/+n6glHFtFcOY3NjIx" class="floating-bot" id="fb-telegram" target="_blank"><span style="color:white;font-weight:bold;font-size:10px;font-family:Arial,sans-serif;text-align:center;line-height:1.2;">Luxury<br>Travel</span></a>
+<style>.floating-bot{position:fixed;bottom:20px;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:1000;transition:0.3s;border:3px solid var(--luxury-gold,#c5a059);}.floating-bot:hover{transform:scale(1.1);}#fb-telegram{right:20px;background-color:#0088cc;}#fb-discord{right:82px;background-color:#5865F2;}@media(max-width:768px){.floating-bot{width:46px;height:46px;bottom:15px;}.floating-bot span{font-size:9px!important;}#fb-telegram{right:15px;}#fb-discord{right:67px;}}</style>
 <a href="https://chat.whatsapp.com/Dp3kACp6v5k2EzjONNqrUe" id="qr-badge" target="_blank"><img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://chat.whatsapp.com/Dp3kACp6v5k2EzjONNqrUe" alt="WhatsApp QR"><div class="qr-label">Contact for request</div></a>
 <div id="fineprint" style="background:#0a1a2f;padding:30px 20px;text-align:center;border-top:2px solid #c5a059;">
     <div style="max-width:900px;margin:0 auto;">
-        <p style="color:rgba(255,255,255,0.5);font-size:0.7rem;line-height:1.8;margin-bottom:10px;">
-            <strong style="color:rgba(255,255,255,0.7);">Legal & Privacy:</strong>
-            Joel Journeys is a digital concierge and referral platform — not a licensed travel agency. We participate in affiliate programs (Travelpayouts, Mavely, Viator, TimeFlys, J&P) and may earn commission on bookings at no extra cost to you. All bookings are with third-party providers subject to their terms. Prices change in real time — verify directly with the provider. We are not liable for cancellations, delays, or any travel-related issues. We collect minimal data (email, chat IDs) for service only; we do not sell your data. By using this site you accept these terms.
-        </p>
-        <p style="color:rgba(255,255,255,0.4);font-size:0.65rem;margin-bottom:8px;">
-            <a href="https://github.com/retard0/joeljourneys/blob/main/DISCLAIMER.md" target="_blank" style="color:#c5a059;text-decoration:none;">Full Disclaimer</a>
-            &nbsp;·&nbsp;
-            <a href="https://github.com/retard0/joeljourneys/blob/main/PRIVACY.md" target="_blank" style="color:#c5a059;text-decoration:none;">Privacy Policy</a>
-            &nbsp;·&nbsp;
-            <a href="https://github.com/retard0/joeljourneys/blob/main/TERMS.md" target="_blank" style="color:#c5a059;text-decoration:none;">Terms of Service</a>
-            &nbsp;·&nbsp;
-            <a href="https://github.com/retard0/joeljourneys" target="_blank" style="color:#c5a059;text-decoration:none;">GitHub</a>
-        </p>
-        <p style="color:rgba(255,255,255,0.3);font-size:0.6rem;letter-spacing:1px;">
-            &copy; 2026 JOEL JOURNEYS &mdash; ALL RIGHTS RESERVED &nbsp;·&nbsp; Contact: j_wromas@yahoo.com
-        </p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.7rem;line-height:1.8;margin-bottom:10px;"><strong style="color:rgba(255,255,255,0.7);">Legal & Privacy:</strong> Joel Journeys is a digital concierge and referral platform — not a licensed travel agency. We participate in affiliate programs (Travelpayouts, Mavely, Viator, TimeFlys, J&P) and may earn commission on bookings at no extra cost to you. All bookings are with third-party providers subject to their terms. Prices change in real time — verify directly with the provider. We are not liable for cancellations, delays, or any travel-related issues. We collect minimal data (email, chat IDs) for service only; we do not sell your data. By using this site you accept these terms.</p>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.65rem;margin-bottom:8px;"><a href="https://github.com/retard0/joeljourneys/blob/main/DISCLAIMER.md" target="_blank" style="color:#c5a059;text-decoration:none;">Full Disclaimer</a> &nbsp;·&nbsp; <a href="https://github.com/retard0/joeljourneys/blob/main/PRIVACY.md" target="_blank" style="color:#c5a059;text-decoration:none;">Privacy Policy</a> &nbsp;·&nbsp; <a href="https://github.com/retard0/joeljourneys/blob/main/TERMS.md" target="_blank" style="color:#c5a059;text-decoration:none;">Terms of Service</a> &nbsp;·&nbsp; <a href="https://github.com/retard0/joeljourneys" target="_blank" style="color:#c5a059;text-decoration:none;">GitHub</a></p>
+        <p style="color:rgba(255,255,255,0.3);font-size:0.6rem;letter-spacing:1px;">&copy; 2026 JOEL JOURNEYS &mdash; ALL RIGHTS RESERVED &nbsp;·&nbsp; Contact: j_wromas@yahoo.com</p>
     </div>
 </div>
 
 <script>
 (function (w, d, s, o, f) {
     w.JoelJourneys = w.JoelJourneys || {};
-    w.JoelJourneys.params = { 
-        siteId: 'jj_main_01', 
-        trackSales: true,
-        botVersion: '1.0' 
-    };
-    var js = d.createElement(s);
-    var fs = d.getElementsByTagName(s)[0];
-    js.async = 1;
-    js.src = o;
-    fs.parentNode.insertBefore(js, fs);
+    w.JoelJourneys.params = { siteId: 'jj_main_01', trackSales: true, botVersion: '1.0' };
+    var js = d.createElement(s); var fs = d.getElementsByTagName(s)[0];
+    js.async = 1; js.src = o; fs.parentNode.insertBefore(js, fs);
 })(window, document, 'script', 'http://localhost:3000/deploy/joel-bot-widget.js?v=' + Date.now());
 </script>
 
-<!-- Meta Pixel Code -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1980336152611329');
-fbq('track', 'PageView');
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1980336152611329');fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1980336152611329&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1980336152611329&ev=PageView&noscript=1" /></noscript>
 
 <script>
-const DISCORD_WEBHOOK = "https://discordapp.com/api/webhooks/1520933969410134217/aQxj9HTuYxY9EHhzZYTlG-pXKDf69i1PY8cvY8MFBy3YrOPLpK4LPPvSIZcGk86XFDOg";
-
-async function fireDiscord(payload) {
-    try {
-        await fetch(DISCORD_WEBHOOK, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        });
-    } catch (e) {}
-}
-
-(function() {
-    const pageData = {
-        content: "**Joel Journeys — Page Visit**\nUser: " + (localStorage.getItem('auth_email') || 'Guest') + "\nPage: " + window.location.href + "\nTime: " + new Date().toLocaleString()
-    };
-    fireDiscord(pageData);
-})();
-
+const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1528448623753560205/A8FKPVSOOmxKkdRwqB5QuuJpiKzK3VHdqnmoP4EzXCm5H_IvJqQQlDrvoCX4z3BTWA5j";
+async function fireDiscord(payload) { try { await fetch(DISCORD_WEBHOOK, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }); } catch (e) {} }
+(function() { fireDiscord({ content: "**Joel Journeys — Page Visit**\nUser: " + (localStorage.getItem('auth_email') || 'Guest') + "\nPage: " + window.location.href + "\nTime: " + new Date().toLocaleString() }); })();
 document.addEventListener('click', function(e) {
     var t = e.target.closest('.book-btn, .qr-link, .nav-links a, .floating-bot');
     if (!t) return;
-    var text = t.textContent.trim().substring(0, 40);
-    var href = t.href || '';
-    fireDiscord({
-        content: "**Joel Journeys — Click**\nUser: " + (localStorage.getItem('auth_email') || 'Guest') + "\nLink: " + text + "\nURL: " + href + "\nTime: " + new Date().toLocaleString()
-    });
+    var text = t.textContent.trim().substring(0, 40); var href = t.href || '';
+    fireDiscord({ content: "**Joel Journeys — Click**\nUser: " + (localStorage.getItem('auth_email') || 'Guest') + "\nLink: " + text + "\nURL: " + href + "\nTime: " + new Date().toLocaleString() });
 });
 </script>
 
@@ -1028,6 +511,70 @@ document.addEventListener('click', function(e) {
     <div style="font-size:1.4rem;font-weight:700;margin-bottom:6px;">Book Your Trip</div>
     <div style="font-size:0.9rem;opacity:0.9;">Tell us where you want to go — we'll craft a custom itinerary with the best deals.</div>
 </a>
+
+<!-- TRAVEL PLANNING PROCESS INFOGRAPHIC -->
+<div id="planning" style="background: var(--deep-navy); padding: 80px 20px;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #fff; text-align: center; margin-bottom: 10px;">Your Journey, Simplified</h2>
+        <p style="text-align: center; color: rgba(255,255,255,0.6); margin-bottom: 50px; font-weight: 300;">From first contact to safe return — here's how we take care of everything.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 60px;">
+            <div style="text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(197,160,89,0.3);"><div style="width: 60px; height: 60px; background: var(--luxury-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">✈️</div><div style="color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px;">STEP 01</div><h3 style="font-family: 'Playfair Display', serif; color: #fff; font-size: 1.2rem; margin-bottom: 10px;">Inquire</h3><p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Reach out via Discord, Telegram, or our booking form. Tell us where you want to go.</p></div>
+            <div style="text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(197,160,89,0.3);"><div style="width: 60px; height: 60px; background: var(--luxury-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">📋</div><div style="color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px;">STEP 02</div><h3 style="font-family: 'Playfair Display', serif; color: #fff; font-size: 1.2rem; margin-bottom: 10px;">Customize</h3><p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">We craft a bespoke itinerary with flights, transfers, excursions, and stays — all tailored to you.</p></div>
+            <div style="text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(197,160,89,0.3);"><div style="width: 60px; height: 60px; background: var(--luxury-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">✅</div><div style="color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px;">STEP 03</div><h3 style="font-family: 'Playfair Display', serif; color: #fff; font-size: 1.2rem; margin-bottom: 10px;">Confirm</h3><p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">Review your plan, confirm bookings.</p></div>
+            <div style="text-align: center; padding: 30px 20px; background: rgba(255,255,255,0.05); border-radius: 15px; border: 1px solid rgba(197,160,89,0.3);"><div style="width: 60px; height: 60px; background: var(--luxury-gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 1.5rem;">🌍</div><div style="color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 8px;">STEP 04</div><h3 style="font-family: 'Playfair Display', serif; color: #fff; font-size: 1.2rem; margin-bottom: 10px;">Travel</h3><p style="color: rgba(255,255,255,0.6); font-size: 0.85rem;">We're with you 24/7 — rebooking, rerouting, and handling anything that comes up.</p></div>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); border-radius: 15px; padding: 40px; margin-bottom: 40px; border: 1px solid rgba(197,160,89,0.2);">
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--luxury-gold); font-size: 1.4rem; margin-bottom: 20px; text-align: center;">What to Expect</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div><p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 12px;">✦ Response within 2 hours during business hours</p><p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 12px;">✦ Full transparency — no hidden fees</p><p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">✦ 24/7 concierge support while traveling</p></div>
+                <div><p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 12px;">✦ Free cancellation on most bookings</p><p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 12px;">✦ Real-time deal alerts for your destination</p><p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">✦ Personalized service from start to finish</p></div>
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; border: 1px solid rgba(197,160,89,0.2);">
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--luxury-gold); font-size: 1.2rem; margin-bottom: 15px;">Travel Tips</h3>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Always carry a copy of your passport and visa</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Notify your bank of travel dates to avoid card blocks</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Download offline maps for your destination</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Keep emergency cash in local currency</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8;">• Book airport transfers in advance</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; border: 1px solid rgba(197,160,89,0.2);">
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--luxury-gold); font-size: 1.2rem; margin-bottom: 15px;">Amalfi Coast Info</h3>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• <strong style="color: rgba(255,255,255,0.8);">Best time:</strong> April–June or September–October</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• <strong style="color: rgba(255,255,255,0.8);">Currency:</strong> Euro (EUR)</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• <strong style="color: rgba(255,255,255,0.8);">Language:</strong> Italian (English widely spoken in tourist areas)</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• <strong style="color: rgba(255,255,255,0.8);">Transport:</strong> Ferries run May–October; private car recommended</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8;">• <strong style="color: rgba(255,255,255,0.8);">Tip:</strong> Carry cash for small villages and taxis</p>
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px;">
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 30px; border: 1px solid rgba(197,160,89,0.2);">
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--luxury-gold); font-size: 1.2rem; margin-bottom: 15px;">Getting Home Safely</h3>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Confirm return transfers 24 hours before departure</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Alternative transport arranged instantly if needed</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8; margin-bottom: 10px;">• Keep boarding pass and ID accessible at all times</p>
+                <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; line-height: 1.8;">• Arrive at the airport 2.5 hours before international flights</p>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(192,57,43,0.2), rgba(197,160,89,0.1)); border-radius: 15px; padding: 30px; border: 1px solid rgba(192,57,43,0.3);">
+                <h3 style="font-family: 'Playfair Display', serif; color: #e74c3c; font-size: 1.2rem; margin-bottom: 15px;">Emergency Contacts</h3>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 10px;"><strong style="color: #fff;">EU Emergency:</strong> 112 (all services)</p>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 10px;"><strong style="color: #fff;">Police:</strong> 113</p>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 10px;"><strong style="color: #fff;">Ambulance:</strong> 118</p>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 15px;"><strong style="color: #fff;">Coast Guard:</strong> 1530</p>
+                <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                    <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-bottom: 8px;"><strong style="color: var(--luxury-gold);">Joel Journeys 24/7:</strong></p>
+                    <a href="https://discord.gg/XskM3NATxm" target="_blank" style="display: inline-block; background: #5865F2; color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600;">Join Our Discord</a>
+                    <a href="https://t.me/+n6glHFtFcOY3NjIx" target="_blank" style="display: inline-block; background: #0088cc; color: #fff; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-left: 8px;">Telegram</a>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a href="book.html" style="display: inline-block; background: var(--luxury-gold); color: #fff; padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: 0.3s;">Start Planning Your Journey</a>
+            <a href="https://jwromas.github.io/adcamp/" target="_blank" style="display: inline-block; background: transparent; color: var(--luxury-gold); padding: 16px 40px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 1rem; border: 2px solid var(--luxury-gold); margin-left: 15px; transition: 0.3s;">Additional Services</a>
+        </div>
+    </div>
+</div>
 
 <div style="max-width:650px;margin:0 auto 20px;background:linear-gradient(135deg,#0a1628,#0d2847);border:1px solid rgba(0,150,255,0.3);border-radius:12px;padding:28px 32px;text-align:center;">
     <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:3px;color:#0096ff;margin-bottom:10px;">Featured Article</div>
