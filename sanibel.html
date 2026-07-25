@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanibel Island — Paradise Awaits | Joel Journeys</title>
+    <meta name="description" content="Sanibel Island, FL — pristine shelling beaches, crystal Gulf waters, yacht charters, and luxury stays. Book your Florida island escape with Joel Journeys.">
+    <meta name="keywords" content="Sanibel Island, Florida travel, shelling beach, Gulf Coast, yacht charter, Fort Myers flights, luxury hotel Sanibel">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://joeljourneys.com/sanibel.html">
+    <meta property="og:title" content="Sanibel Island — Paradise Awaits | Joel Journeys">
+    <meta property="og:description" content="15 miles of unspoiled coastline. Crystal-clear Gulf waters. World-class shelling. Plan your Sanibel escape.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏖️</text></svg>">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JK8SJWYVP7"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JK8SJWYVP7');
+    </script>
+
+    <style>
+        :root {
+            --luxury-gold: #c5a059;
+            --deep-navy: #0a1a2f;
+            --soft-cream: #fdfbf7;
+            --text-main: #2c2c2c;
+            --text-light: #666666;
+            --white: #ffffff;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--soft-cream); color: var(--text-main); font-family: 'Inter', sans-serif; line-height: 1.8; }
+
+        nav { position: sticky; top: 0; z-index: 100; background: var(--deep-navy); }
+        .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; height: 56px; }
+        .nav-logo { font-family: 'Playfair Display', serif; color: var(--luxury-gold); text-decoration: none; font-size: 1rem; letter-spacing: 2px; font-weight: 700; }
+        .nav-toggle { display: none; background: none; border: none; color: var(--white); font-size: 1.5rem; cursor: pointer; padding: 4px 8px; }
+        .nav-links { display: flex; gap: 8px; align-items: center; }
+        .nav-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.78rem; letter-spacing: 0.5px; padding: 6px 14px; border-radius: 50px; transition: 0.3s; font-weight: 500; }
+        .nav-links a:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+        @media (max-width: 768px) {
+            .nav-toggle { display: block; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 56px; left: 0; right: 0; background: var(--deep-navy); padding: 10px 20px 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-top: 1px solid rgba(255,255,255,0.1); }
+            .nav-links.open { display: flex; }
+            .nav-links a { width: 100%; padding: 12px 16px; font-size: 0.9rem; }
+        }
+
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=2000&q=80') center/cover no-repeat;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            color: var(--white); padding: 0 20px;
+        }
+        .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 400; margin-bottom: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300; margin-bottom: 30px; }
+        .hero-content .tagline { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-style: italic; opacity: 0.9; }
+
+        .book-btn { background: var(--deep-navy); color: var(--white); text-decoration: none; padding: 10px 20px; border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: 0.3s; border: 1px solid var(--deep-navy); display: inline-block; }
+        .book-btn:hover { background: transparent; color: var(--deep-navy); }
+        .book-btn.gold { background: var(--luxury-gold); border-color: var(--luxury-gold); color: var(--white); }
+        .book-btn.gold:hover { background: #b08a44; }
+
+        section { padding: 80px 20px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--deep-navy); text-align: center; margin-bottom: 15px; }
+        .section-sub { text-align: center; color: var(--text-light); margin-bottom: 50px; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+        .highlights { background: var(--deep-navy); color: var(--white); text-align: center; }
+        .highlights .section-title { color: var(--white); }
+        .highlights .section-sub { color: rgba(255,255,255,0.7); }
+        .hl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1100px; margin: 0 auto; }
+        .hl-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(197,160,89,0.3); border-radius: 15px; padding: 30px; text-align: center; }
+        .hl-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .hl-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 10px; color: var(--luxury-gold); }
+        .hl-card p { color: rgba(255,255,255,0.65); font-size: 0.9rem; }
+
+        .things-to-do { background: var(--white); }
+        .td-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; max-width: 1100px; margin: 0 auto; }
+        .td-card { border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: var(--white); }
+        .td-card .img { height: 200px; background-size: cover; background-position: center; }
+        .td-card .body { padding: 20px; }
+        .td-card .label { color: var(--luxury-gold); font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 6px; }
+        .td-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--deep-navy); margin-bottom: 8px; }
+        .td-card p { color: var(--text-light); font-size: 0.85rem; line-height: 1.6; margin-bottom: 12px; }
+        .td-card .price { font-size: 0.9rem; margin-bottom: 12px; }
+        .td-card .price strong { color: var(--deep-navy); }
+
+        .booking-section { background: var(--soft-cream); }
+        .bk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
+        .bk-card { background: var(--white); border-radius: 15px; padding: 30px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.06); border: 1px solid #eee; transition: 0.3s; }
+        .bk-card:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0,0,0,0.12); }
+        .bk-card .emoji { font-size: 2.2rem; margin-bottom: 12px; }
+        .bk-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--deep-navy); margin-bottom: 6px; }
+        .bk-card .price { color: var(--luxury-gold); font-weight: 700; font-size: 1.3rem; margin-bottom: 4px; }
+        .bk-card .note { color: var(--text-light); font-size: 0.8rem; margin-bottom: 16px; }
+        .bk-card .book-btn { width: 100%; text-align: center; }
+
+        .cta-section { background: linear-gradient(135deg, var(--deep-navy), #0d2847); text-align: center; padding: 80px 20px; }
+        .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--white); margin-bottom: 15px; }
+        .cta-section p { color: rgba(255,255,255,0.7); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        footer { text-align: center; padding: 40px; color: var(--text-light); font-size: 0.8rem; letter-spacing: 2px; }
+        footer a { color: var(--luxury-gold); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .hero { height: 50vh; }
+            .hero-content .tagline { font-size: 1.1rem; }
+            section { padding: 50px 15px; }
+            .section-title { font-size: 1.8rem; }
+            .td-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="https://joeljourneys.com/" class="nav-logo">JOEL JOURNEYS</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
+        <div class="nav-links" id="nav-links">
+            <a href="#things-to-do">Things to Do</a>
+            <a href="#booking">Book</a>
+            <a href="#about">About</a>
+            <a href="https://joeljourneys.com/book.html">Plan Trip</a>
+            <a href="https://joeljourneys.com/">Home</a>
+        </div>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-content">
+        <p>A Joel Journeys Destination</p>
+        <h1>Sanibel Island</h1>
+        <div class="tagline">Paradise Awaits — 15 Miles of Unspoiled Gulf Coast</div>
+    </div>
+</div>
+
+<section class="highlights" id="about">
+    <h2 class="section-title">Why Sanibel</h2>
+    <p class="section-sub">One of America's top shelling destinations. Crystal-clear Gulf waters, world-class fishing, and nature preserves make it the ultimate escape.</p>
+    <div class="hl-grid">
+        <div class="hl-card">
+            <div class="icon">🐚</div>
+            <h3>World-Class Shelling</h3>
+            <p>15 miles of pristine shoreline — Sanibel is famous for its abundance of rare shells washed ashore by unique east-west orientation.</p>
+        </div>
+        <div class="hl-card">
+            <div class="icon">🌊</div>
+            <h3>Crystal Gulf Waters</h3>
+            <p>Warm, calm, turquoise waters ideal for swimming, paddleboarding, and watching dolphins play at sunset.</p>
+        </div>
+        <div class="hl-card">
+            <div class="icon">🦅</div>
+            <h3>Nature Preserves</h3>
+            <p>J.N. "Ding" Darling National Wildlife Refuge — 6,400 acres of mangroves, kayaking trails, and rare bird sightings.</p>
+        </div>
+    </div>
+</section>
+
+<section class="things-to-do" id="things-to-do">
+    <h2 class="section-title">Things to Do</h2>
+    <p class="section-sub">From secluded beaches to sunset yacht cruises — Sanibel has it all.</p>
+    <div class="td-grid">
+        <div class="td-card">
+            <div class="img" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop');"></div>
+            <div class="body">
+                <div class="label">BEACH · TOP RATED</div>
+                <h3>Bowman's Beach</h3>
+                <p>Secluded, award-winning shelling beach with soft white sand. Less crowded than other beaches — perfect for a peaceful morning walk.</p>
+                <div class="price"><strong>Free Entry</strong></div>
+                <a href="https://joeljourneys.com/" target="_blank" class="book-btn gold">Plan Your Visit</a>
+            </div>
+        </div>
+        <div class="td-card">
+            <div class="img" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop');"></div>
+            <div class="body">
+                <div class="label">NATURE · WILDLIFE</div>
+                <h3>J.N. "Ding" Darling NWR</h3>
+                <p>6,400-acre wildlife refuge. Kayak through mangroves, spot roseate spoonbills, and explore the Wildlife Drive at your own pace.</p>
+                <div class="price"><strong>From $5</strong> <span style="color:var(--text-light);font-size:0.8rem;">· per vehicle</span></div>
+                <a href="https://joeljourneys.com/" target="_blank" class="book-btn gold">Explore</a>
+            </div>
+        </div>
+        <div class="td-card">
+            <div class="img" style="background-image: url('https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&h=400&fit=crop');"></div>
+            <div class="body">
+                <div class="label">LIGHTHOUSE · LANDMARK</div>
+                <h3>Lighthouse Beach Park</h3>
+                <p>Fish off the historic Sanibel pier, explore the fishing pier, and climb the 1884 lighthouse replica for panoramic Gulf views.</p>
+                <div class="price"><strong>Free Entry</strong></div>
+                <a href="https://joeljourneys.com/" target="_blank" class="book-btn gold">Visit</a>
+            </div>
+        </div>
+        <div class="td-card">
+            <div class="img" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop');"></div>
+            <div class="body">
+                <div class="label">MUSEUM · FAMILY</div>
+                <h3>Bailey-Matthews Shell Museum</h3>
+                <p>World's only museum dedicated entirely to shells. Over 500,000 specimens and interactive exhibits for all ages.</p>
+                <div class="price"><strong>From $23.95</strong> <span style="color:var(--text-light);font-size:0.8rem;">· adult</span></div>
+                <a href="https://joeljourneys.com/" target="_blank" class="book-btn gold">Get Tickets</a>
+            </div>
+        </div>
+        <div class="td-card">
+            <div class="img" style="background-image: url('https://images.unsplash.com/photo-1544551763-77932f16d895?w=600&h=400&fit=crop');"></div>
+            <div class="body">
+                <div class="label">ISLAND HOPPING</div>
+                <h3>Captiva Island Day Trip</h3>
+                <p>Walk the famous blind pass, catch sunset at Chapel by the Sea, and enjoy seafood at the historic Old Captiva House.</p>
+                <div class="price"><strong>From $18/day</strong> <span style="color:var(--text-light);font-size:0.8rem;">· car rental</span></div>
+                <a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" class="book-btn gold">Rent a Car</a>
+            </div>
+        </div>
+        <div class="td-card">
+            <div class="img" style="background-image: url('https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=600&h=400&fit=crop');"></div>
+            <div class="body">
+                <div class="label">LUXURY · YACHT</div>
+                <h3>Private Yacht Charter</h3>
+                <p>Cruise the Gulf of Mexico in style. Sunset champagne cruises, island hopping, and deep-sea fishing — all custom itineraries.</p>
+                <div class="price"><strong>From $2,500/day</strong></div>
+                <a href="https://searadar.tpo.lv/A9iLJHms" target="_blank" class="book-btn gold">Charter a Yacht</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="booking-section" id="booking">
+    <h2 class="section-title">Book Your Sanibel Escape</h2>
+    <p class="section-sub">Flights, hotels, transfers, and yacht charters — all at the best rates.</p>
+    <div class="bk-grid">
+        <div class="bk-card">
+            <div class="emoji">✈️</div>
+            <h3>Flights to RSW</h3>
+            <div class="price">$89+</div>
+            <div class="note">Fort Myers (RSW) — 30 min to Sanibel</div>
+            <a href="https://aviasales.tpo.lv/2GVGFfSj" target="_blank" class="book-btn gold">Search Flights</a>
+        </div>
+        <div class="bk-card">
+            <div class="emoji">🏨</div>
+            <h3>Hotels & Resorts</h3>
+            <div class="price">$129+</div>
+            <div class="note">Per night — beachfront & island resorts</div>
+            <a href="https://joeljourneys.com/" target="_blank" class="book-btn gold">Find Hotels</a>
+        </div>
+        <div class="bk-card">
+            <div class="emoji">🚗</div>
+            <h3>Car Rental</h3>
+            <div class="price">$18+</div>
+            <div class="note">Per day — Enterprise, Hertz, Thrifty</div>
+            <a href="https://getrentacar.tpo.lv/G4VtE4W1" target="_blank" class="book-btn gold">Rent a Car</a>
+        </div>
+        <div class="bk-card">
+            <div class="emoji">🛥️</div>
+            <h3>Airport Transfer</h3>
+            <div class="price">$49+</div>
+            <div class="note">Private chauffeur RSW → Sanibel</div>
+            <a href="https://gettransfer.tpo.lv/WQdyH8Vd" target="_blank" class="book-btn gold">Book Transfer</a>
+        </div>
+        <div class="bk-card">
+            <div class="emoji">⛵</div>
+            <h3>Yacht Charter</h3>
+            <div class="price">$2,500+</div>
+            <div class="note">Per day — private Gulf cruises</div>
+            <a href="https://searadar.tpo.lv/A9iLJHms" target="_blank" class="book-btn gold">Charter a Yacht</a>
+        </div>
+        <div class="bk-card">
+            <div class="emoji">📱</div>
+            <h3>Travel eSIM</h3>
+            <div class="price">$29</div>
+            <div class="note">10GB data — stay connected</div>
+            <a href="https://plans.gigsky.com/27H3X8P/2CTPL/?uid=5" target="_blank" class="book-btn gold">Get eSIM</a>
+        </div>
+    </div>
+</section>
+
+<section style="background:var(--deep-navy);padding:60px 20px;text-align:center;">
+    <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--white);margin-bottom:10px;">Sanibel Island Info</h2>
+    <p style="color:rgba(255,255,255,0.6);margin-bottom:40px;font-weight:300;">Everything you need to know before you go.</p>
+    <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left;">
+        <div style="background:rgba(255,255,255,0.05);border-radius:15px;padding:25px;border:1px solid rgba(197,160,89,0.2);">
+            <h3 style="font-family:'Playfair Display',serif;color:var(--luxury-gold);font-size:1.1rem;margin-bottom:15px;">Getting There</h3>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.8;margin-bottom:8px;">• <strong style="color:rgba(255,255,255,0.85);">Airport:</strong> Southwest Florida Intl (RSW) — 30 min drive</p>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.8;margin-bottom:8px;">• <strong style="color:rgba(255,255,255,0.85);">Best time:</strong> November–April (dry season, 75–85°F)</p>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.8;margin-bottom:8px;">• <strong style="color:rgba(255,255,255,0.85);">Currency:</strong> USD</p>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.8;">• <strong style="color:rgba(255,255,255,0.85);">Transport:</strong> Car recommended — bridge toll to island</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border-radius:15px;padding:25px;border:1px solid rgba(197,160,89,0.2);">
+            <h3 style="font-family:'Playfair Display',serif;color:var(--luxury-gold);font-size:1.1rem;margin-bottom:15px;">Travel Tips</h3>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.8;margin-bottom:8px;">• Shell collecting is <strong style="color:rgba(255,255,255,0.85);">legal</strong> on Sanibel — but only empty shells</p>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.8;margin-bottom:8px;">• <strong style="color:rgba(255,255,255,0.85);">Sunset spot:</strong> Bowman's Beach or Captiva's Chapel by the Sea</p>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.8;margin-bottom:8px;">• <strong style="color:rgba(255,255,255,0.85);">Wildlife:</strong> Manatees, dolphins, and nesting sea turtles (May–Oct)</p>
+            <p style="color:rgba(255,255,255,0.65);font-size:0.85rem;line-height:1.8;">• <strong style="color:rgba(255,255,255,0.85);">Tip:</strong> Book yacht charters early — they fill up fast in peak season</p>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <h2>Plan Your Sanibel Journey</h2>
+    <p>Tell us your dates and preferences — we'll craft a custom itinerary with the best deals on flights, stays, and experiences.</p>
+    <a href="https://joeljourneys.com/book.html" class="book-btn gold" style="padding: 16px 40px; font-size: 1rem;">Book Your Trip</a>
+    <a href="https://joeljourneys.com/" class="book-btn" style="padding: 16px 40px; font-size: 1rem; margin-left: 15px; border-color: var(--luxury-gold); color: var(--luxury-gold); background: transparent;">Browse All Destinations</a>
+</section>
+
+<div style="text-align:center;padding:30px 20px;background:var(--soft-cream);">
+    <p style="color:var(--text-light);font-size:0.75rem;">Joel Journeys is a digital concierge and referral platform. Prices shown are approximate and subject to change. All bookings are with third-party providers.</p>
+</div>
+
+<footer>
+    &copy; 2026 JOEL JOURNEYS &mdash; ALL RIGHTS RESERVED &nbsp;&middot;&nbsp; <a href="https://joeljourneys.com/">joeljourneys.com</a> &nbsp;&middot;&nbsp; Contact: j_wromas@yahoo.com
+</footer>
+
+<script>
+document.getElementById('nav-toggle').addEventListener('click', function() {
+    document.getElementById('nav-links').classList.toggle('open');
+});
+</script>
+
+</body>
+</html>
