@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Virtual Experiences — Coming Soon | Joel Journeys</title>
+<meta name="description" content="Immersive 360° VR travel experiences. Step inside paradise before you book. Coming soon from Joel Journeys.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a12;color:#fff;font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+.hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden}
+.hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#0a0a12 0%,#1a0a2e 50%,#0a0a12 100%);z-index:0}
+.hero-bg::before{content:'';position:absolute;top:50%;left:50%;width:600px;height:600px;background:radial-gradient(circle,rgba(255,215,0,0.08) 0%,transparent 70%);transform:translate(-50%,-50%);animation:glow 4s ease-in-out infinite alternate}
+@keyframes glow{0%{opacity:0.5;transform:translate(-50%,-50%) scale(1)}100%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}}
+.particles{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;z-index:1}
+.particle{position:absolute;width:2px;height:2px;background:rgba(255,215,0,0.4);border-radius:50%;animation:float linear infinite}
+@keyframes float{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+.content{position:relative;z-index:2;max-width:800px;padding:0 24px}
+.badge{display:inline-block;padding:8px 20px;border:1px solid rgba(255,215,0,0.3);border-radius:100px;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#FFD700;margin-bottom:30px;background:rgba(255,215,0,0.05)}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:400;line-height:1.1;margin-bottom:20px}
+h1 em{font-style:italic;color:#FFD700}
+.subtitle{font-size:1.1rem;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto}
+.features{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:50px}
+.feature{display:flex;align-items:center;gap:10px;padding:14px 24px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;transition:all .3s}
+.feature:hover{border-color:rgba(255,215,0,0.3);background:rgba(255,215,0,0.05);transform:translateY(-2px)}
+.feature svg{width:20px;height:20px;fill:#FFD700;flex-shrink:0}
+.feature span{font-size:14px;font-weight:500}
+.cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{padding:16px 36px;border-radius:100px;font-size:15px;font-weight:600;text-decoration:none;transition:all .3s;cursor:pointer;border:none;letter-spacing:0.5px}
+.btn-gold{background:linear-gradient(135deg,#FFD700,#ff8c00);color:#000}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(255,215,0,0.3)}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.2)}
+.btn-outline:hover{border-color:rgba(255,215,0,0.5);background:rgba(255,255,255,0.05)}
+.preview{margin-top:80px;padding:40px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:24px}
+.preview h3{font-family:'Playfair Display',serif;font-size:1.4rem;margin-bottom:20px;color:#FFD700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.card{padding:20px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;text-align:center;transition:all .3s}
+.card:hover{border-color:rgba(255,215,0,0.3);transform:translateY(-2px)}
+.card-emoji{font-size:2rem;margin-bottom:10px}
+.card-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.card-loc{font-size:12px;color:rgba(255,255,255,0.4)}
+.footer{margin-top:80px;padding:40px 24px;text-align:center;border-top:1px solid rgba(255,255,255,0.06)}
+.footer p{font-size:13px;color:rgba(255,255,255,0.3)}
+.footer a{color:#FFD700;text-decoration:none}
+.socials{display:flex;gap:16px;justify-content:center;margin-top:20px}
+.social{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none}
+.social:hover{border-color:#FFD700;background:rgba(255,215,0,0.1);transform:translateY(-2px)}
+.social svg{width:20px;height:20px;fill:#fff}
+@media(max-width:640px){.features{flex-direction:column;align-items:center}.cta{flex-direction:column;width:100%;padding:0 20px}.btn{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="particles" id="particles"></div>
+  <div class="content">
+    <div class="badge">Coming Soon</div>
+    <h1>Step Inside<br>Your <em>Destination</em></h1>
+    <p class="subtitle">Immersive 360° VR travel experiences. Walk the beaches, explore the cities, and feel the atmosphere before you ever book a trip.</p>
+    
+    <div class="features">
+      <div class="feature">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span>360° Video</span>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span>VR Headset Ready</span>
+      </div>
+      <div class="feature">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        <span>Free Preview</span>
+      </div>
+    </div>
+
+    <div class="cta">
+      <a href="https://joeljourneys.com" class="btn btn-gold">Book a Trip</a>
+      <a href="#preview" class="btn btn-outline">Preview Destinations</a>
+    </div>
+
+    <div class="preview" id="preview">
+      <h3>Destinations Coming Soon</h3>
+      <div class="grid">
+        <div class="card"><div class="card-emoji">🏖️</div><div class="card-title">Bahamas Beachfront</div><div class="card-loc">Caribbean</div></div>
+        <div class="card"><div class="card-emoji">🏝️</div><div class="card-title">Cancun Paradise</div><div class="card-loc">Mexico</div></div>
+        <div class="card"><div class="card-emoji">🏙️</div><div class="card-title">Dubai Skyline</div><div class="card-loc">UAE</div></div>
+        <div class="card"><div class="card-emoji">🏛️</div><div class="card-title">Santino Cult</div><div class="card-loc">Mediterranean</div></div>
+        <div class="card"><div class="card-emoji">🌴</div><div class="card-title">St. Croix Beach</div><div class="card-loc">USVI</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>A product of <a href="https://joeljourneys.com">Joel Journeys</a> — Bespoke Luxury Travel</p>
+  <div class="socials">
+    <a href="https://t.me/joeljourneys" class="social" target="_blank"><svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg></a>
+    <a href="https://discord.gg/joeljourneys" class="social" target="_blank"><svg viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg></a>
+    <a href="https://youtube.com/@joeljourneys" class="social" target="_blank"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+  </div>
+</div>
+
+<script>
+var pc=document.getElementById('particles');
+for(var i=0;i<25;i++){var p=document.createElement('div');p.className='particle';p.style.left=Math.random()*100+'%';p.style.animationDuration=(8+Math.random()*12)+'s';p.style.animationDelay=Math.random()*10+'s';p.style.width=p.style.height=(1+Math.random()*2)+'px';p.style.opacity=0.2+Math.random()*0.4;pc.appendChild(p)}
+</script>
+
+</body>
+</html>
