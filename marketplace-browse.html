@@ -598,26 +598,9 @@ function openModal(id) {
   document.getElementById('modal-desc').textContent = m.description;
   document.getElementById('modal-price').textContent = '$' + m.price;
   
-  // Show view button for available experiences
+  // Show view button for available experiences (localhost only)
   var viewBtn = document.getElementById('btn-view');
-  if (id === 1) {
-    viewBtn.href = '/experience/bahamas-beachfront';
-    viewBtn.style.display = 'inline-block';
-  } else if (id === 7) {
-    viewBtn.href = '/experience/santino-cult';
-    viewBtn.style.display = 'inline-block';
-  } else if (id === 8) {
-    viewBtn.href = '/experience/stcroix-beachwalk';
-    viewBtn.style.display = 'inline-block';
-  } else if (id === 10) {
-    viewBtn.href = '/experience/dubai-skyline';
-    viewBtn.style.display = 'inline-block';
-  } else if (id === 11) {
-    viewBtn.href = '/experience/cancun-paradise';
-    viewBtn.style.display = 'inline-block';
-  } else {
-    viewBtn.style.display = 'none';
-  }
+  viewBtn.style.display = 'none';
   
   document.getElementById('modal-features').innerHTML = m.features.map(function(f) {
     return '<div class="feature"><div class="label">' + f.label + '</div><div class="value">' + f.value + '</div></div>';
