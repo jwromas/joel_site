@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Marketplace — Browse Experiences</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --gold: #FFD700;
+  --dark: #0a0a0a;
+  --card: #111111;
+  --border: rgba(255,215,0,0.15);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --purple: #8b5cf6;
+  --pink: #ec4899;
+  --accent: #00CED1;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  background: var(--dark);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10,10,10,0.9);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  z-index: 100;
+}
+
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.btn-upload {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.main {
+  padding: 100px 40px 60px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.header p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter {
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter:hover, .filter.active {
+  background: rgba(139,92,246,0.2);
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  border-color: var(--gold);
+}
+
+.card-img {
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img .gradient-bg {
+  width: 100%;
+  height: 100%;
+}
+
+.card-img .badges {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.badge-vr {
+  background: rgba(139,92,246,0.9);
+  color: white;
+}
+
+.badge-ar {
+  background: rgba(0,206,209,0.9);
+  color: white;
+}
+
+.badge-new {
+  background: rgba(236,72,153,0.9);
+  color: white;
+}
+
+.card-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card:hover .card-play { opacity: 1; }
+
+.card-play::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 18px;
+  border-color: transparent transparent transparent white;
+  margin-left: 4px;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.card-body h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.card-location {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.card-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.card-creator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.card-creator .avatar {
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  border-radius: 50%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.9);
+  z-index: 200;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.modal.active { display: flex; }
+
+.modal-content {
+  background: var(--card);
+  border-radius: 24px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.modal-preview {
+  height: 400px;
+  border-radius: 24px 24px 0 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-preview .vr-icon {
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+}
+
+.modal-body {
+  padding: 32px;
+}
+
+.modal-body h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+}
+
+.modal-body .location {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.modal-body .description {
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+.modal-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.feature {
+  padding: 16px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.feature .label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.feature .value {
+  font-weight: 600;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.modal-price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.btn-buy {
+  padding: 16px 40px;
+  background: linear-gradient(135deg, var(--gold), #ff8c00);
+  color: #000;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-buy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255,215,0,0.3);
+}
+
+footer {
+  padding: 40px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+footer a { color: var(--gold); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/memory-marketplace" class="nav-brand">Memory Marketplace</a>
+  <div class="nav-links">
+    <a href="#browse">Browse</a>
+    <a href="#sell">Sell Memories</a>
+    <a href="https://joeljourneys.com">Joel Journeys</a>
+    <button class="btn-upload">Upload Memory</button>
+  </div>
+</nav>
+
+<main class="main">
+  <div class="header">
+    <h1>Browse Immersive Experiences</h1>
+    <p>Step inside someone's journey. Own a memory. Live it in VR.</p>
+  </div>
+
+  <div class="filters">
+    <div class="filter active">All</div>
+    <div class="filter">VR 360°</div>
+    <div class="filter">Beach</div>
+    <div class="filter">City</div>
+  </div>
+
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="modal-preview" id="modal-preview">
+      <div class="vr-icon" id="modal-icon"></div>
+    </div>
+    <div class="modal-body">
+      <h2 id="modal-title"></h2>
+      <div class="location" id="modal-location"></div>
+      <p class="description" id="modal-desc"></p>
+      <div class="modal-features" id="modal-features"></div>
+      <div class="modal-footer">
+        <div class="modal-price" id="modal-price"></div>
+        <a href="/experience/amalfi-sunset" class="btn-view" id="btn-view" style="display:none;padding:12px 24px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;color:#fff;text-decoration:none;font-weight:600;cursor:pointer;">View Experience</a>
+        <button class="btn-buy">Buy Experience</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Memory Marketplace — A product of <a href="https://joeljourneys.com">Joel Journeys</a></p>
+</footer>
+
+<script>
+var memories = [
+  {
+    id: 1,
+    title: 'Bahamas Beachfront',
+    location: 'Bahamas, Caribbean',
+    type: 'VR 360°',
+    price: 49,
+    creator: 'Joel Journeys',
+    emoji: '🏖️',
+    video: '/beachfront360.mp4',
+    gradient: 'linear-gradient(135deg, #0077b6, #00b4d8)',
+    badge: 'vr',
+    description: 'Step onto pristine white sand beaches with crystal-clear turquoise waters. Feel the tropical breeze, hear gentle waves lapping the shore, and watch the sun paint the sky in brilliant colors.',
+    features: [
+      { label: 'Duration', value: '12 minutes' },
+      { label: 'Quality', value: '4K 360°' },
+      { label: 'Audio', value: 'Spatial' },
+      { label: 'Interactivity', value: 'Look Around' }
+    ]
+  },
+  {
+    id: 7,
+    title: 'Santino Cult Experience',
+    location: 'Mediterranean',
+    type: 'VR 360°',
+    price: 49,
+    creator: 'Joel Journeys',
+    emoji: '🏛️',
+    video: '/santino360.mp4',
+    gradient: 'linear-gradient(135deg, #4a1942, #c62368)',
+    badge: 'vr',
+    description: 'Journey through an exclusive cultural experience. Ancient rituals, stunning coastal views, and immersive storytelling bring this unique adventure to life in full 360°.',
+    features: [
+      { label: 'Duration', value: '8 minutes' },
+      { label: 'Quality', value: '4K 360°' },
+      { label: 'Audio', value: 'Spatial' },
+      { label: 'Interactivity', value: 'Look Around' }
+    ]
+  },
+  {
+    id: 8,
+    title: 'St. Croix Beach Walk',
+    location: 'St. Croix, USVI',
+    type: 'VR 360°',
+    price: 39,
+    creator: 'Joel Journeys',
+    emoji: '🌴',
+    video: '/stcroix-beachwalk.mp4',
+    gradient: 'linear-gradient(135deg, #006994, #40e0d0)',
+    badge: 'vr',
+    description: 'Stroll along the sun-kissed shores of St. Croix. Warm golden sand, swaying palms, and the gentle rhythm of Caribbean waves create the perfect tropical escape.',
+    features: [
+      { label: 'Duration', value: '5 minutes' },
+      { label: 'Quality', value: '4K 360°' },
+      { label: 'Audio', value: 'Ambient' },
+      { label: 'Interactivity', value: 'Look Around' }
+    ]
+  },
+  {
+    id: 10,
+    title: 'Dubai Skyline',
+    location: 'Dubai, UAE',
+    type: 'VR 360°',
+    price: 59,
+    creator: 'Joel Journeys',
+    emoji: '🏙️',
+    video: '/dubai-nights.mp4',
+    gradient: 'linear-gradient(135deg, #1a1a2e, #e94560)',
+    badge: 'vr',
+    description: 'Soar above the glittering Dubai skyline at night. Watch the Burj Khalifa pierce the clouds, see the Dubai Fountain dance below, and experience the city that never sleeps.',
+    features: [
+      { label: 'Duration', value: '15 minutes' },
+      { label: 'Quality', value: '4K 360°' },
+      { label: 'Audio', value: 'Cinematic' },
+      { label: 'Interactivity', value: 'Look Around' }
+    ]
+  },
+  {
+    id: 11,
+    title: 'Cancun Paradise',
+    location: 'Cancun, Mexico',
+    type: 'VR 360°',
+    price: 49,
+    creator: 'Joel Journeys',
+    emoji: '🏝️',
+    video: '/cancun.mp4',
+    gradient: 'linear-gradient(135deg, #00b4d8, #90e0ef)',
+    badge: 'vr',
+    description: 'Dive into the crystal-clear turquoise waters of Cancun. Feel the warm Caribbean sun, walk along pristine white sand beaches, and witness the vibrant colors of the Riviera Maya.',
+    features: [
+      { label: 'Duration', value: '12 minutes' },
+      { label: 'Quality', value: '4K 360°' },
+      { label: 'Audio', value: 'Ocean Waves' },
+      { label: 'Interactivity', value: 'Look Around' }
+    ]
+  }
+];
+
+function renderMemories(filter) {
+  var grid = document.getElementById('grid');
+  var filtered = filter === 'All' ? memories : memories.filter(function(m) {
+    return m.type.toLowerCase().includes(filter.toLowerCase()) || 
+           m.title.toLowerCase().includes(filter.toLowerCase()) ||
+           m.location.toLowerCase().includes(filter.toLowerCase());
+  });
+  
+  grid.innerHTML = filtered.map(function(m) {
+    return '<div class="card" onclick="openModal(' + m.id + ')">' +
+      '<div class="card-img">' +
+        '<video class="card-video" src="' + m.video + '" muted loop preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>' +
+        '<div class="card-img-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.7) 100%);"></div>' +
+        '<div class="badges"><span class="badge badge-' + m.badge + '">' + m.type + '</span></div>' +
+        '<div class="card-play"></div>' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<h3>' + m.title + '</h3>' +
+        '<div class="card-location">📍 ' + m.location + '</div>' +
+        '<div class="card-meta">' +
+          '<div class="card-price">$' + m.price + '</div>' +
+          '<div class="card-creator"><div class="avatar"></div>' + m.creator + '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function openModal(id) {
+  var m = memories.find(function(x) { return x.id === id; });
+  if (!m) return;
+  
+  document.getElementById('modal-preview').style.background = m.gradient;
+  document.getElementById('modal-preview').style.display = 'flex';
+  document.getElementById('modal-icon').textContent = m.emoji;
+  document.getElementById('modal-title').textContent = m.title;
+  document.getElementById('modal-location').textContent = '📍 ' + m.location;
+  document.getElementById('modal-desc').textContent = m.description;
+  document.getElementById('modal-price').textContent = '$' + m.price;
+  
+  // Show view button for available experiences
+  var viewBtn = document.getElementById('btn-view');
+  if (id === 1) {
+    viewBtn.href = '/experience/bahamas-beachfront';
+    viewBtn.style.display = 'inline-block';
+  } else if (id === 7) {
+    viewBtn.href = '/experience/santino-cult';
+    viewBtn.style.display = 'inline-block';
+  } else if (id === 8) {
+    viewBtn.href = '/experience/stcroix-beachwalk';
+    viewBtn.style.display = 'inline-block';
+  } else if (id === 10) {
+    viewBtn.href = '/experience/dubai-skyline';
+    viewBtn.style.display = 'inline-block';
+  } else if (id === 11) {
+    viewBtn.href = '/experience/cancun-paradise';
+    viewBtn.style.display = 'inline-block';
+  } else {
+    viewBtn.style.display = 'none';
+  }
+  
+  document.getElementById('modal-features').innerHTML = m.features.map(function(f) {
+    return '<div class="feature"><div class="label">' + f.label + '</div><div class="value">' + f.value + '</div></div>';
+  }).join('');
+  
+  document.getElementById('modal').classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('active');
+}
+
+document.querySelectorAll('.filter').forEach(function(f) {
+  f.addEventListener('click', function() {
+    document.querySelectorAll('.filter').forEach(function(x) { x.classList.remove('active'); });
+    f.classList.add('active');
+    renderMemories(f.textContent);
+  });
+});
+
+document.getElementById('modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+renderMemories('All');
+
+document.querySelectorAll('.card').forEach(function(card) {
+  var vid = card.querySelector('.card-video');
+  if (vid) {
+    card.addEventListener('mouseenter', function() { vid.play(); });
+    card.addEventListener('mouseleave', function() { vid.pause(); vid.currentTime = 0; });
+  }
+});
+</script>
+
+</body>
+</html>
