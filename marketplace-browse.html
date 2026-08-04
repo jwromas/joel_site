@@ -396,6 +396,49 @@ body {
   box-shadow: 0 8px 24px rgba(255,215,0,0.3);
 }
 
+.modal-access {
+  padding: 20px 32px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.access-title {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.access-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.abtn {
+  flex: 1;
+  padding: 13px 0;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.abtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.atg { background: linear-gradient(135deg, #2AABEE, #229ED9); }
+.adc { background: linear-gradient(135deg, #7289DA, #5865F2); }
+.ayt { background: linear-gradient(135deg, #FF0000, #CC0000); }
+
+@media(max-width:768px) {
+  .access-btns { flex-direction: column; }
+}
+
 footer {
   padding: 40px;
   text-align: center;
@@ -446,10 +489,16 @@ footer a { color: var(--gold); text-decoration: none; }
       <div class="location" id="modal-location"></div>
       <p class="description" id="modal-desc"></p>
       <div class="modal-features" id="modal-features"></div>
+      <div class="modal-access">
+        <div class="access-title">Free Access — Join one to unlock</div>
+        <div class="access-btns">
+          <a class="abtn atg" href="https://t.me/+n6glHFtFcOY3NjIx" target="_blank" rel="noopener">📱 Telegram</a>
+          <a class="abtn adc" href="https://discord.gg/XskM3NATxm" target="_blank" rel="noopener">💬 Discord</a>
+          <a class="abtn ayt" href="https://www.youtube.com/@joewromas5712" target="_blank" rel="noopener">▶ YouTube</a>
+        </div>
+      </div>
       <div class="modal-footer">
-        <div class="modal-price" id="modal-price"></div>
         <a href="/experience/bahamas-beachfront" class="btn-view" id="btn-view" style="display:none;padding:12px 24px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;color:#fff;text-decoration:none;font-weight:600;cursor:pointer;">View Experience</a>
-        <button class="btn-buy">Buy Experience</button>
       </div>
     </div>
   </div>
@@ -578,7 +627,7 @@ function renderMemories(filter) {
         '<h3>' + m.title + '</h3>' +
         '<div class="card-location">📍 ' + m.location + '</div>' +
         '<div class="card-meta">' +
-          '<div class="card-price">$' + m.price + '</div>' +
+          '<div class="card-price" style="font-size:13px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-weight:600">Free Access</div>' +
           '<div class="card-creator"><div class="avatar"></div>' + m.creator + '</div>' +
         '</div>' +
       '</div>' +
@@ -596,7 +645,6 @@ function openModal(id) {
   document.getElementById('modal-title').textContent = m.title;
   document.getElementById('modal-location').textContent = '📍 ' + m.location;
   document.getElementById('modal-desc').textContent = m.description;
-  document.getElementById('modal-price').textContent = '$' + m.price;
   
   // Show view button for available experiences (localhost only)
   var viewBtn = document.getElementById('btn-view');
