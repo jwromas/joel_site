@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Export Leads to CSV</title>
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 40px;
+}
+.card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+}
+h1 { color: #60a5fa; }
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    background: #3b82f6;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 5px;
+}
+button:hover { background: #2563eb; }
+button.secondary { background: #475569; }
+pre {
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.count {
+    font-size: 24px;
+    color: #22c55e;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="card">
+    <h1>Lead Export Tool</h1>
+    <p>Leads collected: <span class="count" id="count">0</span></p>
+    
+    <div>
+        <button onclick="exportCSV()">Download CSV for Google Sheets</button>
+        <button class="secondary" onclick="viewLeads()">View Leads</button>
+        <button class="secondary" onclick="clearLeads()">Clear All</button>
+    </div>
+    
+    <pre id="output" style="margin-top: 20px;"></pre>
+</div>
+
+<script>
+function getLeads() {
+    return JSON.parse(localStorage.getItem('jw_leads') || '[]');
+}
+
+function updateCount() {
+    document.getElementById('count').textContent = getLeads().length;
+}
+
+function exportCSV() {
+    const leads = getLeads();
+    if (leads.length === 0) {
+        alert('No leads to export');
+        return;
+    }
+    
+    // CSV header
+    let csv = 'Name,Email,Phone,Source,Date,Interest\n';
+    
+    leads.forEach(lead => {
+        csv += `"${lead.name || ''}","${lead.email || ''}","${lead.phone || ''}","${lead.source || ''}","${lead.date || ''}","${lead.interest || ''}"\n`;
+    });
+    
+    // Download
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'joeljourneys_leads_' + new Date().toISOString().split('T')[0] + '.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    alert('CSV downloaded! Import to Google Sheets: File > Import > Upload');
+}
+
+function viewLeads() {
+    const leads = getLeads();
+    document.getElementById('output').textContent = JSON.stringify(leads, null, 2);
+}
+
+function clearLeads() {
+    if (confirm('Delete all leads?')) {
+        localStorage.removeItem('jw_leads');
+        updateCount();
+        document.getElementById('output').textContent = '';
+    }
+}
+
+updateCount();
+</script>
+</body>
+</html>

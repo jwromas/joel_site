@@ -67,6 +67,16 @@
       });
     </script>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+    <link rel="preconnect" href="https://translate.google.com">
+    <link rel="preconnect" href="https://tpemb.com">
+    <link rel="preconnect" href="https://tp.media">
+    <link rel="preconnect" href="https://connect.facebook.net">
+    <link rel="preconnect" href="https://api.qrserver.com">
+    <link rel="preconnect" href="https://emrldtp.com">
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -516,14 +526,7 @@
     </div>
 </div>
 
-<script>
-(function (w, d, s, o, f) {
-    w.JoelJourneys = w.JoelJourneys || {};
-    w.JoelJourneys.params = { siteId: 'jj_main_01', trackSales: true, botVersion: '1.0' };
-    var js = d.createElement(s); var fs = d.getElementsByTagName(s)[0];
-    js.async = 1; js.src = o; fs.parentNode.insertBefore(js, fs);
-})(window, document, 'script', 'http://localhost:3000/deploy/joel-bot-widget.js?v=' + Date.now());
-</script>
+
 
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init', '1980336152611329');fbq('track', 'PageView');
@@ -622,7 +625,9 @@ document.addEventListener('click', function(e) {
 </div>
 
 <script>
-fetch('/track', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({page:'index.html', referrer:document.referrer||'direct'})});
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+  fetch('/track', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({page:'index.html', referrer:document.referrer||'direct'})});
+}
 </script>
 </body>
 </html>
