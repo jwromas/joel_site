@@ -102,10 +102,9 @@ button:hover { opacity: 0.9; }
 </div>
 
 <script>
-// REPLACE THIS URL with your Google Apps Script URL (see instructions below)
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzj82wLLPXHhX3WaydRO5-TW1ShbqfFE37UYKlvZMkHU8TE0pvYGqdYz5dpr4c1kTbZzQ/exec';
 
-document.getElementById('leadForm').addEventListener('submit', async function(e) {
+document.getElementById('leadForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
     const data = {
@@ -116,22 +115,21 @@ document.getElementById('leadForm').addEventListener('submit', async function(e)
         date: new Date().toLocaleDateString()
     };
     
-    try {
-        const response = await fetch(SCRIPT_URL, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' }
-        });
-        
-        if (response.ok) {
-            document.getElementById('leadForm').style.display = 'none';
-            document.getElementById('success').style.display = 'block';
-        } else {
-            throw new Error('Failed');
-        }
-    } catch (err) {
-        document.getElementById('error').style.display = 'block';
-    }
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = SCRIPT_URL;
+    
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'data';
+    input.value = JSON.stringify(data);
+    form.appendChild(input);
+    
+    document.body.appendChild(form);
+    form.submit();
+    
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
 });
 </script>
 </body>
