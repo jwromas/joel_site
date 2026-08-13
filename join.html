@@ -70,7 +70,6 @@ button {
 }
 button:hover { opacity: 0.9; }
 .success { display: none; color: #22c55e; font-size: 16px; margin-top: 20px; }
-.error { display: none; color: #ef4444; font-size: 14px; margin-top: 10px; }
 </style>
 </head>
 <body>
@@ -79,11 +78,14 @@ button:hover { opacity: 0.9; }
     <h1>Joel Journeys</h1>
     <p>Get exclusive travel deals, VR experiences, and flight alerts</p>
     
-    <form id="leadForm">
-        <input type="text" id="name" placeholder="Your name" required>
-        <input type="email" id="email" placeholder="Email address" required>
-        <input type="tel" id="phone" placeholder="Phone (optional)">
-        <select id="interest" required>
+    <form id="leadForm" action="https://formsubmit.co/joel@joeljourneys.com" method="POST">
+        <input type="hidden" name="_next" value="https://jwromas.github.io/joel_site/join-thanks.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New Lead from Joel Journeys">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Email address" required>
+        <input type="tel" name="phone" placeholder="Phone (optional)">
+        <select name="interest" required>
             <option value="" disabled selected>What interests you?</option>
             <option value="Bahamas Beachfront">Bahamas Beachfront</option>
             <option value="Dubai Skyline">Dubai Skyline</option>
@@ -96,41 +98,6 @@ button:hover { opacity: 0.9; }
         </select>
         <button type="submit">Get My Deals</button>
     </form>
-    
-    <div class="success" id="success">You're in! Check your email for exclusive offers.</div>
-    <div class="error" id="error">Something went wrong. Try again.</div>
 </div>
-
-<script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzj82wLLPXHhX3WaydRO5-TW1ShbqfFE37UYKlvZMkHU8TE0pvYGqdYz5dpr4c1kTbZzQ/exec';
-
-document.getElementById('leadForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const data = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        interest: document.getElementById('interest').value,
-        date: new Date().toLocaleDateString()
-    };
-    
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = SCRIPT_URL;
-    
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'data';
-    input.value = JSON.stringify(data);
-    form.appendChild(input);
-    
-    document.body.appendChild(form);
-    form.submit();
-    
-    document.getElementById('leadForm').style.display = 'none';
-    document.getElementById('success').style.display = 'block';
-});
-</script>
 </body>
 </html>
