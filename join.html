@@ -78,16 +78,11 @@ button:hover { opacity: 0.9; }
     <h1>Joel Journeys</h1>
     <p>Get exclusive travel deals, VR experiences, and flight alerts</p>
     
-    <form id="leadForm" action="https://formsubmit.co/joel.wromas@gmail.com" method="POST">
-        <input type="hidden" name="_next" value="https://jwromas.github.io/joel_site/join-thanks.html">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_subject" value="New Lead from Joel Journeys">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_autoresponse" value="YOUR BESPOKE TRAVEL PACKAGE — JOEL JOURNEYS DUBAI: 360 VR Skyline Tour, Burj Khalifa, Dubai Marina, Desert Safari, Gold Souk. Regions: Downtown, Palm Jumeirah, Creek, Old Dubai. Price from $59. BAHAMAS: Beachfront 360 VR, $49. ST. CROIX: Beach Walk VR, $39. CANCUN: Paradise VR, $59. SANTINO: Cult VR, $49. eSIM: From $2.99 (512MB). FLIGHTS: Orlando from $89, Miami from $89. BOOK NOW: https://joeljourneys.com. TripTrack: Coming Soon. Have a special request? Contact us directly. — Joel Journeys Team">
-        <input type="text" name="name" placeholder="Your name" required>
-        <input type="email" name="email" placeholder="Email address" required>
-        <input type="tel" name="phone" placeholder="Phone (optional)">
-        <select name="interest" required>
+    <form id="leadForm">
+        <input type="text" id="name" placeholder="Your name" required>
+        <input type="email" id="email" placeholder="Email address" required>
+        <input type="tel" id="phone" placeholder="Phone (optional)">
+        <select id="interest" required>
             <option value="" disabled selected>What interests you?</option>
             <option value="Bahamas Beachfront">Bahamas Beachfront</option>
             <option value="Dubai Skyline">Dubai Skyline</option>
@@ -100,6 +95,31 @@ button:hover { opacity: 0.9; }
         </select>
         <button type="submit">Get My Deals</button>
     </form>
+    <div class="success" id="success">You're in! Check your email for exclusive offers.</div>
 </div>
+
+<script>
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzj82wLLPXHhX3WaydRO5-TW1ShbqfFE37UYKlvZMkHU8TE0pvYGqdYz5dpr4c1kTbZzQ/exec';
+
+document.getElementById('leadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const data = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        interest: document.getElementById('interest').value
+    };
+    
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        mode: 'no-cors'
+    }).then(function() {
+        document.getElementById('leadForm').style.display = 'none';
+        document.getElementById('success').style.display = 'block';
+    });
+});
+</script>
 </body>
 </html>
