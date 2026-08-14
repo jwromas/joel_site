@@ -614,7 +614,7 @@ async function submitBooking() {
                 '<span style="background:#6e40c9;color:#fff;padding:8px 14px;border-radius:6px;font-weight:600;font-size:0.85rem;white-space:nowrap;margin-left:10px;">Search Cars</span>' +
             '</div></div>' +
         // GigSky eSIM card
-        '<div onclick="window.open(\'https://plans.gigsky.com/27H3X8P/2CTPL/?uid=5\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #1f6feb;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
+        '<div onclick="if(typeof gtag!==\'undefined\'){gtag(\'event\',\'esim_click\',{\'source\':\'book.html\',\'destination\':'global'});}window.open(\'https://plans.gigsky.com/27H3X8P/2CTPL/?uid=5\',\'_blank\')" style="display:block;background:#0d1117;border:1px solid #30363d;border-left:3px solid #1f6feb;border-radius:8px;padding:14px;margin-bottom:10px;cursor:pointer;">' +
             '<div style="display:flex;justify-content:space-between;align-items:center;">' +
                 '<div style="flex:1;"><div style="font-weight:600;color:#e0e0e0;font-size:0.95rem;">\uD83D\uDCF1 Get a Travel eSIM</div>' +
                 '<div style="color:#8b949e;font-size:0.8rem;margin-top:2px;">Data plans from $2.99 (512MB) \u2014 190+ countries, instant activation</div>' +
