@@ -101,7 +101,7 @@ a-scene{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
   <div class="gatebox">
     <div class="gatelock">🔒</div>
     <div class="gatetitle">Unlock This Experience</div>
-    <div class="gatesub">Join a channel below, then send <b>/pin</b> on Telegram or <b>!pin</b> on Discord to get your <b>4-digit access code</b>.</div>
+    <div class="gatesub">Join our community to receive your <b>4-digit access code</b>.</div>
     <div class="gatebtns">
       <a class="gbtn gtelegram" href="https://t.me/+n6glHFtFcOY3NjIx" target="_blank" rel="noopener">📱 Join Telegram</a>
       <a class="gbtn gdiscord" href="https://discord.gg/XskM3NATxm" target="_blank" rel="noopener">💬 Join Discord</a>
@@ -198,7 +198,7 @@ document.getElementById('gateunlock').addEventListener('click',function(){
   if(!/^\d{4}$/.test(pin)){pinerr.textContent='Please enter the 4-digit PIN from our bot.';return}
   if(typeof VALID_PINS!=='undefined'&&VALID_PINS.indexOf(pin)>-1){
     localStorage.setItem('jj_vr_unlocked','1');gateov.classList.add('gone');pinerr.textContent=''
-  }else{pinerr.textContent='Invalid PIN. Get one via /pin on Telegram or !pin on Discord.'}
+  }else{pinerr.textContent='Invalid PIN. Check your welcome message for the code.'}
 });
 
 function hideLoad(){if(!vidReady){vidReady=true;loadov.classList.add('hide')}}
