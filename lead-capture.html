@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get Exclusive Travel Deals</title>
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+.card {
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid #334155;
+    border-radius: 16px;
+    padding: 40px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+p {
+    color: #94a3b8;
+    margin-bottom: 24px;
+}
+input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    background: #1e293b;
+    color: #fff;
+    font-size: 16px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+input:focus {
+    outline: none;
+    border-color: #60a5fa;
+}
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+button:hover {
+    transform: scale(1.02);
+}
+.success {
+    display: none;
+    color: #22c55e;
+    font-size: 18px;
+    margin-top: 20px;
+}
+.badge {
+    display: inline-block;
+    background: #3b82f6;
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+</style>
+</head>
+<body>
+<div class="card">
+    <div class="badge">VIP ACCESS</div>
+    <h1>Get Exclusive Travel Deals</h1>
+    <p>Join 500+ travelers. Get early access to VR experiences, eSIM discounts, and flight deals.</p>
+    
+    <form id="leadForm">
+        <input type="text" id="name" placeholder="Your name" required>
+        <input type="email" id="email" placeholder="Email address" required>
+        <input type="tel" id="phone" placeholder="Phone (optional)">
+        <button type="submit">Get My Deals</button>
+    </form>
+    
+    <div class="success" id="success">
+        You're in! Check your email for exclusive offers.
+    </div>
+</div>
+
+<script>
+document.getElementById('leadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const lead = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        source: 'lead-capture-page',
+        date: new Date().toISOString().split('T')[0],
+        interest: document.referrer || 'direct'
+    };
+    
+    // Save to localStorage
+    let leads = JSON.parse(localStorage.getItem('jw_leads') || '[]');
+    leads.push(lead);
+    localStorage.setItem('jw_leads', JSON.stringify(leads));
+    
+    // Show success
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+    
+    // Track in GA4
+    if (typeof gtag !== 'undefined') {
+        gtag('event', 'lead_capture', {
+            'interest': lead.interest,
+            'source': lead.source
+        });
+    }
+});
+</script>
+</body>
+</html>
