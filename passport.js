@@ -1,6 +1,6 @@
 (function(){
 var DESTS=[
-{id:'bahamas',name:'Bahamas Beachfront',emoji:'\uD83C\uDFD6\uFE0F',route:'/experience/bahamas-beachfront',color:'#0077b6'},
+{id:'bahamas',name:'Sanibel Island Beachfront',emoji:'\uD83C\uDFD6\uFE0F',route:'/experience/bahamas-beachfront',color:'#0077b6'},
 {id:'santino',name:'Santino Cult',emoji:'\uD83C\uDFDB\uFE0F',route:'/experience/santino-cult',color:'#c62368'},
 {id:'stcroix',name:'St. Croix Walk',emoji:'\uD83C\uDF34',route:'/experience/stcroix-beachwalk',color:'#006994'},
 {id:'dubai',name:'Dubai Skyline',emoji:'\uD83C\uDFD9\uFE0F',route:'/experience/dubai-skyline',color:'#e94560'},
