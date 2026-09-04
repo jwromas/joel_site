@@ -126,7 +126,7 @@ a-scene{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
 
 <a-scene embedded vr-mode-ui="enabled:true" loading-screen="enabled:false" renderer="colorManagement:true">
 <a-assets timeout="120000">
-  <video id="vid360" src="dubai-nights.mp4" preload="auto" crossorigin="anonymous" playsinline webkit-playsinline loop muted></video>
+  <video id="vid360" src="dubai-nights-low.mp4" preload="metadata" crossorigin="anonymous" playsinline webkit-playsinline loop muted></video>
 </a-assets>
 <a-videosphere src="#vid360" rotation="0 0 0" material="side:back"></a-videosphere>
 <a-sky color="#000" material="color:#000;transparent:true;opacity:0.1;shader:flat"></a-sky>
@@ -218,6 +218,8 @@ vid.addEventListener('progress',function(){
 playov.addEventListener('click',function(){
   playov.classList.add('gone');
   ui.classList.add('on');
+  vid.src='dubai-nights.mp4';
+  vid.load();
   vid.play().then(function(){vid.muted=false}).catch(function(){vid.muted=true;vid.play()});
   setTimeout(function(){hint.classList.add('fade')},5000);
   cam.components['look-controls'].enabled=true;
