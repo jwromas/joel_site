@@ -356,16 +356,10 @@ body {
 
 .modal-footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding-top: 24px;
   border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.modal-price {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--gold);
 }
 
 .btn-buy {
@@ -424,8 +418,38 @@ body {
 .adc { background: linear-gradient(135deg, #7289DA, #5865F2); }
 .ayt { background: linear-gradient(135deg, #FF0000, #CC0000); }
 
+.access-pin {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.access-pin .pininput {
+  flex: 1;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  font-size: 16px;
+  letter-spacing: 6px;
+  text-align: center;
+  outline: none;
+}
+
+.access-pin .pininput:focus { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+
+.access-err {
+  font-size: 12px;
+  color: #ff6b6b;
+  margin-top: 10px;
+  min-height: 16px;
+}
+
 @media(max-width:768px) {
   .access-btns { flex-direction: column; }
+  .access-pin { flex-direction: column; align-items: stretch; }
 }
 
 footer {
@@ -442,7 +466,7 @@ footer a { color: var(--gold); text-decoration: none; }
 <body>
 
 <nav class="nav">
-  <a href="/memory-marketplace" class="nav-brand">Memory Marketplace</a>
+  <a href="https://joeljourneys.com" class="nav-brand">Memory Marketplace</a>
   <div class="nav-links">
     <a href="#browse">Browse</a>
     <a href="https://joeljourneys.com">Joel Journeys</a>
@@ -477,15 +501,20 @@ footer a { color: var(--gold); text-decoration: none; }
       <p class="description" id="modal-desc"></p>
       <div class="modal-features" id="modal-features"></div>
       <div class="modal-access">
-        <div class="access-title">Free Access — Join one to unlock</div>
+        <div class="access-title">Free Access — Join a channel, then enter code</div>
         <div class="access-btns">
           <a class="abtn atg" href="https://t.me/+n6glHFtFcOY3NjIx" target="_blank" rel="noopener">📱 Telegram</a>
           <a class="abtn adc" href="https://discord.gg/XskM3NATxm" target="_blank" rel="noopener">💬 Discord</a>
           <a class="abtn ayt" href="https://www.youtube.com/@joewromas5712" target="_blank" rel="noopener">▶ YouTube</a>
         </div>
+        <div class="access-pin" id="access-pin-row">
+          <input class="pininput" id="access-pin" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="Enter access code" autocomplete="off">
+          <button class="abtn atg" id="access-unlock" style="flex:none;padding:13px 22px;background:linear-gradient(135deg,#FFD700,#ff8c00);color:#000;">Unlock</button>
+        </div>
+        <div class="access-err" id="access-err"></div>
       </div>
       <div class="modal-footer">
-        <a href="/experience/bahamas-beachfront" class="btn-view" id="btn-view" style="display:none;padding:12px 24px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:12px;color:#fff;text-decoration:none;font-weight:600;cursor:pointer;">View Experience</a>
+        <a href="#" class="btn-view" id="btn-view" style="display:none;padding:14px 28px;background:linear-gradient(135deg,var(--gold),#ff8c00);color:#000;border-radius:12px;font-weight:700;text-decoration:none;cursor:pointer;">▶ Enter Experience — Free</a>
       </div>
     </div>
   </div>
@@ -502,7 +531,8 @@ var memories = [
     title: 'Sanibel Island Beachfront',
     location: 'Sanibel Island, Florida',
     type: 'VR 360°',
-    price: 49,
+    free: true,
+    page: 'experience-bahamas.html',
     creator: 'Joel Journeys',
     emoji: '🏖️',
     video: '/beachfront360.mp4',
@@ -521,7 +551,8 @@ var memories = [
     title: 'Santino Cult Experience',
     location: 'Mediterranean',
     type: 'VR 360°',
-    price: 49,
+    free: true,
+    page: 'experience-santino.html',
     creator: 'Joel Journeys',
     emoji: '🏛️',
     video: '/santino360.mp4',
@@ -540,7 +571,8 @@ var memories = [
     title: 'St. Croix Beach Walk',
     location: 'St. Croix, USVI',
     type: 'VR 360°',
-    price: 39,
+    free: true,
+    page: 'experience-stcroix.html',
     creator: 'Joel Journeys',
     emoji: '🌴',
     video: '/stcroix-beachwalk.mp4',
@@ -559,7 +591,8 @@ var memories = [
     title: 'Dubai Skyline',
     location: 'Dubai, UAE',
     type: 'VR 360°',
-    price: 59,
+    free: true,
+    page: 'experience-dubai.html',
     creator: 'Joel Journeys',
     emoji: '🏙️',
     video: '/dubai-nights.mp4',
@@ -578,7 +611,8 @@ var memories = [
     title: 'Cancun Paradise',
     location: 'Cancun, Mexico',
     type: 'VR 360°',
-    price: 49,
+    free: true,
+    page: 'experience-cancun.html',
     creator: 'Joel Journeys',
     emoji: '🏝️',
     video: '/cancun.mp4',
@@ -625,28 +659,54 @@ function renderMemories(filter) {
 function openModal(id) {
   var m = memories.find(function(x) { return x.id === id; });
   if (!m) return;
-  
+  current = m;
+
   document.getElementById('modal-preview').style.background = m.gradient;
   document.getElementById('modal-preview').style.display = 'flex';
   document.getElementById('modal-icon').textContent = m.emoji;
   document.getElementById('modal-title').textContent = m.title;
   document.getElementById('modal-location').textContent = '📍 ' + m.location;
   document.getElementById('modal-desc').textContent = m.description;
-  
-  // Show view button for available experiences (localhost only)
+
   var viewBtn = document.getElementById('btn-view');
+  viewBtn.href = m.page;
   viewBtn.style.display = 'none';
-  
+
+  var pinRow = document.getElementById('access-pin-row');
+  var err = document.getElementById('access-err');
+  if (err) err.textContent = '';
+  if (pinRow) pinRow.style.display = 'flex';
+  if (localStorage.getItem('jj_vr_unlocked') === '1') {
+    if (pinRow) pinRow.style.display = 'none';
+    viewBtn.style.display = 'inline-block';
+  }
+
   document.getElementById('modal-features').innerHTML = m.features.map(function(f) {
     return '<div class="feature"><div class="label">' + f.label + '</div><div class="value">' + f.value + '</div></div>';
   }).join('');
-  
+
   document.getElementById('modal').classList.add('active');
 }
 
 function closeModal() {
   document.getElementById('modal').classList.remove('active');
 }
+
+var current = null;
+
+document.getElementById('access-unlock').addEventListener('click', function() {
+  var pin = (document.getElementById('access-pin').value || '').trim();
+  var err = document.getElementById('access-err');
+  if (!/^\d{4}$/.test(pin)) { err.textContent = 'Enter the 4-digit access code.'; return; }
+  var ok = (typeof VALID_PINS !== 'undefined' && VALID_PINS.indexOf(pin) > -1) || pin === '8117';
+  if (!ok) { err.textContent = 'Invalid code. Join a channel for your free access code.'; return; }
+  localStorage.setItem('jj_vr_unlocked', '1');
+  err.textContent = '';
+  document.getElementById('access-pin-row').style.display = 'none';
+  var viewBtn = document.getElementById('btn-view');
+  viewBtn.style.display = 'inline-block';
+  if (current) viewBtn.href = current.page;
+});
 
 document.querySelectorAll('.filter').forEach(function(f) {
   f.addEventListener('click', function() {
