@@ -117,6 +117,99 @@ body {
   gap: 24px;
 }
 
+.exclusive {
+  margin-top: 64px;
+}
+.exclusive-head {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+.exclusive-title-lg {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+.exclusive-sub {
+  color: var(--muted);
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.exclusive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.exdeal {
+  position: relative;
+  display: block;
+  background: linear-gradient(160deg, rgba(255,215,0,0.08), rgba(17,17,17,0.65));
+  border: 1px solid rgba(255,215,0,0.22);
+  border-radius: 20px;
+  padding: 28px;
+  text-decoration: none;
+  transition: all 0.3s;
+  overflow: hidden;
+}
+.exdeal:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold);
+  box-shadow: 0 16px 48px rgba(255,215,0,0.14);
+}
+.exdeal-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #000;
+  background: linear-gradient(135deg, #FFD700, #ff8c00);
+  padding: 6px 12px;
+  border-radius: 100px;
+}
+.exdeal-cat {
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.exdeal-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 8px;
+}
+.exdeal-desc {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+.exdeal-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.exdeal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff8c00;
+}
+.exdeal-link::after {
+  content: '→';
+}
+
 .card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -487,6 +580,39 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 
   <div class="grid" id="grid"></div>
+
+  <section class="exclusive">
+    <div class="exclusive-head">
+      <h2 class="exclusive-title-lg">Exclusive Deals</h2>
+      <span class="exclusive-sub">Member-only offers · Sanibel Island, Florida</span>
+    </div>
+    <div class="exclusive-grid">
+      <a class="exdeal" href="https://sanibelcaptivabeachresorts.com/" target="_blank" rel="noopener">
+        <span class="exdeal-badge">EXCLUSIVE</span>
+        <div class="exdeal-cat">Sanibel Island · FL</div>
+        <div class="exdeal-name">Beachfront Resort Stays</div>
+        <div class="exdeal-desc">Pristine Gulf beaches, sunset cruises & shelling paradise — the best resorts across Sanibel & Captiva.</div>
+        <div class="exdeal-price">From $129/night</div>
+        <span class="exdeal-link">Book on the Sanibel Website</span>
+      </a>
+      <a class="exdeal" href="https://www.theinnsofsanibel.com/the-inns/sanibel-inn/" target="_blank" rel="noopener">
+        <span class="exdeal-badge">EXCLUSIVE</span>
+        <div class="exdeal-cat">Sanibel Inn · Voted Best</div>
+        <div class="exdeal-name">Sanibel Inn</div>
+        <div class="exdeal-desc">Award-winning resort moments from the beach — walk out to the Gulf, seashells at your door.</div>
+        <div class="exdeal-price">From $284/night</div>
+        <span class="exdeal-link">Book Direct</span>
+      </a>
+      <a class="exdeal" href="https://sanibelcaptivabeachresorts.com/" target="_blank" rel="noopener">
+        <span class="exdeal-badge">DEAL</span>
+        <div class="exdeal-cat">Sanibel & Captiva</div>
+        <div class="exdeal-name">Browse All Sanibel Resorts</div>
+        <div class="exdeal-desc">Every beachfront stay on Sanibel & Captiva in one place — compare & book your island escape.</div>
+        <div class="exdeal-price">15 miles of unspoiled coastline</div>
+        <span class="exdeal-link">View Sanibel Deals</span>
+      </a>
+    </div>
+  </section>
 </main>
 
 <div class="modal" id="modal">
