@@ -625,6 +625,26 @@ var memories = [
       { label: 'Audio', value: 'Ocean Waves' },
       { label: 'Interactivity', value: 'Look Around' }
     ]
+  },
+  {
+    id: 12,
+    title: 'Nassau, Bahamas',
+    location: 'Nassau, Bahamas',
+    type: 'VR 360°',
+    free: true,
+    page: 'experience-nassau.html',
+    creator: 'Joel Journeys',
+    emoji: '🌴',
+    video: '/nassau-360.jpg',
+    gradient: 'linear-gradient(135deg, #00b4d8, #48cae4)',
+    badge: 'vr',
+    description: 'Soak in the sun-soaked shores of Nassau, Bahamas. Turquoise water, warm island light, and the easy rhythm of the Caribbean — captured all around you.',
+    features: [
+      { label: 'Format', value: '360° Image' },
+      { label: 'Quality', value: 'Panoramic' },
+      { label: 'Audio', value: 'Ambient' },
+      { label: 'Interactivity', value: 'Look Around' }
+    ]
   }
 ];
 
@@ -638,9 +658,9 @@ function renderMemories(filter) {
   
   grid.innerHTML = filtered.map(function(m) {
     return '<div class="card" onclick="openModal(' + m.id + ')">' +
-      '<div class="card-img">' +
-        '<video class="card-video" src="' + m.video + '" muted loop preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>' +
-        '<div class="card-img-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.7) 100%);"></div>' +
+'<div class="card-img">' +
+          (m.video.match(/\.(jpg|jpeg|png|gif|webp)(\?|$)/i) ? '<img class="card-video" src="' + m.video + '" style="width:100%;height:100%;object-fit:cover;">' : '<video class="card-video" src="' + m.video + '" muted loop preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>') +
+          '<div class="card-img-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.7) 100%);"></div>' +
         '<div class="badges"><span class="badge badge-' + m.badge + '">' + m.type + '</span></div>' +
         '<div class="card-play"></div>' +
       '</div>' +
@@ -724,7 +744,7 @@ renderMemories('All');
 
 document.querySelectorAll('.card').forEach(function(card) {
   var vid = card.querySelector('.card-video');
-  if (vid) {
+  if (vid && typeof vid.play === 'function') {
     card.addEventListener('mouseenter', function() { vid.play(); });
     card.addEventListener('mouseleave', function() { vid.pause(); vid.currentTime = 0; });
   }
