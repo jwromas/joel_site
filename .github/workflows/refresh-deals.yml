@@ -40,11 +40,16 @@ jobs:
       - name: Copy to root for server fallback
         run: cp deploy/live_deals.json ./live_deals.json
 
+      - name: Generate ticker data
+        run: |
+          python3 deploy/gen_ticker.py
+          cp deploy/ticker_data.json ./ticker_data.json
+
       - name: Commit updated deals
         run: |
           git config user.name "JungleWorld Bot"
           git config user.email "bot@joeljourneys.com"
-          git add deploy/live_deals.json live_deals.json
+          git add deploy/live_deals.json live_deals.json deploy/ticker_data.json ticker_data.json
           timestamp=$(date -u +"%Y-%m-%d %H:%M UTC")
           git diff --cached --quiet && echo "No changes to commit" && exit 0
           git commit -m "Refresh live deals ($timestamp)"
