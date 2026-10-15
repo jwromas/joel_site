@@ -1,34 +1,7 @@
 [
   {
-    "price": "From $44",
-    "title": "Flight: Orlando \u2192 Atlanta from $44",
-    "origin": "Orlando (MCO)",
-    "destination": "Atlanta (ATL)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $59",
-    "title": "Flight: Fort Lauderdale \u2192 Atlanta from $59",
-    "origin": "Fort Lauderdale (FLL)",
-    "destination": "Atlanta (ATL)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $66",
-    "title": "Flight: Miami \u2192 Atlanta from $66",
-    "origin": "Miami (MIA)",
-    "destination": "Atlanta (ATL)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $66",
-    "title": "Flight: Tampa \u2192 Atlanta from $66",
+    "price": "From $42",
+    "title": "Flight: Tampa \u2192 Atlanta from $42",
     "origin": "Tampa (TPA)",
     "destination": "Atlanta (ATL)",
     "description": "",
@@ -36,8 +9,17 @@
     "source": "Joel Journeys"
   },
   {
-    "price": "From $114",
-    "title": "Flight: Miami \u2192 San Juan from $114",
+    "price": "From $43",
+    "title": "Flight: Orlando \u2192 Atlanta from $43",
+    "origin": "Orlando (MCO)",
+    "destination": "Atlanta (ATL)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $60",
+    "title": "Flight: Miami \u2192 San Juan from $60",
     "origin": "Miami (MIA)",
     "destination": "San Juan (SJU)",
     "description": "",
@@ -45,99 +27,54 @@
     "source": "Joel Journeys"
   },
   {
-    "price": "From $124",
-    "title": "Flight: Tampa \u2192 New York from $124",
-    "origin": "Tampa (TPA)",
-    "destination": "New York (NYC)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $134",
-    "title": "Flight: Fort Lauderdale \u2192 New York from $134",
+    "price": "From $89",
+    "title": "Flight: Fort Lauderdale \u2192 San Juan from $89",
     "origin": "Fort Lauderdale (FLL)",
-    "destination": "New York (NYC)",
+    "destination": "San Juan (SJU)",
     "description": "",
     "link": "https://aviasales.tpo.lv/2GVGFfSj",
     "source": "Joel Journeys"
   },
   {
-    "price": "From $135",
-    "title": "Flight: Orlando \u2192 Phoenix from $135",
+    "price": "From $102",
+    "title": "Flight: Fort Lauderdale \u2192 Atlanta from $102",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "Atlanta (ATL)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $131",
+    "title": "Flight: Orlando \u2192 New York from $131",
     "origin": "Orlando (MCO)",
-    "destination": "Phoenix (PHX)",
+    "destination": "New York (NYC)",
     "description": "",
     "link": "https://aviasales.tpo.lv/2GVGFfSj",
     "source": "Joel Journeys"
   },
   {
     "price": "From $136",
-    "title": "Flight: Orlando \u2192 New York from $136",
-    "origin": "Orlando (MCO)",
-    "destination": "New York (NYC)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $140",
-    "title": "Flight: Tampa \u2192 Denver from $140",
-    "origin": "Tampa (TPA)",
-    "destination": "Denver (DEN)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $142",
-    "title": "Flight: Orlando \u2192 San Juan from $142",
-    "origin": "Orlando (MCO)",
-    "destination": "San Juan (SJU)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $146",
-    "title": "Flight: Orlando \u2192 Las Vegas from $146",
-    "origin": "Orlando (MCO)",
-    "destination": "Las Vegas (LAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $148",
-    "title": "Flight: Miami \u2192 New York from $148",
-    "origin": "Miami (MIA)",
-    "destination": "New York (NYC)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $148",
-    "title": "Flight: Orlando \u2192 San Francisco from $148",
-    "origin": "Orlando (MCO)",
-    "destination": "San Francisco (SFO)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $154",
-    "title": "Flight: Tampa \u2192 San Juan from $154",
-    "origin": "Tampa (TPA)",
-    "destination": "San Juan (SJU)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $156",
-    "title": "Flight: Fort Lauderdale \u2192 San Juan from $156",
+    "title": "Flight: Fort Lauderdale \u2192 New York from $136",
     "origin": "Fort Lauderdale (FLL)",
+    "destination": "New York (NYC)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $144",
+    "title": "Flight: Miami \u2192 Atlanta from $144",
+    "origin": "Miami (MIA)",
+    "destination": "Atlanta (ATL)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $145",
+    "title": "Flight: Orlando \u2192 San Juan from $145",
+    "origin": "Orlando (MCO)",
     "destination": "San Juan (SJU)",
     "description": "",
     "link": "https://aviasales.tpo.lv/2GVGFfSj",
@@ -145,7 +82,295 @@
   },
   {
     "price": "From $160",
-    "title": "Flight: Jacksonville \u2192 New York from $160",
+    "title": "Flight: Tampa \u2192 Las Vegas from $160",
+    "origin": "Tampa (TPA)",
+    "destination": "Las Vegas (LAS)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $162",
+    "title": "Flight: Tampa \u2192 New York from $162",
+    "origin": "Tampa (TPA)",
+    "destination": "New York (NYC)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $166",
+    "title": "Flight: Tampa \u2192 San Juan from $166",
+    "origin": "Tampa (TPA)",
+    "destination": "San Juan (SJU)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $167",
+    "title": "Flight: Orlando \u2192 Las Vegas from $167",
+    "origin": "Orlando (MCO)",
+    "destination": "Las Vegas (LAS)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $169",
+    "title": "Flight: Orlando \u2192 Los Angeles from $169",
+    "origin": "Orlando (MCO)",
+    "destination": "Los Angeles (LAX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $173",
+    "title": "Flight: Tampa \u2192 Denver from $173",
+    "origin": "Tampa (TPA)",
+    "destination": "Denver (DEN)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $174",
+    "title": "Flight: Orlando \u2192 Denver from $174",
+    "origin": "Orlando (MCO)",
+    "destination": "Denver (DEN)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $190",
+    "title": "Flight: Miami \u2192 New York from $190",
+    "origin": "Miami (MIA)",
+    "destination": "New York (NYC)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $198",
+    "title": "Flight: Fort Myers \u2192 Las Vegas from $198",
+    "origin": "Fort Myers (RSW)",
+    "destination": "Las Vegas (LAS)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $199",
+    "title": "Flight: Orlando \u2192 Phoenix from $199",
+    "origin": "Orlando (MCO)",
+    "destination": "Phoenix (PHX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $209",
+    "title": "Flight: Jacksonville \u2192 Los Angeles from $209",
+    "origin": "Jacksonville (JAX)",
+    "destination": "Los Angeles (LAX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $213",
+    "title": "Flight: Jacksonville \u2192 Phoenix from $213",
+    "origin": "Jacksonville (JAX)",
+    "destination": "Phoenix (PHX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $218",
+    "title": "Flight: Tampa \u2192 Los Angeles from $218",
+    "origin": "Tampa (TPA)",
+    "destination": "Los Angeles (LAX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $225",
+    "title": "Flight: Miami \u2192 Denver from $225",
+    "origin": "Miami (MIA)",
+    "destination": "Denver (DEN)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $226",
+    "title": "Flight: Fort Lauderdale \u2192 Los Angeles from $226",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "Los Angeles (LAX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $227",
+    "title": "Flight: Fort Myers \u2192 San Francisco from $227",
+    "origin": "Fort Myers (RSW)",
+    "destination": "San Francisco (SFO)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $229",
+    "title": "Flight: Miami \u2192 Las Vegas from $229",
+    "origin": "Miami (MIA)",
+    "destination": "Las Vegas (LAS)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $232",
+    "title": "Flight: Miami \u2192 Los Angeles from $232",
+    "origin": "Miami (MIA)",
+    "destination": "Los Angeles (LAX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $233",
+    "title": "Flight: Miami \u2192 Nassau from $233",
+    "origin": "Miami (MIA)",
+    "destination": "Nassau (NAS)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $234",
+    "title": "Flight: Fort Myers \u2192 New York from $234",
+    "origin": "Fort Myers (RSW)",
+    "destination": "New York (NYC)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $249",
+    "title": "Flight: Tampa \u2192 Phoenix from $249",
+    "origin": "Tampa (TPA)",
+    "destination": "Phoenix (PHX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $253",
+    "title": "Flight: Tampa \u2192 Seattle from $253",
+    "origin": "Tampa (TPA)",
+    "destination": "Seattle (SEA)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $273",
+    "title": "Flight: Miami \u2192 Bogota from $273",
+    "origin": "Miami (MIA)",
+    "destination": "Bogota (BOG)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $279",
+    "title": "Flight: Fort Lauderdale \u2192 Denver from $279",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "Denver (DEN)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $282",
+    "title": "Flight: Fort Lauderdale \u2192 San Francisco from $282",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "San Francisco (SFO)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $284",
+    "title": "Flight: Fort Lauderdale \u2192 Phoenix from $284",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "Phoenix (PHX)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $292",
+    "title": "Flight: Tampa \u2192 San Francisco from $292",
+    "origin": "Tampa (TPA)",
+    "destination": "San Francisco (SFO)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $295",
+    "title": "Flight: Miami \u2192 San Francisco from $295",
+    "origin": "Miami (MIA)",
+    "destination": "San Francisco (SFO)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $298",
+    "title": "Flight: Fort Lauderdale \u2192 Las Vegas from $298",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "Las Vegas (LAS)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $319",
+    "title": "Flight: Fort Lauderdale \u2192 Seattle from $319",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "Seattle (SEA)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $325",
+    "title": "Flight: Tampa \u2192 Nassau from $325",
+    "origin": "Tampa (TPA)",
+    "destination": "Nassau (NAS)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $327",
+    "title": "Flight: Orlando \u2192 Seattle from $327",
+    "origin": "Orlando (MCO)",
+    "destination": "Seattle (SEA)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $328",
+    "title": "Flight: Jacksonville \u2192 New York from $328",
     "origin": "Jacksonville (JAX)",
     "destination": "New York (NYC)",
     "description": "",
@@ -153,233 +378,8 @@
     "source": "Joel Journeys"
   },
   {
-    "price": "From $176",
-    "title": "Flight: Miami \u2192 Las Vegas from $176",
-    "origin": "Miami (MIA)",
-    "destination": "Las Vegas (LAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $192",
-    "title": "Flight: Jacksonville \u2192 Seattle from $192",
-    "origin": "Jacksonville (JAX)",
-    "destination": "Seattle (SEA)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $194",
-    "title": "Flight: Fort Lauderdale \u2192 Seattle from $194",
-    "origin": "Fort Lauderdale (FLL)",
-    "destination": "Seattle (SEA)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $196",
-    "title": "Flight: Jacksonville \u2192 Las Vegas from $196",
-    "origin": "Jacksonville (JAX)",
-    "destination": "Las Vegas (LAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $198",
-    "title": "Flight: Tampa \u2192 Las Vegas from $198",
-    "origin": "Tampa (TPA)",
-    "destination": "Las Vegas (LAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $201",
-    "title": "Flight: Fort Lauderdale \u2192 Las Vegas from $201",
-    "origin": "Fort Lauderdale (FLL)",
-    "destination": "Las Vegas (LAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $205",
-    "title": "Flight: Miami \u2192 Denver from $205",
-    "origin": "Miami (MIA)",
-    "destination": "Denver (DEN)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $210",
-    "title": "Flight: Fort Lauderdale \u2192 Denver from $210",
-    "origin": "Fort Lauderdale (FLL)",
-    "destination": "Denver (DEN)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $220",
-    "title": "Flight: Orlando \u2192 Los Angeles from $220",
-    "origin": "Orlando (MCO)",
-    "destination": "Los Angeles (LAX)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $220",
-    "title": "Flight: Orlando \u2192 Denver from $220",
-    "origin": "Orlando (MCO)",
-    "destination": "Denver (DEN)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $229",
-    "title": "Flight: Fort Lauderdale \u2192 Phoenix from $229",
-    "origin": "Fort Lauderdale (FLL)",
-    "destination": "Phoenix (PHX)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $232",
-    "title": "Flight: Orlando \u2192 Bogota from $232",
-    "origin": "Orlando (MCO)",
-    "destination": "Bogota (BOG)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $234",
-    "title": "Flight: Miami \u2192 Nassau from $234",
-    "origin": "Miami (MIA)",
-    "destination": "Nassau (NAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $236",
-    "title": "Flight: Fort Lauderdale \u2192 Los Angeles from $236",
-    "origin": "Fort Lauderdale (FLL)",
-    "destination": "Los Angeles (LAX)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $249",
-    "title": "Flight: Tampa \u2192 Los Angeles from $249",
-    "origin": "Tampa (TPA)",
-    "destination": "Los Angeles (LAX)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $249",
-    "title": "Flight: Jacksonville \u2192 San Juan from $249",
-    "origin": "Jacksonville (JAX)",
-    "destination": "San Juan (SJU)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $251",
-    "title": "Flight: Miami \u2192 Phoenix from $251",
-    "origin": "Miami (MIA)",
-    "destination": "Phoenix (PHX)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $255",
-    "title": "Flight: Jacksonville \u2192 Los Angeles from $255",
-    "origin": "Jacksonville (JAX)",
-    "destination": "Los Angeles (LAX)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $266",
-    "title": "Flight: Fort Lauderdale \u2192 Nassau from $266",
-    "origin": "Fort Lauderdale (FLL)",
-    "destination": "Nassau (NAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $276",
-    "title": "Flight: Tampa \u2192 San Francisco from $276",
-    "origin": "Tampa (TPA)",
-    "destination": "San Francisco (SFO)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $276",
-    "title": "Flight: Fort Myers \u2192 San Francisco from $276",
-    "origin": "Fort Myers (RSW)",
-    "destination": "San Francisco (SFO)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $281",
-    "title": "Flight: Miami \u2192 Los Angeles from $281",
-    "origin": "Miami (MIA)",
-    "destination": "Los Angeles (LAX)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $286",
-    "title": "Flight: Miami \u2192 Salt Lake City from $286",
-    "origin": "Miami (MIA)",
-    "destination": "Salt Lake City (SLC)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $286",
-    "title": "Flight: Fort Myers \u2192 Las Vegas from $286",
-    "origin": "Fort Myers (RSW)",
-    "destination": "Las Vegas (LAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $288",
-    "title": "Flight: Tampa \u2192 Nassau from $288",
-    "origin": "Tampa (TPA)",
-    "destination": "Nassau (NAS)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $299",
-    "title": "Flight: Orlando \u2192 Salt Lake City from $299",
+    "price": "From $330",
+    "title": "Flight: Orlando \u2192 Salt Lake City from $330",
     "origin": "Orlando (MCO)",
     "destination": "Salt Lake City (SLC)",
     "description": "",
@@ -387,17 +387,35 @@
     "source": "Joel Journeys"
   },
   {
-    "price": "From $300",
-    "title": "Flight: Orlando \u2192 Seattle from $300",
+    "price": "From $330",
+    "title": "Flight: Fort Lauderdale \u2192 Nassau from $330",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "Nassau (NAS)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $332",
+    "title": "Flight: Orlando \u2192 San Francisco from $332",
     "origin": "Orlando (MCO)",
+    "destination": "San Francisco (SFO)",
+    "description": "",
+    "link": "https://aviasales.tpo.lv/2GVGFfSj",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $336",
+    "title": "Flight: Miami \u2192 Seattle from $336",
+    "origin": "Miami (MIA)",
     "destination": "Seattle (SEA)",
     "description": "",
     "link": "https://aviasales.tpo.lv/2GVGFfSj",
     "source": "Joel Journeys"
   },
   {
-    "price": "From $331",
-    "title": "Flight: Miami \u2192 Cancun from $331",
+    "price": "From $341",
+    "title": "Flight: Miami \u2192 Cancun from $341",
     "origin": "Miami (MIA)",
     "destination": "Cancun (CUN)",
     "description": "",
@@ -405,46 +423,28 @@
     "source": "Joel Journeys"
   },
   {
-    "price": "From $339",
-    "title": "Flight: Miami \u2192 San Francisco from $339",
-    "origin": "Miami (MIA)",
-    "destination": "San Francisco (SFO)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $341",
-    "title": "Flight: Fort Lauderdale \u2192 Salt Lake City from $341",
-    "origin": "Fort Lauderdale (FLL)",
-    "destination": "Salt Lake City (SLC)",
-    "description": "",
-    "link": "https://aviasales.tpo.lv/2GVGFfSj",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $341",
-    "title": "Flight: Orlando \u2192 Nassau from $341",
+    "price": "From $349",
+    "title": "Flight: Orlando \u2192 Cancun from $349",
     "origin": "Orlando (MCO)",
-    "destination": "Nassau (NAS)",
+    "destination": "Cancun (CUN)",
     "description": "",
     "link": "https://aviasales.tpo.lv/2GVGFfSj",
     "source": "Joel Journeys"
   },
   {
-    "price": "From $342",
-    "title": "Flight: Fort Myers \u2192 New York from $342",
-    "origin": "Fort Myers (RSW)",
-    "destination": "New York (NYC)",
+    "price": "From $357",
+    "title": "Flight: Orlando \u2192 Panama City from $357",
+    "origin": "Orlando (MCO)",
+    "destination": "Panama City (PTY)",
     "description": "",
     "link": "https://aviasales.tpo.lv/2GVGFfSj",
     "source": "Joel Journeys"
   },
   {
-    "price": "From $342",
-    "title": "Flight: Fort Myers \u2192 San Juan from $342",
-    "origin": "Fort Myers (RSW)",
-    "destination": "San Juan (SJU)",
+    "price": "From $413",
+    "title": "Flight: Fort Lauderdale \u2192 Cancun from $413",
+    "origin": "Fort Lauderdale (FLL)",
+    "destination": "Cancun (CUN)",
     "description": "",
     "link": "https://aviasales.tpo.lv/2GVGFfSj",
     "source": "Joel Journeys"
@@ -576,46 +576,10 @@
     "source": "Joel Journeys"
   },
   {
-    "price": "From $14",
-    "title": "Chauffeur: Las Vegas (LAS) \u2192 The Strip \u2014 Economy Sedan from $14",
-    "origin": "Las Vegas (LAS)",
-    "destination": "The Strip",
-    "description": "",
-    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
-    "source": "Joel Journeys"
-  },
-  {
     "price": "From $15",
     "title": "Chauffeur: New York (JFK) \u2192 Manhattan \u2014 Bus from $15",
     "origin": "New York (JFK)",
     "destination": "Manhattan",
-    "description": "",
-    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $17",
-    "title": "Chauffeur: Las Vegas (LAS) \u2192 The Strip \u2014 Comfort Sedan from $17",
-    "origin": "Las Vegas (LAS)",
-    "destination": "The Strip",
-    "description": "",
-    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $17",
-    "title": "Chauffeur: Las Vegas (LAS) \u2192 The Strip \u2014 SUV from $17",
-    "origin": "Las Vegas (LAS)",
-    "destination": "The Strip",
-    "description": "",
-    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $18",
-    "title": "Chauffeur: Las Vegas (LAS) \u2192 The Strip \u2014 Business Sedan from $18",
-    "origin": "Las Vegas (LAS)",
-    "destination": "The Strip",
     "description": "",
     "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
     "source": "Joel Journeys"
@@ -667,6 +631,15 @@
   },
   {
     "price": "From $22",
+    "title": "Chauffeur: London (LHR) \u2192 Central London \u2014 SUV from $22",
+    "origin": "London (LHR)",
+    "destination": "Central London",
+    "description": "",
+    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $22",
     "title": "Chauffeur: Dubai (DXB) \u2192 Dubai Marina \u2014 Economy Sedan from $22",
     "origin": "Dubai (DXB)",
     "destination": "Dubai Marina",
@@ -694,15 +667,6 @@
   },
   {
     "price": "From $23",
-    "title": "Chauffeur: London (LHR) \u2192 Central London \u2014 SUV from $23",
-    "origin": "London (LHR)",
-    "destination": "Central London",
-    "description": "",
-    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $23",
     "title": "Chauffeur: Nassau (NAS) \u2192 Paradise Island \u2014 Comfort Sedan from $23",
     "origin": "Nassau (NAS)",
     "destination": "Paradise Island",
@@ -717,6 +681,60 @@
     "destination": "Central London",
     "description": "",
     "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $24",
+    "title": "Chauffeur: Nassau (NAS) \u2192 Paradise Island \u2014 SUV from $24",
+    "origin": "Nassau (NAS)",
+    "destination": "Paradise Island",
+    "description": "",
+    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $25",
+    "title": "Chauffeur: London (LHR) \u2192 Central London \u2014 Van from $25",
+    "origin": "London (LHR)",
+    "destination": "Central London",
+    "description": "",
+    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $25",
+    "title": "Chauffeur: Dubai (DXB) \u2192 Dubai Marina \u2014 Comfort Sedan from $25",
+    "origin": "Dubai (DXB)",
+    "destination": "Dubai Marina",
+    "description": "",
+    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $25",
+    "title": "Chauffeur: Nassau (NAS) \u2192 Paradise Island \u2014 Business Sedan from $25",
+    "origin": "Nassau (NAS)",
+    "destination": "Paradise Island",
+    "description": "",
+    "link": "https://gettransfer.tpo.lv/WQdyH8Vd",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $1",
+    "title": "St. Peter's Basilica: Digital Audio Guide for Smartphones",
+    "origin": "Any",
+    "destination": "Rome",
+    "description": "",
+    "link": "https://vi.me/s/joel-journeys-vip",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "From $3",
+    "title": "Global Village Dubai Culture Food and Shows",
+    "origin": "Any",
+    "destination": "Dubai",
+    "description": "",
+    "link": "https://vi.me/s/joel-journeys-vip",
     "source": "Joel Journeys"
   },
   {
@@ -738,26 +756,26 @@
     "source": "Joel Journeys"
   },
   {
-    "price": "From $3",
-    "title": "Barcelona Electric Scooter Tour",
+    "price": "From $4",
+    "title": "Dubai Private Red Dunes Safari With Quad Biking, Dinner and Shows",
     "origin": "Any",
-    "destination": "Barcelona",
+    "destination": "Dubai",
     "description": "",
     "link": "https://vi.me/s/joel-journeys-vip",
     "source": "Joel Journeys"
   },
   {
-    "price": "From $3",
-    "title": "Walking tour with Archaeologist",
+    "price": "From $4",
+    "title": "VIP Red Dunes Dubai Desert Safari BBQ Quad Dinner Shows",
     "origin": "Any",
-    "destination": "Rome",
+    "destination": "Dubai",
     "description": "",
     "link": "https://vi.me/s/joel-journeys-vip",
     "source": "Joel Journeys"
   },
   {
-    "price": "From $5",
-    "title": "Dubai Al Shindagha Museum Admission Ticket",
+    "price": "From $4",
+    "title": "Dubai Luxury Red Dunes Safari with BBQ Dinner and Live Shows",
     "origin": "Any",
     "destination": "Dubai",
     "description": "",
@@ -766,18 +784,9 @@
   },
   {
     "price": "From $6",
-    "title": "Evening Desert Safari With BBQ dinner & live shows",
+    "title": "Las Vegas Strip: Rat Pack Ghost Mystery City Game",
     "origin": "Any",
-    "destination": "Dubai",
-    "description": "",
-    "link": "https://vi.me/s/joel-journeys-vip",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $6",
-    "title": "Private Audio Guided Walking Tour in Dubai",
-    "origin": "Any",
-    "destination": "Dubai",
+    "destination": "Las Vegas",
     "description": "",
     "link": "https://vi.me/s/joel-journeys-vip",
     "source": "Joel Journeys"
@@ -839,15 +848,6 @@
   {
     "price": "From $28",
     "title": "Nassau Group Bus Transfers | 5\u2013150 Passengers",
-    "origin": "Any",
-    "destination": "Nassau",
-    "description": "",
-    "link": "https://vi.me/s/joel-journeys-vip",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "From $30",
-    "title": "Round Trip Transportation to Cable Beach/Bahamar Resort/Breezes",
     "origin": "Any",
     "destination": "Nassau",
     "description": "",
@@ -1144,15 +1144,6 @@
   },
   {
     "price": "Check website",
-    "title": "Music: Grateful Shred 2-Day Ticket \u2014 Check website",
-    "origin": "San Francisco, CA",
-    "destination": "San Francisco, CA",
-    "description": "",
-    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "Check website",
     "title": "Arts & Theatre: National Cowboy Museum \u2014 Check website",
     "origin": "Oklahoma City, OK",
     "destination": "Oklahoma City, OK",
@@ -1225,15 +1216,6 @@
   },
   {
     "price": "Check website",
-    "title": "Music: 90s Country Gold Series: Kathy Mattea, Collin Raye, & Pam Tillis \u2014 Check website",
-    "origin": "Dubuque, IA",
-    "destination": "Dubuque, IA",
-    "description": "",
-    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "Check website",
     "title": "Arts & Theatre: Criss Angel MINDFREAK | Official Caesars Ticket + Hotel Packages \u2014 Check website",
     "origin": "Las Vegas, NV",
     "destination": "Las Vegas, NV",
@@ -1252,9 +1234,27 @@
   },
   {
     "price": "Check website",
+    "title": "Music: Wayne Newton | Official Caesars Ticket + Hotel Packages \u2014 Check website",
+    "origin": "Las Vegas, NV",
+    "destination": "Las Vegas, NV",
+    "description": "",
+    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "Check website",
     "title": "Sports: 2026 Ball State Women's Volleyball Season Tickets \u2014 Check website",
     "origin": "Muncie, IN",
     "destination": "Muncie, IN",
+    "description": "",
+    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "Check website",
+    "title": "Music: Donny Osmund  | Official Caesars Ticket + Hotel Packages \u2014 Check website",
+    "origin": "Las Vegas, NV",
+    "destination": "Las Vegas, NV",
     "description": "",
     "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
     "source": "Joel Journeys"
@@ -1333,52 +1333,16 @@
   },
   {
     "price": "Check website",
-    "title": "Film: People of the West: 5-Day Screening Pass \u2014 Check website",
-    "origin": "Temecula, CA",
-    "destination": "Temecula, CA",
+    "title": "Film: 9 to 5 \u2014 Check website",
+    "origin": "Middletown, NY",
+    "destination": "Middletown, NY",
     "description": "",
     "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
     "source": "Joel Journeys"
   },
   {
     "price": "Check website",
-    "title": "Film: Bobby Stone Film Series: The Birds \u2014 Check website",
-    "origin": "Chattanooga, TN",
-    "destination": "Chattanooga, TN",
-    "description": "",
-    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "Check website",
-    "title": "Film: Resident Evil: The IMAX Experience \u2014 Check website",
-    "origin": "Atlantic City, NJ",
-    "destination": "Atlantic City, NJ",
-    "description": "",
-    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "Check website",
-    "title": "Film: Digger: The IMAX Experience \u2014 Check website",
-    "origin": "Atlantic City, NJ",
-    "destination": "Atlantic City, NJ",
-    "description": "",
-    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "Check website",
-    "title": "Film: Jim Henson's Labyrinth: In Concert \u2014 Check website",
-    "origin": "Royal Oak, MI",
-    "destination": "Royal Oak, MI",
-    "description": "",
-    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
-    "source": "Joel Journeys"
-  },
-  {
-    "price": "Check website",
-    "title": "Film: Bobby Stone Film Series: The Birds \u2014 Check website",
+    "title": "Film: Bobby Stone Film Series: North by Northwest \u2014 Check website",
     "origin": "Chattanooga, TN",
     "destination": "Chattanooga, TN",
     "description": "",
@@ -1396,27 +1360,63 @@
   },
   {
     "price": "Check website",
-    "title": "Film: The Blob \u2014 Check website",
-    "origin": "Sacramento, CA",
-    "destination": "Sacramento, CA",
+    "title": "Film: Street Fighter: The IMAX Experience \u2014 Check website",
+    "origin": "Atlantic City, NJ",
+    "destination": "Atlantic City, NJ",
     "description": "",
     "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
     "source": "Joel Journeys"
   },
   {
     "price": "Check website",
-    "title": "Film: People of the West - EP 7: The American Dream & EP 8: Red Power \u2014 Check website",
-    "origin": "Temecula, CA",
-    "destination": "Temecula, CA",
+    "title": "Film: Bobby Stone Film Series: North by Northwest \u2014 Check website",
+    "origin": "Chattanooga, TN",
+    "destination": "Chattanooga, TN",
     "description": "",
     "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
     "source": "Joel Journeys"
   },
   {
     "price": "Check website",
-    "title": "Film: Something Different Presents: Unpopular Opinions Night \u2014 Check website",
-    "origin": "Los Angeles, CA",
-    "destination": "Los Angeles, CA",
+    "title": "Film: The Addams Family - 7pm - Classic Movie Nights! \u2014 Check website",
+    "origin": "Hampton, VA",
+    "destination": "Hampton, VA",
+    "description": "",
+    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "Check website",
+    "title": "Film: Street Fighter: The IMAX Experience \u2014 Check website",
+    "origin": "Atlantic City, NJ",
+    "destination": "Atlantic City, NJ",
+    "description": "",
+    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "Check website",
+    "title": "Film: My Hero Academia in Concert \u2014 Check website",
+    "origin": "Wallingford, CT",
+    "destination": "Wallingford, CT",
+    "description": "",
+    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "Check website",
+    "title": "Film: ChiTown Drive-In Presents -  Hocus Pocus \u2014 Check website",
+    "origin": "Chicago, IL",
+    "destination": "Chicago, IL",
+    "description": "",
+    "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
+    "source": "Joel Journeys"
+  },
+  {
+    "price": "Check website",
+    "title": "Film: Rocky Horror Picture Spooktacular Tour with Patricia Quinn \u2014 Check website",
+    "origin": "Seattle, WA",
+    "destination": "Seattle, WA",
     "description": "",
     "link": "https://c72.travelpayouts.com/click?shmarker=737825&promo_id=1948&source_type=customlink&type=click&custom_url=https%3A%2F%2Fwww.ticketnetwork.com",
     "source": "Joel Journeys"
@@ -1702,7 +1702,7 @@
   },
   {
     "price": "From $3,500",
-    "title": "Private Jet: Los Angeles \u2192 Las Vegas \u2014 Phenom 300 from $3,500 \u2014 Hot Deal",
+    "title": "Private Jet: Los Angeles \u2192 Las Vegas \u2014 Phenom 300 from $3,500",
     "origin": "Los Angeles (VNY)",
     "destination": "Las Vegas (LAS)",
     "description": "",
@@ -1729,7 +1729,7 @@
   },
   {
     "price": "From $5,500",
-    "title": "Private Jet: Miami \u2192 Nassau \u2014 Phenom 300 from $5,500 \u2014 Hot Deal",
+    "title": "Private Jet: Miami \u2192 Nassau \u2014 Phenom 300 from $5,500",
     "origin": "Miami (MIA)",
     "destination": "Nassau (NAS)",
     "description": "",
@@ -1765,7 +1765,7 @@
   },
   {
     "price": "From $9,500",
-    "title": "Private Jet: Miami \u2192 Cancun \u2014 Citation XLS from $9,500",
+    "title": "Private Jet: Miami \u2192 Cancun \u2014 Citation XLS from $9,500 \u2014 Hot Deal",
     "origin": "Miami (MIA)",
     "destination": "Cancun (CUN)",
     "description": "",
@@ -1774,7 +1774,7 @@
   },
   {
     "price": "From $11,000",
-    "title": "Private Jet: Los Angeles \u2192 Cabo San Lucas \u2014 Citation CJ4 from $11,000 \u2014 Hot Deal",
+    "title": "Private Jet: Los Angeles \u2192 Cabo San Lucas \u2014 Citation CJ4 from $11,000",
     "origin": "Los Angeles (VNY)",
     "destination": "Cabos (SJD)",
     "description": "",
@@ -1801,7 +1801,7 @@
   },
   {
     "price": "From $14,000",
-    "title": "Private Jet: Miami \u2192 San Juan \u2014 Citation XLS from $14,000 \u2014 Hot Deal",
+    "title": "Private Jet: Miami \u2192 San Juan \u2014 Citation XLS from $14,000",
     "origin": "Miami (MIA)",
     "destination": "San Juan (SJU)",
     "description": "",
@@ -1810,7 +1810,7 @@
   },
   {
     "price": "From $16,000",
-    "title": "Private Jet: Miami \u2192 St. Croix \u2014 Citation XLS from $16,000",
+    "title": "Private Jet: Miami \u2192 St. Croix \u2014 Citation XLS from $16,000 \u2014 Hot Deal",
     "origin": "Miami (MIA)",
     "destination": "St. Croix (STX)",
     "description": "",
@@ -1828,7 +1828,7 @@
   },
   {
     "price": "From $18,000",
-    "title": "Private Jet: Los Angeles \u2192 Aspen \u2014 Challenger 350 from $18,000",
+    "title": "Private Jet: Los Angeles \u2192 Aspen \u2014 Challenger 350 from $18,000 \u2014 Hot Deal",
     "origin": "Los Angeles (VNY)",
     "destination": "Aspen (ASE)",
     "description": "",
@@ -1855,7 +1855,7 @@
   },
   {
     "price": "From $30,000",
-    "title": "Private Jet: New York \u2192 San Juan \u2014 Falcon 50EX from $30,000",
+    "title": "Private Jet: New York \u2192 San Juan \u2014 Falcon 50EX from $30,000 \u2014 Hot Deal",
     "origin": "New York (TEB)",
     "destination": "San Juan (SJU)",
     "description": "",
@@ -1864,7 +1864,7 @@
   },
   {
     "price": "From $31,500",
-    "title": "Private Jet: New York \u2192 St. Croix \u2014 Falcon 50EX from $31,500",
+    "title": "Private Jet: New York \u2192 St. Croix \u2014 Falcon 50EX from $31,500 \u2014 Hot Deal",
     "origin": "New York (TEB)",
     "destination": "St. Croix (STX)",
     "description": "",
@@ -1873,7 +1873,7 @@
   },
   {
     "price": "From $35,000",
-    "title": "Private Jet: Dubai \u2192 Maldives \u2014 Gulfstream G450 from $35,000",
+    "title": "Private Jet: Dubai \u2192 Maldives \u2014 Gulfstream G450 from $35,000 \u2014 Hot Deal",
     "origin": "Dubai (DXB)",
     "destination": "Maldives (MLE)",
     "description": "",
@@ -1891,7 +1891,7 @@
   },
   {
     "price": "From $42,000",
-    "title": "Private Jet: Dubai \u2192 Maldives \u2014 Bombardier Global 6000 from $42,000",
+    "title": "Private Jet: Dubai \u2192 Maldives \u2014 Bombardier Global 6000 from $42,000 \u2014 Hot Deal",
     "origin": "Dubai (DXB)",
     "destination": "Maldives (MLE)",
     "description": "",
@@ -1936,7 +1936,7 @@
   },
   {
     "price": "From $62,000",
-    "title": "Private Jet: Miami \u2192 Ibiza \u2014 Gulfstream G650 from $62,000 \u2014 Hot Deal",
+    "title": "Private Jet: Miami \u2192 Ibiza \u2014 Gulfstream G650 from $62,000",
     "origin": "Miami (MIA)",
     "destination": "Ibiza (IBZ)",
     "description": "",
@@ -1945,7 +1945,7 @@
   },
   {
     "price": "From $65,000",
-    "title": "Private Jet: New York \u2192 London \u2014 Gulfstream G650 from $65,000 \u2014 Hot Deal",
+    "title": "Private Jet: New York \u2192 London \u2014 Gulfstream G650 from $65,000",
     "origin": "New York (TEB)",
     "destination": "London (STN)",
     "description": "",
@@ -1972,7 +1972,7 @@
   },
   {
     "price": "From $10",
-    "title": "Park G\u00fcell Entry \u2014 $10 \u2014 Popular",
+    "title": "Park G\u00fcell Entry \u2014 $10",
     "origin": "Any",
     "destination": "Barcelona",
     "description": "",
@@ -2044,7 +2044,7 @@
   },
   {
     "price": "From $28",
-    "title": "Uffizi Gallery Skip-the-Line \u2014 $28 \u2014 Popular",
+    "title": "Uffizi Gallery Skip-the-Line \u2014 $28",
     "origin": "Any",
     "destination": "Florence",
     "description": "",
@@ -2053,7 +2053,7 @@
   },
   {
     "price": "From $29",
-    "title": "London Eye Fast Track \u2014 $29 \u2014 Popular",
+    "title": "London Eye Fast Track \u2014 $29",
     "origin": "Any",
     "destination": "London",
     "description": "",
@@ -2080,7 +2080,7 @@
   },
   {
     "price": "From $34",
-    "title": "Tower of London Entry \u2014 $34 \u2014 Popular",
+    "title": "Tower of London Entry \u2014 $34",
     "origin": "Any",
     "destination": "London",
     "description": "",
@@ -2089,7 +2089,7 @@
   },
   {
     "price": "From $35",
-    "title": "Eiffel Tower Summit Access \u2014 $35",
+    "title": "Eiffel Tower Summit Access \u2014 $35 \u2014 Popular",
     "origin": "Any",
     "destination": "Paris",
     "description": "",
@@ -2107,7 +2107,7 @@
   },
   {
     "price": "From $44",
-    "title": "Empire State Building Observatory \u2014 $44 \u2014 Popular",
+    "title": "Empire State Building Observatory \u2014 $44",
     "origin": "Any",
     "destination": "New York",
     "description": "",
